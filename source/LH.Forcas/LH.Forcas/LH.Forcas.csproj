@@ -50,6 +50,7 @@
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Integration\GitHubConfigDataDownloader.cs" />
     <Compile Include="AppConstants.cs" />
+    <Compile Include="Models\UserSettings.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

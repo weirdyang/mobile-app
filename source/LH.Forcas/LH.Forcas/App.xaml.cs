@@ -32,5 +32,15 @@ namespace LH.Forcas
         {
             // Handle when your app resumes
         }
+
+        private void Initialize()
+        {
+            // Check storage -> create DB, tables etc. if required
+            // Is first run? 
+            //    -> Change mainPage -> ask about the CloudSync
+            //    -> Initialize Local store => Download config data (mandatory download!) - add a flag regarding failures or move crash reporting logic to local store
+            //    -> Start the setup wizard
+            // STORE ALL LOCAL DATA IN THE DATABASE - INCLUDING CONFIG DATA
+        }
     }
 }
