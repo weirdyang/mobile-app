@@ -1,4 +1,4 @@
-﻿namespace LH.Forcas
+﻿namespace LH.Forcas.Views
 {
     public partial class MainPage
     {

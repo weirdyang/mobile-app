@@ -1,6 +1,9 @@
-﻿namespace LH.Forcas
+﻿using LH.Forcas.Contract;
+using LH.Forcas.Views;
+
+namespace LH.Forcas
 {
-    public partial class App
+    public partial class App : IApp
     {
         public App()
         {
