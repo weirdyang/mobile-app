@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using LH.Forcas.Models;
 
 namespace LH.Forcas.Contract
 {
     public interface IConfigDataDownloader
     {
-        Task<Dictionary<string, byte[]>> GetUpdatedFiles();
+        Task<ConfigData> GetUpdatedFiles();
     }
 }

@@ -5,12 +5,18 @@ namespace LH.Forcas
 {
     public partial class App : IApp
     {
+        public const string LastConfigDataSyncPropertyKey = "LastConfigDataSync";
+
         public App()
         {
             InitializeComponent();
 
+            this.Constants = new AppConstants();
+
             MainPage = new MainPage();
         }
+
+        public IAppConstants Constants { get; }
 
         protected override void OnStart()
         {

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using Flurl.Http.Testing;
 using LH.Forcas.Contract;
 using LH.Forcas.Integration;
@@ -10,18 +13,38 @@ namespace LH.Forcas.Tests.Integration
     [TestFixture]
     public class GitHubConfigDataDownloaderTests
     {
+        private static readonly string CommitsNoLastSyncResponse = LoadFileContents("Integration\\GitHubConfigDataResponses\\Commits-NoLastSync.json");
+        private static readonly string CommitsOneNewCommitResponse = LoadFileContents("Integration\\GitHubConfigDataResponses\\Commits-OneNewCommit.json");
+        private static readonly string CommitsNoNewCommitResponse = LoadFileContents("Integration\\GitHubConfigDataResponses\\Commits-NoNewCommit.json");
+
+        private static readonly string ContentValidFile = LoadFileContents("Integration\\GitHubConfigDataResponses\\Content-ValidFile.json");
+
+        private static string LoadFileContents(string fileName)
+        {
+            var currentDir = Path.GetDirectoryName(typeof(GitHubConfigDataDownloaderTests).Assembly.Location);
+            var path = Path.Combine(currentDir, fileName);
+
+            return File.ReadAllText(path);
+        }
+
         [SetUp]
         public void Setup()
         {
-            var appConfigMock = new Mock<IAppConfig>();
-
-            appConfigMock.SetupGet(x => x.ConfigDataGitHubUrl).Returns("https://github.com/lholota/LH.Forcas.IntegrationTests");
-            appConfigMock.SetupGet(x => x.ConfigDataMaxAge).Returns(TimeSpan.FromMilliseconds(1));
-            appConfigMock.SetupGet(x => x.ConfigDataRetryCount).Returns(3);
-
-            this.crashReporter = new Mock<ICrashReporter>();
-            this.downloader = new GitHubConfigDataDownloader(appConfigMock.Object, crashReporter.Object);
             this.flurlTest = new HttpTest();
+            this.appProperties = new Dictionary<string, object>();
+            this.crashReporter = new Mock<ICrashReporter>(MockBehavior.Strict);
+
+            var appConstantsMock = new Mock<IAppConstants>();
+            appConstantsMock.SetupGet(x => x.ConfigDataGitHubRepoUrl).Returns("https://github.com/repos/magic/");
+            appConstantsMock.SetupGet(x => x.ConfigDataMaxAge).Returns(TimeSpan.FromMilliseconds(1));
+            appConstantsMock.SetupGet(x => x.HttpRequestRetryCount).Returns(3);
+            appConstantsMock.SetupGet(x => x.HttpRequestRetryWaitTimeBase).Returns(0);
+
+            var appMock = new Mock<IApp>();
+            appMock.SetupGet(x => x.Constants).Returns(appConstantsMock.Object);
+            appMock.SetupGet(x => x.Properties).Returns(this.appProperties);
+            
+            this.downloader = new GitHubConfigDataDownloader(appMock.Object, crashReporter.Object);            
         }
 
         [TearDown]
@@ -33,35 +56,103 @@ namespace LH.Forcas.Tests.Integration
         private HttpTest flurlTest;
         private Mock<ICrashReporter> crashReporter;
         private GitHubConfigDataDownloader downloader;
+        private IDictionary<string, object> appProperties;
 
         [Test]
-        public void SyncWithNoLastSyncShouldReturnLatest()
+        public async Task SyncWithNoLastSyncShouldReturnUpdate()
         {
-            throw new NotImplementedException();
+            this.flurlTest.RespondWith(CommitsNoLastSyncResponse);
+            this.flurlTest.RespondWith(ContentValidFile);
+
+            var result = await this.downloader.GetUpdatedFiles();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Banks);
         }
 
         [Test]
-        public void SyncWithLastSyncShouldReturnDiff()
+        public async Task SyncWithLastSyncShouldReturnUpdate()
         {
-            throw new NotImplementedException();
+            this.flurlTest.RespondWith(CommitsOneNewCommitResponse);
+            this.flurlTest.RespondWith(ContentValidFile);
+
+            var result = await this.downloader.GetUpdatedFiles();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Banks);
         }
 
         [Test]
-        public void ShouldRetryOnError()
+        public async Task ShouldReturnEmptyIfNoUpdatesAreAvailable()
         {
-            throw new NotImplementedException();
+            this.flurlTest.RespondWith(CommitsNoNewCommitResponse);
+            
+            var result = await this.downloader.GetUpdatedFiles();
+
+            Assert.IsNull(result);
+            Assert.AreEqual(1, this.flurlTest.CallLog.Count);
         }
 
         [Test]
-        public void ShouldRetryOnTimeout()
+        public async Task ShouldRetryOnError()
         {
-            throw new NotImplementedException();
+            this.flurlTest.RespondWith(string.Empty, 429);
+            this.flurlTest.RespondWith(string.Empty, 404);
+            this.flurlTest.RespondWith(CommitsNoNewCommitResponse);
+
+            var results = await this.downloader.GetUpdatedFiles();
+
+            Assert.IsNull(results);
+            Assert.AreEqual(3, this.flurlTest.CallLog.Count);
         }
 
         [Test]
-        public void ShouldReportIfSyncFailingForTooLong()
+        public async Task ShouldRetryOnTimeout()
         {
-            throw new NotImplementedException();
+            this.flurlTest.SimulateTimeout();
+            this.flurlTest.SimulateTimeout();
+            this.flurlTest.RespondWith(CommitsNoNewCommitResponse);
+
+            var results = await this.downloader.GetUpdatedFiles();
+
+            Assert.IsNull(results);
+            Assert.AreEqual(3, this.flurlTest.CallLog.Count);
+        }
+
+        [Test]
+        public async Task ShouldReportIfSyncFailingForTooLong()
+        {
+            this.flurlTest.SimulateTimeout();
+            this.flurlTest.SimulateTimeout();
+            this.flurlTest.SimulateTimeout();
+
+            var lastSyncTime = DateTime.MinValue.ToUniversalTime();
+            this.appProperties.Add(App.LastConfigDataSyncPropertyKey, lastSyncTime);
+
+            this.crashReporter
+                .Setup(x => x.ReportException(It.IsAny<Exception>()))
+                .Returns(Task.FromResult(0));
+
+            var result = await this.downloader.GetUpdatedFiles();
+
+            Assert.IsNull(result);
+
+            this.crashReporter.Verify(x => x.ReportException(It.IsAny<Exception>()), Times.Once);
+        }
+
+        [Test]
+        public async Task ShouldNotReportOnTransientError()
+        {
+            this.flurlTest.SimulateTimeout();
+            this.flurlTest.SimulateTimeout();
+            this.flurlTest.SimulateTimeout();
+
+            var lastSyncTime = DateTime.UtcNow;
+            this.appProperties.Add(App.LastConfigDataSyncPropertyKey, lastSyncTime);
+
+            var result = await this.downloader.GetUpdatedFiles();
+
+            Assert.IsNull(result);
         }
     }
 }
