@@ -31,6 +31,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS|AnyCPU'">
+    <OutputPath>bin\VSTS\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
       <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
@@ -98,7 +107,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Integration\GitHubConfigDataDownloaderTests.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Integration\GitHubRefDataDownloaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,19 +118,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Integration\GitHubConfigDataResponses\Commits-NoNewCommit.json">
+    <None Include="Integration\GitHubRefDataResponses\Commits-NoNewCommit.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Integration\GitHubConfigDataResponses\Commits-NoLastSync.json">
+    <None Include="Integration\GitHubRefDataResponses\Commits-NoLastSync.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Integration\GitHubConfigDataResponses\Content-ValidFile.json">
+    <None Include="Integration\GitHubRefDataResponses\Content-ValidFile.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Integration\GitHubConfigDataResponses\Commits-OneNewCommit.json">
+    <None Include="Integration\GitHubRefDataResponses\Commits-OneNewCommit.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

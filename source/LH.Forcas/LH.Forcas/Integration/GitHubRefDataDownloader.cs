@@ -12,12 +12,12 @@ using Polly;
 
 namespace LH.Forcas.Integration
 {
-    public class GitHubConfigDataDownloader : IConfigDataDownloader
+    public class GitHubRefDataDownloader : IRefDataDownloader
     {
         private readonly IApp app;
         private readonly ICrashReporter crashReporter;
 
-        public GitHubConfigDataDownloader(IApp app, ICrashReporter crashReporter)
+        public GitHubRefDataDownloader(IApp app, ICrashReporter crashReporter)
         {
             this.crashReporter = crashReporter;
             this.app = app;

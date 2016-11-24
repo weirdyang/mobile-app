@@ -11,21 +11,13 @@ using NUnit.Framework;
 namespace LH.Forcas.Tests.Integration
 {
     [TestFixture]
-    public class GitHubConfigDataDownloaderTests
+    public class GitHubRefDataDownloaderTests
     {
-        private static readonly string CommitsNoLastSyncResponse = LoadFileContents("Integration\\GitHubConfigDataResponses\\Commits-NoLastSync.json");
-        private static readonly string CommitsOneNewCommitResponse = LoadFileContents("Integration\\GitHubConfigDataResponses\\Commits-OneNewCommit.json");
-        private static readonly string CommitsNoNewCommitResponse = LoadFileContents("Integration\\GitHubConfigDataResponses\\Commits-NoNewCommit.json");
+        private static readonly string CommitsNoLastSyncResponse = Extensions.LoadFileContents("Integration\\GitHubRefDataResponses\\Commits-NoLastSync.json");
+        private static readonly string CommitsOneNewCommitResponse = Extensions.LoadFileContents("Integration\\GitHubRefDataResponses\\Commits-OneNewCommit.json");
+        private static readonly string CommitsNoNewCommitResponse = Extensions.LoadFileContents("Integration\\GitHubRefDataResponses\\Commits-NoNewCommit.json");
 
-        private static readonly string ContentValidFile = LoadFileContents("Integration\\GitHubConfigDataResponses\\Content-ValidFile.json");
-
-        private static string LoadFileContents(string fileName)
-        {
-            var currentDir = Path.GetDirectoryName(typeof(GitHubConfigDataDownloaderTests).Assembly.Location);
-            var path = Path.Combine(currentDir, fileName);
-
-            return File.ReadAllText(path);
-        }
+        private static readonly string ContentValidFile = Extensions.LoadFileContents("Integration\\GitHubRefDataResponses\\Content-ValidFile.json");
 
         [SetUp]
         public void Setup()
@@ -44,7 +36,7 @@ namespace LH.Forcas.Tests.Integration
             appMock.SetupGet(x => x.Constants).Returns(appConstantsMock.Object);
             appMock.SetupGet(x => x.Properties).Returns(this.appProperties);
             
-            this.downloader = new GitHubConfigDataDownloader(appMock.Object, crashReporter.Object);            
+            this.downloader = new GitHubRefDataDownloader(appMock.Object, crashReporter.Object);            
         }
 
         [TearDown]
@@ -55,7 +47,7 @@ namespace LH.Forcas.Tests.Integration
 
         private HttpTest flurlTest;
         private Mock<ICrashReporter> crashReporter;
-        private GitHubConfigDataDownloader downloader;
+        private GitHubRefDataDownloader downloader;
         private IDictionary<string, object> appProperties;
 
         [Test]
