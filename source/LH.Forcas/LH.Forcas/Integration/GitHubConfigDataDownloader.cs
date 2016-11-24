@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Flurl;
+using Flurl.Http;
 using LH.Forcas.Contract;
 
 namespace LH.Forcas.Integration
