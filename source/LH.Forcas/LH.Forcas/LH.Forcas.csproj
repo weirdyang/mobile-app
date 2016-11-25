@@ -47,19 +47,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Contract\IDbManager.cs" />
+    <Compile Include="Contract\IRefDataRepository.cs" />
+    <Compile Include="Contract\IUserDataRepository.cs" />
     <Compile Include="Extensions\PollyExtensions.cs" />
-    <Compile Include="Models\BankConfigData.cs" />
-    <Compile Include="Models\ConfigData.cs" />
     <Compile Include="Contract\IApp.cs" />
-    <Compile Include="Contract\IConfigDataStore.cs" />
     <Compile Include="Contract\ICrashReporter.cs" />
     <Compile Include="Contract\ISyncProvider.cs" />
     <Compile Include="Contract\IRefDataDownloader.cs" />
     <Compile Include="Contract\IAppConstants.cs" />
+    <Compile Include="Extensions\SqLiteExtensions.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Integration\GitHubRefDataDownloader.cs" />
     <Compile Include="AppConstants.cs" />
+    <Compile Include="Models\RefData\AppRefData.cs" />
+    <Compile Include="Models\RefData\Bank.cs" />
+    <Compile Include="Models\RefData\Currency.cs" />
     <Compile Include="Models\UserSettings.cs" />
+    <Compile Include="Storage\DbManager.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

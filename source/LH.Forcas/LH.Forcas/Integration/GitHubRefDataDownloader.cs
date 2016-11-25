@@ -7,7 +7,7 @@ using Flurl;
 using Flurl.Http;
 using LH.Forcas.Contract;
 using LH.Forcas.Extensions;
-using LH.Forcas.Models;
+using LH.Forcas.Models.RefData;
 using Polly;
 
 namespace LH.Forcas.Integration
@@ -23,19 +23,19 @@ namespace LH.Forcas.Integration
             this.app = app;
         }
 
-        public async Task<ConfigData> GetUpdatedFiles()
+        public async Task<AppRefData> GetUpdatedFiles()
         {
             var lastSyncTime = GetLastSyncTime();
 
             try
             {
-                ConfigData result = null;
+                AppRefData result = null;
                 var updatesAvailable = await this.AreUpdatesAvailableAsync(lastSyncTime);
 
                 if (updatesAvailable)
                 {
-                    result = new ConfigData();
-                    result.Banks = await this.FetchConfigDataFileAsync<BanksConfigData>();
+                    result = new AppRefData();
+                    result.Banks = await this.FetchConfigDataFileAsync<Bank[]>();
                 }
 
                 this.app.Properties[App.LastConfigDataSyncPropertyKey] = DateTime.UtcNow;
