@@ -38,7 +38,7 @@ namespace LH.Forcas.Integration
                     result.Banks = await this.FetchConfigDataFileAsync<Bank[]>();
                 }
 
-                this.app.Properties[App.LastConfigDataSyncPropertyKey] = DateTime.UtcNow;
+                this.app.Properties[App.LastRefDataSyncPropertyKey] = DateTime.UtcNow;
 
                 return result;
             }
@@ -57,9 +57,9 @@ namespace LH.Forcas.Integration
         {
             DateTime? lastSyncTime = null;
 
-            if (this.app.Properties.ContainsKey(App.LastConfigDataSyncPropertyKey))
+            if (this.app.Properties.ContainsKey(App.LastRefDataSyncPropertyKey))
             {
-                lastSyncTime = (DateTime) this.app.Properties[App.LastConfigDataSyncPropertyKey];
+                lastSyncTime = (DateTime) this.app.Properties[App.LastRefDataSyncPropertyKey];
             }
 
             return lastSyncTime;

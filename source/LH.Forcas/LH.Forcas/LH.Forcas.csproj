@@ -62,7 +62,7 @@
     <Compile Include="Models\RefData\AppRefData.cs" />
     <Compile Include="Models\RefData\Bank.cs" />
     <Compile Include="Models\RefData\Currency.cs" />
-    <Compile Include="Models\UserSettings.cs" />
+    <Compile Include="Models\UserPreferences.cs" />
     <Compile Include="Storage\DbManager.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -90,6 +90,10 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Dropbox.Api">
+      <HintPath>..\..\..\packages\Dropbox.Api.4.1\lib\portable-net40+sl5+wp80+win8+wpa81\Dropbox.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Flurl">
       <HintPath>..\..\..\packages\Flurl.2.2.1\lib\portable40-net40+sl5+win8+wp8+wpa81\Flurl.dll</HintPath>
       <Private>True</Private>

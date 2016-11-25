@@ -1,6 +1,6 @@
 ﻿namespace LH.Forcas.Models
 {
-    public class UserSettings
+    public class UserPreferences
     {
         public string DefaultCurrency { get; set; } // TODO: Others
     }

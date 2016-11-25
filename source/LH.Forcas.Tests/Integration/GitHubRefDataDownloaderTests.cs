@@ -119,7 +119,7 @@ namespace LH.Forcas.Tests.Integration
             this.flurlTest.SimulateTimeout();
 
             var lastSyncTime = DateTime.MinValue.ToUniversalTime();
-            this.appProperties.Add(App.LastConfigDataSyncPropertyKey, lastSyncTime);
+            this.appProperties.Add(App.LastRefDataSyncPropertyKey, lastSyncTime);
 
             this.crashReporter
                 .Setup(x => x.ReportException(It.IsAny<Exception>()))
@@ -140,7 +140,7 @@ namespace LH.Forcas.Tests.Integration
             this.flurlTest.SimulateTimeout();
 
             var lastSyncTime = DateTime.UtcNow;
-            this.appProperties.Add(App.LastConfigDataSyncPropertyKey, lastSyncTime);
+            this.appProperties.Add(App.LastRefDataSyncPropertyKey, lastSyncTime);
 
             var result = await this.downloader.GetUpdatedFiles();
 
