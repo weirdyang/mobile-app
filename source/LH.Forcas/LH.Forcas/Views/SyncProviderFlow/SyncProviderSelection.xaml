@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LH.Forcas.Views.SyncProviderFlow.SyncProviderSelection">
+  <Grid>
+    <Label Text="Are you using multiple devices?" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label Text="Then please select a service we can use to synchronize your data" VerticalOptions="Center" HorizontalOptions="Center" />
+    
+    <Button Text="OneDrive" Command="{ Binding SelectSyncProvider }" CommandParameter="OneDrive"></Button>
+    <Button Text="DropBox" Command="{ Binding SelectSyncProvider }" CommandParameter="DropBox"></Button>
+
+    <Button Text="No thanks, I'll just use the app on this device for now" Command="{ Binding DisableSync }"></Button>
+  </Grid>
+</ContentPage>

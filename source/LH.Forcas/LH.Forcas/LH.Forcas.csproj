@@ -53,10 +53,11 @@
     <Compile Include="Extensions\PollyExtensions.cs" />
     <Compile Include="Contract\IApp.cs" />
     <Compile Include="Contract\ICrashReporter.cs" />
-    <Compile Include="Contract\ISyncProvider.cs" />
+    <Compile Include="Contract\IFileSyncProvider.cs" />
     <Compile Include="Contract\IRefDataDownloader.cs" />
     <Compile Include="Contract\IAppConstants.cs" />
     <Compile Include="Extensions\SqLiteExtensions.cs" />
+    <Compile Include="Integration\DropBoxFileSyncProvider.cs" />
     <Compile Include="Integration\GitHubRefDataDownloader.cs" />
     <Compile Include="AppConstants.cs" />
     <Compile Include="Models\RefData\AppRefData.cs" />
@@ -87,7 +88,9 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Storage\Entities\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\SyncProviderFlow\" />
+    <Folder Include="Views\SyncProviderFlow\" />
+    <Folder Include="Views\UserDataSetupFlow\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Dropbox.Api">
