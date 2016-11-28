@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
-using SQLite;
+﻿using SQLite;
 
 namespace LH.Forcas.Contract
 {
     public interface IDbManager
     {
-        Task Initialize();
+        void Initialize();
 
-        SQLiteAsyncConnection GetConnection();
+        SQLiteConnection GetSyncConnection();
+
+        SQLiteAsyncConnection GetAsyncConnection();
     }
 }

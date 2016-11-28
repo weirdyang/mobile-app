@@ -64,7 +64,13 @@
     <Compile Include="Models\RefData\Bank.cs" />
     <Compile Include="Models\RefData\Currency.cs" />
     <Compile Include="Models\UserPreferences.cs" />
-    <Compile Include="Storage\DbManager.cs" />
+    <Compile Include="Storage\DbManagerBase.cs" />
+    <Compile Include="Storage\Entities\RefData\CurrencyEntity.cs" />
+    <Compile Include="Storage\Entities\VersionInfoEntity.cs" />
+    <Compile Include="Views\SyncSetup\AuthenticationPage.xaml.cs">
+      <DependentUpon>AuthenticationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SyncSetup\SyncProviderSelection.xaml.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -87,10 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="Storage\Entities\" />
-    <Folder Include="ViewModels\SyncProviderFlow\" />
-    <Folder Include="Views\SyncProviderFlow\" />
-    <Folder Include="Views\UserDataSetupFlow\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Dropbox.Api">
@@ -173,6 +176,16 @@
       <HintPath>..\..\..\packages\Xamarin.Forms.2.3.3.168\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SyncSetup\AuthenticationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SyncSetup\SyncProviderSelection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

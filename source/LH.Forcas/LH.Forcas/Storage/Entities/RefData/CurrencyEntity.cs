@@ -1,7 +1,11 @@
-namespace LH.Forcas.Models.RefData
+﻿using SQLite;
+
+namespace LH.Forcas.Storage.Entities.RefData
 {
-    public class Currency
+    [Table("Currency")]
+    public class CurrencyEntity
     {
+        [PrimaryKey]
         public string ShortCode { get; set; }
 
         public string Name { get; set; }
