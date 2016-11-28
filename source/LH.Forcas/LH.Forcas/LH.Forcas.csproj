@@ -65,6 +65,7 @@
     <Compile Include="Models\RefData\Currency.cs" />
     <Compile Include="Models\UserPreferences.cs" />
     <Compile Include="Storage\DbManagerBase.cs" />
+    <Compile Include="Storage\Entities\RefData\CountryEntity.cs" />
     <Compile Include="Storage\Entities\RefData\CurrencyEntity.cs" />
     <Compile Include="Storage\Entities\VersionInfoEntity.cs" />
     <Compile Include="Views\SyncSetup\AuthenticationPage.xaml.cs">
