@@ -7,5 +7,7 @@ namespace LH.Forcas.Models.RefData
         public IList<Bank> Banks { get; set; }
 
         public IList<Currency> Currencies { get; set; }
+
+        public IList<Country> Countries { get; set; }
     }
 }

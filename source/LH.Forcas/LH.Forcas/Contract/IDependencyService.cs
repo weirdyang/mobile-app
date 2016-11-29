@@ -1,0 +1,7 @@
+﻿namespace LH.Forcas.Contract
+{
+    public interface IDependencyService
+    {
+        T Get<T>() where T : class;
+    }
+}

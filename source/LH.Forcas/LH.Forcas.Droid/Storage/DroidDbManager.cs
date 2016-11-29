@@ -11,12 +11,21 @@ namespace LH.Forcas.Droid.Storage
 {
     public class DroidDbManager : DbManagerBase
     {
+        public override SQLiteConnection GetSyncConnection()
+        {
+            return new SQLiteConnection(this.GetDbFilePath());
+        }
+
         public override SQLiteAsyncConnection GetAsyncConnection()
         {
-            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // Documents folder
-            var dbFilePath =  Path.Combine(documentsPath, DbFileName);
+            return new SQLiteAsyncConnection(this.GetDbFilePath());
+        }
 
-            return new SQLiteAsyncConnection(dbFilePath);
+        private string GetDbFilePath()
+        {
+            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // Documents folder
+            var dbFilePath = Path.Combine(documentsPath, DbFileName);
+            return dbFilePath;
         }
     }
 }

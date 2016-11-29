@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LH.Forcas.Views.MainPage">
-
-  <Label Text="Welcome to Xamarin Forms!"
-           VerticalOptions="Center"
-           HorizontalOptions="Center" />
-
-</ContentPage>
+  <ContentPage Title="Dashboard">
+    <Label Text="Dash"></Label>
+  </ContentPage>
+  <ContentPage Title="Budget">
+    <Label Text="Budget"></Label>
+  </ContentPage>
+  <ContentPage Title="Accounts">
+    <Label Text="Accounts"></Label>
+  </ContentPage>
+  <ContentPage Title="Reports">
+    <Label Text="Reports"></Label>
+  </ContentPage>
+</TabbedPage>

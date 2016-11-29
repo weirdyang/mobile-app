@@ -1,6 +1,5 @@
-﻿using System;
-using LH.Forcas.Contract;
-using LH.Forcas.Storage.Entities.RefData;
+﻿using LH.Forcas.Contract;
+using LH.Forcas.Models.RefData;
 using SQLite;
 
 namespace LH.Forcas.Storage
@@ -11,21 +10,11 @@ namespace LH.Forcas.Storage
 
         public void Initialize()
         {
-            var connection = this.GetSyncConnection();
-            connection.BeginTransaction();
-
-            try
+            using (var connection = this.GetSyncConnection())
             {
-                connection.CreateTable<CurrencyEntity>();
-                connection.CreateTable<CountryEntity>();
-
-                connection.Commit();
-            }
-            catch (Exception)
-            {
-                connection.Rollback();
-
-                // TODO: Rethrow as custom exception
+                connection.CreateTable<Currency>();
+                connection.CreateTable<Country>();
+                connection.CreateTable<Bank>();
             }
         }
 

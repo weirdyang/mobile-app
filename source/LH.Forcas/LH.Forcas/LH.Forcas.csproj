@@ -48,6 +48,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Contract\IDbManager.cs" />
+    <Compile Include="Contract\IDependencyService.cs" />
     <Compile Include="Contract\IRefDataRepository.cs" />
     <Compile Include="Contract\IUserDataRepository.cs" />
     <Compile Include="Extensions\PollyExtensions.cs" />
@@ -65,17 +66,19 @@
     <Compile Include="Models\RefData\Currency.cs" />
     <Compile Include="Models\UserPreferences.cs" />
     <Compile Include="Storage\DbManagerBase.cs" />
-    <Compile Include="Storage\Entities\RefData\CountryEntity.cs" />
-    <Compile Include="Storage\Entities\RefData\CurrencyEntity.cs" />
-    <Compile Include="Storage\Entities\VersionInfoEntity.cs" />
+    <Compile Include="Models\RefData\CountryEntity.cs" />
+    <Compile Include="Storage\RefDataRepository.cs" />
     <Compile Include="Views\SyncSetup\AuthenticationPage.xaml.cs">
       <DependentUpon>AuthenticationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SyncSetup\SyncProviderSelection.xaml.cs" />
+    <Compile Include="Views\SyncSetup\SyncProviderSelection.xaml.cs">
+      <DependentUpon>SyncProviderSelection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XamarinDependencyService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\MainPage.xaml">

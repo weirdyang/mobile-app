@@ -1,5 +1,6 @@
 ﻿using LH.Forcas.Contract;
 using LH.Forcas.Views;
+using LH.Forcas.Views.SyncSetup;
 using Xamarin.Forms;
 
 namespace LH.Forcas
@@ -13,7 +14,7 @@ namespace LH.Forcas
             this.InitializeComponent();
 
             this.Constants = new AppConstants();
-            this.MainPage = new MainPage();
+            this.MainPage = new SyncProviderSelectionPage();
         }
 
         public IAppConstants Constants { get; }

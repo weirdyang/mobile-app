@@ -2,13 +2,37 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LH.Forcas.Views.SyncSetup.SyncProviderSelectionPage">
+  <!--
+  Nested containers will be required, something similar to bootstrap container/row classes
+  -->
   <Grid>
-    <Label Text="Are you using multiple devices?" VerticalOptions="Center" HorizontalOptions="Center" />
-    <Label Text="Then please select a service we can use to synchronize your data" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
     
-    <Button Text="OneDrive" Command="{ Binding SelectSyncProvider }" CommandParameter="OneDrive"></Button>
-    <Button Text="DropBox" Command="{ Binding SelectSyncProvider }" CommandParameter="DropBox"></Button>
+    <Label Grid.ColumnSpan="2" Text="Are you using multiple devices?" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label Grid.ColumnSpan="2" Grid.Row="1" Text="Then please select a service we can use to synchronize your data" VerticalOptions="Center" HorizontalOptions="Center" />
+    
+    <ListView SelectedItem="{ Binding SelectedSyncProvider }"
+              ItemsSource="{ Binding Providers }"
+              Grid.Row="2" Grid.ColumnSpan="2">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <StackLayout Orientation="Horizontal">
+            Ahoj
+          </StackLayout>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
 
-    <Button Text="No thanks, I'll just use the app on this device for now" Command="{ Binding DisableSync }"></Button>
+    <Button Grid.Row="3" Grid.Column="0" Text="No, thanks" Command="{ Binding DisableSync }" BackgroundColor="Gray"></Button>
+    <Button Grid.Row="3" Grid.Column="1" Text="Next" Command="{ Binding NextStepCommand }" BackgroundColor="Accent"></Button>
   </Grid>
 </ContentPage>

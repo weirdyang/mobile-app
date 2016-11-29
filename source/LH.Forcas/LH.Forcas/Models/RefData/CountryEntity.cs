@@ -1,9 +1,8 @@
 ﻿using SQLite;
 
-namespace LH.Forcas.Storage.Entities.RefData
+namespace LH.Forcas.Models.RefData
 {
-    [Table("Country")]
-    public class CountryEntity
+    public class Country
     {
         [MaxLength(5)]
         [PrimaryKey]
