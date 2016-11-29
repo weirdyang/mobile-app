@@ -5,6 +5,8 @@ namespace LH.Forcas.Contract
 {
     public interface ICrashReporter
     {
-        Task ReportException(Exception ex);
+        void ReportException(Exception ex);
+
+        void ReportFatal(Exception ex);
     }
 }
