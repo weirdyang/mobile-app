@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using LH.Forcas.Domain.RefData;
 using LH.Forcas.Extensions;
 using LH.Forcas.Storage;
-using SQLite;
+using LH.Forcas.Storage.Entities.RefData;
+using SQLite.Net;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(RefDataRepository))]
@@ -24,7 +25,7 @@ namespace LH.Forcas.Storage
             this.dbManager = dependencyService.Get<IDbManager>();
         }
 
-        public async Task<IList<T>> GetRefDataAsync<T>() where T : new()
+        public async Task<IList<T>> GetRefDataAsync<T>() where T : class, new()
         {
             return await this.dbManager.GetAsyncConnection()
                 .Table<T>()
@@ -36,7 +37,7 @@ namespace LH.Forcas.Storage
             // ReSharper disable once RedundantLambdaParameterType
             await this.dbManager.GetAsyncConnection().RunInTransactionAsync((SQLiteConnection conn) =>
             {
-                var versions = conn.Table<RefDataVersion>().ToList();
+                var versions = conn.Table<RefDataVersionEntity>().ToList();
 
                 foreach (var update in updates)
                 {
@@ -48,7 +49,7 @@ namespace LH.Forcas.Storage
 
                         if (version == null)
                         {
-                            version = new RefDataVersion();
+                            version = new RefDataVersionEntity();
                             version.EntityTypeName = update.EntityType.Name;
                         }
 

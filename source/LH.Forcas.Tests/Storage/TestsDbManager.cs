@@ -1,37 +1,33 @@
 ﻿using System;
-using System.IO;
 using LH.Forcas.Storage;
-using SQLite;
+using SQLite.Net;
+using SQLite.Net.Interop;
+using SQLite.Net.Platform.Win32;
 
 namespace LH.Forcas.Tests.Storage
 {
-    public class TestsDbManager : DbManagerBase
+    public class TestsDbManager : DbManagerBase, IDisposable
     {
-        private readonly string filePath;
+        private readonly SQLiteConnection connection;
 
         public TestsDbManager()
         {
-            var fileName = $"{Guid.NewGuid():N}.db3";
-            this.filePath = Path.Combine(Path.GetTempPath(), fileName);
-
-            Console.WriteLine("Using database file: {0}", this.filePath);
+            this.connection = this.GetSyncConnection();
         }
 
-        public bool DbFileExists => File.Exists(this.filePath);
-
-        public override SQLiteConnection GetSyncConnection()
+        protected override ISQLitePlatform GetPlatform()
         {
-            return new SQLiteConnection(this.filePath);
+            return new SQLitePlatformWin32();
         }
 
-        public override SQLiteAsyncConnection GetAsyncConnection()
+        protected override string GetDbFilePath()
         {
-            return new SQLiteAsyncConnection(this.filePath);
+            return "file::memory:?cache=shared";
         }
 
-        public void DeleteDatabase()
+        public void Dispose()
         {
-            File.Delete(this.filePath);
+            this.connection.Dispose();
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using SQLite;
+using SQLite.Net.Async;
+using SQLite.Net.Attributes;
 
 namespace LH.Forcas.Extensions
 {

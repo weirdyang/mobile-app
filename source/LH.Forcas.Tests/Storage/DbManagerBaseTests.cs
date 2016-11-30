@@ -15,7 +15,7 @@ namespace LH.Forcas.Tests.Storage
         [TearDown]
         public void TearDown()
         {
-            this.dbManager.DeleteDatabase();
+            this.dbManager.Dispose();
         }
 
         private TestsDbManager dbManager;
@@ -23,11 +23,7 @@ namespace LH.Forcas.Tests.Storage
         [Test]
         public void ShouldCreateTables()
         {
-            Assert.IsFalse(this.dbManager.DbFileExists);
-
             this.dbManager.Initialize();
-
-            Assert.IsTrue(this.dbManager.DbFileExists);
 
             using (var connection = this.dbManager.GetSyncConnection())
             {

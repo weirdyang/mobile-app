@@ -29,7 +29,7 @@ namespace LH.Forcas.Services
             this.repository = dependencyService.Get<IRefDataRepository>();
         }
 
-        public async Task<IEnumerable<T>> GetRefDataAsync<T>() where T : new()
+        public async Task<IEnumerable<T>> GetRefDataAsync<T>() where T : class, new()
         {
             await this.cacheSemaphore.WaitAsync();
 

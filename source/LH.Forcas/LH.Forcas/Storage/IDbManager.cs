@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using SQLite.Net;
+using SQLite.Net.Async;
 
 namespace LH.Forcas.Storage
 {

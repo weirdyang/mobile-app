@@ -6,7 +6,7 @@ namespace LH.Forcas.Storage
 {
     public interface IRefDataRepository
     {
-        Task<IList<T>> GetRefDataAsync<T>() where T : new();
+        Task<IList<T>> GetRefDataAsync<T>() where T : class, new();
 
         Task SaveRefDataUpdates(IRefDataUpdate[] updates);
     }

@@ -1,5 +1,8 @@
 ﻿using LH.Forcas.Domain.RefData;
-using SQLite;
+using LH.Forcas.Storage.Entities.RefData;
+using SQLite.Net;
+using SQLite.Net.Async;
+using SQLite.Net.Interop;
 
 namespace LH.Forcas.Storage
 {
@@ -14,12 +17,33 @@ namespace LH.Forcas.Storage
                 connection.CreateTable<Currency>();
                 connection.CreateTable<Country>();
                 connection.CreateTable<Bank>();
-                connection.CreateTable<RefDataVersion>();
+                connection.CreateTable<RefDataVersionEntity>();
             }
         }
 
-        public abstract SQLiteConnection GetSyncConnection();
+        public SQLiteConnection GetSyncConnection()
+        {
+            // ReSharper disable once RedundantArgumentDefaultValue
+            return new SQLiteConnection(this.GetPlatform(), this.GetDbFilePath(), true);
+        }
 
-        public abstract SQLiteAsyncConnection GetAsyncConnection();
+        public SQLiteAsyncConnection GetAsyncConnection()
+        {
+            return new SQLiteAsyncConnection(this.GetSyncConnectionWithLock);
+        }
+
+        protected SQLiteConnectionWithLock GetSyncConnectionWithLock()
+        {
+            return new SQLiteConnectionWithLock(this.GetPlatform(), this.GetConnectionString());
+        }
+
+        protected SQLiteConnectionString GetConnectionString()
+        {
+            return new SQLiteConnectionString(this.GetDbFilePath(), true);
+        }
+
+        protected abstract ISQLitePlatform GetPlatform();
+
+        protected abstract string GetDbFilePath();
     }
 }

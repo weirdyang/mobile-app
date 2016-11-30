@@ -2,7 +2,8 @@ using System;
 using System.IO;
 using LH.Forcas.Droid.Storage;
 using LH.Forcas.Storage;
-using SQLite;
+using SQLite.Net.Interop;
+using SQLite.Net.Platform.XamarinAndroid;
 using Xamarin.Forms;
 
 [assembly:Dependency(typeof(DroidDbManager))]
@@ -11,20 +12,16 @@ namespace LH.Forcas.Droid.Storage
 {
     public class DroidDbManager : DbManagerBase
     {
-        public override SQLiteConnection GetSyncConnection()
+        protected override ISQLitePlatform GetPlatform()
         {
-            return new SQLiteConnection(this.GetDbFilePath());
+            return new SQLitePlatformAndroid();
         }
 
-        public override SQLiteAsyncConnection GetAsyncConnection()
-        {
-            return new SQLiteAsyncConnection(this.GetDbFilePath());
-        }
-
-        private string GetDbFilePath()
+        protected override string GetDbFilePath()
         {
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // Documents folder
             var dbFilePath = Path.Combine(documentsPath, DbFileName);
+
             return dbFilePath;
         }
     }

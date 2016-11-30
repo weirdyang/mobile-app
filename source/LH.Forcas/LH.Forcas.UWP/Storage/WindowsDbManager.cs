@@ -2,7 +2,8 @@
 using Windows.Storage;
 using LH.Forcas.Storage;
 using LH.Forcas.UWP.Storage;
-using SQLite;
+using SQLite.Net.Interop;
+using SQLite.Net.Platform.WinRT;
 using Xamarin.Forms;
 
 [assembly:Dependency(typeof(WindowsDbManager))]
@@ -11,17 +12,12 @@ namespace LH.Forcas.UWP.Storage
 {
     public class WindowsDbManager : DbManagerBase
     {
-        public override SQLiteConnection GetSyncConnection()
+        protected override ISQLitePlatform GetPlatform()
         {
-            return new SQLiteConnection(this.GetDbFilePath());
+            return new SQLitePlatformWinRT();
         }
 
-        public override SQLiteAsyncConnection GetAsyncConnection()
-        {
-            return new SQLiteAsyncConnection(this.GetDbFilePath());
-        }
-
-        private string GetDbFilePath()
+        protected override string GetDbFilePath()
         {
             return Path.Combine(ApplicationData.Current.LocalFolder.Path, DbFileName);
         }

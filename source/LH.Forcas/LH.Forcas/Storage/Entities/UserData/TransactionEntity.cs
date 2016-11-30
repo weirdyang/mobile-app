@@ -1,9 +1,11 @@
 ﻿using System;
+using SQLite.Net.Attributes;
 
-namespace LH.Forcas.Domain.UserData
+namespace LH.Forcas.Storage.Entities.UserData
 {
-    public class Transaction
+    public class TransactionEntity
     {
+        [PrimaryKey]
         public Guid TransactionId { get; set; }
 
         public string CounterpartyName { get; set; }
@@ -18,6 +20,6 @@ namespace LH.Forcas.Domain.UserData
 
         public string SpecificSymbol { get; set; }
 
-        public TransactionType TransactionType { get; set; }
+        public short TransactionType { get; set; }
     }
 }

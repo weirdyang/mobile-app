@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using LH.Forcas.Domain.RefData;
 using LH.Forcas.Storage;
 using NUnit.Framework;
-using SQLite;
 
 namespace LH.Forcas.Tests.Storage
 {
@@ -25,8 +24,7 @@ namespace LH.Forcas.Tests.Storage
         [TearDown]
         public void TearDown()
         {
-            SQLiteAsyncConnection.ResetPool();
-            this.dbManager.DeleteDatabase();
+            this.dbManager.Dispose();
         }
 
         private TestsDbManager dbManager;
