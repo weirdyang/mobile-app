@@ -112,6 +112,17 @@ namespace LH.Forcas.Tests.Integration
         }
 
         [Test]
+        public void ShouldThrowWhenResponseIsEmpty()
+        {
+            this.flurlTest.RespondWith(CommitsOneNewCommitResponse);
+            this.flurlTest.RespondWith(string.Empty);
+
+            var exception = Assert.ThrowsAsync<RefDataFormatException>(async () => await this.downloader.GetRefDataUpdates(DateTime.Now));
+
+            Assert.IsTrue(exception.Message.Contains("no json response"));
+        }
+
+        [Test]
         public void ShouldThrowWhenContentPropertyIsNotPresent()
         {
             this.flurlTest.RespondWith(CommitsOneNewCommitResponse);
