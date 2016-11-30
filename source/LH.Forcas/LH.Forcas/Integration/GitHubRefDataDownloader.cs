@@ -28,9 +28,9 @@ namespace LH.Forcas.Integration
             this.appConstants = dependencyService.Get<IAppConstants>();
         }
 
-        public async Task<RefDataUpdateBase[]> GetRefDataUpdates(DateTime? lastSyncTime)
+        public async Task<IRefDataUpdate[]> GetRefDataUpdates(DateTime? lastSyncTime)
         {
-            var result = new RefDataUpdateBase[3];
+            var result = new IRefDataUpdate[3];
             var updatesAvailable = await this.AreUpdatesAvailableAsync(lastSyncTime);
 
             if (!updatesAvailable)
@@ -57,7 +57,7 @@ namespace LH.Forcas.Integration
             return commits != null && commits.Any();
         }
 
-        private async Task<RefDataUpdate<T>> FetchRefDataFileAsync<T>()
+        private async Task<IRefDataUpdate> FetchRefDataFileAsync<T>()
         {
             var uri = this.appConstants.ConfigDataGitHubRepoUrl.AppendPathSegment($"{typeof(T).Name}.json");
 

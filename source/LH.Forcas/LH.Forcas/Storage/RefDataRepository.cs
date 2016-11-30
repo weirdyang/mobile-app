@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LH.Forcas.Contract;
 using LH.Forcas.Extensions;
 using LH.Forcas.Models.RefData;
 using LH.Forcas.Storage;
+using SQLite;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(RefDataRepository))]
@@ -30,13 +32,31 @@ namespace LH.Forcas.Storage
                 .ToListAsync();
         }
 
-        public async Task SaveRefDataUpdates(RefDataUpdateBase[] updated)
+        public async Task SaveRefDataUpdates(IRefDataUpdate[] updates)
         {
-            // TODO: Version info - load & save, create an entity for this
-
-            await this.dbManager.GetAsyncConnection().RunInTransactionAsync(connection =>
+            // ReSharper disable once RedundantLambdaParameterType
+            await this.dbManager.GetAsyncConnection().RunInTransactionAsync((SQLiteConnection conn) =>
             {
-                updated.ForEach(item => connection.InsertOrReplace(item));
+                var versions = conn.Table<RefDataVersion>().ToList();
+
+                foreach (var update in updates)
+                {
+                    var version = versions.SingleOrDefault(x => x.EntityTypeName == update.EntityType.Name);
+
+                    if (version == null || version.Version < update.Version)
+                    {
+                        update.Data.ForEach(item => conn.InsertOrReplace(item));
+
+                        if (version == null)
+                        {
+                            version = new RefDataVersion();
+                            version.EntityTypeName = update.EntityType.Name;
+                        }
+
+                        version.Version = update.Version;
+                        conn.InsertOrReplace(version);
+                    }
+                }
             });
         }
     }

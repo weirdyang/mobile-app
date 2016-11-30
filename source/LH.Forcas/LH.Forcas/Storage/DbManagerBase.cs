@@ -15,6 +15,7 @@ namespace LH.Forcas.Storage
                 connection.CreateTable<Currency>();
                 connection.CreateTable<Country>();
                 connection.CreateTable<Bank>();
+                connection.CreateTable<RefDataVersion>();
             }
         }
 

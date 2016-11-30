@@ -46,7 +46,7 @@ namespace LH.Forcas.Tests.Services
         [Test]
         public async Task UpdateShouldInvalidateCache()
         {
-            var updates = new RefDataUpdateBase[1];
+            var updates = new IRefDataUpdate[1];
 
             this.repositoryMock.Setup(x => x.GetRefDataAsync<Country>()).ReturnsAsync(new[] { new Country() });
             this.downloaderMock.Setup(x => x.GetRefDataUpdates(It.IsAny<DateTime>())).ReturnsAsync(updates);
@@ -64,7 +64,7 @@ namespace LH.Forcas.Tests.Services
         public async Task UpdateWithNoResultShouldNotInvalidateCache()
         {
             this.repositoryMock.Setup(x => x.GetRefDataAsync<Country>()).ReturnsAsync(new[] { new Country() });
-            this.downloaderMock.Setup(x => x.GetRefDataUpdates(It.IsAny<DateTime>())).ReturnsAsync((RefDataUpdateBase[])null);
+            this.downloaderMock.Setup(x => x.GetRefDataUpdates(It.IsAny<DateTime>())).ReturnsAsync((IRefDataUpdate[])null);
 
             await this.refDataService.GetRefDataAsync<Country>();
             await this.refDataService.UpdateRefDataAsync();
@@ -77,7 +77,7 @@ namespace LH.Forcas.Tests.Services
         public async Task UpdateWithNoResultShouldNotBeSaved()
         {
             this.repositoryMock.Setup(x => x.GetRefDataAsync<Country>()).ReturnsAsync(new[] { new Country() });
-            this.downloaderMock.Setup(x => x.GetRefDataUpdates(It.IsAny<DateTime>())).ReturnsAsync((RefDataUpdateBase[])null);
+            this.downloaderMock.Setup(x => x.GetRefDataUpdates(It.IsAny<DateTime>())).ReturnsAsync((IRefDataUpdate[])null);
 
             await this.refDataService.GetRefDataAsync<Country>();
             await this.refDataService.UpdateRefDataAsync();

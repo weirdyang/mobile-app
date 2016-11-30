@@ -68,6 +68,7 @@
     <Compile Include="Models\RefData\RefDataUpdate.cs" />
     <Compile Include="Models\RefData\Bank.cs" />
     <Compile Include="Models\RefData\Currency.cs" />
+    <Compile Include="Models\RefData\RefDataVersion.cs" />
     <Compile Include="Models\UserPreferences.cs" />
     <Compile Include="Contract\IRefDataService.cs" />
     <Compile Include="Services\RefDataService.cs" />

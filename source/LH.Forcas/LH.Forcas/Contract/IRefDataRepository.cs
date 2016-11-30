@@ -8,6 +8,6 @@ namespace LH.Forcas.Contract
     {
         Task<IEnumerable<T>> GetRefDataAsync<T>() where T : new();
 
-        Task SaveRefDataUpdates(RefDataUpdateBase[] updates);
+        Task SaveRefDataUpdates(IRefDataUpdate[] updates);
     }
 }

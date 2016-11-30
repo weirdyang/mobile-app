@@ -63,7 +63,7 @@ namespace LH.Forcas.Services
             {
                 var lastSyncTime = DateTime.MaxValue; // TODO: !!!
 
-                RefDataUpdateBase[] updates;
+                IRefDataUpdate[] updates;
                 try
                 {
                      updates = await this.downloader.GetRefDataUpdates(lastSyncTime);

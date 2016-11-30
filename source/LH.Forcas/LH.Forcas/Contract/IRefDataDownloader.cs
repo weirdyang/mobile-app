@@ -6,6 +6,6 @@ namespace LH.Forcas.Contract
 {
     public interface IRefDataDownloader
     {
-        Task<RefDataUpdateBase[]> GetRefDataUpdates(DateTime? lastSyncTime);
+        Task<IRefDataUpdate[]> GetRefDataUpdates(DateTime? lastSyncTime);
     }
 }
