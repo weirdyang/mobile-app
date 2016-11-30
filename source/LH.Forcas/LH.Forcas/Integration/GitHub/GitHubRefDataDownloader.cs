@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
+using LH.Forcas.Domain.RefData;
 using LH.Forcas.Extensions;
 using LH.Forcas.Integration.Exceptions;
 using LH.Forcas.Integration.GitHub;
-using LH.Forcas.Models.RefData;
 using Polly;
 using Xamarin.Forms;
 

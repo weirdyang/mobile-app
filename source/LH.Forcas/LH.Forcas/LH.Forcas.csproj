@@ -47,6 +47,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Domain\RefData\IRefDataUpdate.cs" />
+    <Compile Include="Domain\UserData\Budget.cs" />
+    <Compile Include="Domain\UserData\BudgetCategory.cs" />
+    <Compile Include="Domain\UserData\Transaction.cs" />
+    <Compile Include="Domain\UserData\TransactionType.cs" />
     <Compile Include="Integration\Exceptions\RefDataFormatException.cs" />
     <Compile Include="Storage\IDbManager.cs" />
     <Compile Include="IDependencyService.cs" />
@@ -64,15 +69,15 @@
     <Compile Include="Integration\DummyCrashReporter.cs" />
     <Compile Include="Integration\GitHub\GitHubRefDataDownloader.cs" />
     <Compile Include="AppConstants.cs" />
-    <Compile Include="Models\RefData\RefDataUpdate.cs" />
-    <Compile Include="Models\RefData\Bank.cs" />
-    <Compile Include="Models\RefData\Currency.cs" />
-    <Compile Include="Models\RefData\RefDataVersion.cs" />
-    <Compile Include="Models\UserPreferences.cs" />
+    <Compile Include="Domain\RefData\RefDataUpdate.cs" />
+    <Compile Include="Domain\RefData\Bank.cs" />
+    <Compile Include="Domain\RefData\Currency.cs" />
+    <Compile Include="Domain\RefData\RefDataVersion.cs" />
+    <Compile Include="Domain\UserPreferences.cs" />
     <Compile Include="Services\IRefDataService.cs" />
     <Compile Include="Services\RefDataService.cs" />
     <Compile Include="Storage\DbManagerBase.cs" />
-    <Compile Include="Models\RefData\CountryEntity.cs" />
+    <Compile Include="Domain\RefData\CountryEntity.cs" />
     <Compile Include="Storage\RefDataRepository.cs" />
     <Compile Include="Views\SyncSetup\AuthenticationPage.xaml.cs">
       <DependentUpon>AuthenticationPage.xaml</DependentUpon>

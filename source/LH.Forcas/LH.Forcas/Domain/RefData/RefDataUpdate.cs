@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace LH.Forcas.Models.RefData
+namespace LH.Forcas.Domain.RefData
 {
     public class RefDataUpdate<T> : IRefDataUpdate
     {
@@ -14,14 +14,5 @@ namespace LH.Forcas.Models.RefData
 
         [JsonIgnore]
         public object[] Data => this.TypedData.Cast<object>().ToArray();
-    }
-
-    public interface IRefDataUpdate
-    {
-        Type EntityType { get; }
-
-        int Version { get; }
-
-        object[] Data { get; }
     }
 }

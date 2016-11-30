@@ -1,4 +1,4 @@
-﻿using LH.Forcas.Models.RefData;
+﻿using LH.Forcas.Domain.RefData;
 using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Storage

@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace LH.Forcas.Models.RefData
+namespace LH.Forcas.Domain.RefData
 {
     public class Country
     {

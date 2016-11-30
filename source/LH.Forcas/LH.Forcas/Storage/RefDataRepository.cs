@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LH.Forcas.Domain.RefData;
 using LH.Forcas.Extensions;
-using LH.Forcas.Models.RefData;
 using LH.Forcas.Storage;
 using SQLite;
 using Xamarin.Forms;

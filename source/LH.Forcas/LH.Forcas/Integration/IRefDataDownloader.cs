@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using LH.Forcas.Models.RefData;
+using LH.Forcas.Domain.RefData;
 
 namespace LH.Forcas.Integration
 {

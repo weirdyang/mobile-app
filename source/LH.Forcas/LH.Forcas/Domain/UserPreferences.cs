@@ -1,4 +1,4 @@
-﻿namespace LH.Forcas.Models
+﻿namespace LH.Forcas.Domain
 {
     public class UserPreferences
     {

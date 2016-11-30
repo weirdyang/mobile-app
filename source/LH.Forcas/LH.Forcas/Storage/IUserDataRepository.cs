@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using LH.Forcas.Models;
+using LH.Forcas.Domain;
 
 namespace LH.Forcas.Storage
 {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using LH.Forcas.Models.RefData;
+using LH.Forcas.Domain.RefData;
 using LH.Forcas.Storage;
 using NUnit.Framework;
 using SQLite;

@@ -1,4 +1,4 @@
-﻿using LH.Forcas.Models.RefData;
+﻿using LH.Forcas.Domain.RefData;
 using SQLite;
 
 namespace LH.Forcas.Storage

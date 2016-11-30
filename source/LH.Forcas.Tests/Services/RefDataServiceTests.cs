@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using LH.Forcas.Domain.RefData;
 using LH.Forcas.Integration;
-using LH.Forcas.Models.RefData;
 using LH.Forcas.Services;
 using LH.Forcas.Storage;
 using Moq;
