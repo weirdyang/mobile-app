@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using LH.Forcas.Contract;
+using LH.Forcas.Integration;
 using LH.Forcas.Models.RefData;
+using LH.Forcas.Storage;
 
 namespace LH.Forcas.Services
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LH.Forcas.Contract
+namespace LH.Forcas
 {
     public interface IAppConstants
     {

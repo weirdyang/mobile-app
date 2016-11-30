@@ -1,5 +1,4 @@
-﻿using LH.Forcas.Contract;
-using LH.Forcas.Views;
+﻿using LH.Forcas.Storage;
 using LH.Forcas.Views.SyncSetup;
 using Xamarin.Forms;
 

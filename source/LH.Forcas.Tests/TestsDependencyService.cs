@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using LH.Forcas.Contract;
 
 namespace LH.Forcas.Tests
 {

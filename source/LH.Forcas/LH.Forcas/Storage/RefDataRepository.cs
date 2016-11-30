@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LH.Forcas.Contract;
 using LH.Forcas.Extensions;
 using LH.Forcas.Models.RefData;
 using LH.Forcas.Storage;
@@ -25,7 +24,7 @@ namespace LH.Forcas.Storage
             this.dbManager = dependencyService.Get<IDbManager>();
         }
 
-        public async Task<IEnumerable<T>> GetRefDataAsync<T>() where T : new()
+        public async Task<IList<T>> GetRefDataAsync<T>() where T : new()
         {
             return await this.dbManager.GetAsyncConnection()
                 .Table<T>()

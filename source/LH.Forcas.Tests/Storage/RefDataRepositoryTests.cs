@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using LH.Forcas.Contract;
 using LH.Forcas.Models.RefData;
 using LH.Forcas.Storage;
 using NUnit.Framework;
@@ -71,11 +70,7 @@ namespace LH.Forcas.Tests.Storage
             var country = new Country { Code = countryCode, DefaultCurrencyShortCode = "CZK" };
             var update = new RefDataUpdate<Country> { TypedData = new[] { country }, EntityType = typeof(Country), Version = version };
 
-            await this.refDataRepository.SaveRefDataUpdates(new[] { update });
+            await this.refDataRepository.SaveRefDataUpdates(new IRefDataUpdate[] { update });
         }
-
-        /*
-         * Should not save the update twice
-         */
     }
 }

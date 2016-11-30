@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LH.Forcas.Contract.Exceptions
+namespace LH.Forcas.Integration.Exceptions
 {
     public class RefDataFormatException : Exception
     {

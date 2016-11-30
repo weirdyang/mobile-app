@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LH.Forcas.Contract
+namespace LH.Forcas.Services
 {
     public interface IRefDataService
     {

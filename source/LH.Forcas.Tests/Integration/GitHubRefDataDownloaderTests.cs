@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Flurl.Http.Testing;
-using LH.Forcas.Contract;
-using LH.Forcas.Contract.Exceptions;
-using LH.Forcas.Integration;
+using LH.Forcas.Integration.Exceptions;
+using LH.Forcas.Integration.GitHub;
 using Moq;
 using NUnit.Framework;
 

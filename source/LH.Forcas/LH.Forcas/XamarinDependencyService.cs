@@ -1,5 +1,4 @@
-﻿using LH.Forcas.Contract;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace LH.Forcas
 {

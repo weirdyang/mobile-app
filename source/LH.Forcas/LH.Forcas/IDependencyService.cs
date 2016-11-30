@@ -1,4 +1,4 @@
-﻿namespace LH.Forcas.Contract
+﻿namespace LH.Forcas
 {
     public interface IDependencyService
     {

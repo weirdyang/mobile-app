@@ -1,5 +1,4 @@
 ﻿using System;
-using LH.Forcas.Contract;
 
 namespace LH.Forcas
 {

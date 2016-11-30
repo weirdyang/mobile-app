@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using LH.Forcas.Models.RefData;
 
-namespace LH.Forcas.Contract
+namespace LH.Forcas.Integration
 {
     public interface IRefDataDownloader
     {

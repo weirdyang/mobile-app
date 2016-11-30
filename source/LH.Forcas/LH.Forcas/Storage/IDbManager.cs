@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace LH.Forcas.Contract
+namespace LH.Forcas.Storage
 {
     public interface IDbManager
     {

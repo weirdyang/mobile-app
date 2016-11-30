@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using LH.Forcas.Contract;
+using LH.Forcas.Integration;
 using LH.Forcas.Models.RefData;
 using LH.Forcas.Services;
+using LH.Forcas.Storage;
 using Moq;
 using NUnit.Framework;
 

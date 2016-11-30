@@ -1,5 +1,4 @@
-﻿using LH.Forcas.Contract;
-using LH.Forcas.Models.RefData;
+﻿using LH.Forcas.Models.RefData;
 using SQLite;
 
 namespace LH.Forcas.Storage

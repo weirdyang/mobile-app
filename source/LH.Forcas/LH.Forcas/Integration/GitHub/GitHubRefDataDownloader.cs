@@ -6,13 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
-using LH.Forcas.Contract;
-using LH.Forcas.Contract.Exceptions;
 using LH.Forcas.Extensions;
+using LH.Forcas.Integration.Exceptions;
+using LH.Forcas.Integration.GitHub;
 using LH.Forcas.Models.RefData;
 using Polly;
+using Xamarin.Forms;
 
-namespace LH.Forcas.Integration
+[assembly:Dependency(typeof(GitHubRefDataDownloader))]
+
+namespace LH.Forcas.Integration.GitHub
 {
     public class GitHubRefDataDownloader : IRefDataDownloader
     {

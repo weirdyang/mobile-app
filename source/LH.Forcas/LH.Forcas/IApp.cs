@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LH.Forcas.Contract
+namespace LH.Forcas
 {
     public interface IApp
     {
