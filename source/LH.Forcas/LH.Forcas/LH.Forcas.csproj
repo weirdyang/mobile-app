@@ -75,7 +75,6 @@
     <Compile Include="Integration\IFileSyncProvider.cs" />
     <Compile Include="Integration\IRefDataDownloader.cs" />
     <Compile Include="IAppConstants.cs" />
-    <Compile Include="Extensions\SqLiteExtensions.cs" />
     <Compile Include="Integration\DummyCrashReporter.cs" />
     <Compile Include="Integration\GitHub\GitHubRefDataDownloader.cs" />
     <Compile Include="AppConstants.cs" />
