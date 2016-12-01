@@ -29,33 +29,19 @@ namespace LH.Forcas.Services
             this.repository = dependencyService.Get<IRefDataRepository>();
         }
 
-        public async Task<IEnumerable<T>> GetRefDataAsync<T>() where T : class, new()
+        public async Task<IList<Bank>> GetBanks()
         {
-            await this.cacheSemaphore.WaitAsync();
+            return await this.GetRefDataViaCacheAsync(() => this.repository.GetBanksAsync());
+        }
 
-            object result;
-            if (this.cache.TryGetValue(typeof(T), out result))
-            {
-                return (IEnumerable<T>)result;
-            }
+        public async Task<IList<Country>> GetCountriesAsync()
+        {
+            return await this.GetRefDataViaCacheAsync(() => this.repository.GetCountriesAsync());
+        }
 
-            IEnumerable<T> typedResult;
-
-            try
-            {
-                typedResult = await this.repository.GetRefDataAsync<T>();
-            }
-            catch (Exception ex)
-            {
-                this.cacheSemaphore.Release();
-                this.crashReporter.ReportFatal(ex);
-                throw;
-            }
-
-            this.cache.Add(typeof(T), typedResult);
-            this.cacheSemaphore.Release();
-
-            return typedResult;
+        public async Task<IList<Currency>> GetCurrencies()
+        {
+            return await this.GetRefDataViaCacheAsync(() => this.repository.GetCurrenciesAsync());
         }
 
         public async Task UpdateRefDataAsync()
@@ -89,6 +75,35 @@ namespace LH.Forcas.Services
                 this.crashReporter.ReportException(ex);
                 throw;
             }
+        }
+
+        private async Task<IList<TDomain>> GetRefDataViaCacheAsync<TDomain>(Func<Task<IList<TDomain>>> fetchDataDelegate)
+        {
+            await this.cacheSemaphore.WaitAsync();
+
+            object result;
+            if (this.cache.TryGetValue(typeof(TDomain), out result))
+            {
+                return (IList<TDomain>)result;
+            }
+
+            IList<TDomain> typedResult;
+
+            try
+            {
+                typedResult = await fetchDataDelegate.Invoke();
+            }
+            catch (Exception ex)
+            {
+                this.cacheSemaphore.Release();
+                this.crashReporter.ReportFatal(ex);
+                throw;
+            }
+
+            this.cache.Add(typeof(TDomain), typedResult);
+            this.cacheSemaphore.Release();
+
+            return typedResult;
         }
     }
 }

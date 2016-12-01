@@ -1,5 +1,6 @@
 ﻿using System;
 using SQLite.Net.Attributes;
+using SQLiteNetExtensions.Attributes;
 
 namespace LH.Forcas.Storage.Entities.UserData
 {
@@ -7,6 +8,18 @@ namespace LH.Forcas.Storage.Entities.UserData
     {
         [PrimaryKey]
         public Guid TransactionId { get; set; }
+
+        [ForeignKey(typeof(AccountEntity))]
+        public Guid AccountId { get; set; }
+
+        [ManyToOne(CascadeOperations = CascadeOperation.None)]
+        public AccountEntity Account { get; set; }
+
+        [ForeignKey(typeof(CategoryEntity))]
+        public Guid CategoryId { get; set; }
+
+        [ManyToOne(CascadeOperations = CascadeOperation.None)]
+        public CategoryEntity Category { get; set; }
 
         public string CounterpartyName { get; set; }
 

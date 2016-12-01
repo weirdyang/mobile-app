@@ -12,6 +12,8 @@ namespace LH.Forcas.Tests.Storage
         [SetUp]
         public void Setup()
         {
+            AutoMapperConfig.Configure();
+
             this.dbManager = new TestsDbManager();
             this.dbManager.Initialize();
 
@@ -34,14 +36,14 @@ namespace LH.Forcas.Tests.Storage
         [Test]
         public async Task ShouldLoadSavedEntity()
         {
-            var countries = await this.refDataRepository.GetRefDataAsync<Country>();
+            var countries = await this.refDataRepository.GetCountriesAsync();
 
             Assert.IsNotNull(countries);
             Assert.IsFalse(countries.Any());
 
             await this.SaveCountryUpdate("CZE", 1);
 
-            countries = await this.refDataRepository.GetRefDataAsync<Country>();
+            countries = await this.refDataRepository.GetCountriesAsync();
             var actualCountry = countries.Single();
 
             Assert.AreEqual("CZE", actualCountry.Code);
@@ -52,12 +54,12 @@ namespace LH.Forcas.Tests.Storage
         {
             await this.SaveCountryUpdate("CZE", 1);
 
-            var countries = await this.refDataRepository.GetRefDataAsync<Country>();
+            var countries = await this.refDataRepository.GetCountriesAsync();
             Assert.IsTrue(countries.Any());
 
             await this.SaveCountryUpdate("UK", 1);
 
-            countries = await this.refDataRepository.GetRefDataAsync<Country>();
+            countries = await this.refDataRepository.GetCountriesAsync();
 
             Assert.IsTrue(countries.Any());
             Assert.AreEqual("CZE", countries.Single().Code);
@@ -65,8 +67,8 @@ namespace LH.Forcas.Tests.Storage
 
         private async Task SaveCountryUpdate(string countryCode, int version)
         {
-            var country = new Country { Code = countryCode, DefaultCurrencyShortCode = "CZK" };
-            var update = new RefDataUpdate<Country> { TypedData = new[] { country }, EntityType = typeof(Country), Version = version };
+            var country = new Country { Code = countryCode, DefaultCurrencyCode = "CZK" };
+            var update = new RefDataUpdate<Country> { TypedData = new[] { country }, DomainType = typeof(Country), Version = version };
 
             await this.refDataRepository.SaveRefDataUpdates(new IRefDataUpdate[] { update });
         }

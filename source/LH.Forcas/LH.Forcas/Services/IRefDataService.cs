@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using LH.Forcas.Domain.RefData;
 
 namespace LH.Forcas.Services
 {
     public interface IRefDataService
     {
-        Task<IEnumerable<T>> GetRefDataAsync<T>() where T : class, new();
+        Task<IList<Bank>> GetBanks();
+
+        Task<IList<Country>> GetCountriesAsync();
+
+        Task<IList<Currency>> GetCurrencies();
 
         Task UpdateRefDataAsync();
     }

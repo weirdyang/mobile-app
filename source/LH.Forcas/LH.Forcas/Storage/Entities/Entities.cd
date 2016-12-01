@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LH.Forcas.Storage.Entities.UserData.AccountEntity">
+    <Position X="6" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQCAAAAABAAAAAAAAwAAAAAACAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Storage\Entities\UserData\AccountEntity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Bank" />
+      <Property Name="Currency" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Transactions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LH.Forcas.Storage.Entities.UserData.TransactionEntity">
+    <Position X="1" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAiAAAAAAAAAQAEEKAQAAAAAgCEA=</HashCode>
+      <FileName>Storage\Entities\UserData\TransactionEntity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Category" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LH.Forcas.Storage.Entities.UserData.BudgetEntity">
+    <Position X="9.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Storage\Entities\UserData\BudgetEntity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Categories" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LH.Forcas.Storage.Entities.UserData.BudgetCategoryEntity">
+    <Position X="6.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAEAAAgAAAAAEAACAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Storage\Entities\UserData\BudgetCategoryEntity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Category" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Children" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LH.Forcas.Storage.Entities.UserData.CategoryEntity">
+    <Position X="3.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Storage\Entities\UserData\CategoryEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LH.Forcas.Storage.Entities.RefData.BankEntity">
+    <Position X="8.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAACAAAgAAAAA=</HashCode>
+      <FileName>Storage\Entities\RefData\BankEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LH.Forcas.Storage.Entities.RefData.CurrencyEntity">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAACAA=</HashCode>
+      <FileName>Storage\Entities\RefData\CurrencyEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

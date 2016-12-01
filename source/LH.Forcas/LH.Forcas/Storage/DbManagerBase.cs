@@ -1,5 +1,5 @@
-﻿using LH.Forcas.Domain.RefData;
-using LH.Forcas.Storage.Entities.RefData;
+﻿using LH.Forcas.Storage.Entities.RefData;
+using LH.Forcas.Storage.Entities.UserData;
 using SQLite.Net;
 using SQLite.Net.Async;
 using SQLite.Net.Interop;
@@ -14,10 +14,15 @@ namespace LH.Forcas.Storage
         {
             using (var connection = this.GetSyncConnection())
             {
-                connection.CreateTable<Currency>();
-                connection.CreateTable<Country>();
-                connection.CreateTable<Bank>();
                 connection.CreateTable<RefDataVersionEntity>();
+                connection.CreateTable<CurrencyEntity>();
+                connection.CreateTable<CountryEntity>();
+                connection.CreateTable<BankEntity>();
+
+                connection.CreateTable<BudgetEntity>();
+                connection.CreateTable<BudgetCategoryEntity>();
+                connection.CreateTable<TransactionEntity>();
+                connection.CreateTable<AccountEntity>();
             }
         }
 

@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using LH.Forcas.Domain.UserData;
 using LH.Forcas.Storage;
 using LH.Forcas.Storage.Entities.UserData;
-using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Storage
 {
+    [Ignore("Work in progress")]
     [TestFixture]
-    public class EntityMappingTests
+    public class EntityMappingUserDataTests
     {
         [SetUp]
         public void Setup()
@@ -45,7 +46,10 @@ namespace LH.Forcas.Tests.Storage
         {
             var entity = new BudgetEntity();
             entity.BudgetId = 201405;
-            entity.CategoriesJson = JsonConvert.SerializeObject(new List<BudgetCategory> { new BudgetCategory { CategoryId =  "Dummy", Amount = 10m } });
+            entity.Categories = new List<BudgetCategoryEntity>
+            {
+                new BudgetCategoryEntity { CategoryId = Guid.NewGuid(), Amount = 10m }
+            };
 
             var domain = Mapper.Instance.Map<Budget>(entity);
 

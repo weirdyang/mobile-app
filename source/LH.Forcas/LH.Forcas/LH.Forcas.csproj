@@ -54,7 +54,14 @@
     <Compile Include="Domain\UserData\TransactionType.cs" />
     <Compile Include="Integration\Exceptions\RefDataFormatException.cs" />
     <Compile Include="Storage\AutoMapperConfig.cs" />
+    <Compile Include="Storage\Entities\RefData\BankEntity.cs" />
+    <Compile Include="Storage\Entities\RefData\CountryEntity.cs" />
+    <Compile Include="Storage\Entities\RefData\CurrencyEntity.cs" />
+    <Compile Include="Storage\Entities\RefData\RefDataEntityBase.cs" />
+    <Compile Include="Storage\Entities\UserData\AccountEntity.cs" />
+    <Compile Include="Storage\Entities\UserData\BudgetCategoryEntity.cs" />
     <Compile Include="Storage\Entities\UserData\BudgetEntity.cs" />
+    <Compile Include="Storage\Entities\UserData\CategoryEntity.cs" />
     <Compile Include="Storage\Entities\UserData\TransactionEntity.cs" />
     <Compile Include="Storage\IDbManager.cs" />
     <Compile Include="IDependencyService.cs" />
@@ -80,7 +87,7 @@
     <Compile Include="Services\IRefDataService.cs" />
     <Compile Include="Services\RefDataService.cs" />
     <Compile Include="Storage\DbManagerBase.cs" />
-    <Compile Include="Domain\RefData\CountryEntity.cs" />
+    <Compile Include="Domain\RefData\Country.cs" />
     <Compile Include="Storage\RefDataRepository.cs" />
     <Compile Include="Views\SyncSetup\AuthenticationPage.xaml.cs">
       <DependentUpon>AuthenticationPage.xaml</DependentUpon>
@@ -108,6 +115,7 @@
     <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
+    <None Include="Storage\Entities\Entities.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />

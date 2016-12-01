@@ -8,7 +8,7 @@ namespace LH.Forcas.Domain.RefData
     {
         public T[] TypedData { get; set; }
 
-        public Type EntityType { get; set; }
+        public Type DomainType { get; set; }
 
         public int Version { get; set; }
 
