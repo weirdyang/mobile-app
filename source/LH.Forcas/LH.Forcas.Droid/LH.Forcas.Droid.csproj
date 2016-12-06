@@ -47,8 +47,8 @@
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS|AnyCPU'">
-    <OutputPath>bin\VSTS\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS-Win|AnyCPU'">
+    <OutputPath>bin\VSTS-Win\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>

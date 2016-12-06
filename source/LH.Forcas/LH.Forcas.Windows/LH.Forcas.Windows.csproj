@@ -171,8 +171,8 @@
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS|AnyCPU'">
-    <OutputPath>bin\VSTS\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS-Win|AnyCPU'">
+    <OutputPath>bin\VSTS-Win\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
     <Optimize>true</Optimize>
     <NoStdLib>true</NoStdLib>
@@ -183,8 +183,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS|ARM'">
-    <OutputPath>bin\ARM\VSTS\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS-Win|ARM'">
+    <OutputPath>bin\ARM\VSTS-Win\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
@@ -196,8 +196,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS|x64'">
-    <OutputPath>bin\x64\VSTS\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS-Win|x64'">
+    <OutputPath>bin\x64\VSTS-Win\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
@@ -209,8 +209,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS|x86'">
-    <OutputPath>bin\x86\VSTS\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS-Win|x86'">
+    <OutputPath>bin\x86\VSTS-Win\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
