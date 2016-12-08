@@ -5,6 +5,11 @@ param(
     [string]$PackagePath
 )
 
+$ErrorActionPreference = "Stop"
+
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 Write-Host "Uploading file $PackagePath"
 
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
@@ -16,6 +21,6 @@ $Result = Invoke-RestMethod -Method Post -Uri $Uri -Headers $headers -ContentTyp
 
 Write-Host "Target package upload uri $($result.upload_url)"
 
-Invoke-WebRequest -Uri $result.upload_url -InFile $PackagePath -Method Post -ContentType "multipart/form-data"
+Invoke-WebRequest -Uri $result.upload_url -Method Post -ContentType "multipart/form-data" -InFile $PackagePath -Headers $headers
 
 Write-Host "Package upload completed"
