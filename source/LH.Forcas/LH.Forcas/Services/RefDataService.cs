@@ -18,15 +18,11 @@ namespace LH.Forcas.Services
         private readonly SemaphoreSlim cacheSemaphore = new SemaphoreSlim(1, 1);
         private readonly IDictionary<Type, object> cache = new Dictionary<Type, object>();
 
-        public RefDataService() : this(XamarinDependencyService.Default)
+        public RefDataService(ICrashReporter crashReporter, IRefDataDownloader downloader, IRefDataRepository repository)
         {
-        }
-
-        public RefDataService(IDependencyService dependencyService)
-        {
-            this.crashReporter = dependencyService.Get<ICrashReporter>();
-            this.downloader = dependencyService.Get<IRefDataDownloader>();
-            this.repository = dependencyService.Get<IRefDataRepository>();
+            this.crashReporter = crashReporter;
+            this.downloader = downloader;
+            this.repository = repository;
         }
 
         public async Task<IList<Bank>> GetBanks()

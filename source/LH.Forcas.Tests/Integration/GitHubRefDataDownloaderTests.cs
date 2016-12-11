@@ -24,16 +24,13 @@ namespace LH.Forcas.Tests.Integration
         {
             this.flurlTest = new HttpTest();
 
-            var appConstantsMock = new Mock<IAppConstants>();
+            var appConstantsMock = new Mock<IAppConfig>();
             appConstantsMock.SetupGet(x => x.ConfigDataGitHubRepoUrl).Returns("https://github.com/repos/magic/");
             appConstantsMock.SetupGet(x => x.ConfigDataMaxAge).Returns(TimeSpan.FromMilliseconds(1));
             appConstantsMock.SetupGet(x => x.HttpRequestRetryCount).Returns(3);
             appConstantsMock.SetupGet(x => x.HttpRequestRetryWaitTimeBase).Returns(0);
-            
-            this.dependencyService = new TestsDependencyService();
-            this.dependencyService.Register(appConstantsMock.Object);
 
-            this.downloader = new GitHubRefDataDownloader(this.dependencyService);
+            this.downloader = new GitHubRefDataDownloader(appConstantsMock.Object);
         }
 
         [TearDown]
@@ -44,7 +41,6 @@ namespace LH.Forcas.Tests.Integration
 
         private HttpTest flurlTest;
         private GitHubRefDataDownloader downloader;
-        private TestsDependencyService dependencyService;
 
         [Test]
         public async Task ShouldReturnUpdatesWithNoLastSyncDate()

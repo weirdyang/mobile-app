@@ -2,7 +2,7 @@
 
 namespace LH.Forcas
 {
-    public interface IAppConstants
+    public interface IAppConfig
     {
         string ConfigDataGitHubRepoUrl { get; }
 

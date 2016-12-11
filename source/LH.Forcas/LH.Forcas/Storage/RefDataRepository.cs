@@ -25,13 +25,9 @@ namespace LH.Forcas.Storage
 
         private readonly IDbManager dbManager;
 
-        public RefDataRepository() : this(XamarinDependencyService.Default)
+        public RefDataRepository(IDbManager dbManager)
         {
-        }
-
-        public RefDataRepository(IDependencyService dependencyService)
-        {
-            this.dbManager = dependencyService.Get<IDbManager>();
+            this.dbManager = dbManager;
         }
 
         public async Task<IList<Bank>> GetBanksAsync()

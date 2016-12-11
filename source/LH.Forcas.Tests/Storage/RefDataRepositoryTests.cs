@@ -17,10 +17,7 @@ namespace LH.Forcas.Tests.Storage
             this.dbManager = new TestsDbManager();
             this.dbManager.Initialize();
 
-            this.dependencyService = new TestsDependencyService();
-            this.dependencyService.Register((IDbManager)this.dbManager);
-
-            this.refDataRepository = new RefDataRepository(this.dependencyService);
+            this.refDataRepository = new RefDataRepository(this.dbManager);
         }
 
         [TearDown]
@@ -31,7 +28,6 @@ namespace LH.Forcas.Tests.Storage
 
         private TestsDbManager dbManager;
         private IRefDataRepository refDataRepository;
-        private TestsDependencyService dependencyService;
 
         [Test]
         public async Task ShouldLoadSavedEntity()

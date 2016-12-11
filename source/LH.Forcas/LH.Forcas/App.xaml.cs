@@ -1,45 +1,26 @@
 ﻿using LH.Forcas.Storage;
-using LH.Forcas.Views.SyncSetup;
-using Xamarin.Forms;
+using LH.Forcas.Views;
+using Prism.Unity;
+using Microsoft.Practices.Unity;
 
 namespace LH.Forcas
 {
-    public partial class App : IApp
+    public partial class App
     {
-        public const string LastRefDataSyncPropertyKey = "LastRefDataSync";
+        // public const string LastRefDataSyncPropertyKey = "LastRefDataSync";
 
-        public App()
+        protected override void OnInitialized()
         {
             this.InitializeComponent();
 
-            this.Constants = new AppConstants();
-            this.MainPage = new SyncProviderSelectionPage();
+            this.NavigationService.NavigateAsync("MainPage");
+
+            this.Container.Resolve<IDbManager>().Initialize();
         }
 
-        public IAppConstants Constants { get; }
-
-        protected override void OnStart()
+        protected override void RegisterTypes()
         {
-            var dbManager = DependencyService.Get<IDbManager>();
-            dbManager.Initialize();
-
-            //var userDataRepository = DependencyService.Get<IUserDataRepository>();
-            //var userPreferences = await userDataRepository.GetUserPreferencesAsync();
-
-            //if (userPreferences == null)
-            //{
-
-            //}
-        }
-
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
+            this.Container.RegisterTypeForNavigation<MainPage>();
         }
     }
 }

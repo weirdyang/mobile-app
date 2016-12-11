@@ -1,8 +1,8 @@
 ﻿namespace LH.Forcas.Views.SyncSetup
 {
-    public partial class SyncProviderSelectionPage
+    public partial class ProviderSelection
     {
-        public SyncProviderSelectionPage()
+        public ProviderSelection()
         {
             this.InitializeComponent();
         }

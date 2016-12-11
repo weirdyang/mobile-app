@@ -2,7 +2,7 @@
 
 namespace LH.Forcas
 {
-    public class AppConstants : IAppConstants
+    public class AppConfig : IAppConfig
     {
         public string ConfigDataGitHubRepoUrl => "https://github.com/repos/lholota/LH.Forcas.Sync/";
 

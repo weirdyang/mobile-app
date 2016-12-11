@@ -19,16 +19,11 @@ namespace LH.Forcas.Integration.GitHub
 {
     public class GitHubRefDataDownloader : IRefDataDownloader
     {
-        private readonly IAppConstants appConstants;
+        private readonly IAppConfig appConfig;
 
-        public GitHubRefDataDownloader() : this(XamarinDependencyService.Default)
+        public GitHubRefDataDownloader(IAppConfig appConfig)
         {
-            
-        }
-
-        public GitHubRefDataDownloader(IDependencyService dependencyService)
-        {
-            this.appConstants = dependencyService.Get<IAppConstants>();
+            this.appConfig = appConfig;
         }
 
         public async Task<IRefDataUpdate[]> GetRefDataUpdates(DateTime? lastSyncTime)
@@ -51,7 +46,7 @@ namespace LH.Forcas.Integration.GitHub
         private async Task<bool> AreUpdatesAvailableAsync(DateTime? lastSyncTime)
         {
             var commits = await this.ExecuteWithRetry(async () =>
-                    await this.appConstants.ConfigDataGitHubRepoUrl
+                    await this.appConfig.ConfigDataGitHubRepoUrl
                         .AppendPathSegment("commits")
                         .SetQueryParams(new { since = lastSyncTime?.ToString("o") })
                         .GetJsonListAsync()
@@ -62,7 +57,7 @@ namespace LH.Forcas.Integration.GitHub
 
         private async Task<IRefDataUpdate> FetchRefDataFileAsync<T>()
         {
-            var uri = this.appConstants.ConfigDataGitHubRepoUrl.AppendPathSegment($"{typeof(T).Name}.json");
+            var uri = this.appConfig.ConfigDataGitHubRepoUrl.AppendPathSegment($"{typeof(T).Name}.json");
 
             ExpandoObject fileInfo = await this.ExecuteWithRetry(
                 async () => await uri.GetJsonAsync()
@@ -98,7 +93,7 @@ namespace LH.Forcas.Integration.GitHub
             return await Policy
                 .Handle<HttpRequestException>()
                 .Or<FlurlHttpException>()
-                .WaitAndRetryExponentialAsync(this.appConstants)
+                .WaitAndRetryExponentialAsync(this.appConfig)
                 .ExecuteAsync(fetchCall.Invoke);
         }
     }

@@ -6,11 +6,11 @@ namespace LH.Forcas.Extensions
 {
     public static class PollyExtensions
     {
-        public static RetryPolicy WaitAndRetryExponentialAsync(this PolicyBuilder policyBuilder, IAppConstants appConstants)
+        public static RetryPolicy WaitAndRetryExponentialAsync(this PolicyBuilder policyBuilder, IAppConfig appConfig)
         {
-            Func<int, TimeSpan> timeCalcFunction = attempt => TimeSpan.FromSeconds(Math.Pow(appConstants.HttpRequestRetryWaitTimeBase, attempt));
+            Func<int, TimeSpan> timeCalcFunction = attempt => TimeSpan.FromSeconds(Math.Pow(appConfig.HttpRequestRetryWaitTimeBase, attempt));
 
-            return policyBuilder.WaitAndRetryAsync(appConstants.HttpRequestRetryCount, timeCalcFunction);
+            return policyBuilder.WaitAndRetryAsync(appConfig.HttpRequestRetryCount, timeCalcFunction);
         }
     }
 }

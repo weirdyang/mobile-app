@@ -19,16 +19,13 @@ namespace LH.Forcas.Tests.Services
             this.repositoryMock = new Mock<IRefDataRepository>(MockBehavior.Strict);
             this.downloaderMock = new Mock<IRefDataDownloader>();
             
-            this.dependencyService = new TestsDependencyService();
-            this.dependencyService.Register(this.crashReporterMock.Object);
-            this.dependencyService.Register(this.repositoryMock.Object);
-            this.dependencyService.Register(this.downloaderMock.Object);
-
-            this.refDataService = new RefDataService(this.dependencyService);
+            this.refDataService = new RefDataService(
+                this.crashReporterMock.Object,
+                this.downloaderMock.Object,
+                this.repositoryMock.Object);
         }
 
         private RefDataService refDataService;
-        private TestsDependencyService dependencyService;
         private Mock<ICrashReporter> crashReporterMock;
         private Mock<IRefDataDownloader> downloaderMock;
         private Mock<IRefDataRepository> repositoryMock;
