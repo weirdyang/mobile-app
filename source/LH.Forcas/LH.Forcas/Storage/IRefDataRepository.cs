@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using LH.Forcas.Domain.RefData;
 
 namespace LH.Forcas.Storage
 {
     public interface IRefDataRepository
     {
-        Task<IList<Bank>> GetBanksAsync();
+        IEnumerable<Bank> GetBanks();
 
-        Task<IList<Currency>> GetCurrenciesAsync();
+        IEnumerable<Currency> GetCurrencies();
 
-        Task<IList<Country>> GetCountriesAsync();
+        IEnumerable<Country> GetCountries();
 
-        Task SaveRefDataUpdates(IRefDataUpdate[] updates);
+        void SaveRefDataUpdates(IRefDataUpdate[] updates);
     }
 }

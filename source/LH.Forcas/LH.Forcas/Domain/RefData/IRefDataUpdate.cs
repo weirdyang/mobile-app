@@ -4,7 +4,9 @@ namespace LH.Forcas.Domain.RefData
 {
     public interface IRefDataUpdate
     {
-        Type DomainType { get; }
+        Type Type { get; }
+
+        string TypeName { get; }
 
         int Version { get; }
 

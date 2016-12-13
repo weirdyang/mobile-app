@@ -27,17 +27,17 @@ namespace LH.Forcas.Services
 
         public async Task<IList<Bank>> GetBanks()
         {
-            return await this.GetRefDataViaCacheAsync(() => this.repository.GetBanksAsync());
+            return await this.GetRefDataViaCache(() => this.repository.GetBanks());
         }
 
         public async Task<IList<Country>> GetCountriesAsync()
         {
-            return await this.GetRefDataViaCacheAsync(() => this.repository.GetCountriesAsync());
+            return await this.GetRefDataViaCache(() => this.repository.GetCountries());
         }
 
         public async Task<IList<Currency>> GetCurrencies()
         {
-            return await this.GetRefDataViaCacheAsync(() => this.repository.GetCurrenciesAsync());
+            return await this.GetRefDataViaCache(() => this.repository.GetCurrencies());
         }
 
         public async Task UpdateRefDataAsync()
@@ -62,7 +62,7 @@ namespace LH.Forcas.Services
                     return; // No updates available
                 }
 
-                await this.repository.SaveRefDataUpdates(updates);
+                this.repository.SaveRefDataUpdates(updates);
 
                 this.cache.Clear(); // Invalidate cache
             }
@@ -73,7 +73,7 @@ namespace LH.Forcas.Services
             }
         }
 
-        private async Task<IList<TDomain>> GetRefDataViaCacheAsync<TDomain>(Func<Task<IList<TDomain>>> fetchDataDelegate)
+        private async Task<IList<TDomain>> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)
         {
             await this.cacheSemaphore.WaitAsync();
 
@@ -83,11 +83,15 @@ namespace LH.Forcas.Services
                 return (IList<TDomain>)result;
             }
 
-            IList<TDomain> typedResult;
+            IList<TDomain> typedResult = null;
 
             try
             {
-                typedResult = await fetchDataDelegate.Invoke();
+                var data = fetchDataDelegate.Invoke();
+                if (data != null)
+                {
+                    typedResult = data.ToArray();
+                }
             }
             catch (Exception ex)
             {

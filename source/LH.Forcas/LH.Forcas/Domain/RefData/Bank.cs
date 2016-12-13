@@ -1,10 +1,11 @@
-using System;
+using LiteDB;
 
 namespace LH.Forcas.Domain.RefData
 {
     public class Bank
     {
-        public Guid BankId { get; set; }
+        [BsonId]
+        public string BankId { get; set; }
 
         public string Name { get; set; }
 
@@ -13,7 +14,5 @@ namespace LH.Forcas.Domain.RefData
         public string CountryCode { get; set; }
 
         public int RoutingCode { get; set; }
-
-        // TODO: Logo as byte[] ?
     }
 }

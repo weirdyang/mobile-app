@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LiteDB;
 
 namespace LH.Forcas.Domain.UserData
 {
     public class Transaction
     {
-        public Guid TransactionId { get; set; }
+        [BsonId]
+        public string TransactionId { get; set; }
 
         public string CounterpartyName { get; set; }
 

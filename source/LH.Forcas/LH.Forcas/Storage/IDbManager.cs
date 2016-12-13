@@ -1,5 +1,4 @@
-﻿using SQLite.Net;
-using SQLite.Net.Async;
+﻿using LiteDB;
 
 namespace LH.Forcas.Storage
 {
@@ -7,8 +6,6 @@ namespace LH.Forcas.Storage
     {
         void Initialize();
 
-        SQLiteConnection GetSyncConnection();
-
-        SQLiteAsyncConnection GetAsyncConnection();
+        LiteDatabase GetDatabase();
     }
 }

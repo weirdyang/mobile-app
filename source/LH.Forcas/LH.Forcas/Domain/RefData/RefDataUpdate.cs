@@ -8,7 +8,9 @@ namespace LH.Forcas.Domain.RefData
     {
         public T[] TypedData { get; set; }
 
-        public Type DomainType { get; set; }
+        public Type Type => typeof(T);
+
+        public string TypeName => typeof(T).Name;
 
         public int Version { get; set; }
 

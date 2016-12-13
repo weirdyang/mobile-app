@@ -1,33 +1,27 @@
 ﻿using System;
+using System.IO;
 using LH.Forcas.Storage;
-using SQLite.Net;
-using SQLite.Net.Interop;
-using SQLite.Net.Platform.Win32;
+using LiteDB;
 
 namespace LH.Forcas.Tests.Storage
 {
-    public class TestsDbManager : DbManagerBase, IDisposable
+    public class TestsDbManager : DbManager, IDisposable
     {
-        private readonly SQLiteConnection connection;
+        private readonly MemoryStream stream;
 
-        public TestsDbManager()
+        public TestsDbManager() : base(null)
         {
-            this.connection = this.GetSyncConnection();
+            this.stream = new MemoryStream();
         }
 
-        protected override ISQLitePlatform GetPlatform()
+        public override LiteDatabase GetDatabase()
         {
-            return new SQLitePlatformWin32();
-        }
-
-        protected override string GetDbFilePath()
-        {
-            return "file::memory:?cache=shared";
+            return new LiteDatabase(this.stream);
         }
 
         public void Dispose()
         {
-            this.connection.Dispose();
+            this.stream.Dispose();
         }
     }
 }
