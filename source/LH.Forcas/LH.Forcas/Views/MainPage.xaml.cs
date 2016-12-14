@@ -5,6 +5,12 @@
         public MainPage()
         {
             this.InitializeComponent();
+            this.BindingContext = new DummyCtx();
+        }
+
+        private class DummyCtx
+        {
+            
         }
     }
 }

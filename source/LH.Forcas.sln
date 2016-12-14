@@ -257,13 +257,15 @@ Global
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.AppStore|x64.ActiveCfg = AppStore|iPhone
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.AppStore|x86.ActiveCfg = AppStore|iPhone
-		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|x64.ActiveCfg = Debug|iPhone
-		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|x86.ActiveCfg = Debug|iPhone
+		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|x86.ActiveCfg = Debug|iPhoneSimulator
+		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Debug|x86.Build.0 = Debug|iPhoneSimulator
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Release|Any CPU.ActiveCfg = Release|iPhone
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Release|ARM.ActiveCfg = Release|iPhone
 		{BB2A8E32-70C9-4B09-9A95-6643805CC77C}.Release|iPhone.ActiveCfg = Release|iPhone
