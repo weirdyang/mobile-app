@@ -7,19 +7,20 @@ namespace LH.Forcas
 {
     public partial class App
     {
-        // public const string LastRefDataSyncPropertyKey = "LastRefDataSync";
-
         protected override void OnInitialized()
         {
             this.InitializeComponent();
 
-            this.NavigationService.NavigateAsync("MainPage");
-
+            this.Container.Resolve<IPathResolver>().Initialize();
             this.Container.Resolve<IDbManager>().Initialize();
+
+            this.NavigationService.NavigateAsync("MainPage");
         }
 
         protected override void RegisterTypes()
         {
+            this.Container.RegisterType<IDbManager, DbManager>();
+
             this.Container.RegisterTypeForNavigation<MainPage>();
         }
     }

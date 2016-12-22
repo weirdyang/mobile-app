@@ -58,7 +58,6 @@
     </Compile>
     <Compile Include="Domain\RefData\IRefDataUpdate.cs" />
     <Compile Include="Domain\RefData\RefDataVersion.cs" />
-    <Compile Include="Domain\UserData\Account.cs" />
     <Compile Include="Domain\UserData\Budget.cs" />
     <Compile Include="Domain\UserData\BudgetCategory.cs" />
     <Compile Include="Domain\UserData\Transaction.cs" />
@@ -66,7 +65,6 @@
     <Compile Include="Extensions\LiteDbExtensions.cs" />
     <Compile Include="Extensions\NavigationExtensions.cs" />
     <Compile Include="Integration\Exceptions\RefDataFormatException.cs" />
-    <Compile Include="Services\IFinanceService.cs" />
     <Compile Include="Services\IUserSettingsService.cs" />
     <Compile Include="Storage\IDbManager.cs" />
     <Compile Include="Storage\IPathResolver.cs" />
