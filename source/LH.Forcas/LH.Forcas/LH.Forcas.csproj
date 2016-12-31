@@ -88,27 +88,37 @@
     <Compile Include="Domain\RefData\Country.cs" />
     <Compile Include="Storage\RefDataRepository.cs" />
     <Compile Include="ViewModels\BusyIndicatorSection.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardPageViewModel.cs" />
+    <Compile Include="ViewModels\Root\RootSideMenuPageViewModel.cs" />
     <Compile Include="ViewModels\SyncSetup\SyncFlowState.cs" />
     <Compile Include="ViewModels\SyncSetup\ProviderAuthorizeViewModel.cs" />
     <Compile Include="ViewModels\SyncSetup\ProviderSelectionViewModel.cs" />
     <Compile Include="ViewModels\SyncSetup\SyncFlowViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Dashboard\DashboardNavigationPage.xaml.cs">
+      <DependentUpon>DashboardNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dashboard\DashboardPage.xaml.cs">
+      <DependentUpon>DashboardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Root\RootSideMenuPage.xaml.cs">
+      <DependentUpon>RootSideMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Root\RootTabPage.xaml.cs">
+      <DependentUpon>RootTabPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SyncSetup\AuthenticationPage.xaml.cs">
       <DependentUpon>AuthenticationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SyncSetup\Intro.xaml.cs">
+      <DependentUpon>Intro.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SyncSetup\ProviderSelection.xaml.cs">
       <DependentUpon>ProviderSelection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -270,6 +280,36 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SyncSetup\Intro.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Root\RootTabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Root\RootSideMenuPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Dashboard\DashboardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Dashboard\DashboardNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
