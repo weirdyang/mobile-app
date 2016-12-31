@@ -8,7 +8,6 @@ namespace LH.Forcas
     using LH.Forcas.Extensions;
     using LH.Forcas.Views;
     using LH.Forcas.Views.Dashboard;
-    using LH.Forcas.Views.Dummy;
     using LH.Forcas.Views.Root;
 
     public partial class App
@@ -22,14 +21,7 @@ namespace LH.Forcas
             this.Container.Resolve<IPathResolver>().Initialize();
             this.Container.Resolve<IDbManager>().Initialize();
 
-            try
-            {
-                this.NavigationService.NavigateToDashboard();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            this.NavigationService.NavigateToDashboard();
         }
 
         protected override void RegisterTypes()
@@ -42,8 +34,6 @@ namespace LH.Forcas
 
             this.Container.RegisterTypeForNavigation<DashboardPage>();
             this.Container.RegisterTypeForNavigation<DashboardNavigationPage>();
-
-            this.Container.RegisterTypeForNavigation<DummyPage>();
         }
     }
 }

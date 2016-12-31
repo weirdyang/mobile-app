@@ -19,20 +19,19 @@ namespace LH.Forcas.Extensions
         {
             if (Device.OS == TargetPlatform.Android)
             {
-                _rootPageFormat = "http://forcas.com/RootSideMenuPage/{0}";
+                _rootPageFormat = "RootSideMenuPage/{0}";
             }
             else
             {
-                _rootPageFormat = "http://forcas.com/RootTabPage/{0}";
+                _rootPageFormat = "RootTabPage/{0}";
             }
         }
 
         public static async Task NavigateToDashboard(this INavigationService navigationService)
         {
-            //await navigationService.NavigateAsync(string.Format(_rootPageFormat, "DashboardPage"));
-            //await navigationService.NavigateAsync("RootSideMenuPage/DashboardNavigationPage/DashboardPage", animated:false);
+            await navigationService.NavigateAsync(string.Format(_rootPageFormat, "DashboardNavigationPage/DashboardPage"));
 
-            await navigationService.NavigateAsync("RootSideMenuPage/DashboardNavigationPage/DashboardPage", animated: false);
+            //await navigationService.NavigateAsync("RootSideMenuPage/DashboardNavigationPage/DashboardPage", animated: false);
         }
 
         public static async Task NavigateToSyncProviderAuthorizationAsync(this INavigationService navigationService, IFileSyncProvider syncProvider)
