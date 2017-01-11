@@ -52,5 +52,9 @@
 		<string>fetch</string>
 		<string>voip</string>
 	</array>
+  <key>UIAppFonts</key>
+  <array>
+    <string>iconize-fontawesome.ttf</string>
+  </array>
 </dict>
 </plist>

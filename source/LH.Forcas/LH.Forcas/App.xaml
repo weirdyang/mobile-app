@@ -4,8 +4,8 @@
              xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
              x:Class="LH.Forcas.App">
   <Application.Resources>
-
-    <!-- Application resource dictionary -->
-
+    <ResourceDictionary>
+      <OnPlatform x:TypeArguments="Color" Android="White" iOS="White" WinPhone="White" x:Key="IconToolbarItemFontColor" />
+    </ResourceDictionary>
   </Application.Resources>
 </prism:PrismApplication>

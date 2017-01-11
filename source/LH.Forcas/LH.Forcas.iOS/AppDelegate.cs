@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace LH.Forcas.iOS
@@ -23,7 +19,11 @@ namespace LH.Forcas.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+
+            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.MaterialModule());
+            FormsPlugin.Iconize.iOS.IconControls.Init();
+
+            this.LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
