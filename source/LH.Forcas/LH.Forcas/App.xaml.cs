@@ -1,12 +1,11 @@
 ﻿using LH.Forcas.Storage;
+using LH.Forcas.Views.Accounts;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
 
 namespace LH.Forcas
 {
-    using System;
     using LH.Forcas.Extensions;
-    using LH.Forcas.Views;
     using LH.Forcas.Views.Dashboard;
     using LH.Forcas.Views.Root;
 
@@ -34,6 +33,9 @@ namespace LH.Forcas
 
             this.Container.RegisterTypeForNavigation<DashboardPage>();
             this.Container.RegisterTypeForNavigation<DashboardNavigationPage>();
+
+            this.Container.RegisterTypeForNavigation<AccountsListPage>();
+            this.Container.RegisterTypeForNavigation<AccountsNavigationPage>();
         }
     }
 }

@@ -4,7 +4,22 @@
              x:Class="LH.Forcas.Views.Root.RootSideMenuPage">
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">
-      <Label Text="Menu" VerticalOptions="Center" HorizontalOptions="Center" />
+      <ListView ItemsSource="{ Binding Pages }" SelectedItem="{ Binding SelectedPage, Mode=TwoWay }">
+        <ListView.Header>
+          <Grid>
+            <Label Text="Image"></Label>
+          </Grid>
+        </ListView.Header>
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Orientation="Horizontal" Spacing="15">
+                <Label Text="{ Binding DisplayName }" FontSize="24" VerticalOptions="Center"></Label>
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
     </ContentPage>
   </MasterDetailPage.Master>
 </MasterDetailPage>

@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
-using LH.Forcas.Integration;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using LH.Forcas.Views.Accounts;
+using LH.Forcas.Views.Dashboard;
 using Prism.Navigation;
 
 namespace LH.Forcas.Extensions
@@ -8,38 +11,56 @@ namespace LH.Forcas.Extensions
 
     public static class NavigationExtensions
     {
-        private static string _rootPageFormat;
+        private static string _rootPageName;
 
         // Use this class to enfore passing strongly typed parameters and to avoid the navigation strings in the view model
         public const string ProviderAuthorizePage = "";
 
         public const string SyncFlowStateParameterName = "State";
 
+        public static readonly IEnumerable<NavigationPage> RootLevelPages = new[]
+        {
+            new NavigationPage {DisplayName = "Dashboard", NavigateAction = NavigateToDashboard},
+            new NavigationPage {DisplayName = "Accounts", NavigateAction = NavigateToAccounts}
+        };
+
         public static void InitializeNavigation()
         {
             if (Device.OS == TargetPlatform.Android)
             {
-                _rootPageFormat = "RootSideMenuPage/{0}";
+                _rootPageName = "RootSideMenuPage";
             }
             else
             {
-                _rootPageFormat = "RootTabPage/{0}";
+                _rootPageName = "RootTabPage";
             }
         }
 
         public static async Task NavigateToDashboard(this INavigationService navigationService)
         {
-            await navigationService.NavigateAsync(string.Format(_rootPageFormat, "DashboardNavigationPage/DashboardPage"));
-
-            //await navigationService.NavigateAsync("RootSideMenuPage/DashboardNavigationPage/DashboardPage", animated: false);
+            await navigationService.NavigateAsync(GetAbsoluteUri(nameof(DashboardNavigationPage), nameof(DashboardPage)));
         }
 
-        public static async Task NavigateToSyncProviderAuthorizationAsync(this INavigationService navigationService, IFileSyncProvider syncProvider)
+        public static async Task NavigateToAccounts(this INavigationService navigationService)
         {
-            var parameters = new NavigationParameters();
-            parameters.Add("Provider", syncProvider);
-
-            await navigationService.NavigateAsync(ProviderAuthorizePage, parameters);
+            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsListPage));
+            await navigationService.NavigateAsync(uri);
         }
+
+        private static Uri GetAbsoluteUri(string navPage, string page)
+        {
+            return new Uri($"app://forcas/{_rootPageName}/{navPage}/{page}", UriKind.Absolute);
+        }
+    }
+
+    public delegate Task NavigateDelegate(INavigationService navigationService);
+
+    public class NavigationPage
+    {
+        // TODO: Add data for icon conversion
+
+        public string DisplayName { get; set; }
+
+        public NavigateDelegate NavigateAction { get; set; }
     }
 }

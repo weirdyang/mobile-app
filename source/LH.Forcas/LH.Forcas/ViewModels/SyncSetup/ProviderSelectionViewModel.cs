@@ -37,7 +37,7 @@ namespace LH.Forcas.ViewModels.SyncSetup
             this.dialogService = dialogService;
 
             this.NavigateNextCommand = new DelegateCommand(
-                async () => await navigationService.NavigateToSyncProviderAuthorizationAsync(this.SelectedProvider),
+                async () => await navigationService.NavigateToDashboard(),
                 () => this.SelectedProvider != null)
                 .ObservesProperty(() => this.SelectedProvider);
 

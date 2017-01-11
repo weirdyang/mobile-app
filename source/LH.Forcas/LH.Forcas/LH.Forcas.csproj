@@ -77,7 +77,6 @@
     <Compile Include="Integration\IRefDataDownloader.cs" />
     <Compile Include="IAppConfig.cs" />
     <Compile Include="Integration\DummyCrashReporter.cs" />
-    <Compile Include="Integration\GitHub\GitHubRefDataDownloader.cs" />
     <Compile Include="AppConfig.cs" />
     <Compile Include="Domain\RefData\RefDataUpdate.cs" />
     <Compile Include="Domain\RefData\Bank.cs" />
@@ -87,6 +86,12 @@
     <Compile Include="Storage\DbManager.cs" />
     <Compile Include="Domain\RefData\Country.cs" />
     <Compile Include="Storage\RefDataRepository.cs" />
+    <Compile Include="Views\Accounts\AccountsListPage.xaml.cs">
+      <DependentUpon>AccountsListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accounts\AccountsNavigationPage.xaml.cs">
+      <DependentUpon>AccountsNavigationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BusyIndicatorSection.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardPageViewModel.cs" />
     <Compile Include="ViewModels\Root\RootSideMenuPageViewModel.cs" />
@@ -130,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
+    <Folder Include="ViewModels\Accounts\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -307,6 +313,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Dashboard\DashboardNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Accounts\AccountsNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Accounts\AccountsListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
