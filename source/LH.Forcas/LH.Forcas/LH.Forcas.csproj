@@ -56,15 +56,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\EnumToResourceConverter.cs" />
     <Compile Include="Domain\RefData\IRefDataUpdate.cs" />
     <Compile Include="Domain\RefData\RefDataVersion.cs" />
+    <Compile Include="Domain\UserData\AccountType.cs" />
     <Compile Include="Domain\UserData\Budget.cs" />
     <Compile Include="Domain\UserData\BudgetCategory.cs" />
     <Compile Include="Domain\UserData\Transaction.cs" />
     <Compile Include="Domain\UserData\TransactionType.cs" />
     <Compile Include="Extensions\LiteDbExtensions.cs" />
+    <Compile Include="Extensions\Markup\TranslateExtensions.cs" />
     <Compile Include="Extensions\NavigationExtensions.cs" />
     <Compile Include="Integration\Exceptions\RefDataFormatException.cs" />
+    <Compile Include="Localization\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\ILocale.cs" />
     <Compile Include="Services\IUserSettingsService.cs" />
     <Compile Include="Storage\IDbManager.cs" />
     <Compile Include="Storage\IPathResolver.cs" />
@@ -283,6 +292,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Localization\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\SyncSetup\AuthenticationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>

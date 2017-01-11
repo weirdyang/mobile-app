@@ -1,16 +1,19 @@
-﻿using LH.Forcas.Storage;
-using LH.Forcas.Views.Accounts;
-using Prism.Unity;
-using Microsoft.Practices.Unity;
-
-namespace LH.Forcas
+﻿namespace LH.Forcas
 {
+    using System.Globalization;
     using LH.Forcas.Extensions;
+    using LH.Forcas.Localization;
     using LH.Forcas.Views.Dashboard;
     using LH.Forcas.Views.Root;
+    using Microsoft.Practices.Unity;
+    using Prism.Unity;
+    using Storage;
+    using Views.Accounts;
 
     public partial class App
     {
+        public static CultureInfo CurrentCultureInfo { get; private set; }
+
         protected override void OnInitialized()
         {
             this.InitializeComponent();
@@ -19,6 +22,8 @@ namespace LH.Forcas
 
             this.Container.Resolve<IPathResolver>().Initialize();
             this.Container.Resolve<IDbManager>().Initialize();
+
+            CurrentCultureInfo = this.Container.Resolve<ILocale>().GetCultureInfo();
 
             this.NavigationService.NavigateToDashboard();
         }

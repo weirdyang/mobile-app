@@ -2,13 +2,36 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
-             x:Class="LH.Forcas.Views.Accounts.AccountsListPage" Title="Accounts" 
+             xmlns:extensions="clr-namespace:LH.Forcas.Extensions.Markup;assembly=LH.Forcas"
+             xmlns:converters="clr-namespace:LH.Forcas.Converters;assembly=LH.Forcas"
+             x:Class="LH.Forcas.Views.Accounts.AccountsListPage" 
+             Title="{ extensions:Translate AccountsListPage_Title }" 
              NavigationPage.HasNavigationBar="True">
-
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:EnumToResourceConverter x:Key="EnumToResourceConverter" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
   <ContentPage.ToolbarItems>
-    <iconize:IconToolbarItem Icon="md-add" IconColor="{ StaticResource IconToolbarItemFontColor }" />
+    <iconize:IconToolbarItem Command="{ Binding NavigateToAddAccount }" Icon="md-add" IconColor="{ StaticResource IconToolbarItemFontColor }" />
   </ContentPage.ToolbarItems>
   
-  <Label Text="Accounts list" VerticalOptions="Center" HorizontalOptions="Center" />
-  
+  <ListView ItemsSource="{ Binding Accounts }" 
+            SelectedItem="{ Binding SelectedAccount }" 
+            RefreshCommand="{ Binding RefreshAccounts }"
+            IsPullToRefreshEnabled="True"
+            GroupShortNameBinding="AccountType"
+            GroupDisplayBinding="{ Binding AccountType, Converter={ StaticResource EnumToResourceConverter } }">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <ViewCell.ContextActions>
+            <MenuItem IsDestructive="True" Text="Delete" Command="{ Binding DeleteAccountCommand }" CommandParameter="{ Binding }">
+              <iconize:IconImage Icon="md-delete" IconColor="White"></iconize:IconImage>
+            </MenuItem>
+          </ViewCell.ContextActions>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
 </ContentPage>
