@@ -62,6 +62,24 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete the account {0} and all related transactions?.
+        /// </summary>
+        internal static string AccountsListPage_DeleteAccountConfirmMsgFormat {
+            get {
+                return ResourceManager.GetString("AccountsListPage_DeleteAccountConfirmMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete account?.
+        /// </summary>
+        internal static string AccountsListPage_DeleteAccountConfirmTitle {
+            get {
+                return ResourceManager.GetString("AccountsListPage_DeleteAccountConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accounts.
         /// </summary>
         internal static string AccountsListPage_Title {
@@ -76,6 +94,24 @@ namespace LH.Forcas.Localization {
         internal static string AccountTypeEnum_Checking {
             get {
                 return ResourceManager.GetString("AccountTypeEnum_Checking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string ConfirmDialog_No {
+            get {
+                return ResourceManager.GetString("ConfirmDialog_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string ConfirmDialog_Yes {
+            get {
+                return ResourceManager.GetString("ConfirmDialog_Yes", resourceCulture);
             }
         }
         

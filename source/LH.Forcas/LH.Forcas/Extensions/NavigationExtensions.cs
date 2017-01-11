@@ -47,6 +47,12 @@ namespace LH.Forcas.Extensions
             await navigationService.NavigateAsync(uri);
         }
 
+        public static async Task NavigateToAddAccount(this INavigationService navigationService)
+        {
+            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsAddPage));
+            await navigationService.NavigateAsync(uri);
+        }
+
         private static Uri GetAbsoluteUri(string navPage, string page)
         {
             return new Uri($"app://forcas/{_rootPageName}/{navPage}/{page}", UriKind.Absolute);

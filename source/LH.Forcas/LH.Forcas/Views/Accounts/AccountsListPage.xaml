@@ -13,12 +13,12 @@
     </ResourceDictionary>
   </ContentPage.Resources>
   <ContentPage.ToolbarItems>
-    <iconize:IconToolbarItem Command="{ Binding NavigateToAddAccount }" Icon="md-add" IconColor="{ StaticResource IconToolbarItemFontColor }" />
+    <iconize:IconToolbarItem Command="{ Binding NavigateToAddAccountCommand }" Icon="md-add" IconColor="{ StaticResource IconToolbarItemFontColor }" />
   </ContentPage.ToolbarItems>
   
   <ListView ItemsSource="{ Binding Accounts }" 
             SelectedItem="{ Binding SelectedAccount }" 
-            RefreshCommand="{ Binding RefreshAccounts }"
+            RefreshCommand="{ Binding RefreshAccountsCommand }"
             IsPullToRefreshEnabled="True"
             GroupShortNameBinding="AccountType"
             GroupDisplayBinding="{ Binding AccountType, Converter={ StaticResource EnumToResourceConverter } }">
@@ -26,7 +26,7 @@
       <DataTemplate>
         <ViewCell>
           <ViewCell.ContextActions>
-            <MenuItem IsDestructive="True" Text="Delete" Command="{ Binding DeleteAccountCommand }" CommandParameter="{ Binding }">
+            <MenuItem IsDestructive="True" Text="Delete" Command="{ Binding DeleteAccountCommand }" CommandParameter="{ Binding AccountId }">
               <iconize:IconImage Icon="md-delete" IconColor="White"></iconize:IconImage>
             </MenuItem>
           </ViewCell.ContextActions>

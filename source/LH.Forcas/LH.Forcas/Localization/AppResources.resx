@@ -126,4 +126,16 @@
   <data name="Dashboard_Title" xml:space="preserve">
     <value>Overview</value>
   </data>
+  <data name="AccountsListPage_DeleteAccountConfirmMsgFormat" xml:space="preserve">
+    <value>Do you really want to delete the account {0} and all related transactions?</value>
+  </data>
+  <data name="AccountsListPage_DeleteAccountConfirmTitle" xml:space="preserve">
+    <value>Delete account?</value>
+  </data>
+  <data name="ConfirmDialog_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ConfirmDialog_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

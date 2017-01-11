@@ -95,6 +95,10 @@
     <Compile Include="Storage\DbManager.cs" />
     <Compile Include="Domain\RefData\Country.cs" />
     <Compile Include="Storage\RefDataRepository.cs" />
+    <Compile Include="ViewModels\Accounts\AccountsListPageViewModel.cs" />
+    <Compile Include="Views\Accounts\AccountsAddPage.xaml.cs">
+      <DependentUpon>AccountsAddPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Accounts\AccountsListPage.xaml.cs">
       <DependentUpon>AccountsListPage.xaml</DependentUpon>
     </Compile>
@@ -144,7 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
-    <Folder Include="ViewModels\Accounts\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -295,6 +298,7 @@
     <EmbeddedResource Include="Localization\AppResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SyncSetup\AuthenticationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -346,6 +350,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Accounts\AccountsListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Accounts\AccountsAddPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
