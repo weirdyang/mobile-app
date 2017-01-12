@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LH.Forcas.Views.Accounts.AccountsAddPage">
-  <Label Text="Add new account" VerticalOptions="Center" HorizontalOptions="Center" />
+             x:Class="LH.Forcas.Views.Accounts.AccountsDetailPage">
+  <Label Text="Detail" VerticalOptions="Center" HorizontalOptions="Center" />
 </ContentPage>

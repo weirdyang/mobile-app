@@ -80,6 +80,15 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We&apos;re really sorry, but an error occured while deleting the account. If this happens again, please report it at our website..
+        /// </summary>
+        internal static string AccountsListPage_DeleteAccountError {
+            get {
+                return ResourceManager.GetString("AccountsListPage_DeleteAccountError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accounts.
         /// </summary>
         internal static string AccountsListPage_Title {
@@ -94,6 +103,24 @@ namespace LH.Forcas.Localization {
         internal static string AccountTypeEnum_Checking {
             get {
                 return ResourceManager.GetString("AccountTypeEnum_Checking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string AlertDialog_ErrorTitle {
+            get {
+                return ResourceManager.GetString("AlertDialog_ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string AlertDialog_OK {
+            get {
+                return ResourceManager.GetString("AlertDialog_OK", resourceCulture);
             }
         }
         

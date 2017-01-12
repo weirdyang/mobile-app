@@ -1,33 +1,41 @@
 ﻿namespace LH.Forcas.ViewModels.Accounts
 {
+    using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Threading.Tasks;
     using System.Windows.Input;
+    using Domain.UserData;
     using Extensions;
     using Localization;
     using Prism.Commands;
     using Prism.Navigation;
     using Prism.Services;
+    using Services;
 
     public class AccountsListPageViewModel : ViewModelBase
     {
         private readonly INavigationService navigationService;
         private readonly IPageDialogService dialogService;
+        private readonly IAccountingService accountingService;
 
-        private object selectedAccount;
+        private Account selectedAccount;
 
-        public AccountsListPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
+        public AccountsListPageViewModel(
+            IAccountingService accountingService,
+            INavigationService navigationService, 
+            IPageDialogService dialogService)
         {
+            this.accountingService = accountingService;
             this.navigationService = navigationService;
             this.dialogService = dialogService;
 
             this.NavigateToAddAccountCommand = new DelegateCommand(
                 async () => await this.navigationService.NavigateToAddAccount());
 
-            this.RefreshAccountsCommand = new DelegateCommand(
-                async () => await this.LoadAccounts());
+            this.RefreshAccountsCommand = new DelegateCommand(this.RefreshAccounts);
 
-            this.DeleteAccountCommand = new DelegateCommand<object>(
+            this.DeleteAccountCommand = new DelegateCommand<Account>(
                 async account => await this.DeleteAccount(account));
         }
 
@@ -37,9 +45,9 @@
 
         public ICommand DeleteAccountCommand { get; private set; }
 
-        public IEnumerable<object> Accounts { get; private set; }
+        public IEnumerable<Account> Accounts { get; private set; }
 
-        public object SelectedAccount
+        public Account SelectedAccount
         {
             get { return this.selectedAccount; }
             set
@@ -47,23 +55,31 @@
                 this.selectedAccount = value;
                 this.OnPropertyChanged();
 
-                // TODO: Navigate to detail
+                if (this.selectedAccount != null)
+                {
+                    this.navigationService.NavigateToAccountDetail(this.selectedAccount.AccountId);
+                }
             }
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override void OnNavigatedTo(NavigationParameters parameters)
         {
-            await this.LoadAccounts();
+            this.RefreshAccounts();
+        }
+
+        private void RefreshAccounts()
+        {
+            this.Accounts = this.accountingService.GetAccounts();
             this.SelectedAccount = null;
         }
 
-        private Task LoadAccounts()
+        private async Task DeleteAccount(Account account)
         {
-            return Task.FromResult(0);
-        }
+            if (account == null)
+            {
+                return;
+            }
 
-        private async Task DeleteAccount(object account)
-        {
             var confirmMsg = string.Format(AppResources.AccountsListPage_DeleteAccountConfirmMsgFormat, account);
 
             var confirmed = await this.dialogService.DisplayAlertAsync(
@@ -77,7 +93,26 @@
                 return;
             }
 
-            // TODO: Delete the account
+            try
+            {
+                this.accountingService.DeleteAccount(account.AccountId);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log the exception
+                Debug.WriteLine(ex);
+
+                // This could be changed into a confirm box that would report the error to our storage
+                await this.dialogService.DisplayAlertAsync(
+                    AppResources.AlertDialog_ErrorTitle,
+                    AppResources.AccountsListPage_DeleteAccountError,
+                    AppResources.AlertDialog_OK
+                    );
+            }
+            finally
+            {
+                this.RefreshAccounts();
+            }
         }
     }
 }

@@ -138,4 +138,13 @@
   <data name="ConfirmDialog_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="AccountsListPage_DeleteAccountError" xml:space="preserve">
+    <value>We're really sorry, but an error occured while deleting the account. If this happens again, please report it at our website.</value>
+  </data>
+  <data name="AlertDialog_ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="AlertDialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
 </root>

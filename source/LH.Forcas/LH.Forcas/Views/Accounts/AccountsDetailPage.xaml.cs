@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace LH.Forcas.Views.Accounts
 {
-    public partial class AccountsAddPage : ContentPage
+    public partial class AccountsDetailPage : ContentPage
     {
-        public AccountsAddPage()
+        public AccountsDetailPage()
         {
             InitializeComponent();
         }

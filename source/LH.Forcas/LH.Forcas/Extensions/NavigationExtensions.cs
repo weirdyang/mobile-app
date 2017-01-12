@@ -50,8 +50,18 @@ namespace LH.Forcas.Extensions
 
         public static async Task NavigateToAddAccount(this INavigationService navigationService)
         {
-            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsAddPage));
+            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsDetailPage));
             await navigationService.NavigateAsync(uri);
+        }
+
+        public static async Task NavigateToAccountDetail(this INavigationService navigationService, Guid accountId)
+        {
+            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsDetailPage));
+
+            var parameters = new NavigationParameters();
+            parameters.Add(AccountIdParameterName, accountId);
+
+            await navigationService.NavigateAsync(uri, parameters);
         }
 
         private static Uri GetAbsoluteUri(string navPage, string page)
