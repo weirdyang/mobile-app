@@ -1,4 +1,4 @@
-﻿namespace LH.Forcas.Extensions.Markup
+﻿namespace LH.Forcas.Views.Reusable.MarkupExtensions
 {
     using System;
     using System.Reflection;

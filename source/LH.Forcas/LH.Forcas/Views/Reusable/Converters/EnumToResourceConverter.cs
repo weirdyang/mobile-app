@@ -1,9 +1,10 @@
-﻿namespace LH.Forcas.Converters
+﻿namespace LH.Forcas.Views.Reusable.Converters
 {
     using System;
     using System.Globalization;
     using Localization;
     using Xamarin.Forms;
+
     public class EnumToResourceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

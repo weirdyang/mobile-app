@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
-             xmlns:extensions="clr-namespace:LH.Forcas.Extensions.Markup;assembly=LH.Forcas"
-             xmlns:converters="clr-namespace:LH.Forcas.Converters;assembly=LH.Forcas"
+             xmlns:converters="clr-namespace:LH.Forcas.Views.Reusable.Converters;assembly=LH.Forcas"
+             xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
              x:Class="LH.Forcas.Views.Accounts.AccountsListPage" 
-             Title="{ extensions:Translate AccountsListPage_Title }" 
+             Title="{ ext:Translate AccountsListPage_Title }" 
              NavigationPage.HasNavigationBar="True">
   <ContentPage.Resources>
     <ResourceDictionary>
@@ -13,7 +13,7 @@
     </ResourceDictionary>
   </ContentPage.Resources>
   <ContentPage.ToolbarItems>
-    <iconize:IconToolbarItem Command="{ Binding NavigateToAddAccountCommand }" Icon="md-add" IconColor="{ StaticResource IconToolbarItemFontColor }" />
+    <iconize:IconToolbarItem x:Name="Dummy" Command="{ Binding NavigateToAddAccountCommand }" Icon="md-add" IconColor="{ StaticResource IconToolbarItemFontColor }" />
   </ContentPage.ToolbarItems>
   
   <ListView ItemsSource="{ Binding Accounts }" 

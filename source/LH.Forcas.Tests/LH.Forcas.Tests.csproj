@@ -212,6 +212,7 @@
     <Compile Include="Storage\RefDataRepositoryTests.cs" />
     <Compile Include="Storage\RoamingDataRepositoryTests.cs" />
     <Compile Include="Storage\TestsDbManager.cs" />
+    <Compile Include="ViewModels\Accounts\AccountsDetailPageViewModelTests.cs" />
     <Compile Include="ViewModels\Accounts\AccountsListPageViewModelTests.cs" />
     <Compile Include="ViewModels\SyncSetup\ProviderAuthorizeViewModelTests.cs" />
     <Compile Include="ViewModels\SyncSetup\ProviderSelectionViewModelTests.cs" />
