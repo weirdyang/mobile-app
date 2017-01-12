@@ -1,8 +1,6 @@
-using LiteDB;
-
 namespace LH.Forcas.Domain.RefData
 {
-    public class Bank
+    public class Bank : IIsActive
     {
         public string BankId { get; set; }
 
@@ -13,5 +11,7 @@ namespace LH.Forcas.Domain.RefData
         public string CountryCode { get; set; }
 
         public int RoutingCode { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

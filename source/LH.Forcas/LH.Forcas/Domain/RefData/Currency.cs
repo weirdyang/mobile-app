@@ -1,8 +1,6 @@
-using LiteDB;
-
 namespace LH.Forcas.Domain.RefData
 {
-    public class Currency
+    public class Currency : IIsActive
     { 
         public string CurrencyCode { get; set; }
 
@@ -11,6 +9,8 @@ namespace LH.Forcas.Domain.RefData
         public string DisplayName { get; set; }
 
         public PrefferedCcySymbolLocation PreferedSymbolPosition { get; set; }
+
+        public bool IsActive { get; set; }
     }
 
     public enum PrefferedCcySymbolLocation

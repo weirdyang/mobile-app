@@ -57,8 +57,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\EnumToResourceConverter.cs" />
-    <Compile Include="Domain\RefData\IRefDataUpdate.cs" />
-    <Compile Include="Domain\RefData\RefDataVersion.cs" />
+    <Compile Include="Domain\RefData\IIsActive.cs" />
+    <Compile Include="Domain\UserData\Account.cs" />
+    <Compile Include="Domain\UserData\AccountNumber.cs" />
     <Compile Include="Domain\UserData\AccountType.cs" />
     <Compile Include="Domain\UserData\Budget.cs" />
     <Compile Include="Domain\UserData\BudgetCategory.cs" />
@@ -83,11 +84,9 @@
     <Compile Include="Extensions\PollyExtensions.cs" />
     <Compile Include="Integration\ICrashReporter.cs" />
     <Compile Include="Integration\IFileSyncProvider.cs" />
-    <Compile Include="Integration\IRefDataDownloader.cs" />
     <Compile Include="IAppConfig.cs" />
     <Compile Include="Integration\DummyCrashReporter.cs" />
     <Compile Include="AppConfig.cs" />
-    <Compile Include="Domain\RefData\RefDataUpdate.cs" />
     <Compile Include="Domain\RefData\Bank.cs" />
     <Compile Include="Domain\RefData\Currency.cs" />
     <Compile Include="Services\IRefDataService.cs" />

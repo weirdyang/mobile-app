@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Storage
 {
-    using Domain.RefData;
+    using Forcas.Domain.RefData;
 
     [TestFixture]
     public abstract class RefDataRepositoryTests
@@ -31,6 +31,7 @@ namespace LH.Forcas.Tests.Storage
                 Assert.IsNotEmpty(rb.CountryCode);
                 Assert.IsNotEmpty(rb.IbanPrefix);
                 Assert.AreNotEqual(0, rb.RoutingCode);
+                Assert.IsTrue(rb.IsActive);
             }
 
             [Test]

@@ -39,6 +39,7 @@ namespace LH.Forcas.Services
         }
 
         private async Task<IList<TDomain>> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)
+            where TDomain : IIsActive
         {
             await this.cacheSemaphore.WaitAsync();
 
@@ -55,7 +56,7 @@ namespace LH.Forcas.Services
                 var data = fetchDataDelegate.Invoke();
                 if (data != null)
                 {
-                    typedResult = data.ToArray();
+                    typedResult = data.Where(x => x.IsActive).ToArray();
                 }
             }
             catch (Exception ex)

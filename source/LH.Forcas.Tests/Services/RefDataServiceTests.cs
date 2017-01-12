@@ -9,6 +9,8 @@ using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Services
 {
+    using System.Linq;
+
     [TestFixture]
     public class RefDataServiceTests
     {
@@ -26,6 +28,22 @@ namespace LH.Forcas.Tests.Services
         private RefDataService refDataService;
         private Mock<ICrashReporter> crashReporterMock;
         private Mock<IRefDataRepository> repositoryMock;
+
+        [Test]
+        public async Task ShouldFilterOutInactiveData()
+        {
+            this.repositoryMock.Setup(x => x.GetCountries())
+                .Returns(new[]
+                         {
+                             new Country { IsActive = true, CountryCode = "CZE" },
+                             new Country { IsActive = false, CountryCode = "UK" }
+                         });
+
+            var countries = await this.refDataService.GetCountriesAsync();
+
+            Assert.AreEqual(1, countries.Count);
+            Assert.AreEqual("CZE", countries.Single().CountryCode);
+        }
 
         [Test]
         public async Task ShouldServeSubsequentFetchFromCache()

@@ -4,6 +4,7 @@
     "name": "Raiffeisenbank",
     "routingCode": 5500,
     "countryCode": "CZE",
-    "ibanPrefix": "CZ21"
+    "ibanPrefix": "CZ21",
+    "isActive": true 
   }
 ]

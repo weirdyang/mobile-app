@@ -1,5 +1,7 @@
 ﻿namespace LH.Forcas.Tests.ViewModels.Accounts
 {
+    using System.Linq;
+    using Forcas.Extensions;
     using Forcas.ViewModels.Accounts;
     using Moq;
     using NUnit.Framework;
@@ -27,11 +29,25 @@
         public class NavigationTests : AccountsListPageViewModelTests
         {
             [Test]
-            public void ShouldNavigateWhenCommandIsExecuted()
+            public void ShouldNavigateWhenNavigateToAddCommandIsExecuted()
             {
                 this.NavigationServiceMock.Setup(x => x.NavigateAsync(It.Is<string>(uri => uri.Contains("New")), null, false, true));
 
                 this.ViewModel.NavigateToAddAccountCommand.Execute(null);
+
+                this.NavigationServiceMock.VerifyAll();
+            }
+
+            [Test]
+            public void ShouldNavigateWhenAccountIsSelected()
+            {
+                this.NavigationServiceMock.Setup(x => x.NavigateAsync(
+                    It.Is<string>(uri => uri.Contains("detail")),
+                    It.Is<NavigationParameters>(p => p.ContainsKey(NavigationExtensions.AccountIdParameterName)),
+                    false, 
+                    true));
+
+                this.ViewModel.SelectedAccount = this.ViewModel.Accounts.First();
 
                 this.NavigationServiceMock.VerifyAll();
             }

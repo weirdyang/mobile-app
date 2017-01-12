@@ -17,6 +17,7 @@ namespace LH.Forcas.Extensions
         public const string ProviderAuthorizePage = "";
 
         public const string SyncFlowStateParameterName = "State";
+        public const string AccountIdParameterName = "AccountId";
 
         public static readonly IEnumerable<NavigationPage> RootLevelPages = new[]
         {

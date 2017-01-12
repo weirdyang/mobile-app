@@ -1,12 +1,11 @@
-﻿using LiteDB;
-
-namespace LH.Forcas.Domain.RefData
+﻿namespace LH.Forcas.Domain.RefData
 {
-    public class Country
+    public class Country : IIsActive
     {
-        [BsonId]
         public string CountryCode { get; set; }
 
         public string DefaultCurrencyCode { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
