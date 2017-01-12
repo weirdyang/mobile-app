@@ -75,6 +75,8 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Localization\ILocale.cs" />
+    <Compile Include="Services\AccountingService.cs" />
+    <Compile Include="Services\IAccountingService.cs" />
     <Compile Include="Services\IUserSettingsService.cs" />
     <Compile Include="Storage\IDbManager.cs" />
     <Compile Include="Storage\IPathResolver.cs" />
@@ -93,7 +95,9 @@
     <Compile Include="Services\RefDataService.cs" />
     <Compile Include="Storage\DbManager.cs" />
     <Compile Include="Domain\RefData\Country.cs" />
+    <Compile Include="Storage\IRoamingDataRepository.cs" />
     <Compile Include="Storage\RefDataRepository.cs" />
+    <Compile Include="Storage\RoamingDataRepository.cs" />
     <Compile Include="ViewModels\Accounts\AccountsListPageViewModel.cs" />
     <Compile Include="Views\Accounts\AccountsAddPage.xaml.cs">
       <DependentUpon>AccountsAddPage.xaml</DependentUpon>

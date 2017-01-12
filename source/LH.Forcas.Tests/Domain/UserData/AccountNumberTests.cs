@@ -4,7 +4,8 @@
     using Forcas.Domain.UserData;
     using NUnit.Framework;
 
-    public abstract class AccountNumberTests
+    [TestFixture]
+    public class AccountNumberTests
     {
         [TestFixture]
         public class ParseTests

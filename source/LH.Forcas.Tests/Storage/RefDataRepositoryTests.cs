@@ -7,7 +7,7 @@ namespace LH.Forcas.Tests.Storage
     using Forcas.Domain.RefData;
 
     [TestFixture]
-    public abstract class RefDataRepositoryTests
+    public class RefDataRepositoryTests
     {
         private IRefDataRepository refDataRepository;
 

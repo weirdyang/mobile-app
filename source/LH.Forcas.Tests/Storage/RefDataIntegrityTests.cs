@@ -4,7 +4,8 @@
     using Forcas.Storage;
     using NUnit.Framework;
 
-    public abstract class RefDataIntegrityTests
+    [TestFixture]
+    public class RefDataIntegrityTests
     {
         private IRefDataRepository refDataRepository;
 
