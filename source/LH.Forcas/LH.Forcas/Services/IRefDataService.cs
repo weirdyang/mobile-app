@@ -11,7 +11,5 @@ namespace LH.Forcas.Services
         Task<IList<Country>> GetCountriesAsync();
 
         Task<IList<Currency>> GetCurrencies();
-
-        Task UpdateRefDataAsync();
     }
 }

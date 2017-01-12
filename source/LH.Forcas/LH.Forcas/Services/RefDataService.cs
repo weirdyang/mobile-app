@@ -12,16 +12,14 @@ namespace LH.Forcas.Services
     public class RefDataService : IRefDataService
     {
         private readonly ICrashReporter crashReporter;
-        private readonly IRefDataDownloader downloader;
         private readonly IRefDataRepository repository;
 
         private readonly SemaphoreSlim cacheSemaphore = new SemaphoreSlim(1, 1);
         private readonly IDictionary<Type, object> cache = new Dictionary<Type, object>();
 
-        public RefDataService(ICrashReporter crashReporter, IRefDataDownloader downloader, IRefDataRepository repository)
+        public RefDataService(ICrashReporter crashReporter, IRefDataRepository repository)
         {
             this.crashReporter = crashReporter;
-            this.downloader = downloader;
             this.repository = repository;
         }
 
@@ -38,39 +36,6 @@ namespace LH.Forcas.Services
         public async Task<IList<Currency>> GetCurrencies()
         {
             return await this.GetRefDataViaCache(() => this.repository.GetCurrencies());
-        }
-
-        public async Task UpdateRefDataAsync()
-        {
-            try
-            {
-                var lastSyncTime = DateTime.MaxValue; // TODO: !!!
-
-                IRefDataUpdate[] updates;
-                try
-                {
-                     updates = await this.downloader.GetRefDataUpdates(lastSyncTime);
-                }
-                catch (Exception ex)
-                {
-                    this.crashReporter.ReportException(ex);
-                    return;
-                }
-
-                if (updates == null || !updates.Any())
-                {
-                    return; // No updates available
-                }
-
-                this.repository.SaveRefDataUpdates(updates);
-
-                this.cache.Clear(); // Invalidate cache
-            }
-            catch (Exception ex)
-            {
-                this.crashReporter.ReportException(ex);
-                throw;
-            }
         }
 
         private async Task<IList<TDomain>> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)

@@ -207,6 +207,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RefDataServiceTests.cs" />
+    <Compile Include="Storage\RefDataIntegrityTests.cs" />
     <Compile Include="Storage\RefDataRepositoryTests.cs" />
     <Compile Include="Storage\TestsDbManager.cs" />
     <Compile Include="ViewModels\Accounts\AccountsListPageViewModelTests.cs" />

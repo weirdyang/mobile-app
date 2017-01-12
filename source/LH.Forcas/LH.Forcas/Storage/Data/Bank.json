@@ -1,0 +1,9 @@
+﻿[
+  {
+    "bankId": "RB",
+    "name": "Raiffeisenbank",
+    "routingCode": 5500,
+    "countryCode": "CZE",
+    "ibanPrefix": "CZ21"
+  }
+]

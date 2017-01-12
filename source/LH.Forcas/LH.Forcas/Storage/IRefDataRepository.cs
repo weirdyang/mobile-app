@@ -10,7 +10,5 @@ namespace LH.Forcas.Storage
         IEnumerable<Currency> GetCurrencies();
 
         IEnumerable<Country> GetCountries();
-
-        void SaveRefDataUpdates(IRefDataUpdate[] updates);
     }
 }

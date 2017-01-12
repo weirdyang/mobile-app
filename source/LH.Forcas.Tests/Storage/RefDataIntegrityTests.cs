@@ -1,0 +1,51 @@
+﻿namespace LH.Forcas.Tests.Storage
+{
+    using System.Linq;
+    using Forcas.Storage;
+    using NUnit.Framework;
+
+    public abstract class RefDataIntegrityTests
+    {
+        private IRefDataRepository refDataRepository;
+
+        [SetUp]
+        public void Setup()
+        {
+            this.refDataRepository = new RefDataRepository();
+        }
+
+        [TestFixture]
+        public class CountryCodesIntegrityChecks : RefDataIntegrityTests
+        {
+            [Test]
+            public void BanksCountryCodesAreValid()
+            {
+                var countries = this.refDataRepository.GetCountries().ToArray();
+                var banks = this.refDataRepository.GetBanks();
+
+                foreach (var bank in banks)
+                {
+                    var country = countries.SingleOrDefault(x => x.CountryCode == bank.CountryCode);
+                    Assert.IsNotNull(country, $"Country with the code {bank.CountryCode} could not be found.");
+                }
+            }
+        }
+
+        [TestFixture]
+        public class CurrencyCodeIntegrityChecks : RefDataIntegrityTests
+        {
+            [Test]
+            public void CountryDefaultCurrenciesAreValid()
+            {
+                var currencies = this.refDataRepository.GetCurrencies().ToArray();
+                var countries = this.refDataRepository.GetCountries();
+
+                foreach (var country in countries)
+                {
+                    var currency = currencies.SingleOrDefault(x => x.CurrencyCode == country.DefaultCurrencyCode);
+                    Assert.IsNotNull(currency, $"Currency with the code {country.DefaultCurrencyCode} could not be found");
+                }
+            }
+        }
+    }
+}

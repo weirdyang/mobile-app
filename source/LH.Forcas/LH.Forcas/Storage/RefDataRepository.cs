@@ -1,83 +1,56 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using LH.Forcas.Domain.RefData;
-using LH.Forcas.Extensions;
-
-namespace LH.Forcas.Storage
+﻿namespace LH.Forcas.Storage
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Reflection;
+    using Domain.RefData;
+    using Newtonsoft.Json;
+
     public class RefDataRepository : IRefDataRepository
     {
-        private readonly IDbManager dbManager;
-
-        public RefDataRepository(IDbManager dbManager)
-        {
-            this.dbManager = dbManager;
-        }
-
         public IEnumerable<Bank> GetBanks()
         {
-            using (var db = this.dbManager.GetDatabase())
-            {
-                return db.GetCollection<Bank>().FindAll();
-            }
+            return this.ReadJsonResource<Bank>();
         }
 
         public IEnumerable<Currency> GetCurrencies()
         {
-            using (var db = this.dbManager.GetDatabase())
-            {
-                return db.GetCollection<Currency>().FindAll();
-            }
+            return this.ReadJsonResource<Currency>();
         }
 
         public IEnumerable<Country> GetCountries()
         {
-            using (var db = this.dbManager.GetDatabase())
-            {
-                return db.GetCollection<Country>().FindAll();
-            }
+            return this.ReadJsonResource<Country>();
         }
 
-        public void SaveRefDataUpdates(IRefDataUpdate[] updates)
+        private IEnumerable<T> ReadJsonResource<T>()
         {
-            using (var db = this.dbManager.GetDatabase())
-            using (var tx = db.BeginTrans())
+            var type = this.GetType();
+            var resourceName = $"{type.Namespace}.Data.{typeof(T).Name}.json";
+
+            var assembly = type.GetTypeInfo().Assembly;
+
+            foreach (var name in assembly.GetManifestResourceNames())
             {
-                var currentVersions = db.GetCollection<RefDataVersion>()
-                    .FindAll()
-                    .ToArray();
+                Debug.WriteLine(name);
+            }
 
-                foreach (var update in updates)
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
                 {
-                    var currentVersion = currentVersions.SingleOrDefault(x => x.TypeName == update.TypeName);
-                    var shouldUpdate = currentVersion == null || currentVersion.Version < update.Version;
-                    var shouldInsertRefDataVersion = false;
-
-                    if (currentVersion == null)
-                    {
-                        currentVersion = new RefDataVersion();
-                        currentVersion.TypeName = update.TypeName;
-
-                        shouldInsertRefDataVersion = true;
-                    }
-
-                    if (shouldUpdate)
-                    {
-                        var collection = db.GetCollection(update.TypeName);
-                        
-                        update.Data.ForEach(item =>
-                        {
-                            // ReSharper disable once AccessToDisposedClosure
-                            var bson = db.Mapper.ToDocument(update.Type, item);
-                            collection.Upsert(bson);
-                        });
-
-                        currentVersion.Version = update.Version;
-                        db.GetCollection<RefDataVersion>().Upsert(currentVersion, shouldInsertRefDataVersion);
-                    }
+                    throw new FileNotFoundException($"The resource with the name {resourceName} could not be found.");
                 }
 
-                tx.Commit();
+                using (var textReader = new StreamReader(stream))
+                using (var jsonReader = new JsonTextReader(textReader))
+                {
+                    var serializer = new JsonSerializer();
+                    var result = serializer.Deserialize(jsonReader, typeof(T).MakeArrayType());
+
+                    return (IEnumerable<T>) result;
+                }
             }
         }
     }
