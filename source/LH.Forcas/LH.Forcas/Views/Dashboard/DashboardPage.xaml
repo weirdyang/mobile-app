@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
+             xmlns:controls="clr-namespace:LH.Forcas.Views.Reusable.Controls;assembly=LH.Forcas"
+             xmlns:converters="clr-namespace:LH.Forcas.Views.Reusable.Converters;assembly=LH.Forcas"
              x:Class="LH.Forcas.Views.Dashboard.DashboardPage"
              Title="{ ext:Translate Dashboard_Title }">
   <Grid>
@@ -10,15 +12,21 @@
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
+    <Grid.Resources>
+      <ResourceDictionary>
+        <converters:ValidationResultToColorConverter x:Key="ValidationResultToColorConverter" />
+      </ResourceDictionary>
+    </Grid.Resources>
 
-    <Label Grid.Row="0" Text="{ Binding [0] }" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Entry Grid.Row="0" Text="{ Binding TestProp }" BackgroundColor="{ Binding ValidationResults[TestProp], Converter={ StaticResource ValidationResultToColorConverter } }" />
 
-    <Label Grid.Row="1" Text="{ Binding [1] }" VerticalOptions="Center" HorizontalOptions="Center" />
-
-    <Label Grid.Row="2" Text="{ Binding DummyProp[0] }" VerticalOptions="Center" HorizontalOptions="Center" />
-
-    <Label Grid.Row="3" Text="{ Binding DummyProp[1] }" VerticalOptions="Center" HorizontalOptions="Center" />
+    <controls:ValidationIcon ValidationResult="{ Binding ValidationResults[TestProp] }" Grid.Row="1" />
+    <controls:ValidationLabel ValidationResult="{ Binding ValidationResults[TestProp] }" Grid.Row="2" />
+    <!--<controls:ValidationLabel ValidationResult="{ Binding ValidationResults[TestProp] }" InfoMessage="Some useful info..." Grid.Row="3" />-->
+    
+    <Label Text="{ Binding ValidationResults[TestProp].IsValid }" Grid.Row="4"></Label>
     
   </Grid>
 </ContentPage>

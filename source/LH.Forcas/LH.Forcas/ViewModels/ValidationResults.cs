@@ -1,6 +1,7 @@
 ﻿namespace LH.Forcas.ViewModels
 {
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using FluentValidation.Results;
 
     public class ValidationResults
@@ -12,6 +13,7 @@
             this.validationResults = new Dictionary<string, ValidationResult>();
         }
 
+        [IndexerName("MyItem")]
         public ValidationResult this[string propertyName]
         {
             get
@@ -26,9 +28,9 @@
             }
         }
 
-        public void PushResults(string propertyName, ValidationResult results)
+        public void PushResults(string propertyName, ValidationResult newResults)
         {
-            this.validationResults[propertyName] = results;
+            this.validationResults[propertyName] = newResults;
         }
     }
 }

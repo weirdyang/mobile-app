@@ -1,6 +1,7 @@
 ﻿namespace LH.Forcas.Tests.ViewModels
 {
     using FluentValidation;
+    using Forcas.Domain.UserData;
     using Forcas.ViewModels;
     using NUnit.Framework;
 

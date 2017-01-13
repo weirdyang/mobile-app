@@ -59,7 +59,6 @@
     <Compile Include="ViewModels\IValidated.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
-    <Compile Include="Views\Reusable\Behaviours\ValidationBehavior.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationIcon.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationLabel.cs" />
     <Compile Include="Views\Reusable\Converters\EnumToResourceConverter.cs" />
@@ -72,6 +71,7 @@
     <Compile Include="Domain\UserData\Transaction.cs" />
     <Compile Include="Domain\UserData\TransactionType.cs" />
     <Compile Include="Extensions\LiteDbExtensions.cs" />
+    <Compile Include="Views\Reusable\Converters\ValidationResultToColorConverter.cs" />
     <Compile Include="Views\Reusable\MarkupExtensions\TranslateExtensions.cs" />
     <Compile Include="Extensions\NavigationExtensions.cs" />
     <Compile Include="Integration\Exceptions\RefDataFormatException.cs" />
@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
+    <Folder Include="Views\Reusable\Behaviors\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

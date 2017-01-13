@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using Prism.Mvvm;
-using Prism.Navigation;
-
-namespace LH.Forcas.ViewModels
+﻿namespace LH.Forcas.ViewModels
 {
     using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
     using FluentValidation;
     using FluentValidation.Internal;
+    using Prism.Mvvm;
+    using Prism.Navigation;
 
     public abstract class ViewModelBase : BindableBase, IConfirmNavigationAsync
     {
@@ -69,27 +68,24 @@ namespace LH.Forcas.ViewModels
 
         protected override bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
-            // ReSharper disable once ExplicitCallerInfoArgument
+            // ReSharper disable ExplicitCallerInfoArgument
             var changed = base.SetProperty(ref storage, value, propertyName);
-
+            
             if (changed && this.Validator != null && propertyName != "IsBusy")
             {
                 var ctx = new ValidationContext(
-                    this.GetValidatedObject(),
+                    this,
                     new PropertyChain(),
                     new MemberNameValidatorSelector(new [] { propertyName }));
 
                 var results = this.Validator.Validate(ctx);
 
                 this.ValidationResults.PushResults(propertyName, results);
+                this.OnPropertyChanged(nameof(this.ValidationResults));
             }
 
+            // ReSharper restore ExplicitCallerInfoArgument
             return changed;
-        }
-
-        protected virtual object GetValidatedObject()
-        {
-            return this;
         }
     }
 }

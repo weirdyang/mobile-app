@@ -1,52 +1,35 @@
 ﻿namespace LH.Forcas.ViewModels.Dashboard
 {
+    using FluentValidation;
+
     public class DashboardPageViewModel : ViewModelBase
     {
         private string testProp;
 
         public DashboardPageViewModel()
         {
-            this.DummyProp = new Dummy();
+            this.Validator = new DashboardValidator();
         }
-
-        public Dummy DummyProp { get; set; }
 
         public string TestProp
         {
             get { return this.testProp; }
-            set
-            {
-                this.testProp = value;
-                this.OnPropertyChanged();
-            }
+            set { this.SetProperty(ref this.testProp, value); }
         }
 
-        public string this[int key]
+        public string this[int i]
         {
             get
             {
-                if (key == 0)
-                {
-                    return "000000000";
-                }
-
-                return "111111111111111";
+                return "AAAAA";
             }
         }
 
-        public class Dummy
+        private class DashboardValidator : AbstractValidator<DashboardPageViewModel>
         {
-            public string this[int key]
+            public DashboardValidator()
             {
-                get
-                {
-                    if (key == 0)
-                    {
-                        return "AAAAAAAAAAA";
-                    }
-
-                    return "BBBBBBBBBBB";
-                }
+                this.RuleFor(x => x.TestProp).NotEmpty();
             }
         }
     }
