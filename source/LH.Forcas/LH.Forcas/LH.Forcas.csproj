@@ -57,6 +57,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\IValidated.cs" />
+    <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
     <Compile Include="Views\Reusable\Behaviours\ValidationBehavior.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationIcon.cs" />
@@ -175,6 +176,10 @@
     </Reference>
     <Reference Include="Dropbox.Api">
       <HintPath>..\..\packages\Dropbox.Api.4.1\lib\portable-net40+sl5+wp80+win8+wpa81\Dropbox.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentValidation.6.2.1.0\lib\portable-net45+wp80+win8+wpa81\FluentValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Flurl">

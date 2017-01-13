@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
-             xmlns:controls="clr-namespace:LH.Forcas.Views.Reusable.Controls;assembly=LH.Forcas"
              x:Class="LH.Forcas.Views.Dashboard.DashboardPage"
              Title="{ ext:Translate Dashboard_Title }">
   <Grid>
@@ -10,13 +9,16 @@
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
 
-    <Label Grid.Row="0" Text="Dashboard" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label Grid.Row="0" Text="{ Binding [0] }" VerticalOptions="Center" HorizontalOptions="Center" />
 
-    <Entry Grid.Row="1" Text="{ Binding TestProp, Mode=TwoWay }"></Entry>
+    <Label Grid.Row="1" Text="{ Binding [1] }" VerticalOptions="Center" HorizontalOptions="Center" />
 
-    <controls:ValidationTest Grid.Row="2" Validated="{ Binding TestProp }" Text="AAAA" />
+    <Label Grid.Row="2" Text="{ Binding DummyProp[0] }" VerticalOptions="Center" HorizontalOptions="Center" />
+
+    <Label Grid.Row="3" Text="{ Binding DummyProp[1] }" VerticalOptions="Center" HorizontalOptions="Center" />
     
   </Grid>
 </ContentPage>

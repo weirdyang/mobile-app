@@ -67,6 +67,10 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Flurl, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Flurl.2.2.1\lib\portable40-net40+sl5+win8+wp8+wpa81\Flurl.dll</HintPath>
@@ -216,6 +220,7 @@
     <Compile Include="ViewModels\Accounts\AccountsListPageViewModelTests.cs" />
     <Compile Include="ViewModels\SyncSetup\ProviderAuthorizeViewModelTests.cs" />
     <Compile Include="ViewModels\SyncSetup\ProviderSelectionViewModelTests.cs" />
+    <Compile Include="ViewModels\ViewModelBaseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LH.Forcas\LH.Forcas\LH.Forcas.csproj">
