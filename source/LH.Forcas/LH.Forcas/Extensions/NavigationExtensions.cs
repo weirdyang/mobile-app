@@ -50,23 +50,32 @@ namespace LH.Forcas.Extensions
 
         public static async Task NavigateToAddAccount(this INavigationService navigationService)
         {
-            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsDetailPage));
+            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsListPage), nameof(AccountsDetailPage));
+
             await navigationService.NavigateAsync(uri);
         }
 
         public static async Task NavigateToAccountDetail(this INavigationService navigationService, Guid accountId)
         {
-            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsDetailPage));
-
-            var parameters = new NavigationParameters();
-            parameters.Add(AccountIdParameterName, accountId);
+            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsListPage), nameof(AccountsDetailPage));
+            var parameters = CreateAccountDetailParameters(accountId);
 
             await navigationService.NavigateAsync(uri, parameters);
         }
 
-        private static Uri GetAbsoluteUri(string navPage, string page)
+        public static NavigationParameters CreateAccountDetailParameters(Guid accountId)
         {
-            return new Uri($"app://forcas/{_rootPageName}/{navPage}/{page}", UriKind.Absolute);
+            var parameters = new NavigationParameters();
+            parameters.Add(AccountIdParameterName, accountId);
+
+            return parameters;
+        }
+
+        private static Uri GetAbsoluteUri(string navPage, params string[] pages)
+        {
+            var pageUri = string.Join("/", pages);
+
+            return new Uri($"app://forcas/{_rootPageName}/{navPage}/{pageUri}", UriKind.Absolute);
         }
     }
 

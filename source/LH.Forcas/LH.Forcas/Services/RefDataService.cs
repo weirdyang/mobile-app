@@ -9,6 +9,8 @@ using LH.Forcas.Storage;
 
 namespace LH.Forcas.Services
 {
+    using System.Diagnostics.Contracts;
+
     public class RefDataService : IRefDataService
     {
         private readonly ICrashReporter crashReporter;
@@ -36,6 +38,19 @@ namespace LH.Forcas.Services
         public async Task<IList<Currency>> GetCurrencies()
         {
             return await this.GetRefDataViaCache(() => this.repository.GetCurrencies());
+        }
+
+        public async Task<IList<Bank>> GetBanksByCountry(string countryCode)
+        {
+            if (string.IsNullOrEmpty(countryCode))
+            {
+                throw new ArgumentNullException(nameof(countryCode));
+            }
+
+            var allBanks = await this.GetBanks();
+            return allBanks
+                .Where(x => string.Equals(x.CountryCode, countryCode, StringComparison.OrdinalIgnoreCase))
+                .ToArray();
         }
 
         private async Task<IList<TDomain>> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)

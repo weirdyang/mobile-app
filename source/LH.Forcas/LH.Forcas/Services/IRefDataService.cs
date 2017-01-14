@@ -11,5 +11,7 @@ namespace LH.Forcas.Services
         Task<IList<Country>> GetCountriesAsync();
 
         Task<IList<Currency>> GetCurrencies();
+
+        Task<IList<Bank>> GetBanksByCountry(string countryCode);
     }
 }

@@ -4,6 +4,9 @@ using Prism.Navigation;
 
 namespace LH.Forcas.ViewModels.Root
 {
+    using System;
+    using System.Threading.Tasks;
+
     public class RootSideMenuPageViewModel : ViewModelBase
     {
         private readonly INavigationService navigationService;
@@ -14,8 +17,6 @@ namespace LH.Forcas.ViewModels.Root
             this.navigationService = navigationService;
             this.Pages = NavigationExtensions.RootLevelPages;
         }
-
-        //public event EventHandler RequestSideMenuClose;
 
         public IEnumerable<NavigationPage> Pages { get; set; }
 
@@ -29,16 +30,22 @@ namespace LH.Forcas.ViewModels.Root
 
                 if (this.selectedPage != null)
                 {
-                    this.selectedPage.NavigateAction.Invoke(this.navigationService);
+                    this.Navigate();
+                    //this.selectedPage.NavigateAction.Invoke(this.navigationService);
                 }
-
-                // this.OnRequestSideMenuClose();
             }
         }
 
-        //protected virtual void OnRequestSideMenuClose()
-        //{
-        //    this.RequestSideMenuClose?.Invoke(this, EventArgs.Empty);
-        //}
+        private async void Navigate()
+        {
+            try
+            {
+                await this.selectedPage.NavigateAction.Invoke(this.navigationService);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

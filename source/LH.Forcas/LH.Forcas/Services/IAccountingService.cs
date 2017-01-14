@@ -9,5 +9,7 @@
         IEnumerable<Account> GetAccounts();
 
         void DeleteAccount(Guid id);
+
+        Account GetAccount(Guid id);
     }
 }

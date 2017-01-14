@@ -104,7 +104,7 @@
     <Compile Include="Storage\IRoamingDataRepository.cs" />
     <Compile Include="Storage\RefDataRepository.cs" />
     <Compile Include="Storage\RoamingDataRepository.cs" />
-    <Compile Include="ViewModels\Accounts\AccountsDetailsPageViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\AccountsDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Accounts\AccountsListPageViewModel.cs" />
     <Compile Include="Views\Accounts\AccountsDetailPage.xaml.cs">
       <DependentUpon>AccountsDetailPage.xaml</DependentUpon>

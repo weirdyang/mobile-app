@@ -57,6 +57,25 @@ namespace LH.Forcas.Tests.Services
         }
 
         [Test]
+        public async Task ShouldFilterBanksByCountry()
+        {
+            var allBanks = new Bank[]
+            {
+                new Bank { BankId = "CzeBank", CountryCode = "CZE" },
+                new Bank { BankId = "UkBank", CountryCode = "UK" }
+            };
+
+            this.repositoryMock
+                .Setup(x => x.GetBanks())
+                .Returns(allBanks);
+
+            var result = await this.refDataService.GetBanksByCountry("CZE");
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("CzeBank", result.Single().BankId);
+        }
+
+        [Test]
         public void ShouldReportFatalCrashWhenFetchFails()
         {
             var ex = new Exception("Dummy");

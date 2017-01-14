@@ -147,4 +147,7 @@
   <data name="AlertDialog_OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="AccountsDetailPage_Title_New" xml:space="preserve">
+    <value>New Account</value>
+  </data>
 </root>

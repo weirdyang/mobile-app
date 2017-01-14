@@ -16,7 +16,12 @@
 
         public IEnumerable<Account> GetAccounts()
         {
-            throw new System.NotImplementedException();
+            return this.roamingDataRepository.GetAll<Account>();
+        }
+
+        public Account GetAccount(Guid id)
+        {
+            return this.roamingDataRepository.GetOneById<Account>(id);
         }
 
         public void DeleteAccount(Guid id)

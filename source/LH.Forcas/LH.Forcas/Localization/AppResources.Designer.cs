@@ -62,6 +62,15 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Account.
+        /// </summary>
+        internal static string AccountsDetailPage_Title_New {
+            get {
+                return ResourceManager.GetString("AccountsDetailPage_Title_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete the account {0} and all related transactions?.
         /// </summary>
         internal static string AccountsListPage_DeleteAccountConfirmMsgFormat {

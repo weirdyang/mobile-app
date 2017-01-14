@@ -16,9 +16,7 @@ namespace LH.Forcas.Droid
 
             Xamarin.Forms.Forms.Init(this, bundle);
 
-            Plugin.Iconize.Iconize
-                  //.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
-                  .With(new Plugin.Iconize.Fonts.MaterialModule());
+            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.MaterialModule());
 
             FormsPlugin.Iconize.Droid.IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
 
