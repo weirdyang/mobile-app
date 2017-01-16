@@ -74,7 +74,7 @@
     </Compile>
     <Compile Include="Views\Reusable\Controls\ValidationIcon.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationLabel.cs" />
-    <Compile Include="Views\Reusable\Converters\EnumToResourceConverter - Copy.cs" />
+    <Compile Include="Views\Reusable\Converters\StringToResourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\EnumToResourceConverter.cs" />
     <Compile Include="Domain\RefData\IIsActive.cs" />
     <Compile Include="Domain\UserData\Account.cs" />
