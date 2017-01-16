@@ -56,6 +56,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Domain\UserData\Authorization\BankAuthorization.cs" />
+    <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />
+    <Compile Include="Integration\Banks\IBankIntegration.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
