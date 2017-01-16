@@ -58,6 +58,8 @@
     </Compile>
     <Compile Include="Domain\UserData\Authorization\BankAuthorization.cs" />
     <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />
+    <Compile Include="Integration\Banks\Cze\Fio\FioOutputParser.cs" />
+    <Compile Include="Integration\Banks\Cze\Fio\FioAccountStatement.cs" />
     <Compile Include="Integration\Banks\IBankIntegration.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
@@ -157,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Integration\Banks\Cze\Fio\FioXmlSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <EmbeddedResource Include="Storage\Data\Bank.json" />
     <EmbeddedResource Include="Storage\Data\Currency.json" />

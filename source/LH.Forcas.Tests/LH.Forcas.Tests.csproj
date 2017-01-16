@@ -210,6 +210,8 @@
   <ItemGroup>
     <Compile Include="Domain\UserData\AccountNumberTests.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Integration\Banks\Cze\Fio\FioBankIntegrationTests.cs" />
+    <Compile Include="Integration\Banks\Cze\Fio\FioOutputParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RefDataServiceTests.cs" />
     <Compile Include="Storage\RefDataIntegrityTests.cs" />
@@ -230,14 +232,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Integration\Banks\Cze\Fio\TransactionDownloadSample.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Integration\Banks\Cze\Fio\TransactionParsingSample.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Integration\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

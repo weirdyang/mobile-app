@@ -6,13 +6,11 @@
 
     public static class Extensions
     {
-        public static string LoadFileContents(string fileName)
+        public static string GetContentFilePath(string fileName)
         {
             var currentDir = Path.GetDirectoryName(typeof(Extensions).Assembly.Location);
             // ReSharper disable once AssignNullToNotNullAttribute
-            var path = Path.Combine(currentDir, fileName);
-
-            return File.ReadAllText(path);
+            return Path.Combine(currentDir, fileName);
         }
 
         public static bool HasParameter<T>(this NavigationParameters parameters, string name, T expectedValue)
