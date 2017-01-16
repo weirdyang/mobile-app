@@ -62,11 +62,19 @@
     <Compile Include="Integration\Banks\Cze\Fio\FioOutputParser.cs" />
     <Compile Include="Integration\Banks\Cze\Fio\FioAccountStatement.cs" />
     <Compile Include="Integration\Banks\IBankIntegration.cs" />
+    <Compile Include="ViewModels\Accounts\AccountsAddBankSelectionPageViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\AccountsAddTypeSelectionPageViewModel.cs" />
+    <Compile Include="ViewModels\Accounts\AddAccountFlowState.cs" />
+    <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
+    <Compile Include="Views\Accounts\AccountsAddTypeSelectionPage.xaml.cs">
+      <DependentUpon>AccountsAddTypeSelectionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reusable\Controls\ValidationIcon.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationLabel.cs" />
+    <Compile Include="Views\Reusable\Converters\EnumToResourceConverter - Copy.cs" />
     <Compile Include="Views\Reusable\Converters\EnumToResourceConverter.cs" />
     <Compile Include="Domain\RefData\IIsActive.cs" />
     <Compile Include="Domain\UserData\Account.cs" />
@@ -385,6 +393,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Accounts\AccountsDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Accounts\AccountsAddTypeSelectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

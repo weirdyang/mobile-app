@@ -31,7 +31,7 @@
             this.dialogService = dialogService;
 
             this.NavigateToAddAccountCommand = new DelegateCommand(
-                async () => await this.navigationService.NavigateToAddAccount());
+                async () => await this.navigationService.StartAddAccountFlow());
 
             this.RefreshAccountsCommand = new DelegateCommand(this.RefreshAccounts);
 

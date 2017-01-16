@@ -120,8 +120,8 @@
   <data name="AccountsListPage_Title" xml:space="preserve">
     <value>Accounts</value>
   </data>
-  <data name="AccountTypeEnum_Checking" xml:space="preserve">
-    <value>Checking</value>
+  <data name="AccountType_Bank" xml:space="preserve">
+    <value>Bank</value>
   </data>
   <data name="Dashboard_Title" xml:space="preserve">
     <value>Overview</value>
@@ -149,5 +149,20 @@
   </data>
   <data name="AccountsDetailPage_Title_New" xml:space="preserve">
     <value>New Account</value>
+  </data>
+  <data name="AccountType_Bank_Description" xml:space="preserve">
+    <value>Your checking or other account in a bank we will connect to and download the transactions.</value>
+  </data>
+  <data name="AccountType_Cash" xml:space="preserve">
+    <value>Cash</value>
+  </data>
+  <data name="AccountType_Cash_Description" xml:space="preserve">
+    <value>To track the balance of your wallet or money you have under the pillow...</value>
+  </data>
+  <data name="AccountType_Loan" xml:space="preserve">
+    <value>Loan</value>
+  </data>
+  <data name="AccountType_Loan_Description" xml:space="preserve">
+    <value>Any kind of money you own to anyone, like mortgage, car loan and similar</value>
   </data>
 </root>

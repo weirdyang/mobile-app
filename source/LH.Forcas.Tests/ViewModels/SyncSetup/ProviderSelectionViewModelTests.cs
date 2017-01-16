@@ -190,7 +190,7 @@ namespace LH.Forcas.Tests.ViewModels.SyncSetup
         private ProviderSelectionViewModel CreateViewModel(SyncFlowState state)
         {
             var parameters = new NavigationParameters();
-            parameters.Add(NavigationExtensions.SyncFlowStateParameterName, state);
+            parameters.Add(NavigationExtensions.FlowStateParameterName, state);
 
             return new ProviderSelectionViewModel(
                 this.navigationServiceMock.Object,

@@ -107,11 +107,56 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking.
+        ///   Looks up a localized string similar to Bank.
         /// </summary>
-        internal static string AccountTypeEnum_Checking {
+        internal static string AccountType_Bank {
             get {
-                return ResourceManager.GetString("AccountTypeEnum_Checking", resourceCulture);
+                return ResourceManager.GetString("AccountType_Bank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your checking or other account in a bank we will connect to and download the transactions..
+        /// </summary>
+        internal static string AccountType_Bank_Description {
+            get {
+                return ResourceManager.GetString("AccountType_Bank_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash.
+        /// </summary>
+        internal static string AccountType_Cash {
+            get {
+                return ResourceManager.GetString("AccountType_Cash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To track the balance of your wallet or money you have under the pillow....
+        /// </summary>
+        internal static string AccountType_Cash_Description {
+            get {
+                return ResourceManager.GetString("AccountType_Cash_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loan.
+        /// </summary>
+        internal static string AccountType_Loan {
+            get {
+                return ResourceManager.GetString("AccountType_Loan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any kind of money you own to anyone, like mortgage, car loan and similar.
+        /// </summary>
+        internal static string AccountType_Loan_Description {
+            get {
+                return ResourceManager.GetString("AccountType_Loan_Description", resourceCulture);
             }
         }
         
