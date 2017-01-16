@@ -4,20 +4,26 @@
     using System.IO;
     using System.Linq;
     using Forcas.Integration.Banks.Cze.Fio;
+    using Forcas.Integration.Exceptions;
     using NUnit.Framework;
 
     [TestFixture]
     public class FioOutputParserTests
     {
         protected Stream SampleJsonStream;
+        protected Stream SampleFailingJsonStream;
         protected FioOutputParser Parser;
 
         [SetUp]
         public void Setup()
         {
             var jsonPath = Extensions.GetContentFilePath(@"Integration\Banks\Cze\Fio\TransactionParsingSample.json");
+            var failingJsonPath =
+                Extensions.GetContentFilePath(@"Integration\Banks\Cze\Fio\TransactionParsingSample-Fail.json");
 
             this.SampleJsonStream = File.OpenRead(jsonPath);
+            this.SampleFailingJsonStream = File.OpenRead(failingJsonPath);
+
             this.Parser = new FioOutputParser();
         }
 
@@ -61,7 +67,8 @@
                 Assert.IsNotNull(result.TransactionList.Transactions);
                 Assert.AreEqual(3, result.TransactionList.Transactions.Length);
 
-                var testedTransaction = result.TransactionList.Transactions.Single(x => x.BankTransactionId.Value == 1148734530);
+                var testedTransaction =
+                    result.TransactionList.Transactions.Single(x => x.BankTransactionId.Value == 1148734530);
 
                 Assert.AreEqual("Příjem převodem uvnitř banky", testedTransaction.TransactionType.Value);
                 Assert.AreEqual("Some dummy info", testedTransaction.AdditionalInfo.Value);
@@ -84,6 +91,19 @@
                 Assert.AreEqual("Comment", testedTransaction.UserComment.Value);
                 Assert.AreEqual(2105685816, testedTransaction.UserActionId.Value);
                 Assert.AreEqual("Pepa Novák", testedTransaction.TransactionOwner.Value);
+            }
+
+            [Test]
+            public void ShouldThrowIfParsingFails()
+            {
+                try
+                {
+                    this.Parser.Parse(this.SampleFailingJsonStream);
+                    Assert.Fail();
+                }
+                catch (BankPayloadFormatException)
+                {
+                }
             }
         }
     }

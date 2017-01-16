@@ -79,7 +79,7 @@
     <Compile Include="Views\Reusable\Converters\ValidationResultToColorConverter.cs" />
     <Compile Include="Views\Reusable\MarkupExtensions\TranslateExtensions.cs" />
     <Compile Include="Extensions\NavigationExtensions.cs" />
-    <Compile Include="Integration\Exceptions\RefDataFormatException.cs" />
+    <Compile Include="Integration\Exceptions\BankPayloadFormatException.cs" />
     <Compile Include="Localization\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
