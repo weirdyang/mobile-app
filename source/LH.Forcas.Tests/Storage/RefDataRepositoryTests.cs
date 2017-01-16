@@ -31,6 +31,7 @@ namespace LH.Forcas.Tests.Storage
                 Assert.IsNotEmpty(rb.CountryCode);
                 Assert.IsNotEmpty(rb.IbanPrefix);
                 Assert.AreNotEqual(0, rb.RoutingCode);
+                Assert.AreEqual(BankAuthorizationScheme.PerAccount, rb.AuthorizationScheme);
                 Assert.IsTrue(rb.IsActive);
             }
 

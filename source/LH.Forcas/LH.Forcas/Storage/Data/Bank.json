@@ -5,6 +5,7 @@
     "routingCode": 5500,
     "countryCode": "CZE",
     "ibanPrefix": "CZ21",
+    "authorizationScheme": "PerAccount", 
     "isActive": true 
   }
 ]

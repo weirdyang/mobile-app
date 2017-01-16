@@ -12,6 +12,8 @@ namespace LH.Forcas.Domain.RefData
 
         public int RoutingCode { get; set; }
 
+        public BankAuthorizationScheme AuthorizationScheme { get; set; }
+
         public bool IsActive { get; set; }
     }
 }
