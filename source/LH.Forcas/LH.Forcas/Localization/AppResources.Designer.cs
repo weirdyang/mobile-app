@@ -62,6 +62,24 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bank.
+        /// </summary>
+        internal static string AccountsAddBankSelection_Title {
+            get {
+                return ResourceManager.GetString("AccountsAddBankSelection_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Type.
+        /// </summary>
+        internal static string AccountsAddTypeSelection_Title {
+            get {
+                return ResourceManager.GetString("AccountsAddTypeSelection_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Account.
         /// </summary>
         internal static string AccountsDetailPage_Title_New {

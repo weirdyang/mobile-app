@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markupExtensions="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
+             xmlns:converters="clr-namespace:LH.Forcas.Views.Reusable.Converters;assembly=LH.Forcas"
+             x:Class="LH.Forcas.Views.Accounts.AccountsAddBankSelectionPage"
+             Title="{ markupExtensions:Translate AccountsAddBankSelection_Title }">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:BankIdToImageSourceConverter x:Key="BankIdToImageSourceConverter" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <ListView ItemsSource="{ Binding Items }"
+            SelectedItem="{ Binding SelectedItem, Mode=TwoWay }"
+            IsPullToRefreshEnabled="False">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ImageCell
+          ImageSource="{ Binding BankId, Converter={ StaticResource BankIdToImageSourceConverter } }"
+          Text="{ Binding Name }"/>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+</ContentPage>

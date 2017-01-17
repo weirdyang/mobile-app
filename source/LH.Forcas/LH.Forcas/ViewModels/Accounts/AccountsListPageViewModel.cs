@@ -31,7 +31,11 @@
             this.dialogService = dialogService;
 
             this.NavigateToAddAccountCommand = new DelegateCommand(
-                async () => await this.navigationService.StartAddAccountFlow());
+                async () =>
+                {
+                    var flow = new AddAccountFlow(accountingService);
+                    await flow.NavigateNext(null, this.navigationService);
+                });
 
             this.RefreshAccountsCommand = new DelegateCommand(this.RefreshAccounts);
 
@@ -57,7 +61,7 @@
 
                 if (this.selectedAccount != null)
                 {
-                    this.navigationService.NavigateToAccountDetail(this.selectedAccount.AccountId);
+                    this.NavigateToAccountDetail();
                 }
             }
         }
@@ -71,6 +75,11 @@
         {
             this.Accounts = this.accountingService.GetAccounts();
             this.SelectedAccount = null;
+        }
+
+        private async void NavigateToAccountDetail()
+        {
+            await this.navigationService.NavigateToAccountDetail(this.selectedAccount.AccountId);
         }
 
         private async Task DeleteAccount(Account account)

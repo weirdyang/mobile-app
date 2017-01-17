@@ -1,6 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LH.Forcas.Views.Accounts.AccountsAddTypeSelectionPage">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+             xmlns:converters="clr-namespace:LH.Forcas.Views.Reusable.Converters;assembly=LH.Forcas"
+             xmlns:markupExtensions="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
+             x:Class="LH.Forcas.Views.Accounts.AccountsAddTypeSelectionPage"
+             Title="{ markupExtensions:Translate AccountsAddTypeSelection_Title }">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:StringToResourceConverter x:Key="StringToResourceConverter" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <ListView ItemsSource="{ Binding Items }"
+            SelectedItem="{ Binding SelectedItem, Mode=TwoWay }"
+            IsPullToRefreshEnabled="False">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ImageCell
+          Command="{ Binding SelectItemCommand }"
+          CommandParameter="{ Binding . }"
+          ImageSource="TBA"
+          Text="{ Binding ., Converter={ StaticResource StringToResourceConverter } }"
+          Detail="{ Binding ., Converter={ StaticResource StringToResourceConverter }, ConverterParameter={}{}_Description }">
+        </ImageCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
 </ContentPage>

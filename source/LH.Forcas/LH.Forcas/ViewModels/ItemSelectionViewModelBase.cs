@@ -2,25 +2,17 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Windows.Input;
+    using Prism.Commands;
     using Prism.Navigation;
 
     public abstract class ItemSelectionViewModelBase<TItem> : ViewModelBase
     {
-        private TItem selectedItem;
         private IEnumerable<TItem> items;
 
-        public TItem SelectedItem
+        protected ItemSelectionViewModelBase()
         {
-            get { return this.selectedItem; }
-            set
-            {
-                this.SetProperty(ref this.selectedItem, value);
-
-                if (value != null && value.Equals(default(TItem)))
-                {
-                    this.OnItemSelected(value);
-                }
-            }
+            this.SelectItemCommand = new DelegateCommand<TItem>(this.SelectItemCommandExecute);
         }
 
         public IEnumerable<TItem> Items
@@ -29,16 +21,24 @@
             private set { this.SetProperty(ref this.items, value); }
         }
 
+        public ICommand SelectItemCommand { get; private set; }
+
         public override async Task OnNavigatedToAsync(NavigationParameters parameters)
         {
             await base.OnNavigatedToAsync(parameters);
-
             this.Items = await this.GetSelectionItems();
-            this.SelectedItem = default(TItem);
         }
 
         protected abstract Task<IEnumerable<TItem>> GetSelectionItems();
 
         protected abstract void OnItemSelected(TItem item);
+
+        private void SelectItemCommandExecute(TItem item)
+        {
+            if (item != null && !item.Equals(default(TItem)))
+            {
+                this.OnItemSelected(item);
+            }
+        }
     }
 }

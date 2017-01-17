@@ -10,12 +10,12 @@ namespace LH.Forcas.ViewModels.SyncSetup
         {
             this.FlowNavigationParameters = parameters;
 
-            if (!parameters.ContainsKey(NavigationExtensions.FlowStateParameterName))
+            if (!parameters.ContainsKey(NavigationExtensions.FlowParameterName))
             {
                 throw new ArgumentException("SyncSetup pages must be navigated to with SyncFlowState parameter.", nameof(parameters));
             }
 
-            this.State = (SyncFlowState)parameters[NavigationExtensions.FlowStateParameterName];
+            this.State = (SyncFlowState)parameters[NavigationExtensions.FlowParameterName];
         }
 
         protected SyncFlowState State { get; private set; }

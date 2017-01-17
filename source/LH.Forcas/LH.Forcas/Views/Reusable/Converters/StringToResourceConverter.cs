@@ -7,8 +7,6 @@
 
     public class StringToResourceConverter : IValueConverter
     {
-        public string KeyFormat { get; set; }
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
@@ -17,9 +15,11 @@
             }
 
             string resxKey = $"{value}";
-            if (!string.IsNullOrEmpty(this.KeyFormat))
+
+            var format = parameter as string;
+            if (!string.IsNullOrEmpty(format))
             {
-                resxKey = string.Format(this.KeyFormat, value);
+                resxKey = string.Format(format, value);
             }
 
             return AppResources.ResourceManager.GetString(resxKey, App.CurrentCultureInfo);

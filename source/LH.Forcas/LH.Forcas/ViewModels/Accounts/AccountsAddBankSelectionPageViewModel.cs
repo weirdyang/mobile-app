@@ -1,43 +1,41 @@
 ﻿namespace LH.Forcas.ViewModels.Accounts
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
-    using Domain.UserData;
+    using Domain.RefData;
     using Extensions;
     using Prism.Navigation;
     using Services;
 
-    public class AccountsAddBankSelectionPageViewModel : ItemSelectionViewModelBase<Tuple<string, string>>
+    public class AccountsAddBankSelectionPageViewModel : ItemSelectionViewModelBase<Bank>
     {
-        private AddAccountFlowState flowState;
+        private AddAccountFlow flow;
 
         private readonly IRefDataService refDataService;
+        private readonly INavigationService navigationService;
 
-        public AccountsAddBankSelectionPageViewModel(IRefDataService refDataService)
+        public AccountsAddBankSelectionPageViewModel(IRefDataService refDataService, INavigationService navigationService)
         {
             this.refDataService = refDataService;
+            this.navigationService = navigationService;
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
-            this.flowState = parameters.GetNavigationParameter<AddAccountFlowState>(NavigationExtensions.FlowStateParameterName);
+            this.flow = parameters.GetNavigationParameter<AddAccountFlow>(NavigationExtensions.FlowParameterName);
         }
 
-        protected override async Task<IEnumerable<Tuple<string, string>>> GetSelectionItems()
+        protected override async Task<IEnumerable<Bank>> GetSelectionItems()
         {
-            var banks = await this.refDataService.GetBanks();
-
-            return banks.Select(x => new Tuple<string, string>(x.BankId, x.Name));
+            return await this.refDataService.GetBanks();
         }
 
-        protected override void OnItemSelected(Tuple<string, string> item)
+        protected override async void OnItemSelected(Bank bank)
         {
-            var bankAccount = (BankAccount)this.flowState.Account;
-            bankAccount.BankId = item.Item1;
+            this.flow.Bank = bank;
+            await this.flow.NavigateNext(AddAccountFlow.Steps.BankSelection, this.navigationService);
         }
     }
 }

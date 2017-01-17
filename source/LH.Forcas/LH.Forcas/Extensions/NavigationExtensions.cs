@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Prism.Navigation;
-    using ViewModels.Accounts;
     using Views.Accounts;
     using Views.Dashboard;
     using Xamarin.Forms;
@@ -16,7 +15,7 @@
         // Use this class to enfore passing strongly typed parameters and to avoid the navigation strings in the view model
         public const string ProviderAuthorizePage = "";
 
-        public const string FlowStateParameterName = "FlowState";
+        public const string FlowParameterName = "Flow";
         public const string AccountIdParameterName = "AccountId";
 
         public static readonly IEnumerable<NavigationPage> RootLevelPages = new[]
@@ -56,19 +55,6 @@
             await navigationService.NavigateAsync(uri, parameters);
         }
 
-        public static async Task StartAddAccountFlow(this INavigationService navigationService)
-        {
-            var flowState = new AddAccountFlowState();
-            flowState.CancelNavigationAction = async () => await NavigateToAccounts(navigationService); // TBA - navigate to where the flow started
-
-            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsAddTypeSelectionPage));
-
-            var parameters = new NavigationParameters();
-            parameters.Add(FlowStateParameterName, flowState);
-
-            await navigationService.NavigateAsync(uri);
-        }
-
         public static NavigationParameters CreateAccountDetailParameters(Guid accountId)
         {
             var parameters = new NavigationParameters();
@@ -93,7 +79,7 @@
             return (TItem) paramValue;
         }
 
-        private static Uri GetAbsoluteUri(string navPage, params string[] pages)
+        public static Uri GetAbsoluteUri(string navPage, params string[] pages)
         {
             var pageUri = string.Join("/", pages);
 

@@ -48,6 +48,8 @@
             this.Container.RegisterTypeForNavigation<AccountsListPage>();
             this.Container.RegisterTypeForNavigation<AccountsDetailPage>();
             this.Container.RegisterTypeForNavigation<AccountsNavigationPage>();
+            this.Container.RegisterTypeForNavigation<AccountsAddTypeSelectionPage>();
+            this.Container.RegisterTypeForNavigation<AccountsAddBankSelectionPage>();
         }
     }
 }

@@ -10,13 +10,20 @@
 
     public class AccountsAddTypeSelectionPageViewModel : ItemSelectionViewModelBase<string>
     {
-        private AddAccountFlowState flowState;
+        private readonly INavigationService navigationService;
+
+        private AddAccountFlow flow;
+
+        public AccountsAddTypeSelectionPageViewModel(INavigationService navigationService)
+        {
+            this.navigationService = navigationService;
+        }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
-            this.flowState = parameters.GetNavigationParameter<AddAccountFlowState>(NavigationExtensions.FlowStateParameterName);
+            this.flow = parameters.GetNavigationParameter<AddAccountFlow>(NavigationExtensions.FlowParameterName);
         }
 
         protected override Task<IEnumerable<string>> GetSelectionItems()
@@ -31,10 +38,10 @@
             return Task.FromResult<IEnumerable<string>>(result);
         }
 
-        protected override void OnItemSelected(string accountType)
+        protected override async void OnItemSelected(string accountType)
         {
-            this.flowState.Account = this.CreateAccount(accountType);
-            this.flowState.NavigateToSecondStep();
+            this.flow.Account = this.CreateAccount(accountType);
+            await this.flow.NavigateNext(AddAccountFlow.Steps.AccountTypeSelection, this.navigationService);
         }
 
         private Account CreateAccount(string accountType)
