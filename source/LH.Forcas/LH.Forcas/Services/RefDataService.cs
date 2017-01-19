@@ -56,23 +56,24 @@ namespace LH.Forcas.Services
         private async Task<IList<TDomain>> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)
             where TDomain : IIsActive
         {
-            await this.cacheSemaphore.WaitAsync();
-
-            object result;
-            if (this.cache.TryGetValue(typeof(TDomain), out result))
-            {
-                return (IList<TDomain>)result;
-            }
-
             IList<TDomain> typedResult = null;
+            await this.cacheSemaphore.WaitAsync();
 
             try
             {
+                object result;
+                if (this.cache.TryGetValue(typeof(TDomain), out result))
+                {
+                    return (IList<TDomain>) result;
+                }
+
                 var data = fetchDataDelegate.Invoke();
                 if (data != null)
                 {
                     typedResult = data.Where(x => x.IsActive).ToArray();
                 }
+
+                this.cache.Add(typeof(TDomain), typedResult);
             }
             catch (Exception ex)
             {
@@ -80,9 +81,10 @@ namespace LH.Forcas.Services
                 this.crashReporter.ReportFatal(ex);
                 throw;
             }
-
-            this.cache.Add(typeof(TDomain), typedResult);
-            this.cacheSemaphore.Release();
+            finally
+            {
+                this.cacheSemaphore.Release();
+            }
 
             return typedResult;
         }

@@ -34,8 +34,8 @@
             this.AccountingServiceMock.Setup(x => x.GetAccounts())
                 .Returns(new[]
                          {
-                             new Account { AccountId = Guid.NewGuid(), Name = "Checking", Type = AccountType.Checking },
-                             new Account { AccountId = Guid.NewGuid(), Name = "Savings", Type = AccountType.Savings }
+                             new BankAccount { AccountId = Guid.NewGuid(), Name = "Checking", Type = BankAccountType.Checking },
+                             new BankAccount { AccountId = Guid.NewGuid(), Name = "Savings", Type = BankAccountType.Savings }
                          });
         }
 

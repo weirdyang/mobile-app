@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.DeviceInfo;
@@ -13,7 +12,7 @@ using Prism.Services;
 
 namespace LH.Forcas.ViewModels.SyncSetup
 {
-    public class ProviderSelectionViewModel : SyncFlowViewModelBase
+    public class ProviderSelectionViewModel : SyncFlowViewModelBase, IConfirmNavigationAsync
     {
         private readonly IConnectivity connectivity;
         private readonly IUnityContainer container;
@@ -60,23 +59,20 @@ namespace LH.Forcas.ViewModels.SyncSetup
 
         public ICommand NavigateBackCommand { get; }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override void OnNavigatedTo(NavigationParameters parameters)
         {
-            using (this.StartBusyIndicator())
-            {
-                this.Providers = this.container.ResolveAll<IFileSyncProvider>();
+            //this.Providers = this.container.ResolveAll<IFileSyncProvider>();
 
-                if (!string.IsNullOrEmpty(this.userSettingsService.SyncProviderName))
-                {
-                    this.SelectedProvider =
-                        this.Providers.Single(x => x.Key == this.userSettingsService.SyncProviderName);
-                }
+            //if (!string.IsNullOrEmpty(this.userSettingsService.SyncProviderName))
+            //{
+            //    this.SelectedProvider =
+            //        this.Providers.Single(x => x.Key == this.userSettingsService.SyncProviderName);
+            //}
 
-                await this.VerifyInternetConnectivity();
-            }
+            //await this.VerifyInternetConnectivity();
         }
 
-        public override Task<bool> CanNavigateAsync(NavigationParameters parameters)
+        public Task<bool> CanNavigateAsync(NavigationParameters parameters)
         {
             return Task.FromResult(this.SelectedProvider != null);
         }

@@ -115,13 +115,13 @@
 
         private Account GetValidAccount()
         {
-            return new Account
+            return new BankAccount
             {
                 AccountId = Guid.NewGuid(),
                 AccountNumber = AccountNumber.Parse("123/5500"),
                 BankId = "RB",
                 CurrencyId = "CZK",
-                Type = AccountType.Checking,
+                Type = BankAccountType.Checking,
                 Name = "My Test Account",
                 CurrentBalance = 1000.98m
             };

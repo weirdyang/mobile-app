@@ -1,16 +1,17 @@
 ﻿namespace LH.Forcas.ViewModels
 {
+    using System;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
     using FluentValidation;
     using FluentValidation.Internal;
     using Prism.Mvvm;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
-    public abstract class ViewModelBase : BindableBase, IConfirmNavigationAsync
+    public abstract class ViewModelBase : BindableBase, INavigationAware
     {
         private bool isBusy;
-        private BusyIndicatorSection indicatorSection;
 
         protected IValidator Validator;
 
@@ -22,48 +23,36 @@
         public bool IsBusy
         {
             get { return this.isBusy; }
-            set { this.SetProperty(ref this.isBusy, value); }
+            private set { this.SetProperty(ref this.isBusy, value); }
         }
 
         public ValidationResults ValidationResults { get; }
 
-        public virtual void OnNavigatedFrom(NavigationParameters parameters)
+        public virtual void OnNavigatedFrom(NavigationParameters parameters) { }
+
+        public virtual void OnNavigatedTo(NavigationParameters parameters) { }
+
+        protected Task RunAsyncWithBusyIndicator(Action action)
         {
-            this.OnNavigatedFromAsync(parameters).Wait();
+            this.IsBusy = true;
+
+            return Task.Run(() =>
+                     {
+                         try
+                         {
+                             action.Invoke();
+                         }
+                         finally
+                         {
+                             //Device.BeginInvokeOnMainThread(() => { this.IsBusy = false; });
+                             this.IsBusy = false;
+                         }
+                     });
         }
 
-        public virtual Task OnNavigatedFromAsync(NavigationParameters parameters)
+        protected Task RunAsyncWithBusyIndicator(Task task)
         {
-            return Task.FromResult(0);
-        }
-
-        public virtual void OnNavigatedTo(NavigationParameters parameters)
-        {
-            this.OnNavigatedToAsync(parameters).Wait();
-        }
-
-        public virtual Task OnNavigatedToAsync(NavigationParameters parameters)
-        {
-            return Task.FromResult(0);
-        }
-
-        public virtual Task<bool> CanNavigateAsync(NavigationParameters parameters)
-        {
-            return Task.FromResult(true);
-        }
-
-        protected BusyIndicatorSection StartBusyIndicator()
-        {
-            if (this.indicatorSection == null)
-            {
-                this.indicatorSection = new BusyIndicatorSection(this);
-            }
-            else
-            {
-                this.indicatorSection.PushNested();
-            }
-
-            return this.indicatorSection;
+            return this.RunAsyncWithBusyIndicator(task.Wait);
         }
 
         protected override bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)

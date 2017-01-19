@@ -1,6 +1,7 @@
 ﻿namespace LH.Forcas.ViewModels
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using Prism.Commands;
@@ -13,6 +14,7 @@
         protected ItemSelectionViewModelBase()
         {
             this.SelectItemCommand = new DelegateCommand<TItem>(this.SelectItemCommandExecute);
+            this.PropertyChanged += (sender, e) => Debug.WriteLine("Prop. changed: {0}", e.PropertyName);
         }
 
         public IEnumerable<TItem> Items
@@ -23,10 +25,13 @@
 
         public ICommand SelectItemCommand { get; private set; }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        protected virtual bool RequiresDataRefresh => false;
+
+        public override void OnNavigatedTo(NavigationParameters parameters)
         {
-            await base.OnNavigatedToAsync(parameters);
-            this.Items = await this.GetSelectionItems();
+            base.OnNavigatedTo(parameters);
+
+            this.RunAsyncWithBusyIndicator(() => this.Items = this.GetSelectionItems().Result);
         }
 
         protected abstract Task<IEnumerable<TItem>> GetSelectionItems();

@@ -75,9 +75,11 @@
     <Compile Include="Views\Accounts\AccountsAddTypeSelectionPage.xaml.cs">
       <DependentUpon>AccountsAddTypeSelectionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Reusable\Behaviors\DisableListViewSelectionBehavior.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationIcon.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationLabel.cs" />
     <Compile Include="Views\Reusable\Converters\BankIdToImageSourceConverter.cs" />
+    <Compile Include="Views\Reusable\Converters\NegateBoolConverter.cs" />
     <Compile Include="Views\Reusable\Converters\StringToResourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\EnumToResourceConverter.cs" />
     <Compile Include="Domain\RefData\IIsActive.cs" />
@@ -133,7 +135,6 @@
     <Compile Include="Views\Accounts\AccountsNavigationPage.xaml.cs">
       <DependentUpon>AccountsNavigationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\BusyIndicatorSection.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardPageViewModel.cs" />
     <Compile Include="ViewModels\Root\RootSideMenuPageViewModel.cs" />
     <Compile Include="ViewModels\SyncSetup\SyncFlowState.cs" />
@@ -181,7 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
-    <Folder Include="Views\Reusable\Behaviors\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

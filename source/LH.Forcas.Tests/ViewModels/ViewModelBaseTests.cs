@@ -1,7 +1,8 @@
 ﻿namespace LH.Forcas.Tests.ViewModels
 {
+    using System.Threading;
+    using System.Threading.Tasks;
     using FluentValidation;
-    using Forcas.Domain.UserData;
     using Forcas.ViewModels;
     using NUnit.Framework;
 
@@ -12,34 +13,32 @@
         public class IsBusyTests
         {
             [Test]
-            public void ShouldSetIsBusyWhenInBusySection()
+            public void ShouldSetIsBusyWhenRunningWithBusyIndicator()
             {
                 var viewModel = new TestViewModel(false);
                 Assert.IsFalse(viewModel.IsBusy);
 
-                using (viewModel.StartBusyIndicator())
-                {
-                    Assert.IsTrue(viewModel.IsBusy);
-                }
+                var longRunning = viewModel.RunLongRunningLogic();
+                Assert.IsTrue(viewModel.IsBusy);
 
+                viewModel.ResetEvent.Reset(); // Simulates long running stuff is finished
+
+                longRunning.Wait();
                 Assert.IsFalse(viewModel.IsBusy);
             }
 
             [Test]
-            public void ShouldKeepBusyWhenExitingNestedSection()
+            public void ShouldSetIsBusyWhenRunningWithBusyIndicatorAsTask()
             {
-                var viewModel = new TestViewModel(false);
+                var viewModel = new TestViewModel(false);               
+                Assert.IsFalse(viewModel.IsBusy);
 
-                using (viewModel.StartBusyIndicator())
-                {
-                    using (viewModel.StartBusyIndicator())
-                    {
-                        Assert.IsTrue(viewModel.IsBusy);
-                    }
+                var longRunning = viewModel.RunLongRunningLogicAsTask();
+                Assert.IsTrue(viewModel.IsBusy);
 
-                    Assert.IsTrue(viewModel.IsBusy);
-                }
+                viewModel.ResetEvent.Reset(); // Simulates long running stuff is finished
 
+                longRunning.Wait();
                 Assert.IsFalse(viewModel.IsBusy);
             }
         }
@@ -74,6 +73,8 @@
 
         private class TestViewModel : ViewModelBase
         {
+            public readonly ManualResetEvent ResetEvent = new ManualResetEvent(true);
+
             private string property;
 
             public TestViewModel(bool setValidator = true)
@@ -90,9 +91,23 @@
                 set { this.SetProperty(ref this.property, value); }
             }
 
-            public new BusyIndicatorSection StartBusyIndicator()
+            public Task RunLongRunningLogic()
             {
-                return base.StartBusyIndicator();
+                return this.RunAsyncWithBusyIndicator(() =>
+                                          {
+                                              this.ResetEvent.WaitOne();
+                                          });
+            }
+
+            public Task RunLongRunningLogicAsTask()
+            {
+                return this.RunAsyncWithBusyIndicator(this.AsyncLongRunningLogic());
+            }
+
+            private Task AsyncLongRunningLogic()
+            {
+                this.ResetEvent.WaitOne();
+                return Task.FromResult(0);
             }
         }
 

@@ -44,7 +44,12 @@
             private set { this.SetProperty(ref this.banks, value); }
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override void OnNavigatedTo(NavigationParameters parameters)
+        {
+            this.RunAsyncWithBusyIndicator(this.LoadData(parameters));
+        }
+
+        private async Task LoadData(NavigationParameters parameters)
         {
             await this.LoadBanks();
 

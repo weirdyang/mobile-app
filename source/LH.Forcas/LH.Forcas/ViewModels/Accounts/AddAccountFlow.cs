@@ -46,9 +46,7 @@
         {
             if (!currentStep.HasValue)
             {
-                var uri = NavigationExtensions.GetAbsoluteUri(nameof(AccountsAddTypeSelectionPage));
-                await navigationService.NavigateAsync(uri, this.navigationParameters);
-
+                await navigationService.NavigateAsync(nameof(AccountsAddTypeSelectionPage), this.navigationParameters);
                 return;
             }
 
