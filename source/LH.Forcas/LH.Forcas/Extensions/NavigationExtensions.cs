@@ -47,12 +47,16 @@
             await navigationService.NavigateAsync(uri);
         }
 
+        public static async Task NavigateToAccountAdd(this INavigationService navigationService)
+        {
+            await navigationService.NavigateAsync(nameof(AccountsDetailPage));
+        }
+
         public static async Task NavigateToAccountDetail(this INavigationService navigationService, Guid accountId)
         {
-            var uri = GetAbsoluteUri(nameof(AccountsNavigationPage), nameof(AccountsListPage), nameof(AccountsDetailPage));
             var parameters = CreateAccountDetailParameters(accountId);
 
-            await navigationService.NavigateAsync(uri, parameters);
+            await navigationService.NavigateAsync(nameof(AccountsDetailPage), parameters);
         }
 
         public static NavigationParameters CreateAccountDetailParameters(Guid accountId)

@@ -4,10 +4,12 @@
              xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
              xmlns:controls="clr-namespace:LH.Forcas.Views.Reusable.Controls;assembly=LH.Forcas"
              xmlns:converters="clr-namespace:LH.Forcas.Views.Reusable.Converters;assembly=LH.Forcas"
+             xmlns:freshEssentials="clr-namespace:FreshEssentials;assembly=FreshEssentials"
              x:Class="LH.Forcas.Views.Dashboard.DashboardPage"
              Title="{ ext:Translate Dashboard_Title }">
   <Grid>
     <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
@@ -26,7 +28,15 @@
     <controls:ValidationLabel ValidationResult="{ Binding ValidationResults[TestProp] }" Grid.Row="2" />
     <!--<controls:ValidationLabel ValidationResult="{ Binding ValidationResults[TestProp] }" InfoMessage="Some useful info..." Grid.Row="3" />-->
     
-    <Label Text="{ Binding ValidationResults[TestProp].IsValid }" Grid.Row="4"></Label>
+    <freshEssentials:BindablePicker ItemsSource="{ Binding Items }" DisplayProperty="Name" />
+    
+    <TableView Grid.Row="5" Intent="Form">
+      <TableSection>
+        <EntryCell Label="Text entry"></EntryCell>
+        <SwitchCell Text="Switch" On="True"></SwitchCell>
+        <controls:PickerCell LabelText="Description" ItemsSource="{ Binding Items }" SelectedItem="{ Binding Selected }" DisplayProperty="Name"></controls:PickerCell>
+      </TableSection>
+    </TableView>
     
   </Grid>
 </ContentPage>

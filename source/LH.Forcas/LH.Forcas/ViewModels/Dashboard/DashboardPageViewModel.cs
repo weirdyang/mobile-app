@@ -1,14 +1,21 @@
 ﻿namespace LH.Forcas.ViewModels.Dashboard
 {
+    using System.Collections.Generic;
     using FluentValidation;
 
     public class DashboardPageViewModel : ViewModelBase
     {
         private string testProp;
+        private DummyItem selected;
 
         public DashboardPageViewModel()
         {
             this.Validator = new DashboardValidator();
+            this.Items = new List<DummyItem>
+            {
+                new DummyItem { Name = "First Item" },
+                new DummyItem { Name = "Second Item" }
+            };
         }
 
         public string TestProp
@@ -17,11 +24,15 @@
             set { this.SetProperty(ref this.testProp, value); }
         }
 
-        public string this[int i]
+        public IList<DummyItem> Items { get; set; }
+
+        public DummyItem Selected
         {
-            get
+            get { return this.selected; }
+            set
             {
-                return "AAAAA";
+                this.selected = value;
+                this.OnPropertyChanged();
             }
         }
 
@@ -31,6 +42,11 @@
             {
                 this.RuleFor(x => x.TestProp).NotEmpty();
             }
+        }
+
+        public class DummyItem
+        {
+            public string Name { get; set; }
         }
     }
 }

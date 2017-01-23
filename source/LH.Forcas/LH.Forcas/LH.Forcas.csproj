@@ -62,20 +62,12 @@
     <Compile Include="Integration\Banks\Cze\Fio\FioOutputParser.cs" />
     <Compile Include="Integration\Banks\Cze\Fio\FioAccountStatement.cs" />
     <Compile Include="Integration\Banks\IBankIntegration.cs" />
-    <Compile Include="ViewModels\Accounts\AccountsAddBankSelectionPageViewModel.cs" />
-    <Compile Include="ViewModels\Accounts\AccountsAddTypeSelectionPageViewModel.cs" />
-    <Compile Include="ViewModels\Accounts\AddAccountFlow.cs" />
     <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
-    <Compile Include="Views\Accounts\AccountsAddBankSelectionPage.xaml.cs">
-      <DependentUpon>AccountsAddBankSelectionPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Accounts\AccountsAddTypeSelectionPage.xaml.cs">
-      <DependentUpon>AccountsAddTypeSelectionPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Reusable\Behaviors\DisableListViewSelectionBehavior.cs" />
+    <Compile Include="Views\Reusable\Controls\PickerCell.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationIcon.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationLabel.cs" />
     <Compile Include="Views\Reusable\Converters\BankIdToImageSourceConverter.cs" />
@@ -214,6 +206,10 @@
     </Reference>
     <Reference Include="FormsPlugin.Iconize, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.FormsPlugin.Iconize.1.0.10\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FormsPlugin.Iconize.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FreshEssentials, Version=1.0.6122.21141, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FreshEssentials.2.1.2\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FreshEssentials.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Google.Apis, Version=1.19.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
@@ -397,18 +393,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Accounts\AccountsDetailPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Accounts\AccountsAddTypeSelectionPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Accounts\AccountsAddBankSelectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
