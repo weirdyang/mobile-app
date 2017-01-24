@@ -5,6 +5,8 @@
              xmlns:controls="clr-namespace:LH.Forcas.Views.Reusable.Controls;assembly=LH.Forcas"
              xmlns:converters="clr-namespace:LH.Forcas.Views.Reusable.Converters;assembly=LH.Forcas"
              xmlns:freshEssentials="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:behaviors="clr-namespace:LH.Forcas.Views.Reusable.Behaviors;assembly=LH.Forcas"
+             xmlns:generic="clr-namespace:System.Collections.Generic;assembly=System.Collections"
              x:Class="LH.Forcas.Views.Dashboard.DashboardPage"
              Title="{ ext:Translate Dashboard_Title }">
   <Grid>
@@ -27,16 +29,24 @@
     <controls:ValidationIcon ValidationResult="{ Binding ValidationResults[TestProp] }" Grid.Row="1" />
     <controls:ValidationLabel ValidationResult="{ Binding ValidationResults[TestProp] }" Grid.Row="2" />
     <!--<controls:ValidationLabel ValidationResult="{ Binding ValidationResults[TestProp] }" InfoMessage="Some useful info..." Grid.Row="3" />-->
-    
+
     <freshEssentials:BindablePicker ItemsSource="{ Binding Items }" DisplayProperty="Name" />
-    
-    <TableView Grid.Row="5" Intent="Form">
-      <TableSection>
-        <EntryCell Label="Text entry"></EntryCell>
-        <SwitchCell Text="Switch" On="True"></SwitchCell>
-        <controls:PickerCell LabelText="Description" ItemsSource="{ Binding Items }" SelectedItem="{ Binding Selected }" DisplayProperty="Name"></controls:PickerCell>
+
+    <TableView Grid.Row="5" Intent="Form" x:Name="Table">
+      <TableView.Behaviors>
+        <behaviors:DynamicTableViewBehavior />
+      </TableView.Behaviors>
+      <TableSection Title="First">
+        <SwitchCell Text="Second" On="{ Binding IsSecondSectionVisible, Mode=TwoWay }" />
+        <SwitchCell Text="Third" On="{ Binding IsThirdSectionVisible, Mode=TwoWay }" />
+      </TableSection>
+      <TableSection Title="Second" behaviors:DynamicTableViewBehavior.IsVisible="{ Binding IsSecondSectionVisible }">
+        <EntryCell Label="Second text"></EntryCell>
+      </TableSection>
+      <TableSection Title="Third" behaviors:DynamicTableViewBehavior.IsVisible="{ Binding IsThirdSectionVisible }">
+        <EntryCell Label="Third text"></EntryCell>
       </TableSection>
     </TableView>
-    
+
   </Grid>
 </ContentPage>
