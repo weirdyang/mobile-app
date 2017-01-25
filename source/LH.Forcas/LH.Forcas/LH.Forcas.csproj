@@ -62,8 +62,10 @@
     <Compile Include="Integration\Banks\Cze\Fio\FioOutputParser.cs" />
     <Compile Include="Integration\Banks\Cze\Fio\FioAccountStatement.cs" />
     <Compile Include="Integration\Banks\IBankIntegration.cs" />
+    <Compile Include="ViewModels\DetailViewModelBase.cs" />
     <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
+    <Compile Include="ViewModels\PropertyValidationResult.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
     <Compile Include="Views\Reusable\Behaviors\DisableListViewSelectionBehavior.cs" />

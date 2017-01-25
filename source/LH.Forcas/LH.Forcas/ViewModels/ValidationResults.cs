@@ -1,25 +1,40 @@
 ﻿namespace LH.Forcas.ViewModels
 {
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
+    using System.Linq;
     using FluentValidation.Results;
 
     public class ValidationResults
     {
-        private readonly IDictionary<string, ValidationResult> validationResults;
+        private readonly IDictionary<string, PropertyValidationResult> errors;
+
+        public ValidationResults(ValidationResult result)
+        {
+            this.IsValid = result.IsValid;
+
+            this.errors = result.Errors
+                                .GroupBy(x => x.PropertyName)
+                                .ToDictionary(
+                                    x => x.Key, 
+                                    x => new PropertyValidationResult(x.Select(err => err.ErrorMessage)));
+        }
 
         public ValidationResults()
         {
-            this.validationResults = new Dictionary<string, ValidationResult>();
+            this.IsValid = true;
+            this.errors = new Dictionary<string, PropertyValidationResult>();
         }
 
-        [IndexerName("MyItem")]
-        public ValidationResult this[string propertyName]
+        public bool IsValid { get; private set; }
+
+        public int ErrorsCount => this.errors.Count;
+
+        public PropertyValidationResult this[string propertyName]
         {
             get
             {
-                ValidationResult result;
-                if (this.validationResults.TryGetValue(propertyName, out result))
+                PropertyValidationResult result;
+                if (this.errors.TryGetValue(propertyName, out result))
                 {
                     return result;
                 }
@@ -28,9 +43,23 @@
             }
         }
 
-        public void PushResults(string propertyName, ValidationResult newResults)
+        public void UpdateProperty(string propertyName, ValidationResult result)
         {
-            this.validationResults[propertyName] = newResults;
+            if (!result.IsValid)
+            {
+                IEnumerable<string> errorMessages = null;
+                if (result.Errors != null && result.Errors.Count > 0)
+                {
+                    errorMessages = result.Errors.Select(x => x.ErrorMessage);
+                }
+
+                var propertyResult = new PropertyValidationResult(errorMessages);
+                this.errors[propertyName] = propertyResult;
+            }
+            else
+            {
+                this.errors.Remove(propertyName);
+            }
         }
     }
 }

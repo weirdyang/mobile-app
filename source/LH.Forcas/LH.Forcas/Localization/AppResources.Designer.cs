@@ -62,20 +62,47 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bank.
+        ///   Looks up a localized string similar to Account Type.
         /// </summary>
-        internal static string AccountsAddBankSelection_Title {
+        internal static string AccountsDetailPage_AccountType {
             get {
-                return ResourceManager.GetString("AccountsAddBankSelection_Title", resourceCulture);
+                return ResourceManager.GetString("AccountsDetailPage_AccountType", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account Type.
+        ///   Looks up a localized string similar to Bank.
         /// </summary>
-        internal static string AccountsAddTypeSelection_Title {
+        internal static string AccountsDetailPage_Bank {
             get {
-                return ResourceManager.GetString("AccountsAddTypeSelection_Title", resourceCulture);
+                return ResourceManager.GetString("AccountsDetailPage_Bank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Connection.
+        /// </summary>
+        internal static string AccountsDetailPage_BankSectionTitle {
+            get {
+                return ResourceManager.GetString("AccountsDetailPage_BankSectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        internal static string AccountsDetailPage_Country {
+            get {
+                return ResourceManager.GetString("AccountsDetailPage_Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Name.
+        /// </summary>
+        internal static string AccountsDetailPage_Name {
+            get {
+                return ResourceManager.GetString("AccountsDetailPage_Name", resourceCulture);
             }
         }
         
@@ -211,6 +238,24 @@ namespace LH.Forcas.Localization {
         internal static string ConfirmDialog_Yes {
             get {
                 return ResourceManager.GetString("ConfirmDialog_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Going away will undo the changes you have done, do you want to continue?.
+        /// </summary>
+        internal static string ConfirmDirtyDialog_Description {
+            get {
+                return ResourceManager.GetString("ConfirmDirtyDialog_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Really?.
+        /// </summary>
+        internal static string ConfirmDirtyDialog_Title {
+            get {
+                return ResourceManager.GetString("ConfirmDirtyDialog_Title", resourceCulture);
             }
         }
         

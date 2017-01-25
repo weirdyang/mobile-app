@@ -165,10 +165,25 @@
   <data name="AccountType_Loan_Description" xml:space="preserve">
     <value>Any kind of money you own to anyone, like mortgage, car loan and similar</value>
   </data>
-  <data name="AccountsAddTypeSelection_Title" xml:space="preserve">
+  <data name="AccountsDetailPage_AccountType" xml:space="preserve">
     <value>Account Type</value>
   </data>
-  <data name="AccountsAddBankSelection_Title" xml:space="preserve">
+  <data name="AccountsDetailPage_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="AccountsDetailPage_Bank" xml:space="preserve">
     <value>Bank</value>
+  </data>
+  <data name="AccountsDetailPage_BankSectionTitle" xml:space="preserve">
+    <value>Bank Connection</value>
+  </data>
+  <data name="AccountsDetailPage_Name" xml:space="preserve">
+    <value>Account Name</value>
+  </data>
+  <data name="ConfirmDirtyDialog_Description" xml:space="preserve">
+    <value>Going away will undo the changes you have done, do you want to continue?</value>
+  </data>
+  <data name="ConfirmDirtyDialog_Title" xml:space="preserve">
+    <value>Really?</value>
   </data>
 </root>
