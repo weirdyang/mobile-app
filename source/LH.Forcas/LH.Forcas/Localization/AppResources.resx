@@ -186,4 +186,10 @@
   <data name="ConfirmDirtyDialog_Title" xml:space="preserve">
     <value>Really?</value>
   </data>
+  <data name="AccountsDetailPage_LoadError" xml:space="preserve">
+    <value>There was a problem loading the account. If this happens again, please report it at our website.</value>
+  </data>
+  <data name="AccountsDetailPage_SaveError" xml:space="preserve">
+    <value>There was a problem saving the account. If this happens again, please report it at our website.</value>
+  </data>
 </root>

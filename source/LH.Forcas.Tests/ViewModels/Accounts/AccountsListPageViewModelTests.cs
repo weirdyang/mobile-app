@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Threading.Tasks;
     using Forcas.Domain.UserData;
     using Forcas.Extensions;
     using Forcas.Services;
@@ -43,41 +44,31 @@
         public class NavigationTests : AccountsListPageViewModelTests
         {
             [Test]
-            public void ShouldNavigateWhenNavigateToAddCommandIsExecuted()
+            public async Task ShouldNavigateWhenNavigateToAddCommandIsExecuted()
             {
-                this.NavigationServiceMock.Setup(x => x.NavigateAsync(It.Is<Uri>(uri => uri.ToString().Contains("Detail")), null, null, true));
+                this.NavigationServiceMock.Setup(x => x.NavigateAsync(It.Is<string>(uri => uri.Contains("Detail")), null, null, true)).ReturnAwaitable();
 
                 this.ViewModel.OnNavigatedTo(null);
-                this.ViewModel.NavigateToAddAccountCommand.Execute(null);
+                await this.ViewModel.NavigateToAddAccountCommand.Execute();
 
                 this.NavigationServiceMock.VerifyAll();
             }
 
             [Test]
-            public void ShouldNavigateWhenAccountIsSelected()
+            public void ShouldNavigateWhenNavigateToDetailCommandIsExecuted()
             {
                 this.ViewModel.OnNavigatedTo(null);
                 var accountToNavigate = this.ViewModel.Accounts.First();
 
                 this.NavigationServiceMock.Setup(x => x.NavigateAsync(
-                    It.Is<Uri>(uri => uri.ToString().Contains("Detail")),
+                    It.Is<string>(uri => uri.ToString().Contains("Detail")),
                     It.Is<NavigationParameters>(p => p.HasParameter(NavigationExtensions.AccountIdParameterName, accountToNavigate.AccountId)),
                     null, 
-                    true));
+                    true)).ReturnAwaitable();
 
-                this.ViewModel.SelectedAccount = accountToNavigate;
+                this.ViewModel.NavigateToAccountDetailCommand.Execute(accountToNavigate);
 
                 this.NavigationServiceMock.VerifyAll();
-            }
-
-            [Test]
-            public void ShouldClearSelectedAccountWhenNavigatedTo()
-            {
-                this.ViewModel.OnNavigatedTo(null);
-                this.ViewModel.SelectedAccount = this.ViewModel.Accounts.First();
-
-                this.ViewModel.OnNavigatedTo(null);
-                Assert.IsNull(this.ViewModel.SelectedAccount);
             }
 
             [Test]

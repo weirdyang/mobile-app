@@ -24,6 +24,11 @@
             return this.roamingDataRepository.GetOneById<Account>(id);
         }
 
+        public void SaveAccount(Account account)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteAccount(Guid id)
         {
             throw new NotImplementedException();

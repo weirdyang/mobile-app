@@ -8,7 +8,7 @@ namespace LH.Forcas.Domain.RefData
 
         public string IbanPrefix { get; set; }
 
-        public string CountryCode { get; set; }
+        public string CountryId { get; set; }
 
         public int RoutingCode { get; set; }
 

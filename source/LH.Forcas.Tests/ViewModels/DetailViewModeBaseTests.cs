@@ -24,15 +24,7 @@
             public void ShouldValidatePropertyWhenValueSet()
             {
                 var viewModel = new TestViewModel(this.PageDialogServiceMock.Object);
-                Assert.IsNull(viewModel.ValidationResults);
-
-                viewModel.Property = "Valid value";
-                Assert.IsNull(viewModel.ValidationResults["Property"]);
-                Assert.AreEqual(0, viewModel.ValidationResults.ErrorsCount, "The VM should only validate the changed property!");
-
-                viewModel.Property = null;
-                Assert.IsNotNull(viewModel.ValidationResults["Property"]);
-                Assert.IsFalse(viewModel.ValidationResults["Property"].IsValid);
+                viewModel.TestPropertyValidation(x => x.Property, "Valid", null);
             }
 
             [Test]
@@ -49,7 +41,7 @@
             {
                 var viewModel = new TestViewModel(this.PageDialogServiceMock.Object);
                 
-                viewModel.SaveCommand.CanExecute(null);
+                viewModel.SaveCommand.CanExecute();
                 Assert.AreEqual(2, viewModel.ValidationResults.ErrorsCount);
             }
         }
@@ -86,7 +78,7 @@
         public class NavigationTests : DetailViewModeBaseTests
         {
             [Test]
-            public void ShouldCancelNavigationIfDirtyAndUserCancels()
+            public void ShouldShouldDialogIfDirty()
             {
                 this.PageDialogServiceMock.SetupAlert(false);
                 var viewModel = new TestViewModel(this.PageDialogServiceMock.Object, false);
@@ -121,6 +113,7 @@
         {
             private string property;
             private string otherProperty;
+            private string ruleSetValidatedProperty;
 
             public TestViewModel(IPageDialogService pageDialogService, bool setValidator = true)
                 : base(pageDialogService)

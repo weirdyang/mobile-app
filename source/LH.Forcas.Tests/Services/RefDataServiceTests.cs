@@ -35,14 +35,14 @@ namespace LH.Forcas.Tests.Services
             this.repositoryMock.Setup(x => x.GetCountries())
                 .Returns(new[]
                          {
-                             new Country { IsActive = true, CountryCode = "CZE" },
-                             new Country { IsActive = false, CountryCode = "UK" }
+                             new Country { IsActive = true, CountryId = "CZE" },
+                             new Country { IsActive = false, CountryId = "UK" }
                          });
 
             var countries = await this.refDataService.GetCountriesAsync();
 
             Assert.AreEqual(1, countries.Count);
-            Assert.AreEqual("CZE", countries.Single().CountryCode);
+            Assert.AreEqual("CZE", countries.Single().CountryId);
         }
 
         [Test]
@@ -61,8 +61,8 @@ namespace LH.Forcas.Tests.Services
         {
             var allBanks = new Bank[]
             {
-                new Bank { BankId = "CzeBank", CountryCode = "CZE" },
-                new Bank { BankId = "UkBank", CountryCode = "UK" }
+                new Bank { BankId = "CzeBank", CountryId = "CZE" },
+                new Bank { BankId = "UkBank", CountryId = "UK" }
             };
 
             this.repositoryMock

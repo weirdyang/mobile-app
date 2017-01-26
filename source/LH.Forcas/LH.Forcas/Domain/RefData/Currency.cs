@@ -2,7 +2,7 @@ namespace LH.Forcas.Domain.RefData
 {
     public class Currency : IIsActive
     { 
-        public string CurrencyCode { get; set; }
+        public string CurrencyId { get; set; }
 
         public string Symbol { get; set; }
 

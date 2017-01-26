@@ -2,7 +2,7 @@
 {
     public class Country : IIsActive
     {
-        public string CountryCode { get; set; }
+        public string CountryId { get; set; }
 
         public string DefaultCurrencyCode { get; set; }
 

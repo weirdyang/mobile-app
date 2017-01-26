@@ -4,6 +4,6 @@
     {
         string SyncProviderName { get; set; }
 
-        string CountryCode { get; set; }
+        string CountryId { get; set; }
     }
 }

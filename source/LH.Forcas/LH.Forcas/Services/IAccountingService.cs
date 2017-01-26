@@ -11,5 +11,7 @@
         void DeleteAccount(Guid id);
 
         Account GetAccount(Guid id);
+
+        void SaveAccount(Account account);
     }
 }

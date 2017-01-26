@@ -29,6 +29,11 @@
 
         public int ErrorsCount => this.errors.Count;
 
+        public IEnumerable<string> Properties
+        {
+            get { return this.errors.Keys; }
+        }
+
         public PropertyValidationResult this[string propertyName]
         {
             get
@@ -54,12 +59,15 @@
                 }
 
                 var propertyResult = new PropertyValidationResult(errorMessages);
+
                 this.errors[propertyName] = propertyResult;
             }
             else
             {
                 this.errors.Remove(propertyName);
             }
+
+            this.IsValid = this.errors.Count == 0;
         }
     }
 }

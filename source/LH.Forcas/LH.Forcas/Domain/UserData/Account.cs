@@ -1,6 +1,7 @@
 ﻿namespace LH.Forcas.Domain.UserData
 {
     using System;
+    using System.Collections.Generic;
     using LiteDB;
 
     public abstract class Account

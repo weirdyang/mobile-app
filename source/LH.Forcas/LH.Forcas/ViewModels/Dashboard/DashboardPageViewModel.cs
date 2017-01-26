@@ -1,7 +1,6 @@
 ﻿namespace LH.Forcas.ViewModels.Dashboard
 {
     using System.Collections.Generic;
-    using FluentValidation;
 
     public class DashboardPageViewModel : ViewModelBase
     {
@@ -12,7 +11,6 @@
 
         public DashboardPageViewModel()
         {
-            this.Validator = new DashboardValidator();
             this.Items = new List<DummyItem>
             {
                 new DummyItem { Name = "First Item" },
@@ -55,14 +53,6 @@
             {
                 this.selected = value;
                 this.OnPropertyChanged();
-            }
-        }
-
-        private class DashboardValidator : AbstractValidator<DashboardPageViewModel>
-        {
-            public DashboardValidator()
-            {
-                this.RuleFor(x => x.TestProp).NotEmpty();
             }
         }
 

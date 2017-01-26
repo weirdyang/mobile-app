@@ -26,8 +26,8 @@
 
                 foreach (var bank in banks)
                 {
-                    var country = countries.SingleOrDefault(x => x.CountryCode == bank.CountryCode);
-                    Assert.IsNotNull(country, $"Country with the code {bank.CountryCode} could not be found.");
+                    var country = countries.SingleOrDefault(x => x.CountryId == bank.CountryId);
+                    Assert.IsNotNull(country, $"Country with the code {bank.CountryId} could not be found.");
                 }
             }
         }
@@ -43,7 +43,7 @@
 
                 foreach (var country in countries)
                 {
-                    var currency = currencies.SingleOrDefault(x => x.CurrencyCode == country.DefaultCurrencyCode);
+                    var currency = currencies.SingleOrDefault(x => x.CurrencyId == country.DefaultCurrencyCode);
                     Assert.IsNotNull(currency, $"Currency with the code {country.DefaultCurrencyCode} could not be found");
                 }
             }

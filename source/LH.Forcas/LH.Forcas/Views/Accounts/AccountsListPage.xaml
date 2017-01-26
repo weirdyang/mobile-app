@@ -5,6 +5,7 @@
              xmlns:converters="clr-namespace:LH.Forcas.Views.Reusable.Converters;assembly=LH.Forcas"
              xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
              xmlns:reusable="clr-namespace:LH.Forcas.Views.Reusable;assembly=LH.Forcas"
+             xmlns:behaviors="clr-namespace:LH.Forcas.Views.Reusable.Behaviors;assembly=LH.Forcas"
              x:Class="LH.Forcas.Views.Accounts.AccountsListPage"
              Title="{ ext:Translate AccountsListPage_Title }"
              x:Name="Page" NavigationPage.HasBackButton="False">
@@ -26,10 +27,12 @@
     -->
     <ListView.ItemTemplate>
       <DataTemplate>
-        <ViewCell>
+        <ViewCell 
+          behaviors:ViewCellCommand.Command="{ Binding NavigateToDetailCommand, Source={ x:Reference Page.BindingContext } }"
+          behaviors:ViewCellCommand.CommandParameter="{ Binding . }">
           <ViewCell.ContextActions>
-            <MenuItem IsDestructive="True" Text="Delete">
-              <!--Command="{ Binding DeleteAccountCommand, Source={ x:Reference Page } }" CommandParameter="{ Binding AccountId }">-->
+            <MenuItem IsDestructive="True" Text="Delete"
+                Command="{ Binding DeleteAccountCommand, Source={ x:Reference Page.BindingContext } }" CommandParameter="{ Binding . }">
               <iconize:IconImage Icon="md-delete" IconColor="White"></iconize:IconImage>
             </MenuItem>
           </ViewCell.ContextActions>

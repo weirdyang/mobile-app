@@ -2,7 +2,6 @@
 {
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
-    using System.Windows.Input;
     using FluentValidation;
     using FluentValidation.Internal;
     using Localization;
@@ -16,20 +15,18 @@
 
         protected IValidator Validator;
 
-        private readonly DelegateCommand saveCommand;
-
         protected DetailViewModelBase(IPageDialogService dialogService)
         {
             this.DialogService = dialogService;
 
-            this.saveCommand = new DelegateCommand(this.Save, this.CanSave);
+            this.SaveCommand = DelegateCommand.FromAsyncHandler(this.Save, this.CanSave);
         }
 
         public bool IsDirty { get; protected set; }
 
         public ValidationResults ValidationResults { get; private set; }
 
-        public ICommand SaveCommand => this.saveCommand;
+        public DelegateCommand SaveCommand { get; }
 
         public async Task<bool> CanNavigateAsync(NavigationParameters parameters)
         {
@@ -61,7 +58,7 @@
 
                 if (changed)
                 {
-                    this.saveCommand.RaiseCanExecuteChanged();
+                    this.SaveCommand.RaiseCanExecuteChanged();
 
                     this.IsDirty = true;
                     this.OnPropertyChanged(nameof(this.IsDirty));
@@ -72,9 +69,11 @@
             return changed;
         }
 
-        protected virtual void Save()
+        protected virtual Task Save()
         {
             this.IsDirty = false;
+
+            return Task.FromResult(0);
         }
 
         protected virtual bool CanSave()

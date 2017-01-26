@@ -225,6 +225,7 @@
     <Compile Include="ViewModels\SyncSetup\ProviderAuthorizeViewModelTests.cs" />
     <Compile Include="ViewModels\SyncSetup\ProviderSelectionViewModelTests.cs" />
     <Compile Include="ViewModels\ViewModelBaseTests.cs" />
+    <Compile Include="Views\Reusables\Converters\AccountTypeToResourceConverterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LH.Forcas\LH.Forcas\LH.Forcas.csproj">

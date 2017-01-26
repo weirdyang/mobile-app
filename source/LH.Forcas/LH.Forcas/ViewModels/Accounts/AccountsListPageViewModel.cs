@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using System.Windows.Input;
     using Domain.UserData;
     using Extensions;
     using Localization;
@@ -19,8 +18,6 @@
         private readonly IPageDialogService dialogService;
         private readonly IAccountingService accountingService;
 
-        private Account selectedAccount;
-
         public AccountsListPageViewModel(
             IAccountingService accountingService,
             INavigationService navigationService, 
@@ -30,37 +27,23 @@
             this.navigationService = navigationService;
             this.dialogService = dialogService;
 
-            this.NavigateToAddAccountCommand = new DelegateCommand(
-                async () => await this.navigationService.NavigateToAccountAdd());
+            this.NavigateToAddAccountCommand = DelegateCommand.FromAsyncHandler(this.navigationService.NavigateToAccountAdd);
+            this.NavigateToAccountDetailCommand = DelegateCommand<Account>.FromAsyncHandler(this.NavigateToAccountDetail);
+
+            this.DeleteAccountCommand = DelegateCommand<Account>.FromAsyncHandler(this.DeleteAccount);
 
             this.RefreshAccountsCommand = new DelegateCommand(this.RefreshAccounts);
-
-            this.DeleteAccountCommand = new DelegateCommand<Account>(
-                async account => await this.DeleteAccount(account));
         }
 
-        public ICommand NavigateToAddAccountCommand { get; private set; }
+        public DelegateCommand NavigateToAddAccountCommand { get; private set; }
 
-        public ICommand RefreshAccountsCommand { get; private set; }
+        public DelegateCommand<Account> NavigateToAccountDetailCommand { get; private set; }
 
-        public ICommand DeleteAccountCommand { get; private set; }
+        public DelegateCommand RefreshAccountsCommand { get; private set; }
+
+        public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
 
         public IEnumerable<Account> Accounts { get; private set; }
-
-        public Account SelectedAccount
-        {
-            get { return this.selectedAccount; }
-            set
-            {
-                this.selectedAccount = value;
-                this.OnPropertyChanged();
-
-                if (this.selectedAccount != null)
-                {
-                    this.NavigateToAccountDetail();
-                }
-            }
-        }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
@@ -70,12 +53,11 @@
         private void RefreshAccounts()
         {
             this.Accounts = this.accountingService.GetAccounts();
-            this.SelectedAccount = null;
         }
 
-        private async void NavigateToAccountDetail()
+        private async Task NavigateToAccountDetail(Account account)
         {
-            await this.navigationService.NavigateToAccountDetail(this.selectedAccount.AccountId);
+            await this.navigationService.NavigateToAccountDetail(account.AccountId);
         }
 
         private async Task DeleteAccount(Account account)
@@ -107,12 +89,7 @@
                 // TODO: Log the exception
                 Debug.WriteLine(ex);
 
-                // This could be changed into a confirm box that would report the error to our storage
-                await this.dialogService.DisplayAlertAsync(
-                    AppResources.AlertDialog_ErrorTitle,
-                    AppResources.AccountsListPage_DeleteAccountError,
-                    AppResources.AlertDialog_OK
-                    );
+                await this.dialogService.DisplayErrorAlert(AppResources.AccountsListPage_DeleteAccountError);
             }
             finally
             {

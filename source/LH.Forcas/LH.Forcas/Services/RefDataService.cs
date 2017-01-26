@@ -49,7 +49,7 @@ namespace LH.Forcas.Services
 
             var allBanks = await this.GetBanks();
             return allBanks
-                .Where(x => string.Equals(x.CountryCode, countryCode, StringComparison.OrdinalIgnoreCase))
+                .Where(x => string.Equals(x.CountryId, countryCode, StringComparison.OrdinalIgnoreCase))
                 .ToArray();
         }
 

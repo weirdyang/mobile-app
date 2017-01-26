@@ -98,11 +98,29 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was a problem loading the account. If this happens again, please report it at our website..
+        /// </summary>
+        internal static string AccountsDetailPage_LoadError {
+            get {
+                return ResourceManager.GetString("AccountsDetailPage_LoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account Name.
         /// </summary>
         internal static string AccountsDetailPage_Name {
             get {
                 return ResourceManager.GetString("AccountsDetailPage_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was a problem saving the account. If this happens again, please report it at our website..
+        /// </summary>
+        internal static string AccountsDetailPage_SaveError {
+            get {
+                return ResourceManager.GetString("AccountsDetailPage_SaveError", resourceCulture);
             }
         }
         

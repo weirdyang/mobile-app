@@ -28,7 +28,7 @@ namespace LH.Forcas.Tests.Storage
 
                 Assert.IsNotNull(rb);
                 Assert.IsNotEmpty(rb.Name);
-                Assert.IsNotEmpty(rb.CountryCode);
+                Assert.IsNotEmpty(rb.CountryId);
                 Assert.IsNotEmpty(rb.IbanPrefix);
                 Assert.AreNotEqual(0, rb.RoutingCode);
                 Assert.AreEqual(BankAuthorizationScheme.PerAccount, rb.AuthorizationScheme);
@@ -39,7 +39,7 @@ namespace LH.Forcas.Tests.Storage
             public void LoadCountries()
             {
                 var countries = this.refDataRepository.GetCountries();
-                var cze = countries.SingleOrDefault(x => x.CountryCode == "CZE");
+                var cze = countries.SingleOrDefault(x => x.CountryId == "CZE");
 
                 Assert.IsNotNull(cze);
                 Assert.IsNotEmpty(cze.DefaultCurrencyCode);
@@ -49,7 +49,7 @@ namespace LH.Forcas.Tests.Storage
             public void LoadCurrencies()
             {
                 var currencies = this.refDataRepository.GetCurrencies();
-                var cze = currencies.SingleOrDefault(x => x.CurrencyCode == "CZK");
+                var cze = currencies.SingleOrDefault(x => x.CurrencyId == "CZK");
 
                 Assert.IsNotNull(cze);
                 Assert.IsNotEmpty(cze.DisplayName);
