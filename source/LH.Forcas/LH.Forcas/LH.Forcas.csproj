@@ -57,12 +57,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Domain\RefData\BankAuthorizationScheme.cs" />
-    <Compile Include="Domain\UserData\Authorization\BankAuthorization.cs" />
+    <Compile Include="Domain\UserData\Authorization\BankAuthorizationBase.cs" />
     <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />
     <Compile Include="Extensions\PrismExtensions.cs" />
+    <Compile Include="Integration\Banks\BankProviderCatalog.cs" />
+    <Compile Include="Integration\Banks\BankProviderInfoAttribute.cs" />
     <Compile Include="Integration\Banks\Cze\Fio\FioOutputParser.cs" />
     <Compile Include="Integration\Banks\Cze\Fio\FioAccountStatement.cs" />
-    <Compile Include="Integration\Banks\IBankIntegration.cs" />
+    <Compile Include="Integration\Banks\IBankProvider.cs" />
     <Compile Include="ViewModels\DetailViewModelBase.cs" />
     <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
     <Compile Include="ViewModels\IValidated.cs" />

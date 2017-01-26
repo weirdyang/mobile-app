@@ -1,11 +1,12 @@
 ﻿namespace LH.Forcas.Integration.Banks
 {
     using System;
+    using Domain.UserData.Authorization;
     using LH.Forcas.Domain.UserData;
 
-    public interface IBankIntegration
+    public interface IBankProvider
     {
-        void Initialize(BankAuthorization authorization);
+        void Initialize(BankAuthorizationBase authorizationBase);
 
         Account[] FetchAccounts();
 

@@ -210,6 +210,8 @@
   <ItemGroup>
     <Compile Include="Domain\UserData\AccountNumberTests.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Integration\Banks\BankProviderCatalogTests.cs" />
+    <Compile Include="Integration\Banks\BankProviderInfoAttribute.cs" />
     <Compile Include="Integration\Banks\Cze\Fio\FioBankIntegrationTests.cs" />
     <Compile Include="Integration\Banks\Cze\Fio\FioOutputParserTests.cs" />
     <Compile Include="MockExtensions.cs" />
