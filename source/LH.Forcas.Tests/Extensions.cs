@@ -5,6 +5,7 @@
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
+    using System.Threading;
     using Flurl.Util;
     using Forcas.ViewModels;
     using NUnit.Framework;
@@ -32,20 +33,15 @@
             var propInfo = ExtractPropertyInfoFromLambda(propertyExpression);
 
             propInfo.SetValue(viewModel, validValue);
-            Assert.IsTrue(viewModel.ValidationResults.IsValid);
-            Assert.AreEqual(0, viewModel.ValidationResults.ErrorsCount);
+            Assert.IsNull(viewModel.ValidationResults[propInfo.Name]);
 
             propInfo.SetValue(viewModel, invalidValue);
 
             Assert.IsFalse(viewModel.ValidationResults.IsValid);
-            Assert.AreEqual(1, viewModel.ValidationResults.ErrorsCount);
-
             Assert.IsNotNull(viewModel.ValidationResults[propInfo.Name]);
-            Assert.IsFalse(viewModel.ValidationResults[propInfo.Name].IsValid);
 
             propInfo.SetValue(viewModel, validValue);
-            Assert.IsTrue(viewModel.ValidationResults.IsValid);
-            Assert.AreEqual(0, viewModel.ValidationResults.ErrorsCount);
+            Assert.IsNull(viewModel.ValidationResults[propInfo.Name]);
         }
 
         private static PropertyInfo ExtractPropertyInfoFromLambda(LambdaExpression expression)
@@ -86,6 +82,21 @@
             }
 
             return builder.ToString();
+        }
+
+        public static void WaitUntilNotBusy(this ViewModelBase viewModel, TimeSpan timeout = default(TimeSpan))
+        {
+            if (timeout == default(TimeSpan))
+            {
+                timeout = TimeSpan.FromSeconds(3);
+            }
+
+            var start = DateTime.Now;
+
+            while (viewModel.IsBusy && DateTime.Now - start <= timeout)
+            {
+                Thread.SpinWait(1000);
+            }
         }
     }
 }

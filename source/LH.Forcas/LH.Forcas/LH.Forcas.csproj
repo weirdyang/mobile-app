@@ -59,12 +59,18 @@
     <Compile Include="Domain\RefData\BankAuthorizationScheme.cs" />
     <Compile Include="Domain\UserData\Authorization\BankAuthorizationBase.cs" />
     <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />
+    <Compile Include="Domain\UserData\Category.cs" />
+    <Compile Include="Domain\UserData\IRoamingObject.cs" />
     <Compile Include="Extensions\PrismExtensions.cs" />
     <Compile Include="Integration\Banks\BankProviderCatalog.cs" />
     <Compile Include="Integration\Banks\BankProviderInfoAttribute.cs" />
     <Compile Include="Integration\Banks\Cze\Fio\FioOutputParser.cs" />
     <Compile Include="Integration\Banks\Cze\Fio\FioAccountStatement.cs" />
     <Compile Include="Integration\Banks\IBankProvider.cs" />
+    <Compile Include="Integration\Banks\IBankProviderCatalog.cs" />
+    <Compile Include="Integration\Banks\RemoteAccountInfo.cs" />
+    <Compile Include="Integration\Banks\TestBankProvider.cs" />
+    <Compile Include="Storage\Data\TestData.cs" />
     <Compile Include="ViewModels\DetailViewModelBase.cs" />
     <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
@@ -182,6 +188,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
+    <Folder Include="Views\About\" />
+    <Folder Include="Views\Budget\" />
+    <Folder Include="Views\Categories\" />
+    <Folder Include="Views\Reports\" />
+    <Folder Include="Views\Settings\" />
+    <Folder Include="Views\Transactions\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

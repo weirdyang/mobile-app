@@ -20,8 +20,8 @@
 
         public static readonly IEnumerable<NavigationPage> RootLevelPages = new[]
         {
-            new NavigationPage {DisplayName = "Dashboard", NavigateAction = NavigateToDashboard},
-            new NavigationPage {DisplayName = "Accounts", NavigateAction = NavigateToAccounts}
+            new NavigationPage { DisplayName = "Dashboard", NavigateAction = NavigateToDashboard },
+            new NavigationPage { DisplayName = "Accounts", NavigateAction = NavigateToAccounts }
         };
 
         public static void InitializeNavigation()

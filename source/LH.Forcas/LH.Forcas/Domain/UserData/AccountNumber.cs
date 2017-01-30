@@ -23,7 +23,7 @@
 
             var result = new AccountNumber();
             result.BankRoutingCode = int.Parse(match.Groups["code"].Value);
-            result.Number = int.Parse(match.Groups["number"].Value);
+            result.Number = long.Parse(match.Groups["number"].Value);
 
             var prefix = match.Groups["prefix"].Value;
             if (!string.IsNullOrEmpty(prefix))
@@ -36,7 +36,7 @@
 
         public int Prefix { get; set; }
 
-        public int Number { get; set; }
+        public long Number { get; set; }
 
         public int BankRoutingCode { get; set; }
 
@@ -65,10 +65,10 @@
         {
             unchecked
             {
-                var hashCode = this.BankRoutingCode;
+                long hashCode = this.BankRoutingCode;
                 hashCode = (hashCode*397) ^ this.Number;
                 hashCode = (hashCode*397) ^ this.Prefix;
-                return hashCode;
+                return (int)hashCode;
             }
         }
 

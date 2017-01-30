@@ -1,7 +1,5 @@
 ﻿namespace LH.Forcas.Tests.Integration.Banks
 {
-    using System;
-    using Forcas.Domain.UserData;
     using Forcas.Domain.UserData.Authorization;
     using Forcas.Integration.Banks;
     using Microsoft.Practices.Unity;
@@ -26,40 +24,20 @@
         [Test]
         public void ShouldLoadProviderTypes()
         {
-            this.Catalog.Initialize(this.GetType().Assembly);
+            this.Catalog.Initialize(new [] { typeof(TestBankProvider) });
             
-            Assert.AreEqual(typeof(StaticTokenAuthorizationBase), this.Catalog.GetAuthorizationType("DummyId"));
+            Assert.AreEqual(typeof(StaticTokenAuthorization), this.Catalog.GetAuthorizationType("RB"));
         }
 
         [Test]
         public void ShouldCreateProviderViaContainer()
         {
-            this.UnityContainerMock.Setup(x => x.Resolve(typeof(DummyBankProvider), null)).Returns(new DummyBankProvider());
+            this.UnityContainerMock.Setup(x => x.Resolve(typeof(TestBankProvider), null)).Returns(new TestBankProvider());
 
-            this.Catalog.Initialize(this.GetType().Assembly);
-            this.Catalog.GetIntegrationProvider("DummyId");
+            this.Catalog.Initialize(new[] { typeof(TestBankProvider) });
+            this.Catalog.GetIntegrationProvider("RB");
 
             this.UnityContainerMock.VerifyAll();
         }
     }
-
-    #region Helper Classes
-
-    [BankProviderInfo(typeof(StaticTokenAuthorizationBase), "DummyId")]
-    public class DummyBankProvider : IBankProvider
-    {
-        public void Initialize(BankAuthorizationBase authorizationBase) { }
-
-        public Account[] FetchAccounts()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Transaction[] FetchTransactions(Account account, DateTime lastDownloadTime)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-#endregion
 }

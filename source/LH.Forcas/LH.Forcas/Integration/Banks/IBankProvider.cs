@@ -8,7 +8,7 @@
     {
         void Initialize(BankAuthorizationBase authorizationBase);
 
-        Account[] FetchAccounts();
+        RemoteAccountInfo[] FetchAccounts();
 
         Transaction[] FetchTransactions(Account account, DateTime lastDownloadTime);
     }

@@ -9,6 +9,7 @@
     using Microsoft.Practices.Unity;
     using Prism.Unity;
     using Storage;
+    using Storage.Data;
     using Views.Accounts;
 
     public partial class App
@@ -22,7 +23,12 @@
             NavigationExtensions.InitializeNavigation();
 
             this.Container.Resolve<IPathResolver>().Initialize();
-            this.Container.Resolve<IDbManager>().Initialize();
+            var dbManager = this.Container.Resolve<IDbManager>();
+            dbManager.Initialize();
+
+#if DEBUG
+            TestData.InsertTestData(dbManager);
+#endif
 
             CurrentCultureInfo = this.Container.Resolve<ILocale>().GetCultureInfo();
 

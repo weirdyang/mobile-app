@@ -27,7 +27,7 @@
         [Test]
         public void ShouldThrowIfNoIdIsProvided()
         {
-            var exception = Assert.Throws<ArgumentException>(() => new BankProviderInfoAttribute(typeof(StaticTokenAuthorizationBase)));
+            var exception = Assert.Throws<ArgumentException>(() => new BankProviderInfoAttribute(typeof(StaticTokenAuthorization)));
 
             Assert.IsTrue(exception.Message.Contains("Id"));
         }

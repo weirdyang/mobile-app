@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LH.Forcas.Views.Root.RootSideMenuPage">
+             xmlns:behaviors="clr-namespace:LH.Forcas.Views.Reusable.Behaviors;assembly=LH.Forcas"
+             x:Class="LH.Forcas.Views.Root.RootSideMenuPage"
+             x:Name="Page">
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">
       <ListView ItemsSource="{ Binding Pages }" SelectedItem="{ Binding SelectedPage, Mode=TwoWay }">
@@ -12,7 +14,8 @@
         </ListView.Header>
         <ListView.ItemTemplate>
           <DataTemplate>
-            <ViewCell>
+            <ViewCell behaviors:ViewCellCommand.Command="{ Binding BindingContext.NavigateCommand, Source={ x:Reference Page } }"
+                      behaviors:ViewCellCommand.CommandParameter="{ Binding . }">
               <StackLayout Orientation="Horizontal" Spacing="15">
                 <Label Text="{ Binding DisplayName }" FontSize="24" VerticalOptions="Center"></Label>
               </StackLayout>

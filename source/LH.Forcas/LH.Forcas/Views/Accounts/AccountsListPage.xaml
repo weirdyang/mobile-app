@@ -20,6 +20,7 @@
   <ListView ItemsSource="{ Binding Accounts }"
             SelectedItem="{ Binding SelectedAccount }"
             RefreshCommand="{ Binding RefreshAccountsCommand }"
+            IsRefreshing="{ Binding IsBusy }"
             IsPullToRefreshEnabled="True">
     <!--
     GroupShortNameBinding="AccountType"
@@ -27,12 +28,12 @@
     -->
     <ListView.ItemTemplate>
       <DataTemplate>
-        <ViewCell 
-          behaviors:ViewCellCommand.Command="{ Binding NavigateToDetailCommand, Source={ x:Reference Page.BindingContext } }"
+        <ViewCell
+          behaviors:ViewCellCommand.Command="{ Binding BindingContext.NavigateToDetailCommand, Source={ x:Reference Page } }"
           behaviors:ViewCellCommand.CommandParameter="{ Binding . }">
           <ViewCell.ContextActions>
             <MenuItem IsDestructive="True" Text="Delete"
-                Command="{ Binding DeleteAccountCommand, Source={ x:Reference Page.BindingContext } }" CommandParameter="{ Binding . }">
+                Command="{ Binding BindingContext.DeleteAccountCommand, Source={ x:Reference Page } }" CommandParameter="{ Binding . }">
               <iconize:IconImage Icon="md-delete" IconColor="White"></iconize:IconImage>
             </MenuItem>
           </ViewCell.ContextActions>

@@ -5,45 +5,33 @@ using Prism.Navigation;
 namespace LH.Forcas.ViewModels.Root
 {
     using System;
-    using System.Threading.Tasks;
+    using Prism.Commands;
 
     public class RootSideMenuPageViewModel : ViewModelBase
     {
         private readonly INavigationService navigationService;
-        private NavigationPage selectedPage;
 
         public RootSideMenuPageViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService;
             this.Pages = NavigationExtensions.RootLevelPages;
+
+            this.NavigateCommand = new DelegateCommand<NavigationPage>(this.Navigate);
         }
+
+        public DelegateCommand<NavigationPage> NavigateCommand { get; private set; }
 
         public IEnumerable<NavigationPage> Pages { get; set; }
 
-        public NavigationPage SelectedPage
-        {
-            get { return this.selectedPage; }
-            set
-            {
-                this.selectedPage = value;
-                this.OnPropertyChanged();
-
-                if (this.selectedPage != null)
-                {
-                    this.Navigate();
-                    //this.selectedPage.NavigateAction.Invoke(this.navigationService);
-                }
-            }
-        }
-
-        private async void Navigate()
+        private async void Navigate(NavigationPage page)
         {
             try
             {
-                await this.selectedPage.NavigateAction.Invoke(this.navigationService);
+                await page.NavigateAction.Invoke(this.navigationService);
             }
             catch (Exception ex)
             {
+                // TODO: Log exception
                 throw;
             }
         }

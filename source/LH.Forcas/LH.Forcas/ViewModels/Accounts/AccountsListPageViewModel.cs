@@ -18,6 +18,8 @@
         private readonly IPageDialogService dialogService;
         private readonly IAccountingService accountingService;
 
+        private IEnumerable<Account> accounts;
+
         public AccountsListPageViewModel(
             IAccountingService accountingService,
             INavigationService navigationService, 
@@ -43,7 +45,11 @@
 
         public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
 
-        public IEnumerable<Account> Accounts { get; private set; }
+        public IEnumerable<Account> Accounts
+        {
+            get { return this.accounts; }
+            private set { this.SetProperty(ref this.accounts, value); }
+        }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
@@ -52,7 +58,7 @@
 
         private void RefreshAccounts()
         {
-            this.Accounts = this.accountingService.GetAccounts();
+            this.RunAsyncWithBusyIndicator(() => this.Accounts = this.accountingService.GetAccounts());
         }
 
         private async Task NavigateToAccountDetail(Account account)

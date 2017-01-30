@@ -7,6 +7,7 @@
     using Domain.RefData;
     using Domain.UserData;
     using FluentValidation;
+    using Integration.Banks;
     using LH.Forcas.Extensions;
     using LH.Forcas.Localization;
     using Prism.Navigation;
@@ -25,12 +26,14 @@
         private Guid accountId;
         private IList<Bank> banks;
         private IList<Country> countries;
+        private IList<Currency> currencies;
+        private Type selectedAccountType;
         private Bank selectedBank;
         private Country selectedCountry;
-        private Type selectedAccountType;
-        private IList<Currency> currencies;
         private Currency selectedCurrency;
         private bool canEditAccountType;
+        private IList<RemoteAccountInfo> remoteAccounts;
+        private RemoteAccountInfo selectedRemoteAccount;
 
         public AccountsDetailPageViewModel(
             IAccountingService accountingService,
@@ -69,7 +72,14 @@
         public Bank SelectedBank
         {
             get { return this.selectedBank; }
-            set { this.SetProperty(ref this.selectedBank, value); }
+            set
+            { 
+                if (this.SetProperty(ref this.selectedBank, value) && value != null)
+                {
+                    this.SelectedRemoteAccount = null;
+                    this.RunAsyncWithBusyIndicator(this.RefreshRemoteAccounts());
+                }
+            }
         }
 
         public IList<Bank> Banks
@@ -81,7 +91,13 @@
         public Country SelectedCountry
         {
             get { return this.selectedCountry; }
-            set { this.SetProperty(ref this.selectedCountry, value); }
+            set
+            {
+                if (this.SetProperty(ref this.selectedCountry, value))
+                {
+                    this.SelectedBank = null;
+                }
+            }
         }
 
         public IList<Country> Countries
@@ -105,10 +121,42 @@
         public Type SelectedAccountType
         {
             get { return this.selectedAccountType; }
-            set { this.SetProperty(ref this.selectedAccountType, value); }
+            set
+            {
+                this.SetProperty(ref this.selectedAccountType, value);
+
+                this.OnPropertyChanged(() => this.SelectedCountry);
+                this.OnPropertyChanged(() => this.SelectedBank);
+                this.OnPropertyChanged(() => this.SelectedRemoteAccount);
+            }
         }
 
         public IList<Type> AccountTypes { get; private set; }
+
+        public RemoteAccountInfo SelectedRemoteAccount
+        {
+            get { return this.selectedRemoteAccount; }
+            set
+            {
+                if (this.SetProperty(ref this.selectedRemoteAccount, value))
+                {
+                    if (value == null)
+                    {
+                        this.SelectedCurrency = null;
+                    }
+                    else
+                    {
+                        this.SelectedCurrency = this.Currencies.SingleById(value.CurrencyId);
+                    }
+                }
+            }
+        }
+
+        public IList<RemoteAccountInfo> RemoteAccounts
+        {
+            get { return this.remoteAccounts; }
+            set { this.SetProperty(ref this.remoteAccounts, value); }
+        }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
@@ -140,7 +188,7 @@
                 }
                 else
                 {
-                    this.accountId = (Guid) parameters[NavigationExtensions.AccountIdParameterName];
+                    this.accountId = (Guid)parameters[NavigationExtensions.AccountIdParameterName];
                     var account = this.accountingService.GetAccount(this.accountId);
 
                     this.Title = account.Name;
@@ -148,13 +196,16 @@
 
                     this.AccountName = account.Name;
                     this.SelectedAccountType = account.GetType();
+
                     this.SelectedCurrency = this.Currencies.SingleById(account.CurrencyId);
 
                     var bankAccount = account as BankAccount;
                     if (bankAccount != null)
                     {
-                        this.SelectedBank = this.Banks.SingleById(bankAccount.BankId);
-                        this.SelectedCountry = this.Countries.SingleById(this.SelectedBank.CountryId);
+                        var bank = this.Banks.SingleById(bankAccount.BankId);
+
+                        this.SelectedCountry = this.Countries.SingleById(bank.CountryId);
+                        this.SelectedBank = bank;
                     }
                 }
             }
@@ -167,24 +218,28 @@
             }
         }
 
+        private async Task RefreshRemoteAccounts()
+        {
+            if (this.selectedBank == null)
+            {
+                return;
+            }
+
+            this.RemoteAccounts = await this.accountingService.GetAvailableRemoteAccounts(this.selectedBank.BankId);
+        }
+
         protected override async Task Save()
         {
             try
             {
                 var account = (Account)Activator.CreateInstance(this.SelectedAccountType);
                 account.Name = this.AccountName;
-
-                var cashAccount = account as CashAccount;
-                if (cashAccount != null)
-                {
-                    cashAccount.CurrencyId = this.SelectedCurrency.CurrencyId;
-                }
+                account.CurrencyId = this.SelectedCurrency.CurrencyId;
 
                 var bankAccount = account as BankAccount;
                 if (bankAccount != null)
                 {
-                    // bankAccount.AccountNumber
-                    // bankAccount.CurrencyId
+                    bankAccount.AccountNumber = this.selectedRemoteAccount.AccountNumber;
                     bankAccount.BankId = this.SelectedBank.BankId;
                 }
 
@@ -210,6 +265,7 @@
 
                 this.RuleFor(x => x.SelectedCountry).NotNull().When(x => x.SelectedAccountType == typeof(BankAccount));
                 this.RuleFor(x => x.SelectedBank).NotNull().When(x => x.SelectedAccountType == typeof(BankAccount));
+                this.RuleFor(x => x.SelectedRemoteAccount).NotNull().When(x => x.SelectedAccountType == typeof(BankAccount));
             }
         }
     }

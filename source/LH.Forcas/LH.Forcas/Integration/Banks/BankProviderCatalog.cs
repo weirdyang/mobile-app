@@ -6,8 +6,7 @@
     using System.Reflection;
     using Microsoft.Practices.Unity;
 
-    // TODO: Add logging
-    public class BankProviderCatalog
+    public class BankProviderCatalog : IBankProviderCatalog
     {
         private readonly IUnityContainer container;
         private readonly IDictionary<string, Tuple<Type, Type>> providers;
@@ -18,17 +17,23 @@
             this.container = container;
         }
 
-        public void Initialize(Assembly assembly = null)
+        public void Initialize(IEnumerable<Type> providerTypes = null)
         {
-            assembly = assembly ?? this.GetType().GetTypeInfo().Assembly;
-            var providerInterfaceInfo = typeof(IBankProvider).GetTypeInfo();
+            if (providerTypes == null)
+            {
+                var providerInterfaceInfo = typeof(IBankProvider).GetTypeInfo();
 
-            var providerTypes = assembly.DefinedTypes.Where(x => providerInterfaceInfo.IsAssignableFrom(x));
+                var assembly = this.GetType().GetTypeInfo().Assembly;
+
+                providerTypes = assembly.DefinedTypes
+                    .Where(x => providerInterfaceInfo.IsAssignableFrom(x))
+                    .Select(x => x.AsType());
+            }
 
             foreach (var providerType in providerTypes)
             {
-                var attribute = providerType.GetCustomAttribute<BankProviderInfoAttribute>();
-                var typesTuple = new Tuple<Type, Type>(providerType.AsType(), attribute.AuthorizationType);
+                var attribute = providerType.GetTypeInfo().GetCustomAttribute<BankProviderInfoAttribute>();
+                var typesTuple = new Tuple<Type, Type>(providerType, attribute.AuthorizationType);
 
                 foreach (var bankId in attribute.BankIds)
                 {

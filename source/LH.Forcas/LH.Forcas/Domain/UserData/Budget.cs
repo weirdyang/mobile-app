@@ -3,10 +3,9 @@ using LiteDB;
 
 namespace LH.Forcas.Domain.UserData
 {
-    [BsonId]
-    public class Budget
+    public class Budget : IRoamingObject
     {
-        public int Id
+        public int BudgetId
         {
             get { return this.Year*100 + this.Month; }
             set
@@ -21,5 +20,10 @@ namespace LH.Forcas.Domain.UserData
         public int Year { get; set; }
 
         public List<BudgetCategory> Categories { get; set; }
+
+        public BsonValue GetIdAsBson()
+        {
+            return new BsonValue(this.BudgetId);
+        }
     }
 }

@@ -2,10 +2,12 @@
 
 namespace LH.Forcas.Domain.UserData
 {
-    public class Transaction
+    using System;
+
+    public class Transaction : IRoamingObject
     {
         [BsonId]
-        public string TransactionId { get; set; }
+        public Guid TransactionId { get; set; }
 
         public string CounterpartyName { get; set; }
 
@@ -20,5 +22,10 @@ namespace LH.Forcas.Domain.UserData
         public string SpecificSymbol { get; set; }
 
         public TransactionType TransactionType { get; set; }
+
+        public BsonValue GetIdAsBson()
+        {
+            return new BsonValue(this.TransactionId);
+        }
     }
 }

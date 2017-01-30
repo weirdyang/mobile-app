@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using Forcas.Integration.Banks;
     using LH.Forcas.Domain.RefData;
     using LH.Forcas.Domain.UserData;
     using LH.Forcas.Extensions;
@@ -15,13 +16,9 @@
     [TestFixture]
     public class AccountsDetailPageViewModelTests
     {
-        /*
-         * NavigatedTo w/o parameters -> new account mode
-         * NavigatedTo w/ parameters -> load account 
-         * Save command with invalid data -> no navigation, display warning - highlight the fields
-         * Save command with valid data -> save
-         * Validation rules logic
-         */
+        // TODO: Update init tests -> editability rules
+        // Bank accounts -> only name
+        // Cash accounts -> only name
 
         protected Guid AccountId;
         protected Mock<IRefDataService> RefDataServiceMock;
@@ -82,7 +79,9 @@
                 var differentAccount = this.GetDifferentBankAccount();
 
                 this.NavigationServiceMock.Setup(x => x.GoBackAsync(null, null, true)).ReturnsAsync(true);
+
                 this.AccountingServiceMock.Setup(x => x.SaveAccount(It.Is<Account>(acc => this.CompareAccounts(differentAccount, acc, false))));
+                this.AccountingServiceMock.Setup(x => x.GetAvailableRemoteAccounts(It.IsAny<string>())).ReturnsAsync(new[] { this.GetRemoteAccount() });
 
                 this.NavigateToEdit(this.GetValidBankAccount());
 
@@ -104,7 +103,9 @@
             {
                 var validAccount = this.GetValidBankAccount();
                 this.NavigationServiceMock.Setup(x => x.GoBackAsync(null, null, true)).ReturnsAsync(true);
+
                 this.AccountingServiceMock.Setup(x => x.SaveAccount(It.Is<Account>(acc => this.CompareAccounts(validAccount, acc, true))));
+                this.AccountingServiceMock.Setup(x => x.GetAvailableRemoteAccounts(It.IsAny<string>())).ReturnsAsync(new[] { this.GetRemoteAccount() });
 
                 this.ViewModel.OnNavigatedTo(null);
 
@@ -114,8 +115,9 @@
                 this.ViewModel.AccountName = validAccount.Name;
                 this.ViewModel.SelectedCountry = this.ViewModel.Countries.Single(x => x.CountryId == bank.CountryId);
                 this.ViewModel.SelectedBank = bank;
+                this.ViewModel.WaitUntilNotBusy();
 
-                // TBA: Currency selection via account provider...
+                this.ViewModel.SelectedRemoteAccount = this.ViewModel.RemoteAccounts.First();
 
                 Assert.IsTrue(this.ViewModel.SaveCommand.CanExecute(), this.ViewModel.ValidationResults.BuildErrorsString());
                 this.ViewModel.SaveCommand.Execute();
@@ -145,6 +147,7 @@
             public void CreateAndSaveCashAccountTest()
             {
                 var validAccount = this.GetValidCashAccount();
+
                 this.AccountingServiceMock.Setup(x => x.SaveAccount(It.Is<Account>(acc => this.CompareAccounts(validAccount, acc, true))));
 
                 this.ViewModel.OnNavigatedTo(null);
@@ -318,6 +321,11 @@
                 this.ViewModel.TestPropertyValidation(x => x.SelectedCurrency, this.ViewModel.Currencies.First(), null);
                 this.ViewModel.TestPropertyValidation(x => x.SelectedBank, this.ViewModel.Banks.First(), null);
                 this.ViewModel.TestPropertyValidation(x => x.SelectedCountry, this.ViewModel.Countries.First(), null);
+
+                this.ViewModel.SelectedBank = this.ViewModel.Banks.First();
+                this.ViewModel.WaitUntilNotBusy();
+
+                this.ViewModel.TestPropertyValidation(x => x.SelectedRemoteAccount, this.ViewModel.RemoteAccounts.First(), null);
             }
         }
 
@@ -350,6 +358,16 @@
             };
         }
 
+        private RemoteAccountInfo GetRemoteAccount()
+        {
+            return new RemoteAccountInfo
+            {
+                AccountNumber = AccountNumber.Parse("123/5500"),
+                CurrencyId = "CZK",
+                Type = BankAccountType.Checking
+            };
+        }
+
         private BankAccount GetValidBankAccount()
         {
             return new BankAccount
@@ -359,7 +377,7 @@
                 CurrencyId = "CZK",
                 Type = BankAccountType.Checking,
                 Name = "My Test Account",
-                CurrentBalance = 1000.98m
+                CurrentBalance = 0m
             };
         }
 
