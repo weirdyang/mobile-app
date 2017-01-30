@@ -113,7 +113,6 @@
         {
             private string property;
             private string otherProperty;
-            private string ruleSetValidatedProperty;
 
             public TestViewModel(IPageDialogService pageDialogService, bool setValidator = true)
                 : base(pageDialogService)
@@ -132,7 +131,7 @@
 
             public string OtherProperty
             {
-                get { return this.property; }
+                get { return this.otherProperty; }
                 set { this.SetProperty(ref this.otherProperty, value); }
             }
         }

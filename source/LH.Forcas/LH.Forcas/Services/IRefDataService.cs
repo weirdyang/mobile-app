@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using LH.Forcas.Domain.RefData;
 
 namespace LH.Forcas.Services
 {
     public interface IRefDataService
     {
-        Task<IList<Bank>> GetBanks();
+        IList<Bank> GetBanks();
 
-        Task<IList<Country>> GetCountriesAsync();
+        IList<Country> GetCountries();
 
-        Task<IList<Currency>> GetCurrencies();
-
-        Task<IList<Bank>> GetBanksByCountry(string countryCode);
+        IList<Currency> GetCurrencies();
     }
 }

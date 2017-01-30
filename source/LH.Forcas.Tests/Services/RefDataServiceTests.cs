@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using LH.Forcas.Domain.RefData;
 using LH.Forcas.Integration;
 using LH.Forcas.Services;
@@ -30,49 +29,30 @@ namespace LH.Forcas.Tests.Services
         private Mock<IRefDataRepository> repositoryMock;
 
         [Test]
-        public async Task ShouldFilterOutInactiveData()
+        public void ShouldFilterOutInactiveData()
         {
             this.repositoryMock.Setup(x => x.GetCountries())
                 .Returns(new[]
                          {
-                             new Country { IsActive = true, CountryId = "CZE" },
-                             new Country { IsActive = false, CountryId = "UK" }
+                             new Country { IsActive = true, CountryId = "CZ" },
+                             new Country { IsActive = false, CountryId = "GB" }
                          });
 
-            var countries = await this.refDataService.GetCountriesAsync();
+            var countries = this.refDataService.GetCountries();
 
             Assert.AreEqual(1, countries.Count);
-            Assert.AreEqual("CZE", countries.Single().CountryId);
+            Assert.AreEqual("CZ", countries.Single().CountryId);
         }
 
         [Test]
-        public async Task ShouldServeSubsequentFetchFromCache()
+        public void ShouldServeSubsequentFetchFromCache()
         {
             this.repositoryMock.Setup(x => x.GetCountries()).Returns(new[] { new Country() });
 
-            await this.refDataService.GetCountriesAsync();
-            await this.refDataService.GetCountriesAsync();
+            this.refDataService.GetCountries();
+            this.refDataService.GetCountries();
 
             this.repositoryMock.Verify(x => x.GetCountries(), Times.Once);
-        }
-
-        [Test]
-        public async Task ShouldFilterBanksByCountry()
-        {
-            var allBanks = new Bank[]
-            {
-                new Bank { BankId = "CzeBank", CountryId = "CZE" },
-                new Bank { BankId = "UkBank", CountryId = "UK" }
-            };
-
-            this.repositoryMock
-                .Setup(x => x.GetBanks())
-                .Returns(allBanks);
-
-            var result = await this.refDataService.GetBanksByCountry("CZE");
-
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual("CzeBank", result.Single().BankId);
         }
 
         [Test]
@@ -83,7 +63,7 @@ namespace LH.Forcas.Tests.Services
             this.repositoryMock.Setup(x => x.GetCountries()).Throws(ex);
             this.crashReporterMock.Setup(x => x.ReportFatal(ex));
 
-            Assert.ThrowsAsync<Exception>(async () => await this.refDataService.GetCountriesAsync());
+            Assert.Throws<Exception>(() => this.refDataService.GetCountries());
 
             this.crashReporterMock.Verify(x => x.ReportFatal(ex), Times.Once);
         }

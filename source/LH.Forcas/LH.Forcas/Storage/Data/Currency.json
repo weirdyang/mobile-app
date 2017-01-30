@@ -1,6 +1,7 @@
 ﻿[
   {
-    "currencyCode": "CZK",
+    "currencyId": "CZK",
+    "displayName": "Czech Koruna",
     "symbol": "Kč",
     "preferedSymbolPosition": "after"
   }

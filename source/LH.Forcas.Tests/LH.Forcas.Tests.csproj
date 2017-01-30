@@ -212,8 +212,8 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Integration\Banks\BankProviderCatalogTests.cs" />
     <Compile Include="Integration\Banks\BankProviderInfoAttribute.cs" />
-    <Compile Include="Integration\Banks\Cze\Fio\FioBankIntegrationTests.cs" />
-    <Compile Include="Integration\Banks\Cze\Fio\FioOutputParserTests.cs" />
+    <Compile Include="Integration\Banks\Cz\Fio\FioBankIntegrationTests.cs" />
+    <Compile Include="Integration\Banks\Cz\Fio\FioOutputParserTests.cs" />
     <Compile Include="MockExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RefDataServiceTests.cs" />
@@ -237,13 +237,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Content Include="Integration\Banks\Cze\Fio\TransactionDownloadSample.json">
+    <Content Include="Integration\Banks\Cz\Fio\TransactionDownloadSample.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Integration\Banks\Cze\Fio\TransactionParsingSample.json">
+    <Content Include="Integration\Banks\Cz\Fio\TransactionParsingSample.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Integration\Banks\Cze\Fio\TransactionParsingSample-Fail.json">
+    <Content Include="Integration\Banks\Cz\Fio\TransactionParsingSample-Fail.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />

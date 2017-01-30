@@ -1,4 +1,4 @@
-namespace LH.Forcas.Integration.Banks.Cze.Fio
+namespace LH.Forcas.Integration.Banks.Cz.Fio
 {
     using System;
     using System.Xml.Serialization;

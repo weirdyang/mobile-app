@@ -6,11 +6,9 @@ namespace LH.Forcas.Domain.RefData
 
         public string Name { get; set; }
 
-        public string IbanPrefix { get; set; }
-
         public string CountryId { get; set; }
 
-        public int RoutingCode { get; set; }
+        public int BBAN { get; set; }
 
         public BankAuthorizationScheme AuthorizationScheme { get; set; }
 

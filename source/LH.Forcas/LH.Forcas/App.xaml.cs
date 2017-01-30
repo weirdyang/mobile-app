@@ -32,7 +32,9 @@
 
             CurrentCultureInfo = this.Container.Resolve<ILocale>().GetCultureInfo();
 
+#pragma warning disable 4014
             this.NavigationService.NavigateToDashboard();
+#pragma warning restore 4014
         }
 
         protected override void RegisterTypes()

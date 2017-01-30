@@ -48,14 +48,14 @@
 
             var banks = new[]
             {
-                new Bank { BankId = "TestBank", Name = "Test Bank Name", CountryId = "CZE" },
-                new Bank { BankId = "OtherBank", Name = "Test Bank Name", CountryId = "UK" }
+                new Bank { BankId = "TestBank", Name = "Test Bank Name", CountryId = "CZ" },
+                new Bank { BankId = "OtherBank", Name = "Test Bank Name", CountryId = "GB" }
             };
 
             var countries = new[]
             {
-                new Country { CountryId = "UK", DefaultCurrencyCode = "GBP" },
-                new Country { CountryId = "CZE", DefaultCurrencyCode = "CZK" }
+                new Country { CountryId = "GB", DefaultCurrencyCode = "GBP" },
+                new Country { CountryId = "CZ", DefaultCurrencyCode = "CZK" }
             };
 
             var currencies = new[]
@@ -64,10 +64,10 @@
                 new Currency { CurrencyId  = "GBP", DisplayName = "British Pound", IsActive = true, Symbol = "£", PreferedSymbolPosition = PrefferedCcySymbolLocation.Before },
             };
 
-            this.UserSettingsServiceMock.Setup(x => x.CountryId).Returns("CZE");
-            this.RefDataServiceMock.Setup(x => x.GetBanks()).ReturnsAsync(banks);
-            this.RefDataServiceMock.Setup(x => x.GetCountriesAsync()).ReturnsAsync(countries);
-            this.RefDataServiceMock.Setup(x => x.GetCurrencies()).ReturnsAsync(currencies);
+            this.UserSettingsServiceMock.Setup(x => x.CountryId).Returns("CZ");
+            this.RefDataServiceMock.Setup(x => x.GetBanks()).Returns(banks);
+            this.RefDataServiceMock.Setup(x => x.GetCountries()).Returns(countries);
+            this.RefDataServiceMock.Setup(x => x.GetCurrencies()).Returns(currencies);
         }
 
         [TestFixture]
@@ -228,7 +228,7 @@
                 this.ViewModel.OnNavigatedTo(null);
 
                 Assert.IsNotNull(this.ViewModel.SelectedCountry);
-                Assert.AreEqual("CZE", this.ViewModel.SelectedCountry.CountryId);
+                Assert.AreEqual("CZ", this.ViewModel.SelectedCountry.CountryId);
             }
 
             [Test]

@@ -29,8 +29,7 @@ namespace LH.Forcas.Tests.Storage
                 Assert.IsNotNull(rb);
                 Assert.IsNotEmpty(rb.Name);
                 Assert.IsNotEmpty(rb.CountryId);
-                Assert.IsNotEmpty(rb.IbanPrefix);
-                Assert.AreNotEqual(0, rb.RoutingCode);
+                Assert.AreNotEqual(0, rb.BBAN);
                 Assert.AreEqual(BankAuthorizationScheme.PerAccount, rb.AuthorizationScheme);
                 Assert.IsTrue(rb.IsActive);
             }
@@ -39,22 +38,22 @@ namespace LH.Forcas.Tests.Storage
             public void LoadCountries()
             {
                 var countries = this.refDataRepository.GetCountries();
-                var cze = countries.SingleOrDefault(x => x.CountryId == "CZE");
+                var cz = countries.SingleOrDefault(x => x.CountryId == "CZ");
 
-                Assert.IsNotNull(cze);
-                Assert.IsNotEmpty(cze.DefaultCurrencyCode);
+                Assert.IsNotNull(cz);
+                Assert.IsNotEmpty(cz.DefaultCurrencyCode);
             }
 
             [Test]
             public void LoadCurrencies()
             {
                 var currencies = this.refDataRepository.GetCurrencies();
-                var cze = currencies.SingleOrDefault(x => x.CurrencyId == "CZK");
+                var cz = currencies.SingleOrDefault(x => x.CurrencyId == "CZK");
 
-                Assert.IsNotNull(cze);
-                Assert.IsNotEmpty(cze.DisplayName);
-                Assert.IsNotEmpty(cze.Symbol);
-                Assert.AreEqual(PrefferedCcySymbolLocation.After, cze.PreferedSymbolPosition);
+                Assert.IsNotNull(cz);
+                Assert.IsNotEmpty(cz.DisplayName);
+                Assert.IsNotEmpty(cz.Symbol);
+                Assert.AreEqual(PrefferedCcySymbolLocation.After, cz.PreferedSymbolPosition);
             }
         }
     }

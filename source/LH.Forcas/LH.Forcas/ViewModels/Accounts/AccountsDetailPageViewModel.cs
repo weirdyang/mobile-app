@@ -167,9 +167,9 @@
         {
             try
             {
-                this.Banks = await this.refDataService.GetBanks();
-                this.Countries = await this.refDataService.GetCountriesAsync();
-                this.Currencies = await this.refDataService.GetCurrencies();
+                this.Banks = this.refDataService.GetBanks();
+                this.Countries = this.refDataService.GetCountries();
+                this.Currencies = this.refDataService.GetCurrencies();
 
                 this.AccountTypes = new[]
                 {

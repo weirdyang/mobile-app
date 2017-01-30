@@ -2,36 +2,32 @@
   {
     "bankId": "RB",
     "name": "Raiffeisenbank",
-    "routingCode": 5500,
-    "countryCode": "CZE",
-    "ibanPrefix": "CZ21",
+    "bban": 5500,
+    "countryId": "CZ",
     "authorizationScheme": "PerAccount",
     "isActive": true
   },
   {
     "bankId": "FIO",
     "name": "FIO banka",
-    "routingCode": 2010,
-    "countryCode": "CZE",
-    "ibanPrefix": "CZ99",
+    "bban": 2010,
+    "countryId": "CZ",
     "authorizationScheme": "PerAccount",
     "isActive": true
   },
   {
     "bankId": "UCB",
     "name": "Unicredit Bank",
-    "routingCode": 2700,
-    "countryCode": "CZE",
-    "ibanPrefix": "CZ99",
+    "bban": 2700,
+    "countryId": "CZ",
     "authorizationScheme": "PerPersona",
     "isActive": true
   },
   {
     "bankId": "AB",
     "name": "Air Bank",
-    "routingCode": 3030,
-    "countryCode": "CZE",
-    "ibanPrefix": "CZ99",
+    "bban": 3030,
+    "countryId": "CZ",
     "authorizationScheme": "PerPersona",
     "isActive": true
   }

@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using LH.Forcas.Domain.RefData;
 using LH.Forcas.Integration;
 using LH.Forcas.Storage;
 
 namespace LH.Forcas.Services
 {
-    using System.Diagnostics.Contracts;
+    using System.Collections.Concurrent;
 
     public class RefDataService : IRefDataService
     {
         private readonly ICrashReporter crashReporter;
         private readonly IRefDataRepository repository;
 
-        private readonly SemaphoreSlim cacheSemaphore = new SemaphoreSlim(1, 1);
-        private readonly IDictionary<Type, object> cache = new Dictionary<Type, object>();
+        private readonly object cacheLock = new object();
+        private readonly IDictionary<Type, object> cache = new ConcurrentDictionary<Type, object>();
 
         public RefDataService(ICrashReporter crashReporter, IRefDataRepository repository)
         {
@@ -25,65 +23,49 @@ namespace LH.Forcas.Services
             this.repository = repository;
         }
 
-        public async Task<IList<Bank>> GetBanks()
+        public IList<Bank> GetBanks()
         {
-            return await this.GetRefDataViaCache(() => this.repository.GetBanks());
+            return this.GetRefDataViaCache(() => this.repository.GetBanks());
         }
 
-        public async Task<IList<Country>> GetCountriesAsync()
+        public IList<Country> GetCountries()
         {
-            return await this.GetRefDataViaCache(() => this.repository.GetCountries());
+            return this.GetRefDataViaCache(() => this.repository.GetCountries());
         }
 
-        public async Task<IList<Currency>> GetCurrencies()
+        public IList<Currency> GetCurrencies()
         {
-            return await this.GetRefDataViaCache(() => this.repository.GetCurrencies());
+            return this.GetRefDataViaCache(() => this.repository.GetCurrencies());
         }
 
-        public async Task<IList<Bank>> GetBanksByCountry(string countryCode)
-        {
-            if (string.IsNullOrEmpty(countryCode))
-            {
-                throw new ArgumentNullException(nameof(countryCode));
-            }
-
-            var allBanks = await this.GetBanks();
-            return allBanks
-                .Where(x => string.Equals(x.CountryId, countryCode, StringComparison.OrdinalIgnoreCase))
-                .ToArray();
-        }
-
-        private async Task<IList<TDomain>> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)
+        private IList<TDomain> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)
             where TDomain : IIsActive
         {
             IList<TDomain> typedResult = null;
-            await this.cacheSemaphore.WaitAsync();
 
             try
             {
-                object result;
-                if (this.cache.TryGetValue(typeof(TDomain), out result))
+                lock (this.cacheLock)
                 {
-                    return (IList<TDomain>) result;
-                }
+                    object result;
+                    if (this.cache.TryGetValue(typeof(TDomain), out result))
+                    {
+                        return (IList<TDomain>)result;
+                    }
 
-                var data = fetchDataDelegate.Invoke();
-                if (data != null)
-                {
-                    typedResult = data.Where(x => x.IsActive).ToArray();
-                }
+                    var data = fetchDataDelegate.Invoke();
+                    if (data != null)
+                    {
+                        typedResult = data.Where(x => x.IsActive).ToArray();
+                    }
 
-                this.cache.Add(typeof(TDomain), typedResult);
+                    this.cache.Add(typeof(TDomain), typedResult);
+                }
             }
             catch (Exception ex)
             {
-                this.cacheSemaphore.Release();
                 this.crashReporter.ReportFatal(ex);
                 throw;
-            }
-            finally
-            {
-                this.cacheSemaphore.Release();
             }
 
             return typedResult;

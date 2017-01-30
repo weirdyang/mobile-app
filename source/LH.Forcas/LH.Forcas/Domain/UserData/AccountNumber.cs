@@ -3,9 +3,15 @@
     using System;
     using System.Text.RegularExpressions;
 
+    /*
+     * Impl in base -> ToString override (To GetIban())
+     * Abstract -> GetIban, ToLocalString()
+     * Specific only -> Parse method
+     */
+
     public struct AccountNumber
     {
-        private static readonly Regex ParseRegex = new Regex("(?:(?<prefix>\\d+)-)?(?<number>\\d+)/(?<code>\\d{4})");
+        private static readonly Regex ParseRegex = new Regex("(?:(?<prefix>\\d+)-)?(?<number>\\d+)/(?<code>\\d{4})", RegexOptions.CultureInvariant);
 
         public static AccountNumber Parse(string value)
         {

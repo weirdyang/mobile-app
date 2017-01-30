@@ -29,10 +29,7 @@
 
         public int ErrorsCount => this.errors.Count;
 
-        public IEnumerable<string> Properties
-        {
-            get { return this.errors.Keys; }
-        }
+        public IEnumerable<string> Properties => this.errors.Keys;
 
         public PropertyValidationResult this[string propertyName]
         {

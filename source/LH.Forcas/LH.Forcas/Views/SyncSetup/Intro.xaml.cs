@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-
-namespace LH.Forcas.Views.SyncSetup
+﻿namespace LH.Forcas.Views.SyncSetup
 {
-    public partial class Intro : ContentPage
+    public partial class Intro
     {
         public Intro()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }
