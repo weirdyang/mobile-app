@@ -28,21 +28,29 @@
             collection.Insert(new BankAccount
             {
                 BankId = "RB",
-                Type = BankAccountType.Checking,
                 Name = "RB eKonto",
                 AccountId = Guid.NewGuid(),
-                AccountNumber = AccountNumber.Parse("123456798/5500"),
-                CurrencyId = "CZK"
+                AccountNumber = AccountNumber.FromCzLocal("123456798/5500"),
+                CurrencyId = "CZK",
+                CurrentBalance = new Amount(5555758.17m, "CZK")
             });
 
             collection.Insert(new BankAccount
             {
                 BankId = "AB",
-                Type = BankAccountType.Savings,
                 Name = "AB Spořící",
                 AccountId = Guid.NewGuid(),
-                AccountNumber = AccountNumber.Parse("555574789789/3300"),
-                CurrencyId = "CZK"
+                AccountNumber = AccountNumber.FromCzLocal("555574789789/3300"),
+                CurrencyId = "CZK",
+                CurrentBalance = new Amount(258.17m, "CZK")
+            });
+
+            collection.Insert(new CashAccount
+            {
+                Name = "Peněženka",
+                AccountId = Guid.NewGuid(),
+                CurrencyId = "CZK",
+                CurrentBalance = new Amount(-38.17m, "CZK")
             });
         }
 

@@ -4,29 +4,26 @@
     using Forcas.Domain.RefData;
     using Forcas.Services;
     using Forcas.Views.Reusable.Converters;
-    using Microsoft.Practices.Unity;
     using Moq;
     using NUnit.Framework;
 
     [TestFixture]
-    public class NumberToCurrencyConverterTests
+    public class AmountToStringConverterTests
     {
-        private NumberToCurrencyConverter converter;
+        private AmountToCurrencyStringConverter converter;
 
         private Currency currency;
-        private Mock<IUnityContainer> unityContainerMock = new Mock<IUnityContainer>();
-        private Mock<IRefDataService> refDataServiceMock = new Mock<IRefDataService>();
+        private Mock<IRefDataService> refDataServiceMock;
 
         [SetUp]
         public void Setup()
         {
             this.currency = new Currency {DisplayFormat = "€{0}"};
 
-            this.unityContainerMock.Setup(x => x.Resolve(typeof(IRefDataService), null)).Returns(this.refDataServiceMock.Object);
+            this.refDataServiceMock = new Mock<IRefDataService>();
             this.refDataServiceMock.Setup(x => x.GetCurrency("EUR")).Returns(this.currency);
 
-            App.GlobalContainer = this.unityContainerMock.Object;
-            this.converter = new NumberToCurrencyConverter();
+            this.converter = new AmountToCurrencyStringConverter();
         }
 
         [Test]

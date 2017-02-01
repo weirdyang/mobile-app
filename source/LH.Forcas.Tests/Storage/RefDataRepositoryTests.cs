@@ -52,8 +52,7 @@ namespace LH.Forcas.Tests.Storage
 
                 Assert.IsNotNull(cz);
                 Assert.IsNotEmpty(cz.DisplayName);
-                Assert.IsNotEmpty(cz.Symbol);
-                Assert.AreEqual(PrefferedCcySymbolLocation.After, cz.PreferedSymbolPosition);
+                Assert.IsNotEmpty(cz.DisplayFormat);
             }
         }
     }

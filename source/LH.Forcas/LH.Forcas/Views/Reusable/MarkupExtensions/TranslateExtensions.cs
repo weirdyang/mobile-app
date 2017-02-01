@@ -6,7 +6,7 @@
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
-    [ContentProperty("Key")]
+    [ContentProperty(nameof(Key))]
     public class TranslateExtension : IMarkupExtension
     {
         const string ResourceId = "LH.Forcas.Localization.AppResources";

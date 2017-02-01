@@ -29,8 +29,8 @@ namespace LH.Forcas.Storage
         private void RegisterBsonMappings()
         {
             BsonMapper.Global.RegisterType(
-                number => number.ToString(),
-                str => AccountNumber.Parse(str));
+                number => number.Iban,
+                iban => AccountNumber.FromIban(iban));
 
             BsonMapper.Global.RegisterType(
                 guid => guid.ToString("N"),

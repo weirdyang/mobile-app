@@ -2,8 +2,9 @@
 {
     using System;
     using System.Globalization;
+    using Domain.UserData;
     using Xamarin.Forms;
-    public class NumberColorIndicatorConverter : IValueConverter
+    public class AmountToColorConverter : IValueConverter
     {
         public Color PositiveColor { get; set; }
 
@@ -11,14 +12,14 @@
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is decimal))
+            if (!(value is Amount))
             {
                 throw new ArgumentException("Only decimal value conversion is supported.", nameof(value));
             }
 
-            var number = (decimal) value;
+            var amount = (Amount) value;
 
-            return number >= 0 ? this.PositiveColor : this.NegativeColor;
+            return amount.Value >= 0 ? this.PositiveColor : this.NegativeColor;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

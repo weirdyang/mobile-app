@@ -2,7 +2,13 @@
   {
     "currencyId": "CZK",
     "displayName": "Czech Koruna",
-    "symbol": "Kč",
-    "preferedSymbolPosition": "after"
+    "displayFormat": "{0:n} Kč",
+    "isActive": "true" 
+  },
+  {
+    "currencyId": "EUR",
+    "displayName": "Euro",
+    "displayFormat": "€{0}",
+    "isActive": "true" 
   }
 ]

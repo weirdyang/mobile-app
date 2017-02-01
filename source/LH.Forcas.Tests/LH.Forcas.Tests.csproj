@@ -234,7 +234,7 @@
     <Compile Include="Views\Reusables\Converters\AccountTypeToResourceConverterTests.cs" />
     <Compile Include="Views\Reusables\Converters\DateTimeAgoConverterTests.cs" />
     <Compile Include="Views\Reusables\Converters\NumberColorIndicatorConverter.cs" />
-    <Compile Include="Views\Reusables\Converters\NumberToCurrencyConverterTests.cs" />
+    <Compile Include="Views\Reusables\Converters\AmountToStringConverterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LH.Forcas\LH.Forcas\LH.Forcas.csproj">

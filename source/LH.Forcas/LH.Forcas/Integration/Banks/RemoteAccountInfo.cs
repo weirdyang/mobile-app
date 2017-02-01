@@ -8,6 +8,6 @@
 
         public AccountNumber AccountNumber { get; set; }
 
-        public BankAccountType Type { get; set; }
+        // TODO: BankProduct type?
     }
 }

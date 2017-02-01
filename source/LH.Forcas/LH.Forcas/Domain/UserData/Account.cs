@@ -11,7 +11,9 @@
 
         public string CurrencyId { get; set; }
 
-        public decimal CurrentBalance { get; set; }
+        public Amount CurrentBalance { get; set; }
+
+        public DateTime LastSyncUtcTime { get; set; }
 
         public BsonValue GetIdAsBson()
         {
@@ -19,20 +21,24 @@
         }
     }
 
-    public class CashAccount : Account
+    public abstract class BankProductAccount : Account
     {
-        
+        public string BankId { get; set; }
     }
 
-    public class BankAccount : Account
-    {
-        // TODO: Add some kind of product identification (to match the pricelists)
-
-        public string BankId { get; set; }
-
-        public BankAccountType Type { get; set; }
-
+    public class BankAccount : BankProductAccount
+    { 
         public AccountNumber AccountNumber { get; set; }
+    }
+
+    public class CreditCardAccount : BankProductAccount
+    {
+        public string CardNumber { get; set; }
+    }
+
+    public class CashAccount : Account
+    {
+
     }
 
     public class InvestmentAccount : Account

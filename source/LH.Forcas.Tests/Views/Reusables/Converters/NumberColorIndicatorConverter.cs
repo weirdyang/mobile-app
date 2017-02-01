@@ -9,12 +9,12 @@
     [TestFixture]
     public class NumberColorIndicatorConverterTests
     {
-        private NumberColorIndicatorConverter converter;
+        private AmountToColorConverter converter;
 
         [SetUp]
         public void Setup()
         {
-            this.converter = new NumberColorIndicatorConverter();
+            this.converter = new AmountToColorConverter();
             this.converter.PositiveColor = Color.Green;
             this.converter.NegativeColor = Color.Red;
         }
