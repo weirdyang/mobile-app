@@ -156,6 +156,10 @@
       <HintPath>..\packages\Prism.Forms.6.2.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.Forms.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Prism.Unity.Forms, Version=6.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Unity.Forms.6.2.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.Unity.Forms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -228,7 +232,9 @@
     <Compile Include="ViewModels\SyncSetup\ProviderSelectionViewModelTests.cs" />
     <Compile Include="ViewModels\ViewModelBaseTests.cs" />
     <Compile Include="Views\Reusables\Converters\AccountTypeToResourceConverterTests.cs" />
+    <Compile Include="Views\Reusables\Converters\DateTimeAgoConverterTests.cs" />
     <Compile Include="Views\Reusables\Converters\NumberColorIndicatorConverter.cs" />
+    <Compile Include="Views\Reusables\Converters\NumberToCurrencyConverterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LH.Forcas\LH.Forcas\LH.Forcas.csproj">
@@ -252,7 +258,6 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

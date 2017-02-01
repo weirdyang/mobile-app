@@ -85,10 +85,12 @@
     <Compile Include="Views\Reusable\Controls\ValidationLabel.cs" />
     <Compile Include="Views\Reusable\Converters\AccountTypeToResourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\BankIdToImageSourceConverter.cs" />
+    <Compile Include="Views\Reusable\Converters\DateTimeAgoConverter.cs" />
     <Compile Include="Views\Reusable\Converters\NegateBoolConverter.cs" />
     <Compile Include="Views\Reusable\Converters\NumberColorIndicatorConverter.cs" />
+    <Compile Include="Views\Reusable\Converters\NumberToCurrencyConverter.cs" />
     <Compile Include="Views\Reusable\Converters\StringToResourceConverter.cs" />
-    <Compile Include="Views\Reusable\Converters\EnumToResourceConverter.cs" />
+    <Compile Include="Views\Reusable\Converters\ToResourceConverter.cs" />
     <Compile Include="Domain\RefData\IIsActive.cs" />
     <Compile Include="Domain\UserData\Account.cs" />
     <Compile Include="Domain\UserData\AccountNumber.cs" />
@@ -351,7 +353,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\AppResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
