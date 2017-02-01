@@ -86,6 +86,7 @@
     <Compile Include="Views\Reusable\Converters\AccountTypeToResourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\BankIdToImageSourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\NegateBoolConverter.cs" />
+    <Compile Include="Views\Reusable\Converters\NumberColorIndicatorConverter.cs" />
     <Compile Include="Views\Reusable\Converters\StringToResourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\EnumToResourceConverter.cs" />
     <Compile Include="Domain\RefData\IIsActive.cs" />
