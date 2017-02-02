@@ -23,7 +23,7 @@ namespace LH.Forcas.Localization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AppResources {
+    public class AppResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -37,7 +37,7 @@ namespace LH.Forcas.Localization {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LH.Forcas.Localization.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
@@ -52,7 +52,7 @@ namespace LH.Forcas.Localization {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Account Type.
         /// </summary>
-        internal static string AccountsDetailPage_AccountType {
+        public static string AccountsDetailPage_AccountType {
             get {
                 return ResourceManager.GetString("AccountsDetailPage_AccountType", resourceCulture);
             }
@@ -73,7 +73,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Bank.
         /// </summary>
-        internal static string AccountsDetailPage_Bank {
+        public static string AccountsDetailPage_Bank {
             get {
                 return ResourceManager.GetString("AccountsDetailPage_Bank", resourceCulture);
             }
@@ -82,7 +82,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Bank Connection.
         /// </summary>
-        internal static string AccountsDetailPage_BankSectionTitle {
+        public static string AccountsDetailPage_BankSectionTitle {
             get {
                 return ResourceManager.GetString("AccountsDetailPage_BankSectionTitle", resourceCulture);
             }
@@ -91,7 +91,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Country.
         /// </summary>
-        internal static string AccountsDetailPage_Country {
+        public static string AccountsDetailPage_Country {
             get {
                 return ResourceManager.GetString("AccountsDetailPage_Country", resourceCulture);
             }
@@ -100,7 +100,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to There was a problem loading the account. If this happens again, please report it at our website..
         /// </summary>
-        internal static string AccountsDetailPage_LoadError {
+        public static string AccountsDetailPage_LoadError {
             get {
                 return ResourceManager.GetString("AccountsDetailPage_LoadError", resourceCulture);
             }
@@ -109,7 +109,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Account Name.
         /// </summary>
-        internal static string AccountsDetailPage_Name {
+        public static string AccountsDetailPage_Name {
             get {
                 return ResourceManager.GetString("AccountsDetailPage_Name", resourceCulture);
             }
@@ -118,7 +118,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to There was a problem saving the account. If this happens again, please report it at our website..
         /// </summary>
-        internal static string AccountsDetailPage_SaveError {
+        public static string AccountsDetailPage_SaveError {
             get {
                 return ResourceManager.GetString("AccountsDetailPage_SaveError", resourceCulture);
             }
@@ -127,7 +127,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to New Account.
         /// </summary>
-        internal static string AccountsDetailPage_Title_New {
+        public static string AccountsDetailPage_Title_New {
             get {
                 return ResourceManager.GetString("AccountsDetailPage_Title_New", resourceCulture);
             }
@@ -136,7 +136,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete the account {0} and all related transactions?.
         /// </summary>
-        internal static string AccountsListPage_DeleteAccountConfirmMsgFormat {
+        public static string AccountsListPage_DeleteAccountConfirmMsgFormat {
             get {
                 return ResourceManager.GetString("AccountsListPage_DeleteAccountConfirmMsgFormat", resourceCulture);
             }
@@ -145,7 +145,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Delete account?.
         /// </summary>
-        internal static string AccountsListPage_DeleteAccountConfirmTitle {
+        public static string AccountsListPage_DeleteAccountConfirmTitle {
             get {
                 return ResourceManager.GetString("AccountsListPage_DeleteAccountConfirmTitle", resourceCulture);
             }
@@ -154,79 +154,88 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to We&apos;re really sorry, but an error occured while deleting the account. If this happens again, please report it at our website..
         /// </summary>
-        internal static string AccountsListPage_DeleteAccountError {
+        public static string AccountsListPage_DeleteAccountError {
             get {
                 return ResourceManager.GetString("AccountsListPage_DeleteAccountError", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last synced {0}.
+        /// </summary>
+        public static string AccountsListPage_LastSyncLabelFormat {
+            get {
+                return ResourceManager.GetString("AccountsListPage_LastSyncLabelFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accounts.
         /// </summary>
-        internal static string AccountsListPage_Title {
+        public static string AccountsListPage_Title {
             get {
                 return ResourceManager.GetString("AccountsListPage_Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bank.
-        /// </summary>
-        internal static string AccountType_Bank {
-            get {
-                return ResourceManager.GetString("AccountType_Bank", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Your checking or other account in a bank we will connect to and download the transactions..
         /// </summary>
-        internal static string AccountType_Bank_Description {
+        public static string AccountType_Bank_Description {
             get {
                 return ResourceManager.GetString("AccountType_Bank_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cash.
+        ///   Looks up a localized string similar to Bank.
         /// </summary>
-        internal static string AccountType_Cash {
+        public static string AccountType_BankAccount {
             get {
-                return ResourceManager.GetString("AccountType_Cash", resourceCulture);
+                return ResourceManager.GetString("AccountType_BankAccount", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to To track the balance of your wallet or money you have under the pillow....
         /// </summary>
-        internal static string AccountType_Cash_Description {
+        public static string AccountType_Cash_Description {
             get {
                 return ResourceManager.GetString("AccountType_Cash_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loan.
+        ///   Looks up a localized string similar to Cash.
         /// </summary>
-        internal static string AccountType_Loan {
+        public static string AccountType_CashAccount {
             get {
-                return ResourceManager.GetString("AccountType_Loan", resourceCulture);
+                return ResourceManager.GetString("AccountType_CashAccount", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Any kind of money you own to anyone, like mortgage, car loan and similar.
         /// </summary>
-        internal static string AccountType_Loan_Description {
+        public static string AccountType_Loan_Description {
             get {
                 return ResourceManager.GetString("AccountType_Loan_Description", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loan.
+        /// </summary>
+        public static string AccountType_LoanAccount {
+            get {
+                return ResourceManager.GetString("AccountType_LoanAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
-        internal static string AlertDialog_ErrorTitle {
+        public static string AlertDialog_ErrorTitle {
             get {
                 return ResourceManager.GetString("AlertDialog_ErrorTitle", resourceCulture);
             }
@@ -235,7 +244,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
-        internal static string AlertDialog_OK {
+        public static string AlertDialog_OK {
             get {
                 return ResourceManager.GetString("AlertDialog_OK", resourceCulture);
             }
@@ -244,7 +253,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string ConfirmDialog_No {
+        public static string ConfirmDialog_No {
             get {
                 return ResourceManager.GetString("ConfirmDialog_No", resourceCulture);
             }
@@ -253,7 +262,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string ConfirmDialog_Yes {
+        public static string ConfirmDialog_Yes {
             get {
                 return ResourceManager.GetString("ConfirmDialog_Yes", resourceCulture);
             }
@@ -262,7 +271,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Going away will undo the changes you have done, do you want to continue?.
         /// </summary>
-        internal static string ConfirmDirtyDialog_Description {
+        public static string ConfirmDirtyDialog_Description {
             get {
                 return ResourceManager.GetString("ConfirmDirtyDialog_Description", resourceCulture);
             }
@@ -271,7 +280,7 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Really?.
         /// </summary>
-        internal static string ConfirmDirtyDialog_Title {
+        public static string ConfirmDirtyDialog_Title {
             get {
                 return ResourceManager.GetString("ConfirmDirtyDialog_Title", resourceCulture);
             }
@@ -280,9 +289,126 @@ namespace LH.Forcas.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Overview.
         /// </summary>
-        internal static string Dashboard_Title {
+        public static string Dashboard_Title {
             get {
                 return ResourceManager.GetString("Dashboard_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a day ago.
+        /// </summary>
+        public static string DateTimeAgo_Day {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} days ago.
+        /// </summary>
+        public static string DateTimeAgo_Days {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to an hour ago.
+        /// </summary>
+        public static string DateTimeAgo_Hour {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Hour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} hours ago.
+        /// </summary>
+        public static string DateTimeAgo_Hours {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to one minute ago.
+        /// </summary>
+        public static string DateTimeAgo_Minute {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Minute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} minutes ago.
+        /// </summary>
+        public static string DateTimeAgo_Minutes {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a month ago.
+        /// </summary>
+        public static string DateTimeAgo_Month {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} months ago.
+        /// </summary>
+        public static string DateTimeAgo_Months {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Months", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a few seconds ago.
+        /// </summary>
+        public static string DateTimeAgo_Seconds {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Seconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a week ago.
+        /// </summary>
+        public static string DateTimeAgo_Week {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} weeks ago.
+        /// </summary>
+        public static string DateTimeAgo_Weeks {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Weeks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a year ago.
+        /// </summary>
+        public static string DateTimeAgo_Year {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} years ago.
+        /// </summary>
+        public static string DateTimeAgo_Years {
+            get {
+                return ResourceManager.GetString("DateTimeAgo_Years", resourceCulture);
             }
         }
     }

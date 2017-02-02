@@ -1,8 +1,10 @@
 ﻿namespace LH.Forcas.ViewModels.Accounts
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Threading.Tasks;
     using Domain.UserData;
     using Extensions;
@@ -17,8 +19,9 @@
         private readonly INavigationService navigationService;
         private readonly IPageDialogService dialogService;
         private readonly IAccountingService accountingService;
+        private readonly Type[] accountTypeOrder = { typeof(CashAccount), typeof(BankAccount), typeof(CreditCardAccount), typeof(LoanAccount), typeof(InvestmentAccount) };
 
-        private IEnumerable<Account> accounts;
+        private IEnumerable<AccountsGroup> accounts;
 
         public AccountsListPageViewModel(
             IAccountingService accountingService,
@@ -45,7 +48,7 @@
 
         public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
 
-        public IEnumerable<Account> Accounts
+        public IEnumerable<AccountsGroup> Accounts
         {
             get { return this.accounts; }
             private set { this.SetProperty(ref this.accounts, value); }
@@ -58,7 +61,15 @@
 
         private void RefreshAccounts()
         {
-            this.RunAsyncWithBusyIndicator(() => this.Accounts = this.accountingService.GetAccounts());
+            this.RunAsyncWithBusyIndicator(() =>
+                                           {
+                                               var groupped = this.accountingService.GetAccounts()
+                                                                .GroupBy(account => account.GetType())
+                                                                .Select(group => new AccountsGroup(group.Key, group.OrderBy(acc => acc.Name)))
+                                                                .OrderBy(group => Array.IndexOf(this.accountTypeOrder, group.AccountType));
+
+                                               this.Accounts = groupped;
+                                           });
         }
 
         private async Task NavigateToAccountDetail(Account account)
@@ -73,7 +84,7 @@
                 return;
             }
 
-            var confirmMsg = string.Format(AppResources.AccountsListPage_DeleteAccountConfirmMsgFormat, account);
+            var confirmMsg = string.Format(AppResources.AccountsListPage_DeleteAccountConfirmMsgFormat, account.Name);
 
             var confirmed = await this.dialogService.DisplayAlertAsync(
                           AppResources.AccountsListPage_DeleteAccountConfirmTitle,
@@ -100,6 +111,34 @@
             finally
             {
                 this.RefreshAccounts();
+            }
+        }
+
+        public class AccountsGroup : IOrderedEnumerable<Account>
+        {
+            private readonly IOrderedEnumerable<Account> accounts;
+
+            public AccountsGroup(Type accountType, IOrderedEnumerable<Account> accounts)
+            {
+                this.AccountType = accountType;
+                this.accounts = accounts;
+            }
+
+            public Type AccountType { get; }
+
+            public IOrderedEnumerable<Account> CreateOrderedEnumerable<TKey>(Func<Account, TKey> keySelector, IComparer<TKey> comparer, bool descending)
+            {
+                return this.accounts.CreateOrderedEnumerable(keySelector, comparer, descending);
+            }
+
+            public IEnumerator<Account> GetEnumerator()
+            {
+                return this.accounts.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return this.GetEnumerator();
             }
         }
     }

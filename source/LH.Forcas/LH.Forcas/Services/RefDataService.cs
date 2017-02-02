@@ -33,6 +33,13 @@ namespace LH.Forcas.Services
             return this.GetRefDataViaCache(() => this.repository.GetCountries());
         }
 
+        public Currency GetCurrency(string id)
+        {
+            var currencies = this.GetRefDataViaCache(() => this.repository.GetCurrencies());
+
+            return currencies.Single(x => x.CurrencyId == id); // TODO: this should be done via dictionary...
+        }
+
         public IList<Currency> GetCurrencies()
         {
             return this.GetRefDataViaCache(() => this.repository.GetCurrencies());

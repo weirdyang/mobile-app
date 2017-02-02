@@ -32,7 +32,8 @@
                 AccountId = Guid.NewGuid(),
                 AccountNumber = AccountNumber.FromCzLocal("123456798/5500"),
                 CurrencyId = "CZK",
-                CurrentBalance = new Amount(5555758.17m, "CZK")
+                CurrentBalance = new Amount(5555758.17m, "CZK"),
+                LastSyncUtcTime = DateTime.UtcNow.AddDays(-2)
             });
 
             collection.Insert(new BankAccount
@@ -42,7 +43,8 @@
                 AccountId = Guid.NewGuid(),
                 AccountNumber = AccountNumber.FromCzLocal("555574789789/3300"),
                 CurrencyId = "CZK",
-                CurrentBalance = new Amount(258.17m, "CZK")
+                CurrentBalance = new Amount(258.17m, "CZK"),
+                LastSyncUtcTime = DateTime.UtcNow.AddHours(-5)
             });
 
             collection.Insert(new CashAccount
@@ -50,7 +52,8 @@
                 Name = "Peněženka",
                 AccountId = Guid.NewGuid(),
                 CurrencyId = "CZK",
-                CurrentBalance = new Amount(-38.17m, "CZK")
+                CurrentBalance = new Amount(-38.17m, "CZK"),
+                LastSyncUtcTime = DateTime.UtcNow.AddMinutes(-25)
             });
         }
 

@@ -35,8 +35,8 @@
             this.AccountingServiceMock.Setup(x => x.GetAccounts())
                 .Returns(new[]
                          {
-                             new BankAccount { AccountId = Guid.NewGuid(), Name = "Checking", Type = BankAccountType.Checking },
-                             new BankAccount { AccountId = Guid.NewGuid(), Name = "Savings", Type = BankAccountType.Savings }
+                             new BankAccount { AccountId = Guid.NewGuid(), Name = "Checking" },
+                             new BankAccount { AccountId = Guid.NewGuid(), Name = "Savings" }
                          });
         }
 
@@ -48,7 +48,7 @@
             {
                 this.NavigationServiceMock.Setup(x => x.NavigateAsync(It.Is<string>(uri => uri.Contains("Detail")), null, null, true)).ReturnAwaitable();
 
-                this.ViewModel.OnNavigatedTo(null);
+                this.NavigateTo();
                 await this.ViewModel.NavigateToAddAccountCommand.Execute();
 
                 this.NavigationServiceMock.VerifyAll();
@@ -57,8 +57,8 @@
             [Test]
             public void ShouldNavigateWhenNavigateToDetailCommandIsExecuted()
             {
-                this.ViewModel.OnNavigatedTo(null);
-                var accountToNavigate = this.ViewModel.Accounts.First();
+                this.NavigateTo();
+                var accountToNavigate = this.ViewModel.Accounts.First().First();
 
                 this.NavigationServiceMock.Setup(x => x.NavigateAsync(
                     It.Is<string>(uri => uri.ToString().Contains("Detail")),
@@ -74,7 +74,7 @@
             [Test]
             public void ShouldLoadAccountsWhenNavigatedTo()
             {
-                this.ViewModel.OnNavigatedTo(null);
+                this.NavigateTo();
                 this.AccountingServiceMock.VerifyAll();
             }
         }
@@ -87,8 +87,9 @@
             {
                 this.SetupDeleteConfirm(false);
 
-                this.ViewModel.OnNavigatedTo(null);
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First());
+                this.NavigateTo();
+
+                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First().First());
 
                 this.DialogServiceMock.VerifyAll();
             }
@@ -99,8 +100,9 @@
                 this.SetupDeleteConfirm(false);
                 this.AccountingServiceMock.Setup(x => x.DeleteAccount(It.IsAny<Guid>()));
 
-                this.ViewModel.OnNavigatedTo(null);
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First());
+                this.NavigateTo();
+
+                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First().First());
 
                 this.DialogServiceMock.VerifyAll();
                 this.AccountingServiceMock.Verify(x => x.DeleteAccount(It.IsAny<Guid>()), Times.Never);
@@ -109,13 +111,13 @@
             [Test]
             public void ShouldDeleteAccountIfConfirmed()
             {
-                this.ViewModel.OnNavigatedTo(null);
-                var accountId = this.ViewModel.Accounts.First().AccountId;
+                this.NavigateTo();
+                var accountId = this.ViewModel.Accounts.First().First().AccountId;
 
                 this.SetupDeleteConfirm(true);
                 this.AccountingServiceMock.Setup(x => x.DeleteAccount(It.Is<Guid>(id => id == accountId)));
 
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First());
+                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First().First());
 
                 this.DialogServiceMock.VerifyAll();
                 this.AccountingServiceMock.Verify(x => x.DeleteAccount(It.Is<Guid>(id => id == accountId)), Times.Once);
@@ -133,8 +135,9 @@
                     It.IsAny<string>(),
                     It.IsAny<string>()));
 
-                this.ViewModel.OnNavigatedTo(null);
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First());
+                this.NavigateTo();
+
+                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First().First());
 
                 this.DialogServiceMock.VerifyAll();
             }
@@ -142,7 +145,7 @@
             [Test]
             public void ShouldIgnoreCommandCalledWithoutParameter()
             {
-                this.ViewModel.OnNavigatedTo(null);
+                this.NavigateTo();
                 this.ViewModel.DeleteAccountCommand.Execute(null);
 
                 this.AccountingServiceMock.VerifyAll();
@@ -162,6 +165,12 @@
                                                 It.IsAny<string>(),
                                                 It.IsAny<string>()))
                                      .ReturnsAsync(result);
+        }
+
+        protected void NavigateTo()
+        {
+            this.ViewModel.OnNavigatedTo(null);
+            this.ViewModel.CurrentBackgroundTask?.Wait();
         }
     }
 }

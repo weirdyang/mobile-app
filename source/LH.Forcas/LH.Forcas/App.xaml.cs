@@ -26,6 +26,8 @@
             var dbManager = this.Container.Resolve<IDbManager>();
             dbManager.Initialize();
 
+            this.AmountToCurrencyStringConverter.RefDataService = this.Container.Resolve<IRefDataService>();
+
 #if DEBUG
             TestData.InsertTestData(dbManager);
 #endif

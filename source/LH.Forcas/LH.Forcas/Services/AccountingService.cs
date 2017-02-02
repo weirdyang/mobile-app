@@ -40,7 +40,7 @@
 
         public void DeleteAccount(Guid id)
         {
-            throw new NotImplementedException();
+            this.roamingDataRepository.Delete<Account>(id);
         }
     }
 }

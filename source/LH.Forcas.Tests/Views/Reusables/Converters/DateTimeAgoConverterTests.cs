@@ -26,6 +26,13 @@
                 var result = this.Converter.Convert(null, typeof(string), null, CultureInfo.CurrentCulture);
                 Assert.IsNull(result);
             }
+
+            [Test]
+            public void InvalidValueTest()
+            {
+                var result = this.Converter.Convert("DUMMY", typeof(string), null, CultureInfo.CurrentCulture);
+                Assert.IsNull(result);
+            }
         }
 
         [TestFixture]
@@ -120,6 +127,15 @@
             {
                 var result = (string)this.Converter.Convert(new TimeSpan(1200, 21, 4, 30), typeof(string), null, CultureInfo.CurrentCulture);
                 AssertWithFormat(AppResources.DateTimeAgo_Years, result);
+            }
+
+            [Test]
+            public void DateTimeTest()
+            {
+                var dateTime = DateTime.UtcNow.AddDays(-2);
+
+                var result = (string)this.Converter.Convert(dateTime, typeof(string), null, CultureInfo.CurrentCulture);
+                AssertWithFormat(AppResources.DateTimeAgo_Days, result);
             }
 
             private static void AssertWithFormat(string expectedFormat, object actual)

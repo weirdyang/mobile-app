@@ -30,5 +30,14 @@
                 return db.GetCollection<T>().FindById(bsonId);
             }
         }
+
+        public void Delete<T>(object id)
+        {
+            using (var db = this.dbManager.GetDatabase())
+            {
+                var bsonId = new BsonValue(id);
+                db.GetCollection<T>().Delete(bsonId);
+            }
+        }
     }
 }

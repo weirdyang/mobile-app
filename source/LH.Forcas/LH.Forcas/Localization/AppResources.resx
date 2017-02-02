@@ -120,7 +120,7 @@
   <data name="AccountsListPage_Title" xml:space="preserve">
     <value>Accounts</value>
   </data>
-  <data name="AccountType_Bank" xml:space="preserve">
+  <data name="AccountType_BankAccount" xml:space="preserve">
     <value>Bank</value>
   </data>
   <data name="Dashboard_Title" xml:space="preserve">
@@ -153,13 +153,13 @@
   <data name="AccountType_Bank_Description" xml:space="preserve">
     <value>Your checking or other account in a bank we will connect to and download the transactions.</value>
   </data>
-  <data name="AccountType_Cash" xml:space="preserve">
+  <data name="AccountType_CashAccount" xml:space="preserve">
     <value>Cash</value>
   </data>
   <data name="AccountType_Cash_Description" xml:space="preserve">
     <value>To track the balance of your wallet or money you have under the pillow...</value>
   </data>
-  <data name="AccountType_Loan" xml:space="preserve">
+  <data name="AccountType_LoanAccount" xml:space="preserve">
     <value>Loan</value>
   </data>
   <data name="AccountType_Loan_Description" xml:space="preserve">
@@ -191,5 +191,47 @@
   </data>
   <data name="AccountsDetailPage_SaveError" xml:space="preserve">
     <value>There was a problem saving the account. If this happens again, please report it at our website.</value>
+  </data>
+  <data name="DateTimeAgo_Day" xml:space="preserve">
+    <value>a day ago</value>
+  </data>
+  <data name="DateTimeAgo_Days" xml:space="preserve">
+    <value>{0} days ago</value>
+  </data>
+  <data name="DateTimeAgo_Hour" xml:space="preserve">
+    <value>an hour ago</value>
+  </data>
+  <data name="DateTimeAgo_Hours" xml:space="preserve">
+    <value>{0} hours ago</value>
+  </data>
+  <data name="DateTimeAgo_Minute" xml:space="preserve">
+    <value>one minute ago</value>
+  </data>
+  <data name="DateTimeAgo_Minutes" xml:space="preserve">
+    <value>{0} minutes ago</value>
+  </data>
+  <data name="DateTimeAgo_Month" xml:space="preserve">
+    <value>a month ago</value>
+  </data>
+  <data name="DateTimeAgo_Months" xml:space="preserve">
+    <value>{0} months ago</value>
+  </data>
+  <data name="DateTimeAgo_Seconds" xml:space="preserve">
+    <value>a few seconds ago</value>
+  </data>
+  <data name="DateTimeAgo_Week" xml:space="preserve">
+    <value>a week ago</value>
+  </data>
+  <data name="DateTimeAgo_Weeks" xml:space="preserve">
+    <value>{0} weeks ago</value>
+  </data>
+  <data name="DateTimeAgo_Year" xml:space="preserve">
+    <value>a year ago</value>
+  </data>
+  <data name="DateTimeAgo_Years" xml:space="preserve">
+    <value>{0} years ago</value>
+  </data>
+  <data name="AccountsListPage_LastSyncLabelFormat" xml:space="preserve">
+    <value>Last synced {0}</value>
   </data>
 </root>

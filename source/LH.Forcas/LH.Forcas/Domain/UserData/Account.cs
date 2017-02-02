@@ -5,6 +5,7 @@
 
     public abstract class Account : IRoamingObject
     {
+        [BsonId]
         public Guid AccountId { get; set; }
 
         public string Name { get; set; }

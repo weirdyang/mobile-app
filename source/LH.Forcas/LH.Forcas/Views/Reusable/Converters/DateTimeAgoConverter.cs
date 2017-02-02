@@ -9,12 +9,22 @@
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is TimeSpan))
+            TimeSpan timeSpan;
+
+            if (value is TimeSpan)
+            {
+                timeSpan = (TimeSpan) value;
+            }
+            else if(value is DateTime)
+            {
+                var date = (DateTime) value;
+                timeSpan = DateTime.UtcNow - date;
+            }
+            else
             {
                 return null;
             }
 
-            var timeSpan = (TimeSpan) value;
             string result;
 
             if (this.IsInRange(timeSpan.TotalDays, 365, AppResources.DateTimeAgo_Years, AppResources.DateTimeAgo_Year, out result))
@@ -56,7 +66,7 @@
 
             if (total >= unit*2)
             {
-                message = string.Format(multipleUnitsMessageFormat, total/unit);
+                message = string.Format(multipleUnitsMessageFormat, Math.Floor(total/unit));
             }
             else if(total >= unit)
             {

@@ -57,6 +57,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Domain\RefData\BankAuthorizationScheme.cs" />
+    <Compile Include="Domain\UserData\Amount.cs" />
     <Compile Include="Domain\UserData\Authorization\BankAuthorizationBase.cs" />
     <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />
     <Compile Include="Domain\UserData\Category.cs" />
@@ -77,9 +78,11 @@
     <Compile Include="ViewModels\PropertyValidationResult.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
+    <Compile Include="Views\Accounts\AccountTemplateSelector.cs" />
     <Compile Include="Views\Reusable\Behaviors\DisableListViewSelectionBehavior.cs" />
     <Compile Include="Views\Reusable\Behaviors\DynamicTableViewBehavior.cs" />
     <Compile Include="Views\Reusable\Behaviors\ViewCellCommand.cs" />
+    <Compile Include="Views\Reusable\Controls\ContentControl.cs" />
     <Compile Include="Views\Reusable\Controls\PickerCell.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationIcon.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationLabel.cs" />
@@ -87,14 +90,13 @@
     <Compile Include="Views\Reusable\Converters\BankIdToImageSourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\DateTimeAgoConverter.cs" />
     <Compile Include="Views\Reusable\Converters\NegateBoolConverter.cs" />
-    <Compile Include="Views\Reusable\Converters\NumberColorIndicatorConverter.cs" />
-    <Compile Include="Views\Reusable\Converters\NumberToCurrencyConverter.cs" />
+    <Compile Include="Views\Reusable\Converters\AmountToColorConverter.cs" />
+    <Compile Include="Views\Reusable\Converters\AmountToCurrencyStringConverter.cs" />
     <Compile Include="Views\Reusable\Converters\StringToResourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\ToResourceConverter.cs" />
     <Compile Include="Domain\RefData\IIsActive.cs" />
     <Compile Include="Domain\UserData\Account.cs" />
     <Compile Include="Domain\UserData\AccountNumber.cs" />
-    <Compile Include="Domain\UserData\AccountType.cs" />
     <Compile Include="Domain\UserData\Budget.cs" />
     <Compile Include="Domain\UserData\BudgetCategory.cs" />
     <Compile Include="Domain\UserData\Transaction.cs" />

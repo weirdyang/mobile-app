@@ -7,5 +7,6 @@
         IEnumerable<T> GetAll<T>();
 
         T GetOneById<T>(object id);
+        void Delete<T>(object id);
     }
 }

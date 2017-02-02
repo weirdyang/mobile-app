@@ -8,11 +8,31 @@
     public abstract class ViewModelBase : BindableBase, INavigationAware
     {
         private bool isBusy;
+        private Task currentBackgroundTask;
+        private readonly object currentBackgroundTaskLock = new object();
 
         public bool IsBusy
         {
             get { return this.isBusy; }
             private set { this.SetProperty(ref this.isBusy, value); }
+        }
+
+        public Task CurrentBackgroundTask
+        {
+            get
+            {
+                lock (this.currentBackgroundTaskLock)
+                {
+                    return this.currentBackgroundTask;
+                }
+            }
+            private set
+            {
+                lock (this.currentBackgroundTaskLock)
+                {
+                    this.currentBackgroundTask = value;
+                }
+            }
         }
 
         public virtual void OnNavigatedFrom(NavigationParameters parameters) { }
@@ -22,8 +42,7 @@
         protected Task RunAsyncWithBusyIndicator(Action action)
         {
             this.IsBusy = true;
-
-            return Task.Run(() =>
+            this.CurrentBackgroundTask = Task.Run(() =>
                      {
                          try
                          {
@@ -31,10 +50,12 @@
                          }
                          finally
                          {
-                             //Device.BeginInvokeOnMainThread(() => { this.IsBusy = false; });
                              this.IsBusy = false;
+                             this.CurrentBackgroundTask = null;
                          }
                      });
+
+            return this.CurrentBackgroundTask;
         }
 
         protected Task RunAsyncWithBusyIndicator(Task task)

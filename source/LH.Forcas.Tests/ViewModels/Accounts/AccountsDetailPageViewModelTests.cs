@@ -60,8 +60,8 @@
 
             var currencies = new[]
             {
-                new Currency { CurrencyId  = "CZK", DisplayName = "Česká Koruna", IsActive = true, Symbol = "Kč", PreferedSymbolPosition = PrefferedCcySymbolLocation.After },
-                new Currency { CurrencyId  = "GBP", DisplayName = "British Pound", IsActive = true, Symbol = "£", PreferedSymbolPosition = PrefferedCcySymbolLocation.Before },
+                new Currency { CurrencyId  = "CZK", DisplayName = "Česká Koruna", IsActive = true, DisplayFormat = "{0} Kč" },
+                new Currency { CurrencyId  = "GBP", DisplayName = "British Pound", IsActive = true, DisplayFormat = "£{0}" },
             };
 
             this.UserSettingsServiceMock.Setup(x => x.CountryId).Returns("CZ");
@@ -362,9 +362,8 @@
         {
             return new RemoteAccountInfo
             {
-                AccountNumber = AccountNumber.Parse("123/5500"),
-                CurrencyId = "CZK",
-                Type = BankAccountType.Checking
+                AccountNumber = AccountNumber.FromCzLocal("123/5500"),
+                CurrencyId = "CZK"
             };
         }
 
@@ -372,12 +371,11 @@
         {
             return new BankAccount
             {
-                AccountNumber = AccountNumber.Parse("123/5500"),
+                AccountNumber = AccountNumber.FromCzLocal("123/5500"),
                 BankId = "TestBank",
                 CurrencyId = "CZK",
-                Type = BankAccountType.Checking,
                 Name = "My Test Account",
-                CurrentBalance = 0m
+                CurrentBalance = new Amount(0m, "CZK")
             };
         }
 
@@ -385,12 +383,11 @@
         {
             return new BankAccount
             {
-                AccountNumber = AccountNumber.Parse("456/5577"),
+                AccountNumber = AccountNumber.FromCzLocal("456/5577"),
                 BankId = "OtherBank",
                 CurrencyId = "GBP",
-                Type = BankAccountType.Savings,
                 Name = "Another Account's Name",
-                CurrentBalance = 99.98m
+                CurrentBalance = new Amount(0m, "GBP")
             };
         }
 
