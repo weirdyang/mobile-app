@@ -39,5 +39,18 @@
                 db.GetCollection<T>().Delete(bsonId);
             }
         }
+
+        public void Save<T>(T item)
+        {
+            using (var db = this.dbManager.GetDatabase())
+            {
+                db.GetCollection<T>().Upsert(item);
+            }
+        }
+
+        public IRepositoryTransaction BeginTransaction()
+        {
+            return new RoamingRepositoryTransaction(this.dbManager.GetDatabase());
+        }
     }
 }

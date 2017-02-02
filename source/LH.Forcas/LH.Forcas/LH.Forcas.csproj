@@ -72,6 +72,9 @@
     <Compile Include="Integration\Banks\RemoteAccountInfo.cs" />
     <Compile Include="Integration\Banks\TestBankProvider.cs" />
     <Compile Include="Storage\Data\TestData.cs" />
+    <Compile Include="Storage\IRepositoryActions.cs" />
+    <Compile Include="Storage\IRepositoryTransaction.cs" />
+    <Compile Include="Storage\RoamingRepositoryTransaction.cs" />
     <Compile Include="ViewModels\DetailViewModelBase.cs" />
     <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
