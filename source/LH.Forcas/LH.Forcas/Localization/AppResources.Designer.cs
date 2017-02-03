@@ -251,6 +251,51 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete the account {0} and all related transactions?.
+        /// </summary>
+        public static string CategoriesListPage_DeleteCategoryConfirmMsgFormat {
+            get {
+                return ResourceManager.GetString("CategoriesListPage_DeleteCategoryConfirmMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete category?.
+        /// </summary>
+        public static string CategoriesListPage_DeleteCategoryConfirmTitle {
+            get {
+                return ResourceManager.GetString("CategoriesListPage_DeleteCategoryConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There were {0} transactions in the {1} category. Do you want to move them all into another one?.
+        /// </summary>
+        public static string CategoriesListPage_DeleteCategoryMoveTransactionsConfirmMsgFormat {
+            get {
+                return ResourceManager.GetString("CategoriesListPage_DeleteCategoryMoveTransactionsConfirmMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move transactions?.
+        /// </summary>
+        public static string CategoriesListPage_DeleteCategoryMoveTransactionsConfirmTitle {
+            get {
+                return ResourceManager.GetString("CategoriesListPage_DeleteCategoryMoveTransactionsConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Categories.
+        /// </summary>
+        public static string CategoriesListPage_Title {
+            get {
+                return ResourceManager.GetString("CategoriesListPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string ConfirmDialog_No {

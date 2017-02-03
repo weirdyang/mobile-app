@@ -14,5 +14,16 @@
                   description,
                   AppResources.AlertDialog_OK);
         }
+
+        public static async Task<bool> DisplayConfirmAlert(this IPageDialogService pageDialogService, string title, string descriptionFormat, params object[] args)
+        {
+            var description = string.Format(descriptionFormat, args);
+
+            return await pageDialogService.DisplayAlertAsync(
+                  AppResources.AlertDialog_ErrorTitle,
+                  description,
+                  AppResources.ConfirmDialog_Yes,
+                  AppResources.ConfirmDialog_No);
+        }
     }
 }

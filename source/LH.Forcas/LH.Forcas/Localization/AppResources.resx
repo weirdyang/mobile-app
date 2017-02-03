@@ -234,4 +234,19 @@
   <data name="AccountsListPage_LastSyncLabelFormat" xml:space="preserve">
     <value>Last synced {0}</value>
   </data>
+  <data name="CategoriesListPage_Title" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="CategoriesListPage_DeleteCategoryConfirmMsgFormat" xml:space="preserve">
+    <value>Do you really want to delete the account {0} and all related transactions?</value>
+  </data>
+  <data name="CategoriesListPage_DeleteCategoryConfirmTitle" xml:space="preserve">
+    <value>Delete category?</value>
+  </data>
+  <data name="CategoriesListPage_DeleteCategoryMoveTransactionsConfirmMsgFormat" xml:space="preserve">
+    <value>There were {0} transactions in the {1} category. Do you want to move them all into another one?</value>
+  </data>
+  <data name="CategoriesListPage_DeleteCategoryMoveTransactionsConfirmTitle" xml:space="preserve">
+    <value>Move transactions?</value>
+  </data>
 </root>

@@ -16,6 +16,8 @@
             this.roamingDataRepository = roamingDataRepository;
         }
 
+        #region Accounts
+
         public IEnumerable<Account> GetAccounts()
         {
             return this.roamingDataRepository.GetAll<Account>();
@@ -31,6 +33,11 @@
             throw new NotImplementedException();
         }
 
+        public void DeleteAccount(Guid id)
+        {
+            this.roamingDataRepository.Delete<Account>(id);
+        }
+
         public Task<IList<RemoteAccountInfo>> GetAvailableRemoteAccounts(string bankId)
         {
             // TODO: Filter out accounts which already exist (by account number whatever...)
@@ -38,9 +45,25 @@
             throw new NotImplementedException();
         }
 
-        public void DeleteAccount(Guid id)
+        #endregion
+
+        #region Categories
+
+        public IEnumerable<Category> GetCategories()
         {
-            this.roamingDataRepository.Delete<Account>(id);
+            return this.roamingDataRepository.GetAll<Category>();
         }
+
+        public void DeleteCategory(Guid categoryId, Guid? moveTransactionsIntoCategoryId)
+        {
+            this.roamingDataRepository.Delete<Category>(categoryId);
+        }
+
+        public void SaveCategory(Category category)
+        {
+            this.roamingDataRepository.Save(category);
+        }
+
+        #endregion
     }
 }

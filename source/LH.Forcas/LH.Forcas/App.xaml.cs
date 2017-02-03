@@ -11,6 +11,7 @@
     using Storage;
     using Storage.Data;
     using Views.Accounts;
+    using Views.Categories;
 
     public partial class App
     {
@@ -58,6 +59,8 @@
             this.Container.RegisterTypeForNavigation<AccountsListPage>();
             this.Container.RegisterTypeForNavigation<AccountsDetailPage>();
             this.Container.RegisterTypeForNavigation<AccountsNavigationPage>();
+
+            this.Container.RegisterTypeForNavigation<CategoriesListPage>();
         }
     }
 }

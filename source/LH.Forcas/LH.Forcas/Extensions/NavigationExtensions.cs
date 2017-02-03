@@ -3,8 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Localization;
     using Prism.Navigation;
     using Views.Accounts;
+    using Views.Categories;
     using Views.Dashboard;
     using Xamarin.Forms;
 
@@ -20,8 +22,9 @@
 
         public static readonly IEnumerable<NavigationPage> RootLevelPages = new[]
         {
-            new NavigationPage { DisplayName = "Dashboard", NavigateAction = NavigateToDashboard },
-            new NavigationPage { DisplayName = "Accounts", NavigateAction = NavigateToAccounts }
+            new NavigationPage { DisplayName = AppResources.Dashboard_Title, NavigateAction = NavigateToDashboard },
+            new NavigationPage { DisplayName = AppResources.AccountsListPage_Title, NavigateAction = NavigateToAccounts },
+            new NavigationPage { DisplayName = AppResources.CategoriesListPage_Title, NavigateAction = NavigateToCategories }
         };
 
         public static void InitializeNavigation()
@@ -57,6 +60,17 @@
             var parameters = CreateAccountDetailParameters(accountId);
 
             await navigationService.NavigateAsync(nameof(AccountsDetailPage), parameters);
+        }
+
+        public static async Task NavigateToCategories(this INavigationService navigationService)
+        {
+            var uri = GetAbsoluteUri(nameof(DashboardNavigationPage), nameof(CategoriesListPage));
+            await navigationService.NavigateAsync(uri);
+        }
+
+        public static async Task NavigateToCategoriesAdd(this INavigationService navigationService)
+        {
+            throw new NotImplementedException();
         }
 
         public static NavigationParameters CreateAccountDetailParameters(Guid accountId)

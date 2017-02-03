@@ -65,6 +65,7 @@
             {
                 CategoryId = Guid.NewGuid(),
                 Name = "Nákupy",
+                Icon = "md-shopping-cart",
                 Children = new List<Category>
                                   {
                                       new Category
@@ -84,6 +85,7 @@
             {
                 CategoryId = Guid.NewGuid(),
                 Name = "Auto",
+                Icon = "md-directions-car",
                 Children = new List<Category>
                                   {
                                       new Category

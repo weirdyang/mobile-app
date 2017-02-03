@@ -8,6 +8,8 @@
 
     public interface IAccountingService
     {
+        #region Accounts
+
         IEnumerable<Account> GetAccounts();
 
         void DeleteAccount(Guid id);
@@ -17,5 +19,17 @@
         void SaveAccount(Account account);
 
         Task<IList<RemoteAccountInfo>> GetAvailableRemoteAccounts(string bankId);
+
+        #endregion
+
+        #region Categories
+
+        IEnumerable<Category> GetCategories();
+        
+        void DeleteCategory(Guid categoryId, Guid? moveTransactionsIntoCategoryId);
+
+        void SaveCategory(Category category);
+
+        #endregion
     }
 }

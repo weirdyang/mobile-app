@@ -9,6 +9,8 @@
         [BsonId]
         public Guid CategoryId { get; set; }
 
+        public string Icon { get; set; }
+
         public string Name { get; set; }
 
         public List<Category> Children { get; set; }

@@ -27,6 +27,7 @@
             using (var db = this.dbManager.GetDatabase())
             {
                 var bsonId = new BsonValue(id);
+
                 return db.GetCollection<T>().FindById(bsonId);
             }
         }

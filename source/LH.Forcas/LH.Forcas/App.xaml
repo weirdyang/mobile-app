@@ -9,6 +9,7 @@
       <converters:DateTimeAgoConverter x:Key="DateTimeAgoConverter" />
       <converters:AmountToCurrencyStringConverter x:Key="AmountToCurrencyStringConverter" x:Name="AmountToCurrencyStringConverter" />
       <converters:AmountToColorConverter x:Key="AmountToColorConverter" PositiveColor="Green" NegativeColor="Red" />
+      <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
       
       <OnPlatform x:TypeArguments="Color" Android="White" iOS="White" WinPhone="White" x:Key="IconToolbarItemFontColor" />
     </ResourceDictionary>

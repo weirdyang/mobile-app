@@ -6,7 +6,7 @@
              x:Name="Page">
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">
-      <ListView ItemsSource="{ Binding Pages }" SelectedItem="{ Binding SelectedPage, Mode=TwoWay }">
+      <ListView ItemsSource="{ Binding Pages }">
         <ListView.Header>
           <Grid>
             <Label Text="Image"></Label>

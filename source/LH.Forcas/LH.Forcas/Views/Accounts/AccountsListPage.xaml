@@ -26,11 +26,6 @@
             IsGroupingEnabled="True"
             GroupShortNameBinding="{ Binding AccountType, Converter={ StaticResource ToResourceConverter } }"
             HasUnevenRows="True">
-    <!--
-    <ListView.Behaviors>
-      <behaviors:DisableListViewSelectionBehavior />
-    </ListView.Behaviors>
-    -->
     <ListView.GroupHeaderTemplate>
       <DataTemplate>
         <ViewCell Height="25">

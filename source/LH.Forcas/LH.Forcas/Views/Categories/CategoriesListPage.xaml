@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+             xmlns:markupExtensions="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
+             x:Class="LH.Forcas.Views.Categories.CategoriesListPage"
+             x:Name="Page"
+             Title="{ markupExtensions:Translate CategoriesListPage_Title }">
+  <ContentPage.ToolbarItems>
+    <iconize:IconToolbarItem Command="{ Binding NavigateToAddCategoryCommand }" Icon="md-add" IconColor="{ StaticResource IconToolbarItemFontColor }" />
+  </ContentPage.ToolbarItems>
+  
+  <ListView ItemsSource="{ Binding Categories }"
+            RefreshCommand="{ Binding RefreshCategoriesCommand }"
+            IsRefreshing="{ Binding IsBusy }"
+            IsPullToRefreshEnabled="True">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <ViewCell.View>
+            <StackLayout Orientation="Horizontal" Padding="10,0,0,0" VerticalOptions="Center">
+              <iconize:IconLabel Text="{ Binding Category.Icon }" FontSize="25" VerticalOptions="Center" IsVisible="{ Binding IsRoot }" />
+              <Label Text="{ Binding Category.Name }" Style="{ DynamicResource SubtitleStyle }" IsVisible="{ Binding IsRoot }" />
+
+              <Label Text="{ Binding Category.Name }" Style="{ DynamicResource ListItemTextStyle }" Margin="45,0,0,0" IsVisible="{ Binding IsRoot, Converter={ StaticResource NegateBoolConverter } }" />
+            </StackLayout>
+          </ViewCell.View>
+          <ViewCell.ContextActions>
+            <MenuItem Text="Delete" IsDestructive="True"
+                      Command="{ Binding BindingContext.DeleteCategoryCommand, Source={ x:Reference Page } }"
+                      CommandParameter="{ Binding Category }"/>
+          </ViewCell.ContextActions>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+</ContentPage>
