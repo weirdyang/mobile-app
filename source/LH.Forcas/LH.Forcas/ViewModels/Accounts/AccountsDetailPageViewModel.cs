@@ -183,7 +183,7 @@
                     this.CanEditAccountType = true;
                     this.Title = AppResources.AccountsDetailPage_Title_New;
 
-                    var preferedCountryId = this.userSettingsService.CountryId;
+                    var preferedCountryId = this.userSettingsService.Settings.DefaultCountryId;
                     this.SelectedCountry = this.Countries.SingleOrDefault(x => x.CountryId == preferedCountryId);
                 }
                 else

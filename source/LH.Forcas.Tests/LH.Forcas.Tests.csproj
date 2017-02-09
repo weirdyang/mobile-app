@@ -50,14 +50,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Acr.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Acr.DeviceInfo.4.0.2\lib\net45\Acr.DeviceInfo.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Acr.DeviceInfo.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Acr.DeviceInfo.4.0.2\lib\net45\Acr.DeviceInfo.Interface.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -228,8 +220,6 @@
     <Compile Include="ViewModels\Accounts\AccountsDetailPageViewModelTests.cs" />
     <Compile Include="ViewModels\Accounts\AccountsListPageViewModelTests.cs" />
     <Compile Include="ViewModels\DetailViewModeBaseTests.cs" />
-    <Compile Include="ViewModels\SyncSetup\ProviderAuthorizeViewModelTests.cs" />
-    <Compile Include="ViewModels\SyncSetup\ProviderSelectionViewModelTests.cs" />
     <Compile Include="ViewModels\ViewModelBaseTests.cs" />
     <Compile Include="Views\Reusables\Converters\AccountTypeToResourceConverterTests.cs" />
     <Compile Include="Views\Reusables\Converters\DateTimeAgoConverterTests.cs" />

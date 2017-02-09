@@ -54,17 +54,17 @@
 
             var countries = new[]
             {
-                new Country { CountryId = "GB", DefaultCurrencyCode = "GBP" },
-                new Country { CountryId = "CZ", DefaultCurrencyCode = "CZK" }
+                new Country { CountryId = "GB", DefaultCurrencyId = "GBP" },
+                new Country { CountryId = "CZ", DefaultCurrencyId = "CZK" }
             };
 
             var currencies = new[]
             {
-                new Currency { CurrencyId  = "CZK", DisplayName = "Česká Koruna", IsActive = true, DisplayFormat = "{0} Kč" },
-                new Currency { CurrencyId  = "GBP", DisplayName = "British Pound", IsActive = true, DisplayFormat = "£{0}" },
+                new Currency { CurrencyId  = "CZK", IsActive = true, DisplayFormat = "{0} Kč" },
+                new Currency { CurrencyId  = "GBP", IsActive = true, DisplayFormat = "£{0}" },
             };
 
-            this.UserSettingsServiceMock.Setup(x => x.CountryId).Returns("CZ");
+            this.UserSettingsServiceMock.Setup(x => x.Settings).Returns(new UserSettings { DefaultCountryId = "CZ" });
             this.RefDataServiceMock.Setup(x => x.GetBanks()).Returns(banks);
             this.RefDataServiceMock.Setup(x => x.GetCountries()).Returns(countries);
             this.RefDataServiceMock.Setup(x => x.GetCurrencies()).Returns(currencies);

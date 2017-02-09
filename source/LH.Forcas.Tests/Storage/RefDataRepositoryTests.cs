@@ -41,7 +41,7 @@ namespace LH.Forcas.Tests.Storage
                 var cz = countries.SingleOrDefault(x => x.CountryId == "CZ");
 
                 Assert.IsNotNull(cz);
-                Assert.IsNotEmpty(cz.DefaultCurrencyCode);
+                Assert.IsNotEmpty(cz.DefaultCurrencyId);
             }
 
             [Test]
@@ -51,7 +51,6 @@ namespace LH.Forcas.Tests.Storage
                 var cz = currencies.SingleOrDefault(x => x.CurrencyId == "CZK");
 
                 Assert.IsNotNull(cz);
-                Assert.IsNotEmpty(cz.DisplayName);
                 Assert.IsNotEmpty(cz.DisplayFormat);
             }
         }

@@ -1,13 +1,11 @@
 ﻿[
   {
     "currencyId": "CZK",
-    "displayName": "Czech Koruna",
     "displayFormat": "{0:n} Kč",
     "isActive": "true" 
   },
   {
     "currencyId": "EUR",
-    "displayName": "Euro",
     "displayFormat": "€{0}",
     "isActive": "true" 
   }

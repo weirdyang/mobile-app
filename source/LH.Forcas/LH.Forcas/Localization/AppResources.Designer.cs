@@ -332,6 +332,33 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Czech Republic.
+        /// </summary>
+        public static string Country_CZ {
+            get {
+                return ResourceManager.GetString("Country_CZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czech Koruna.
+        /// </summary>
+        public static string Currency_CZK {
+            get {
+                return ResourceManager.GetString("Currency_CZK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Euro.
+        /// </summary>
+        public static string Currency_EUR {
+            get {
+                return ResourceManager.GetString("Currency_EUR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overview.
         /// </summary>
         public static string Dashboard_Title {
@@ -454,6 +481,42 @@ namespace LH.Forcas.Localization {
         public static string DateTimeAgo_Years {
             get {
                 return ResourceManager.GetString("DateTimeAgo_Years", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string SettingsPage_DefaultCountry {
+            get {
+                return ResourceManager.GetString("SettingsPage_DefaultCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string SettingsPage_DefaultCurrency {
+            get {
+                return ResourceManager.GetString("SettingsPage_DefaultCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prefered Values.
+        /// </summary>
+        public static string SettingsPage_PreferedValuesSectionTitle {
+            get {
+                return ResourceManager.GetString("SettingsPage_PreferedValuesSectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsPage_Title {
+            get {
+                return ResourceManager.GetString("SettingsPage_Title", resourceCulture);
             }
         }
     }

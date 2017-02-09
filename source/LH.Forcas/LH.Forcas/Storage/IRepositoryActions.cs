@@ -10,6 +10,8 @@
 
         void Delete<T>(object id);
 
-        void Save<T>(T item);
+        void Insert<T>(T item);
+
+        void Update<T>(T item);
     }
 }

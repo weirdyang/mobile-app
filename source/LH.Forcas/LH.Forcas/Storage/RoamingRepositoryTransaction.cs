@@ -32,9 +32,14 @@
             this.db.GetCollection<T>().Delete(bsonId);
         }
 
-        public void Save<T>(T item)
+        public void Insert<T>(T item)
         {
-            this.db.GetCollection<T>().Upsert(item);
+            this.db.GetCollection<T>().Insert(item);
+        }
+
+        public void Update<T>(T item)
+        {
+            this.db.GetCollection<T>().Update(item);
         }
 
         public void Dispose()

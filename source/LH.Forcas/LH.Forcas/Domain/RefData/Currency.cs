@@ -6,8 +6,6 @@ namespace LH.Forcas.Domain.RefData
 
         public string DisplayFormat { get; set; }
 
-        public string DisplayName { get; set; }
-
         public bool IsActive { get; set; }
     }
 }

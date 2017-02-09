@@ -62,6 +62,8 @@
     <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />
     <Compile Include="Domain\UserData\Category.cs" />
     <Compile Include="Domain\UserData\IRoamingObject.cs" />
+    <Compile Include="Domain\UserData\UserSettings.cs" />
+    <Compile Include="Extensions\LocalizationExtensions.cs" />
     <Compile Include="Extensions\PrismExtensions.cs" />
     <Compile Include="Integration\Banks\BankProviderCatalog.cs" />
     <Compile Include="Integration\Banks\BankProviderInfoAttribute.cs" />
@@ -71,6 +73,8 @@
     <Compile Include="Integration\Banks\IBankProviderCatalog.cs" />
     <Compile Include="Integration\Banks\RemoteAccountInfo.cs" />
     <Compile Include="Integration\Banks\TestBankProvider.cs" />
+    <Compile Include="Services\IDeviceService.cs" />
+    <Compile Include="Services\UserSettingsService.cs" />
     <Compile Include="Storage\Data\TestData.cs" />
     <Compile Include="Storage\IRepositoryActions.cs" />
     <Compile Include="Storage\IRepositoryTransaction.cs" />
@@ -80,8 +84,12 @@
     <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
     <Compile Include="ViewModels\PropertyValidationResult.cs" />
+    <Compile Include="ViewModels\Settings\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
+    <Compile Include="Views\GenericNavigationPage.xaml.cs">
+      <DependentUpon>GenericNavigationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Accounts\AccountTemplateSelector.cs" />
     <Compile Include="Views\Categories\CategoriesListPage.xaml.cs">
       <DependentUpon>CategoriesListPage.xaml</DependentUpon>
@@ -155,10 +163,6 @@
     </Compile>
     <Compile Include="ViewModels\Dashboard\DashboardPageViewModel.cs" />
     <Compile Include="ViewModels\Root\RootSideMenuPageViewModel.cs" />
-    <Compile Include="ViewModels\SyncSetup\SyncFlowState.cs" />
-    <Compile Include="ViewModels\SyncSetup\ProviderAuthorizeViewModel.cs" />
-    <Compile Include="ViewModels\SyncSetup\ProviderSelectionViewModel.cs" />
-    <Compile Include="ViewModels\SyncSetup\SyncFlowViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Dashboard\DashboardNavigationPage.xaml.cs">
       <DependentUpon>DashboardNavigationPage.xaml</DependentUpon>
@@ -171,6 +175,9 @@
     </Compile>
     <Compile Include="Views\Root\RootTabPage.xaml.cs">
       <DependentUpon>RootTabPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SyncSetup\AuthenticationPage.xaml.cs">
       <DependentUpon>AuthenticationPage.xaml</DependentUpon>
@@ -203,18 +210,9 @@
     <Folder Include="Views\About\" />
     <Folder Include="Views\Budget\" />
     <Folder Include="Views\Reports\" />
-    <Folder Include="Views\Settings\" />
     <Folder Include="Views\Transactions\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Acr.DeviceInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Acr.DeviceInfo.4.0.2\lib\portable-win+net45+wp8+win8+wpa81\Acr.DeviceInfo.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Acr.DeviceInfo.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Acr.DeviceInfo.4.0.2\lib\portable-win+net45+wp8+win8+wpa81\Acr.DeviceInfo.Interface.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\..\packages\AutoMapper.5.1.1\lib\portable-net45+win8+wpa81\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -436,6 +434,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Categories\CategoriesListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Settings\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\GenericNavigationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

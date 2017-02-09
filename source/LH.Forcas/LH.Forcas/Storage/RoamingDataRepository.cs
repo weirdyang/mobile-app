@@ -41,11 +41,19 @@
             }
         }
 
-        public void Save<T>(T item)
+        public void Insert<T>(T item)
         {
             using (var db = this.dbManager.GetDatabase())
             {
-                db.GetCollection<T>().Upsert(item);
+                db.GetCollection<T>().Insert(item);
+            }
+        }
+
+        public void Update<T>(T item)
+        {
+            using (var db = this.dbManager.GetDatabase())
+            {
+                db.GetCollection<T>().Update(item);
             }
         }
 

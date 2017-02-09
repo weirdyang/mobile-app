@@ -9,6 +9,8 @@ namespace LH.Forcas.Services
 
         IList<Country> GetCountries();
 
+        Country GetCountry(string id);
+
         Currency GetCurrency(string id);
 
         IList<Currency> GetCurrencies();

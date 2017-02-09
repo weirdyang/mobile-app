@@ -4,7 +4,7 @@
     {
         public string CountryId { get; set; }
 
-        public string DefaultCurrencyCode { get; set; }
+        public string DefaultCurrencyId { get; set; }
 
         public bool IsActive { get; set; }
     }

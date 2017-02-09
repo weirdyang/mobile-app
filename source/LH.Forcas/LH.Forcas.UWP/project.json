@@ -1,6 +1,5 @@
 ﻿{
   "dependencies": {
-    "Acr.DeviceInfo": "4.0.2",
     "LiteDB": "3.0.0-beta3",
     "Microsoft.Bcl.Async": "1.0.168",
     "Microsoft.Bcl.Build": "1.0.21",

@@ -29,6 +29,14 @@
             <MenuItem Text="Delete" IsDestructive="True"
                       Command="{ Binding BindingContext.DeleteCategoryCommand, Source={ x:Reference Page } }"
                       CommandParameter="{ Binding Category }"/>
+
+            <MenuItem Text="Move transactions" IsDestructive="False"
+                      Command="{ Binding BindingContext.MoveTransactionsCommand, Source={ x:Reference Page } }"
+                      CommandParameter="{ Binding Category }"/>
+
+            <MenuItem Text="Merge" IsDestructive="False"
+                      Command="{ Binding BindingContext.MoveTransactionsCommand, Source={ x:Reference Page } }"
+                      CommandParameter="{ Binding Category }"/>
           </ViewCell.ContextActions>
         </ViewCell>
       </DataTemplate>

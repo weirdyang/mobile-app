@@ -33,9 +33,17 @@ namespace LH.Forcas.Services
             return this.GetRefDataViaCache(() => this.repository.GetCountries());
         }
 
+        public Country GetCountry(string id)
+        {
+            var countries = this.GetCountries();
+            var unifiedId = id.ToUpper();
+
+            return countries.Single(x => x.CountryId == unifiedId); // TODO: this should be done via dictionary...
+        }
+
         public Currency GetCurrency(string id)
         {
-            var currencies = this.GetRefDataViaCache(() => this.repository.GetCurrencies());
+            var currencies = this.GetCurrencies();
 
             return currencies.Single(x => x.CurrencyId == id); // TODO: this should be done via dictionary...
         }

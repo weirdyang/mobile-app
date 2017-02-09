@@ -3,6 +3,7 @@
     "countryId": "CZ",
     "enName": "Czech Republic",
     "nativeName": "Česká republika",
-    "defaultCurrencyCode": "CZK"
+    "defaultCurrencyId": "CZK",
+    "isActive": "true" 
   }
 ]

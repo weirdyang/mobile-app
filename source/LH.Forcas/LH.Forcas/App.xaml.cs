@@ -10,8 +10,10 @@
     using Prism.Unity;
     using Storage;
     using Storage.Data;
+    using Views;
     using Views.Accounts;
     using Views.Categories;
+    using Views.Settings;
 
     public partial class App
     {
@@ -33,25 +35,30 @@
             TestData.InsertTestData(dbManager);
 #endif
 
+            this.Container.Resolve<IUserSettingsService>().Initialize();
+
             CurrentCultureInfo = this.Container.Resolve<ILocale>().GetCultureInfo();
 
-#pragma warning disable 4014
+            #pragma warning disable 4014
             this.NavigationService.NavigateToDashboard();
-#pragma warning restore 4014
+            #pragma warning restore 4014
         }
 
         protected override void RegisterTypes()
         {
             this.Container.RegisterType<IDbManager, DbManager>(new ContainerControlledLifetimeManager());
-            this.Container.RegisterType<IAccountingService, AccountingService>(new ContainerControlledLifetimeManager());
-            this.Container.RegisterType<IRefDataService, RefDataService>(new ContainerControlledLifetimeManager());
 
             this.Container.RegisterType<IRefDataRepository, RefDataRepository>(new ContainerControlledLifetimeManager());
             this.Container.RegisterType<IRoamingDataRepository, RoamingDataRepository>(new ContainerControlledLifetimeManager());
 
+            this.Container.RegisterType<IAccountingService, AccountingService>(new ContainerControlledLifetimeManager());
+            this.Container.RegisterType<IRefDataService, RefDataService>(new ContainerControlledLifetimeManager());
+            this.Container.RegisterType<IUserSettingsService, UserSettingsService>(new ContainerControlledLifetimeManager());
+
             this.Container.RegisterTypeForNavigation<RootSideMenuPage>();
             this.Container.RegisterTypeForNavigation<RootTabPage>();
             this.Container.RegisterTypeForNavigation<RootSideMenuPage>();
+            this.Container.RegisterTypeForNavigation<GenericNavigationPage>();
 
             this.Container.RegisterTypeForNavigation<DashboardPage>();
             this.Container.RegisterTypeForNavigation<DashboardNavigationPage>();
@@ -61,6 +68,8 @@
             this.Container.RegisterTypeForNavigation<AccountsNavigationPage>();
 
             this.Container.RegisterTypeForNavigation<CategoriesListPage>();
+
+            this.Container.RegisterTypeForNavigation<SettingsPage>();
         }
     }
 }

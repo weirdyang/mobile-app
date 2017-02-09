@@ -61,7 +61,7 @@
 
         public void SaveCategory(Category category)
         {
-            this.roamingDataRepository.Save(category);
+            this.roamingDataRepository.Insert(category);
         }
 
         #endregion

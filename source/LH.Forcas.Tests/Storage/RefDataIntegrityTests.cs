@@ -43,8 +43,8 @@
 
                 foreach (var country in countries)
                 {
-                    var currency = currencies.SingleOrDefault(x => x.CurrencyId == country.DefaultCurrencyCode);
-                    Assert.IsNotNull(currency, $"Currency with the code {country.DefaultCurrencyCode} could not be found");
+                    var currency = currencies.SingleOrDefault(x => x.CurrencyId == country.DefaultCurrencyId);
+                    Assert.IsNotNull(currency, $"Currency with the code {country.DefaultCurrencyId} could not be found");
                 }
             }
         }

@@ -5,9 +5,11 @@
     using System.Threading.Tasks;
     using Localization;
     using Prism.Navigation;
+    using Views;
     using Views.Accounts;
     using Views.Categories;
     using Views.Dashboard;
+    using Views.Settings;
     using Xamarin.Forms;
 
     public static class NavigationExtensions
@@ -24,7 +26,8 @@
         {
             new NavigationPage { DisplayName = AppResources.Dashboard_Title, NavigateAction = NavigateToDashboard },
             new NavigationPage { DisplayName = AppResources.AccountsListPage_Title, NavigateAction = NavigateToAccounts },
-            new NavigationPage { DisplayName = AppResources.CategoriesListPage_Title, NavigateAction = NavigateToCategories }
+            new NavigationPage { DisplayName = AppResources.CategoriesListPage_Title, NavigateAction = NavigateToCategories },
+            new NavigationPage { DisplayName = AppResources.SettingsPage_Title, NavigateAction = NavigateToSettings }
         };
 
         public static void InitializeNavigation()
@@ -73,6 +76,11 @@
             throw new NotImplementedException();
         }
 
+        public static async Task NavigateToSettings(this INavigationService navigationService)
+        {
+            await navigationService.NavigateAsync(GetRelativeUri(nameof(SettingsPage)));
+        }
+
         public static NavigationParameters CreateAccountDetailParameters(Guid accountId)
         {
             var parameters = new NavigationParameters();
@@ -102,6 +110,11 @@
             var pageUri = string.Join("/", pages);
 
             return new Uri($"app://forcas/{_rootPageName}/{navPage}/{pageUri}", UriKind.Absolute);
+        }
+
+        public static string GetRelativeUri(string targetPage, string navPage = nameof(GenericNavigationPage))
+        {
+            return $"{navPage}/{targetPage}";
         }
     }
 

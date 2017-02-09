@@ -1,9 +1,13 @@
 ﻿namespace LH.Forcas.Services
 {
+    using Domain.UserData;
+
     public interface IUserSettingsService
     {
-        string SyncProviderName { get; set; }
+        UserSettings Settings { get; }
 
-        string CountryId { get; set; }
+        void Initialize();
+
+        void Save();
     }
 }

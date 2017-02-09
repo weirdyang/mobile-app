@@ -2,7 +2,7 @@
 {
     using System;
     using System.Globalization;
-    using Localization;
+    using Extensions;
     using Xamarin.Forms;
 
     public class StringToResourceConverter : IValueConverter
@@ -14,15 +14,9 @@
                 return null;
             }
 
-            string resxKey = $"{value}";
+            string resxFormat = (string) parameter;
 
-            var format = parameter as string;
-            if (!string.IsNullOrEmpty(format))
-            {
-                resxKey = string.Format(format, value);
-            }
-
-            return AppResources.ResourceManager.GetString(resxKey, App.CurrentCultureInfo);
+            return value.ToLocalizedResourceString(resxFormat);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
