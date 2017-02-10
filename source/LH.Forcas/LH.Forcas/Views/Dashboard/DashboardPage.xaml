@@ -9,44 +9,31 @@
              xmlns:generic="clr-namespace:System.Collections.Generic;assembly=System.Collections"
              x:Class="LH.Forcas.Views.Dashboard.DashboardPage"
              Title="{ ext:Translate Dashboard_Title }">
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"></RowDefinition>
-      <RowDefinition Height="Auto"></RowDefinition>
-      <RowDefinition Height="Auto"></RowDefinition>
-      <RowDefinition Height="Auto"></RowDefinition>
-      <RowDefinition Height="Auto"></RowDefinition>
-      <RowDefinition Height="Auto"></RowDefinition>
-    </Grid.RowDefinitions>
-    <Grid.Resources>
-      <ResourceDictionary>
-        <converters:ValidationResultToColorConverter x:Key="ValidationResultToColorConverter" />
-      </ResourceDictionary>
-    </Grid.Resources>
+  <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+    <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Grid.Resources>
+        <ResourceDictionary>
+          <converters:ValidationResultToColorConverter x:Key="ValidationResultToColorConverter" />
+        </ResourceDictionary>
+      </Grid.Resources>
 
-    <Entry Grid.Row="0" Text="{ Binding TestProp }" BackgroundColor="{ Binding ValidationResults[TestProp], Converter={ StaticResource ValidationResultToColorConverter } }" />
+      <ListView ItemsSource="{ Binding ManyItems }" SelectedItem="{ Binding TestProp, Mode=TwoWay }" x:Name="DummyListView">
+      </ListView>
 
-    <controls:ValidationIcon ValidationResult="{ Binding ValidationResults[TestProp] }" Grid.Row="1" />
-    <controls:ValidationLabel ValidationResult="{ Binding ValidationResults[TestProp] }" Grid.Row="2" />
-    <!--<controls:ValidationLabel ValidationResult="{ Binding ValidationResults[TestProp] }" InfoMessage="Some useful info..." Grid.Row="3" />-->
+    </Grid>
 
-    <freshEssentials:BindablePicker ItemsSource="{ Binding Items }" DisplayProperty="Name" />
-
-    <TableView Grid.Row="5" Intent="Form" x:Name="Table">
-      <TableView.Behaviors>
-        <behaviors:DynamicTableViewBehavior />
-      </TableView.Behaviors>
-      <TableSection Title="First">
-        <SwitchCell Text="Second" On="{ Binding IsSecondSectionVisible, Mode=TwoWay }" />
-        <SwitchCell Text="Third" On="{ Binding IsThirdSectionVisible, Mode=TwoWay }" />
-      </TableSection>
-      <TableSection Title="Second" behaviors:DynamicTableViewBehavior.IsVisible="{ Binding IsSecondSectionVisible }">
-        <EntryCell Label="Second text"></EntryCell>
-      </TableSection>
-      <TableSection Title="Third" behaviors:DynamicTableViewBehavior.IsVisible="{ Binding IsThirdSectionVisible }">
-        <EntryCell Label="Third text"></EntryCell>
-      </TableSection>
-    </TableView>
-
-  </Grid>
+    <controls:FloatingActionButtonView Icon="md-add" Command="{ Binding DummyCommand }"
+              VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand"
+              AbsoluteLayout.LayoutBounds="1,1,65,65"
+              AbsoluteLayout.LayoutFlags="PositionProportional"
+              behaviors:HideWhenElementScrolled.AttachedListView="{ x:Reference DummyListView }">
+      <controls:FloatingActionButtonView.IsVisible>
+        <OnPlatform x:TypeArguments="x:Boolean" Android="True" WinPhone="False" iOS="False" />
+      </controls:FloatingActionButtonView.IsVisible>
+    </controls:FloatingActionButtonView>
+  </AbsoluteLayout>
 </ContentPage>
