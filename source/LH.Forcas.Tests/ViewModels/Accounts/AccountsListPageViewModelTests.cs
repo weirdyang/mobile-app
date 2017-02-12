@@ -58,7 +58,7 @@
             public void ShouldNavigateWhenNavigateToDetailCommandIsExecuted()
             {
                 this.NavigateTo();
-                var accountToNavigate = this.ViewModel.Accounts.First().First();
+                var accountToNavigate = this.ViewModel.AccountGroups.First().First();
 
                 this.NavigationServiceMock.Setup(x => x.NavigateAsync(
                     It.Is<string>(uri => uri.ToString().Contains("Detail")),
@@ -89,7 +89,7 @@
 
                 this.NavigateTo();
 
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First().First());
+                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
 
                 this.DialogServiceMock.VerifyAll();
             }
@@ -102,7 +102,7 @@
 
                 this.NavigateTo();
 
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First().First());
+                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
 
                 this.DialogServiceMock.VerifyAll();
                 this.AccountingServiceMock.Verify(x => x.DeleteAccount(It.IsAny<Guid>()), Times.Never);
@@ -112,12 +112,12 @@
             public void ShouldDeleteAccountIfConfirmed()
             {
                 this.NavigateTo();
-                var accountId = this.ViewModel.Accounts.First().First().AccountId;
+                var accountId = this.ViewModel.AccountGroups.First().First().AccountId;
 
                 this.SetupDeleteConfirm(true);
                 this.AccountingServiceMock.Setup(x => x.DeleteAccount(It.Is<Guid>(id => id == accountId)));
 
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First().First());
+                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
 
                 this.DialogServiceMock.VerifyAll();
                 this.AccountingServiceMock.Verify(x => x.DeleteAccount(It.Is<Guid>(id => id == accountId)), Times.Once);
@@ -137,7 +137,7 @@
 
                 this.NavigateTo();
 
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.Accounts.First().First());
+                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
 
                 this.DialogServiceMock.VerifyAll();
             }

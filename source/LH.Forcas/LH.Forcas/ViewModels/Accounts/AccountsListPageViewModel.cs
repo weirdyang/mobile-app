@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
@@ -21,7 +22,7 @@
         private readonly IAccountingService accountingService;
         private readonly Type[] accountTypeOrder = { typeof(CashAccount), typeof(BankAccount), typeof(CreditCardAccount), typeof(LoanAccount), typeof(InvestmentAccount) };
 
-        private IEnumerable<AccountsGroup> accounts;
+        private ObservableCollection<AccountsGroup> accountGroups;
 
         public AccountsListPageViewModel(
             IAccountingService accountingService,
@@ -48,10 +49,10 @@
 
         public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
 
-        public IEnumerable<AccountsGroup> Accounts
+        public ObservableCollection<AccountsGroup> AccountGroups
         {
-            get { return this.accounts; }
-            private set { this.SetProperty(ref this.accounts, value); }
+            get { return this.accountGroups; }
+            private set { this.SetProperty(ref this.accountGroups, value); }
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -68,7 +69,7 @@
                                                                 .Select(group => new AccountsGroup(group.Key, group.OrderBy(acc => acc.Name)))
                                                                 .OrderBy(group => Array.IndexOf(this.accountTypeOrder, group.AccountType));
 
-                                               this.Accounts = groupped;
+                                               this.AccountGroups = new ObservableCollection<AccountsGroup>(groupped);
                                            });
         }
 
@@ -100,6 +101,7 @@
             try
             {
                 this.accountingService.DeleteAccount(account.AccountId);
+                this.AccountGroups.Single(x => x.AccountType == account.GetType()).Remove(account);
             }
             catch (Exception ex)
             {
@@ -114,32 +116,15 @@
             }
         }
 
-        public class AccountsGroup : IOrderedEnumerable<Account>
+        public class AccountsGroup : ObservableCollection<Account>
         {
-            private readonly IOrderedEnumerable<Account> accounts;
-
-            public AccountsGroup(Type accountType, IOrderedEnumerable<Account> accounts)
+            public AccountsGroup(Type accountType, IEnumerable<Account> accounts)
+                : base(accounts)
             {
                 this.AccountType = accountType;
-                this.accounts = accounts;
             }
 
             public Type AccountType { get; }
-
-            public IOrderedEnumerable<Account> CreateOrderedEnumerable<TKey>(Func<Account, TKey> keySelector, IComparer<TKey> comparer, bool descending)
-            {
-                return this.accounts.CreateOrderedEnumerable(keySelector, comparer, descending);
-            }
-
-            public IEnumerator<Account> GetEnumerator()
-            {
-                return this.accounts.GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return this.GetEnumerator();
-            }
         }
     }
 }
