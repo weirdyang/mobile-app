@@ -19,7 +19,7 @@
   <ContentPage.ToolbarItems>
     <iconize:IconToolbarItem Command="{ Binding NavigateToAddAccountCommand }" Icon="md-add" IconColor="{ StaticResource IconToolbarItemFontColor }" />
   </ContentPage.ToolbarItems>
-  <ListView ItemsSource="{ Binding Accounts }"
+  <ListView ItemsSource="{ Binding AccountGroups }"
             RefreshCommand="{ Binding RefreshAccountsCommand }"
             IsRefreshing="{ Binding IsBusy }"
             IsPullToRefreshEnabled="True"
