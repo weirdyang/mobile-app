@@ -250,6 +250,1212 @@
       <Name>LH.Forcas</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AD.png">
+      <Link>Resources\Flags\AD.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AE.png">
+      <Link>Resources\Flags\AE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AF.png">
+      <Link>Resources\Flags\AF.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AG.png">
+      <Link>Resources\Flags\AG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AI.png">
+      <Link>Resources\Flags\AI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AL.png">
+      <Link>Resources\Flags\AL.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AM.png">
+      <Link>Resources\Flags\AM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AN.png">
+      <Link>Resources\Flags\AN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AO.png">
+      <Link>Resources\Flags\AO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AQ.png">
+      <Link>Resources\Flags\AQ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AR.png">
+      <Link>Resources\Flags\AR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AS.png">
+      <Link>Resources\Flags\AS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AT.png">
+      <Link>Resources\Flags\AT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AU.png">
+      <Link>Resources\Flags\AU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AW.png">
+      <Link>Resources\Flags\AW.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AX.png">
+      <Link>Resources\Flags\AX.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AZ.png">
+      <Link>Resources\Flags\AZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BA.png">
+      <Link>Resources\Flags\BA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BB.png">
+      <Link>Resources\Flags\BB.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BD.png">
+      <Link>Resources\Flags\BD.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BE.png">
+      <Link>Resources\Flags\BE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BF.png">
+      <Link>Resources\Flags\BF.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BG.png">
+      <Link>Resources\Flags\BG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BH.png">
+      <Link>Resources\Flags\BH.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BI.png">
+      <Link>Resources\Flags\BI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BJ.png">
+      <Link>Resources\Flags\BJ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BL.png">
+      <Link>Resources\Flags\BL.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BM.png">
+      <Link>Resources\Flags\BM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BN.png">
+      <Link>Resources\Flags\BN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BO.png">
+      <Link>Resources\Flags\BO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BR.png">
+      <Link>Resources\Flags\BR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BS.png">
+      <Link>Resources\Flags\BS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BT.png">
+      <Link>Resources\Flags\BT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BW.png">
+      <Link>Resources\Flags\BW.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BY.png">
+      <Link>Resources\Flags\BY.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BZ.png">
+      <Link>Resources\Flags\BZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CA.png">
+      <Link>Resources\Flags\CA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CC.png">
+      <Link>Resources\Flags\CC.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CD.png">
+      <Link>Resources\Flags\CD.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CF.png">
+      <Link>Resources\Flags\CF.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CG.png">
+      <Link>Resources\Flags\CG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CH.png">
+      <Link>Resources\Flags\CH.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CI.png">
+      <Link>Resources\Flags\CI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CK.png">
+      <Link>Resources\Flags\CK.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CL.png">
+      <Link>Resources\Flags\CL.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CM.png">
+      <Link>Resources\Flags\CM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CN.png">
+      <Link>Resources\Flags\CN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CO.png">
+      <Link>Resources\Flags\CO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CR.png">
+      <Link>Resources\Flags\CR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CU.png">
+      <Link>Resources\Flags\CU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CV.png">
+      <Link>Resources\Flags\CV.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CW.png">
+      <Link>Resources\Flags\CW.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CX.png">
+      <Link>Resources\Flags\CX.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CY.png">
+      <Link>Resources\Flags\CY.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CZ.png">
+      <Link>Resources\Flags\CZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DE.png">
+      <Link>Resources\Flags\DE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DJ.png">
+      <Link>Resources\Flags\DJ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DK.png">
+      <Link>Resources\Flags\DK.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DM.png">
+      <Link>Resources\Flags\DM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DO.png">
+      <Link>Resources\Flags\DO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DZ.png">
+      <Link>Resources\Flags\DZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EC.png">
+      <Link>Resources\Flags\EC.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EE.png">
+      <Link>Resources\Flags\EE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EG.png">
+      <Link>Resources\Flags\EG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EH.png">
+      <Link>Resources\Flags\EH.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ER.png">
+      <Link>Resources\Flags\ER.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ES.png">
+      <Link>Resources\Flags\ES.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ET.png">
+      <Link>Resources\Flags\ET.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EU.png">
+      <Link>Resources\Flags\EU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FI.png">
+      <Link>Resources\Flags\FI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FJ.png">
+      <Link>Resources\Flags\FJ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FK.png">
+      <Link>Resources\Flags\FK.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FM.png">
+      <Link>Resources\Flags\FM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FO.png">
+      <Link>Resources\Flags\FO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FR.png">
+      <Link>Resources\Flags\FR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GA.png">
+      <Link>Resources\Flags\GA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GB.png">
+      <Link>Resources\Flags\GB.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GD.png">
+      <Link>Resources\Flags\GD.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GE.png">
+      <Link>Resources\Flags\GE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GG.png">
+      <Link>Resources\Flags\GG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GH.png">
+      <Link>Resources\Flags\GH.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GI.png">
+      <Link>Resources\Flags\GI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GL.png">
+      <Link>Resources\Flags\GL.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GM.png">
+      <Link>Resources\Flags\GM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GN.png">
+      <Link>Resources\Flags\GN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GQ.png">
+      <Link>Resources\Flags\GQ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GR.png">
+      <Link>Resources\Flags\GR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GS.png">
+      <Link>Resources\Flags\GS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GT.png">
+      <Link>Resources\Flags\GT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GU.png">
+      <Link>Resources\Flags\GU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GW.png">
+      <Link>Resources\Flags\GW.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GY.png">
+      <Link>Resources\Flags\GY.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HK.png">
+      <Link>Resources\Flags\HK.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HN.png">
+      <Link>Resources\Flags\HN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HR.png">
+      <Link>Resources\Flags\HR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HT.png">
+      <Link>Resources\Flags\HT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HU.png">
+      <Link>Resources\Flags\HU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IC.png">
+      <Link>Resources\Flags\IC.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ID.png">
+      <Link>Resources\Flags\ID.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IE.png">
+      <Link>Resources\Flags\IE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IL.png">
+      <Link>Resources\Flags\IL.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IM.png">
+      <Link>Resources\Flags\IM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IN.png">
+      <Link>Resources\Flags\IN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IQ.png">
+      <Link>Resources\Flags\IQ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IR.png">
+      <Link>Resources\Flags\IR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IS.png">
+      <Link>Resources\Flags\IS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IT.png">
+      <Link>Resources\Flags\IT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\JE.png">
+      <Link>Resources\Flags\JE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\JM.png">
+      <Link>Resources\Flags\JM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\JO.png">
+      <Link>Resources\Flags\JO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\JP.png">
+      <Link>Resources\Flags\JP.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KE.png">
+      <Link>Resources\Flags\KE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KG.png">
+      <Link>Resources\Flags\KG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KH.png">
+      <Link>Resources\Flags\KH.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KI.png">
+      <Link>Resources\Flags\KI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KM.png">
+      <Link>Resources\Flags\KM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KN.png">
+      <Link>Resources\Flags\KN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KP.png">
+      <Link>Resources\Flags\KP.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KR.png">
+      <Link>Resources\Flags\KR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KW.png">
+      <Link>Resources\Flags\KW.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KY.png">
+      <Link>Resources\Flags\KY.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KZ.png">
+      <Link>Resources\Flags\KZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LA.png">
+      <Link>Resources\Flags\LA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LB.png">
+      <Link>Resources\Flags\LB.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LC.png">
+      <Link>Resources\Flags\LC.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LI.png">
+      <Link>Resources\Flags\LI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LK.png">
+      <Link>Resources\Flags\LK.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LR.png">
+      <Link>Resources\Flags\LR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LS.png">
+      <Link>Resources\Flags\LS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LT.png">
+      <Link>Resources\Flags\LT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LU.png">
+      <Link>Resources\Flags\LU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LV.png">
+      <Link>Resources\Flags\LV.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LY.png">
+      <Link>Resources\Flags\LY.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MA.png">
+      <Link>Resources\Flags\MA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MC.png">
+      <Link>Resources\Flags\MC.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MD.png">
+      <Link>Resources\Flags\MD.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ME.png">
+      <Link>Resources\Flags\ME.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MF.png">
+      <Link>Resources\Flags\MF.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MG.png">
+      <Link>Resources\Flags\MG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MH.png">
+      <Link>Resources\Flags\MH.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MK.png">
+      <Link>Resources\Flags\MK.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ML.png">
+      <Link>Resources\Flags\ML.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MM.png">
+      <Link>Resources\Flags\MM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MN.png">
+      <Link>Resources\Flags\MN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MO.png">
+      <Link>Resources\Flags\MO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MP.png">
+      <Link>Resources\Flags\MP.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MQ.png">
+      <Link>Resources\Flags\MQ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MR.png">
+      <Link>Resources\Flags\MR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MS.png">
+      <Link>Resources\Flags\MS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MT.png">
+      <Link>Resources\Flags\MT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MU.png">
+      <Link>Resources\Flags\MU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MV.png">
+      <Link>Resources\Flags\MV.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MW.png">
+      <Link>Resources\Flags\MW.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MX.png">
+      <Link>Resources\Flags\MX.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MY.png">
+      <Link>Resources\Flags\MY.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MZ.png">
+      <Link>Resources\Flags\MZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NA.png">
+      <Link>Resources\Flags\NA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NC.png">
+      <Link>Resources\Flags\NC.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NE.png">
+      <Link>Resources\Flags\NE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NF.png">
+      <Link>Resources\Flags\NF.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NG.png">
+      <Link>Resources\Flags\NG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NI.png">
+      <Link>Resources\Flags\NI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NL.png">
+      <Link>Resources\Flags\NL.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NO.png">
+      <Link>Resources\Flags\NO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NP.png">
+      <Link>Resources\Flags\NP.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NR.png">
+      <Link>Resources\Flags\NR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NU.png">
+      <Link>Resources\Flags\NU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NZ.png">
+      <Link>Resources\Flags\NZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\OM.png">
+      <Link>Resources\Flags\OM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PA.png">
+      <Link>Resources\Flags\PA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PE.png">
+      <Link>Resources\Flags\PE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PF.png">
+      <Link>Resources\Flags\PF.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PG.png">
+      <Link>Resources\Flags\PG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PH.png">
+      <Link>Resources\Flags\PH.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PK.png">
+      <Link>Resources\Flags\PK.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PL.png">
+      <Link>Resources\Flags\PL.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PN.png">
+      <Link>Resources\Flags\PN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PR.png">
+      <Link>Resources\Flags\PR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PS.png">
+      <Link>Resources\Flags\PS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PT.png">
+      <Link>Resources\Flags\PT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PW.png">
+      <Link>Resources\Flags\PW.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PY.png">
+      <Link>Resources\Flags\PY.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\QA.png">
+      <Link>Resources\Flags\QA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\RO.png">
+      <Link>Resources\Flags\RO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\RS.png">
+      <Link>Resources\Flags\RS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\RU.png">
+      <Link>Resources\Flags\RU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\RW.png">
+      <Link>Resources\Flags\RW.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SA.png">
+      <Link>Resources\Flags\SA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SB.png">
+      <Link>Resources\Flags\SB.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SC.png">
+      <Link>Resources\Flags\SC.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SD.png">
+      <Link>Resources\Flags\SD.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SE.png">
+      <Link>Resources\Flags\SE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SG.png">
+      <Link>Resources\Flags\SG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SH.png">
+      <Link>Resources\Flags\SH.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SI.png">
+      <Link>Resources\Flags\SI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SK.png">
+      <Link>Resources\Flags\SK.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SL.png">
+      <Link>Resources\Flags\SL.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SM.png">
+      <Link>Resources\Flags\SM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SN.png">
+      <Link>Resources\Flags\SN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SO.png">
+      <Link>Resources\Flags\SO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SR.png">
+      <Link>Resources\Flags\SR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SS.png">
+      <Link>Resources\Flags\SS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ST.png">
+      <Link>Resources\Flags\ST.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SV.png">
+      <Link>Resources\Flags\SV.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SY.png">
+      <Link>Resources\Flags\SY.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SZ.png">
+      <Link>Resources\Flags\SZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TC.png">
+      <Link>Resources\Flags\TC.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TD.png">
+      <Link>Resources\Flags\TD.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TF.png">
+      <Link>Resources\Flags\TF.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TG.png">
+      <Link>Resources\Flags\TG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TH.png">
+      <Link>Resources\Flags\TH.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TJ.png">
+      <Link>Resources\Flags\TJ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TK.png">
+      <Link>Resources\Flags\TK.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TL.png">
+      <Link>Resources\Flags\TL.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TM.png">
+      <Link>Resources\Flags\TM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TN.png">
+      <Link>Resources\Flags\TN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TO.png">
+      <Link>Resources\Flags\TO.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TR.png">
+      <Link>Resources\Flags\TR.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TT.png">
+      <Link>Resources\Flags\TT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TV.png">
+      <Link>Resources\Flags\TV.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TW.png">
+      <Link>Resources\Flags\TW.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TZ.png">
+      <Link>Resources\Flags\TZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\UA.png">
+      <Link>Resources\Flags\UA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\UG.png">
+      <Link>Resources\Flags\UG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\US.png">
+      <Link>Resources\Flags\US.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\UY.png">
+      <Link>Resources\Flags\UY.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\UZ.png">
+      <Link>Resources\Flags\UZ.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VA.png">
+      <Link>Resources\Flags\VA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VC.png">
+      <Link>Resources\Flags\VC.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VE.png">
+      <Link>Resources\Flags\VE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VG.png">
+      <Link>Resources\Flags\VG.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VI.png">
+      <Link>Resources\Flags\VI.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VN.png">
+      <Link>Resources\Flags\VN.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VU.png">
+      <Link>Resources\Flags\VU.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\WF.png">
+      <Link>Resources\Flags\WF.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\WS.png">
+      <Link>Resources\Flags\WS.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\YE.png">
+      <Link>Resources\Flags\YE.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\YT.png">
+      <Link>Resources\Flags\YT.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ZA.png">
+      <Link>Resources\Flags\ZA.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ZM.png">
+      <Link>Resources\Flags\ZM.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ZW.png">
+      <Link>Resources\Flags\ZW.png</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
