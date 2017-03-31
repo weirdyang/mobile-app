@@ -68,6 +68,7 @@
             this.Container.RegisterTypeForNavigation<AccountsNavigationPage>();
 
             this.Container.RegisterTypeForNavigation<CategoriesListPage>();
+            this.Container.RegisterTypeForNavigation<CategoriesDetailPage>();
 
             this.Container.RegisterTypeForNavigation<SettingsPage>();
         }

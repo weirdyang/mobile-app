@@ -9,7 +9,19 @@
              xmlns:generic="clr-namespace:System.Collections.Generic;assembly=System.Collections"
              x:Class="LH.Forcas.Views.Dashboard.DashboardPage"
              Title="{ ext:Translate Dashboard_Title }">
-  <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+  <ContentPage.Content>
+    <Grid>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+    </Grid>
+
+
+    <!--<AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
     <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
       <Grid.RowDefinitions>
         <RowDefinition Height="*"></RowDefinition>
@@ -35,5 +47,6 @@
         <OnPlatform x:TypeArguments="x:Boolean" Android="True" WinPhone="False" iOS="False" />
       </controls:FloatingActionButtonView.IsVisible>
     </controls:FloatingActionButtonView>
-  </AbsoluteLayout>
+  </AbsoluteLayout>-->
+  </ContentPage.Content>
 </ContentPage>

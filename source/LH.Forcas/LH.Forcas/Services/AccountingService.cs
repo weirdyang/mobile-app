@@ -56,6 +56,7 @@
 
         public void DeleteCategory(Guid categoryId, Guid? moveTransactionsIntoCategoryId)
         {
+            // TODO: Change category of all transactions in the category
             this.roamingDataRepository.Delete<Category>(categoryId);
         }
 

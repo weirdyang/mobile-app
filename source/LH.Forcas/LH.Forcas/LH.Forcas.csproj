@@ -79,6 +79,7 @@
     <Compile Include="Storage\IRepositoryActions.cs" />
     <Compile Include="Storage\IRepositoryTransaction.cs" />
     <Compile Include="Storage\RoamingRepositoryTransaction.cs" />
+    <Compile Include="ViewModels\Categories\CategoriesDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Categories\CategoriesListPageViewModel.cs" />
     <Compile Include="ViewModels\DetailViewModelBase.cs" />
     <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
@@ -87,6 +88,9 @@
     <Compile Include="ViewModels\Settings\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
+    <Compile Include="Views\Categories\CategoriesDetailPage.xaml.cs">
+      <DependentUpon>CategoriesDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GenericNavigationPage.xaml.cs">
       <DependentUpon>GenericNavigationPage.xaml</DependentUpon>
     </Compile>
@@ -212,6 +216,7 @@
     <Folder Include="Views\About\" />
     <Folder Include="Views\Budget\" />
     <Folder Include="Views\Reports\" />
+    <Folder Include="Views\Rules\" />
     <Folder Include="Views\Transactions\" />
   </ItemGroup>
   <ItemGroup>
@@ -472,6 +477,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\GenericNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Categories\CategoriesDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

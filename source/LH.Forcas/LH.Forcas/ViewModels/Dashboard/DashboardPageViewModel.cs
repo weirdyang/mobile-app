@@ -1,11 +1,14 @@
 ﻿namespace LH.Forcas.ViewModels.Dashboard
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Windows.Input;
+    using Domain.RefData;
     using Prism.Commands;
     using Prism.Services;
+    using Services;
 
     public class DashboardPageViewModel : ViewModelBase
     {
@@ -13,8 +16,9 @@
         private DummyItem selected;
         private bool isSecondSectionVisible;
         private bool isThirdSectionVisible;
+        private Country selectedCountry;
 
-        public DashboardPageViewModel(IPageDialogService dialogService)
+        public DashboardPageViewModel(IPageDialogService dialogService, IRefDataService refDataService)
         {
             this.Items = new List<DummyItem>
             {
@@ -30,6 +34,16 @@
             this.DummyCommand.CanExecuteChanged += (sender, e) => Debug.WriteLine("Can execute changed: {0}", this.DummyCommand.CanExecute(null));
 
             this.ManyItems = Enumerable.Range(1, 50).Select(x => $"Item {x}").ToArray();
+
+            this.Countries = refDataService.GetCountries();
+        }
+
+        public IEnumerable Countries { get; set; }
+
+        public Country SelectedCountry
+        {
+            get { return this.selectedCountry; }
+            set { this.SetProperty(ref this.selectedCountry, value); }
         }
 
         public ICommand DummyCommand { get; set; }
