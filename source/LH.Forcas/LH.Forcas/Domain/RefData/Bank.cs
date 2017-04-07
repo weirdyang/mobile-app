@@ -10,7 +10,7 @@ namespace LH.Forcas.Domain.RefData
 
         public int BBAN { get; set; }
 
-        public BankAuthorizationScheme AuthorizationScheme { get; set; }
+        public BankAuthorizationScope AuthorizationScheme { get; set; }
 
         public bool IsActive { get; set; }
     }

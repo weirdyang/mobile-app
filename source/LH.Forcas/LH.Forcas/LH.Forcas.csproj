@@ -56,7 +56,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Domain\RefData\BankAuthorizationScheme.cs" />
+    <Compile Include="Domain\RefData\BankAuthorizationScope.cs" />
     <Compile Include="Domain\UserData\Amount.cs" />
     <Compile Include="Domain\UserData\Authorization\BankAuthorizationBase.cs" />
     <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />
@@ -142,10 +142,7 @@
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\DynamicExtensions.cs" />
     <Compile Include="Extensions\PollyExtensions.cs" />
-    <Compile Include="Integration\ICrashReporter.cs" />
-    <Compile Include="Integration\IFileSyncProvider.cs" />
     <Compile Include="IAppConfig.cs" />
-    <Compile Include="Integration\DummyCrashReporter.cs" />
     <Compile Include="AppConfig.cs" />
     <Compile Include="Domain\RefData\Bank.cs" />
     <Compile Include="Domain\RefData\Currency.cs" />

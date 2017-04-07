@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 using LH.Forcas.Domain.RefData;
 using LH.Forcas.Integration;
 using LH.Forcas.Storage;
@@ -8,18 +9,17 @@ using LH.Forcas.Storage;
 namespace LH.Forcas.Services
 {
     using System.Collections.Concurrent;
+    using System.Diagnostics;
 
     public class RefDataService : IRefDataService
     {
-        private readonly ICrashReporter crashReporter;
         private readonly IRefDataRepository repository;
 
         private readonly object cacheLock = new object();
         private readonly IDictionary<Type, object> cache = new ConcurrentDictionary<Type, object>();
 
-        public RefDataService(ICrashReporter crashReporter, IRefDataRepository repository)
+        public RefDataService(IRefDataRepository repository)
         {
-            this.crashReporter = crashReporter;
             this.repository = repository;
         }
 
@@ -79,8 +79,10 @@ namespace LH.Forcas.Services
             }
             catch (Exception ex)
             {
-                this.crashReporter.ReportFatal(ex);
+                // TODO: Add logging
+#if DEBUG
                 throw;
+#endif
             }
 
             return typedResult;

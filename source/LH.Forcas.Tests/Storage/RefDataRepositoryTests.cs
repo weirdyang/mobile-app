@@ -30,7 +30,7 @@ namespace LH.Forcas.Tests.Storage
                 Assert.IsNotEmpty(rb.Name);
                 Assert.IsNotEmpty(rb.CountryId);
                 Assert.AreNotEqual(0, rb.BBAN);
-                Assert.AreEqual(BankAuthorizationScheme.PerAccount, rb.AuthorizationScheme);
+                Assert.AreEqual(BankAuthorizationScope.PerAccount, rb.AuthorizationScheme);
                 Assert.IsTrue(rb.IsActive);
             }
 

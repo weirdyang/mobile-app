@@ -1,6 +1,6 @@
 ﻿namespace LH.Forcas.Domain.RefData
 {
-    public enum BankAuthorizationScheme
+    public enum BankAuthorizationScope
     {
         PerPersona = 1,
         PerAccount = 2
