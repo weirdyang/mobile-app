@@ -9,23 +9,23 @@
 
     public class AccountingService : IAccountingService
     {
-        private readonly IRoamingDataRepository roamingDataRepository;
+        private readonly IUserDataRepository userDataRepository;
 
-        public AccountingService(IRoamingDataRepository roamingDataRepository)
+        public AccountingService(IUserDataRepository userDataRepository)
         {
-            this.roamingDataRepository = roamingDataRepository;
+            this.userDataRepository = userDataRepository;
         }
 
         #region Accounts
 
         public IEnumerable<Account> GetAccounts()
         {
-            return this.roamingDataRepository.GetAll<Account>();
+            return this.userDataRepository.GetAll<Account>();
         }
 
         public Account GetAccount(Guid id)
         {
-            return this.roamingDataRepository.GetOneById<Account>(id);
+            return this.userDataRepository.GetOneById<Account>(id);
         }
 
         public void SaveAccount(Account account)
@@ -35,7 +35,7 @@
 
         public void DeleteAccount(Guid id)
         {
-            this.roamingDataRepository.Delete<Account>(id);
+            this.userDataRepository.Delete<Account>(id);
         }
 
         public Task<IList<RemoteAccountInfo>> GetAvailableRemoteAccounts(string bankId)
@@ -51,18 +51,18 @@
 
         public IEnumerable<Category> GetCategories()
         {
-            return this.roamingDataRepository.GetAll<Category>();
+            return this.userDataRepository.GetAll<Category>();
         }
 
         public void DeleteCategory(Guid categoryId, Guid? moveTransactionsIntoCategoryId)
         {
             // TODO: Change category of all transactions in the category
-            this.roamingDataRepository.Delete<Category>(categoryId);
+            this.userDataRepository.Delete<Category>(categoryId);
         }
 
         public void SaveCategory(Category category)
         {
-            this.roamingDataRepository.Insert(category);
+            this.userDataRepository.Insert(category);
         }
 
         #endregion

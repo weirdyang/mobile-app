@@ -4,12 +4,12 @@
     using Extensions;
     using LiteDB;
 
-    public class RoamingRepositoryTransaction : IRepositoryTransaction
+    public class UserDataRepositoryTransaction : IRepositoryTransaction
     {
         private readonly LiteDatabase db;
         private readonly LiteTransaction transaction;
 
-        public RoamingRepositoryTransaction(LiteDatabase db)
+        public UserDataRepositoryTransaction(LiteDatabase db)
         {
             this.db = db;
             this.transaction = db.BeginTrans();

@@ -117,6 +117,9 @@
       <HintPath>..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Octokit, Version=0.24.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.0.24.0\lib\net45\Octokit.dll</HintPath>
+    </Reference>
     <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
       <HintPath>..\packages\PCLCrypto.2.0.147\lib\net45\PCLCrypto.dll</HintPath>
       <Private>True</Private>
@@ -235,6 +238,7 @@
     <Compile Include="Storage\RefDataRepositoryTests.cs" />
     <Compile Include="Storage\RoamingDataRepositoryTests.cs" />
     <Compile Include="Storage\TestsDbManager.cs" />
+    <Compile Include="Sync\RefData\RefDataDownloaderTests.cs" />
     <Compile Include="ViewModels\Accounts\AccountsDetailPageViewModelTests.cs" />
     <Compile Include="ViewModels\Accounts\AccountsListPageViewModelTests.cs" />
     <Compile Include="ViewModels\DetailViewModeBaseTests.cs" />
@@ -262,6 +266,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <None Include="Sync\RefData\InvalidRefDataUpdate.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Sync\RefData\ValidRefDataUpdate.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

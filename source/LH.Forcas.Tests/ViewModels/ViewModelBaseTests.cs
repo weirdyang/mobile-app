@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Tests.ViewModels
+﻿using System;
+
+namespace LH.Forcas.Tests.ViewModels
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -17,12 +19,12 @@
                 var viewModel = new TestViewModel();
                 Assert.IsFalse(viewModel.IsBusy);
 
-                var longRunning = viewModel.RunLongRunningLogic();
+                var task = viewModel.RunLongRunningLogic();
                 Assert.IsTrue(viewModel.IsBusy);
 
                 viewModel.ResetEvent.Reset(); // Simulates long running stuff is finished
+                task.Wait();
 
-                longRunning.Wait();
                 Assert.IsFalse(viewModel.IsBusy);
             }
 
@@ -32,6 +34,7 @@
                 var viewModel = new TestViewModel();               
                 Assert.IsFalse(viewModel.IsBusy);
 
+                Console.WriteLine("Starting task");
                 var longRunning = viewModel.RunLongRunningLogicAsTask();
                 Assert.IsTrue(viewModel.IsBusy);
 

@@ -16,16 +16,13 @@ namespace LH.Forcas.Tests.Services
         [SetUp]
         public void Setup()
         {
-            this.crashReporterMock = new Mock<ICrashReporter>();
             this.repositoryMock = new Mock<IRefDataRepository>(MockBehavior.Strict);
             
             this.refDataService = new RefDataService(
-                this.crashReporterMock.Object,
                 this.repositoryMock.Object);
         }
 
         private RefDataService refDataService;
-        private Mock<ICrashReporter> crashReporterMock;
         private Mock<IRefDataRepository> repositoryMock;
 
         [Test]
@@ -53,19 +50,6 @@ namespace LH.Forcas.Tests.Services
             this.refDataService.GetCountries();
 
             this.repositoryMock.Verify(x => x.GetCountries(), Times.Once);
-        }
-
-        [Test]
-        public void ShouldReportFatalCrashWhenFetchFails()
-        {
-            var ex = new Exception("Dummy");
-
-            this.repositoryMock.Setup(x => x.GetCountries()).Throws(ex);
-            this.crashReporterMock.Setup(x => x.ReportFatal(ex));
-
-            Assert.Throws<Exception>(() => this.refDataService.GetCountries());
-
-            this.crashReporterMock.Verify(x => x.ReportFatal(ex), Times.Once);
         }
     }
 }

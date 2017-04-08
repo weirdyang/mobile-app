@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.ViewModels
+﻿using System.Diagnostics;
+
+namespace LH.Forcas.ViewModels
 {
     using System;
     using System.Threading.Tasks;
@@ -50,6 +52,7 @@
                          }
                          finally
                          {
+                             Debug.WriteLine("Finishing");
                              this.IsBusy = false;
                              this.CurrentBackgroundTask = null;
                          }

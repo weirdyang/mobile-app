@@ -1,6 +1,6 @@
 ﻿namespace LH.Forcas.Storage
 {
-    public interface IRoamingDataRepository : IRepositoryActions
+    public interface IUserDataRepository : IRepositoryActions
     {
         IRepositoryTransaction BeginTransaction();
     }

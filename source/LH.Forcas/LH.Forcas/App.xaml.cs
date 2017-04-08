@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas
+﻿using System;
+
+namespace LH.Forcas
 {
     using System.Globalization;
     using LH.Forcas.Extensions;
@@ -15,8 +17,10 @@
     using Views.Categories;
     using Views.Settings;
 
-    public partial class App
+    public partial class App : IApp
     {
+        public Version AppVersion { get; private set; }
+
         public static CultureInfo CurrentCultureInfo { get; private set; }
 
         protected override void OnInitialized()
@@ -49,7 +53,7 @@
             this.Container.RegisterType<IDbManager, DbManager>(new ContainerControlledLifetimeManager());
 
             this.Container.RegisterType<IRefDataRepository, RefDataRepository>(new ContainerControlledLifetimeManager());
-            this.Container.RegisterType<IRoamingDataRepository, RoamingDataRepository>(new ContainerControlledLifetimeManager());
+            this.Container.RegisterType<IUserDataRepository, UserDataRepository>(new ContainerControlledLifetimeManager());
 
             this.Container.RegisterType<IAccountingService, AccountingService>(new ContainerControlledLifetimeManager());
             this.Container.RegisterType<IRefDataService, RefDataService>(new ContainerControlledLifetimeManager());

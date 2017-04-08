@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "minAppVersion": "2.1.0.0"
+}
+//---------------{
+  "banks": [
+    {
+      "bankId": "RB",
+      "name": "Raiffeisenbank",
+      "bban": 5500,
+      "countryId": "CZ",
+      "authorizationScheme": "PerAccount",
+      "isActive": true,
+      "lastChangedVersion": 2 
+    }
+  ]
+}

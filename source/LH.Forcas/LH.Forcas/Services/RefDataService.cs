@@ -79,7 +79,8 @@ namespace LH.Forcas.Services
             }
             catch (Exception ex)
             {
-                // TODO: Add logging
+                // TODO: Handle network exceptions differently
+                Debug.WriteLine(ex);
 #if DEBUG
                 throw;
 #endif

@@ -5,11 +5,11 @@
     using System.Linq;
     using LiteDB;
 
-    public class RoamingDataRepository : IRoamingDataRepository
+    public class UserDataRepository : IUserDataRepository
     {
         private readonly IDbManager dbManager;
 
-        public RoamingDataRepository(IDbManager dbManager)
+        public UserDataRepository(IDbManager dbManager)
         {
             this.dbManager = dbManager;
         }
@@ -59,7 +59,7 @@
 
         public IRepositoryTransaction BeginTransaction()
         {
-            return new RoamingRepositoryTransaction(this.dbManager.GetDatabase());
+            return new UserDataRepositoryTransaction(this.dbManager.GetDatabase());
         }
     }
 }

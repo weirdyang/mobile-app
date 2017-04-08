@@ -7,9 +7,9 @@
     {
         private readonly IRefDataService refDataService;
         private readonly IDeviceService deviceService;
-        private readonly IRoamingDataRepository dataRepository;
+        private readonly IUserDataRepository dataRepository;
 
-        public UserSettingsService(IRoamingDataRepository dataRepository, IRefDataService refDataService, IDeviceService deviceService)
+        public UserSettingsService(IUserDataRepository dataRepository, IRefDataService refDataService, IDeviceService deviceService)
         {
             this.dataRepository = dataRepository;
             this.refDataService = refDataService;
