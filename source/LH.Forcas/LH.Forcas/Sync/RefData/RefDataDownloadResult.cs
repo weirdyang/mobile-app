@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Sync.RefData
+﻿using LH.Forcas.Domain.RefData;
+
+namespace LH.Forcas.Sync.RefData
 {
     public class RefDataDownloadResult
     {
@@ -12,18 +14,16 @@
         {
             this.NewDataAvailable = true;
             this.Data = data;
-            this.CommitSha = commitSha;
-            this.Version = version;
+
+            this.NewStatus = new RefDataStatus(commitSha, version);
         }
 
         public bool NewDataAvailable { get; }
 
         public bool NewIncompatibleDataAvailable { get; }
 
-        public string CommitSha { get; }
-
-        public int Version { get; }
-
         public RefDataUpdate Data { get; }
+
+        public RefDataStatus NewStatus { get; }
     }
 }

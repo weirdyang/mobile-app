@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using LH.Forcas.Analytics;
+using LH.Forcas.Domain.RefData;
 using LH.Forcas.Sync.RefData;
 using Moq;
 using NUnit.Framework;
@@ -56,7 +58,7 @@ namespace LH.Forcas.Tests.Sync.RefData
             public async Task ShouldNotDownloadFileContents()
             {
                 this.SetupBranchCommit("sha");
-                var update = await this.Downloader.DownloadRefData("sha", 1);
+                var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha", 1));
 
                 Assert.IsFalse(update.NewDataAvailable);
             }
@@ -73,13 +75,13 @@ namespace LH.Forcas.Tests.Sync.RefData
                 this.SetupFileContents(ValidJsonFilePath, newCommitSha);
                 this.AppMock.SetupGet(x => x.AppVersion).Returns(new Version(3, 0));
 
-                var update = await this.Downloader.DownloadRefData("sha1", 1);
+                var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
 
                 Assert.IsTrue(update.NewDataAvailable);
                 Assert.IsFalse(update.NewIncompatibleDataAvailable);
                 Assert.IsNotNull(update.Data);
                 Assert.IsNotNull(update.Data.Banks);
-                Assert.AreEqual(1, update.Data.Banks.Count);
+                Assert.AreEqual(1, update.Data.Banks.Count());
             }
 
             [Test]
@@ -91,7 +93,7 @@ namespace LH.Forcas.Tests.Sync.RefData
                 this.SetupFileContents(ValidJsonFilePath, newCommitSha);
                 this.AppMock.SetupGet(x => x.AppVersion).Returns(new Version(1, 0));
 
-                var update = await this.Downloader.DownloadRefData("sha1", 1);
+                var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
 
                 Assert.IsFalse(update.NewDataAvailable);
                 Assert.IsTrue(update.NewIncompatibleDataAvailable);
@@ -109,7 +111,7 @@ namespace LH.Forcas.Tests.Sync.RefData
                     .Setup(x => x.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                     .ThrowsAsync(ex);
 
-                var update = await this.Downloader.DownloadRefData("sha", 1);
+                var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha", 1));
 
                 Assert.IsFalse(update.NewDataAvailable);
                 Assert.IsFalse(update.NewIncompatibleDataAvailable);
@@ -127,7 +129,7 @@ namespace LH.Forcas.Tests.Sync.RefData
                 this.AnalyticsReporterMock
                     .Setup(x => x.ReportHandledException(It.IsAny<Exception>(), It.IsAny<string>()));
 
-                var update = await this.Downloader.DownloadRefData("sha1", 1);
+                var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
 
                 Assert.IsFalse(update.NewDataAvailable);
                 Assert.IsFalse(update.NewIncompatibleDataAvailable);

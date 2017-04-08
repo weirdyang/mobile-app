@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Domain\RefData\BankAuthorizationScope.cs" />
     <Compile Include="Domain\RefData\IRefDataEntity.cs" />
+    <Compile Include="Domain\RefData\RefDataStatus.cs" />
     <Compile Include="Domain\UserData\Amount.cs" />
     <Compile Include="Domain\UserData\Authorization\BankAuthorizationBase.cs" />
     <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />

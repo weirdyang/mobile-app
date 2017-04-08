@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Storage
+﻿using LH.Forcas.Sync.RefData;
+
+namespace LH.Forcas.Storage
 {
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -9,6 +11,11 @@
 
     public class RefDataRepository : IRefDataRepository
     {
+        public RefDataStatus GetStatus()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Bank> GetBanks()
         {
             return this.ReadJsonResource<Bank>();
@@ -22,6 +29,11 @@
         public IEnumerable<Country> GetCountries()
         {
             return this.ReadJsonResource<Country>();
+        }
+
+        public void SaveRefDataUpdate(RefDataUpdate update, RefDataStatus status)
+        {
+            throw new System.NotImplementedException();
         }
 
         private IEnumerable<T> ReadJsonResource<T>()

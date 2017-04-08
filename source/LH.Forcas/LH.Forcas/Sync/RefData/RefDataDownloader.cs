@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using LH.Forcas.Analytics;
+using LH.Forcas.Domain.RefData;
 using Newtonsoft.Json;
 using Octokit;
 
@@ -37,17 +38,17 @@ namespace LH.Forcas.Sync.RefData
             }
         }
 
-        public async Task<RefDataDownloadResult> DownloadRefData(string lastSyncedCommit, int lastSyncedVersion)
+        public async Task<RefDataDownloadResult> DownloadRefData(RefDataStatus status)
         {
             try
             {
                 var client = this.clientFactory.CreateClient();
 
-                if (!string.IsNullOrEmpty(lastSyncedCommit))
+                if (status != null)
                 {
                     var branch = await client.Repository.Branch.Get(OwnerName, RepositoryName, this.BranchName);
 
-                    if (string.Equals(branch.Commit.Sha, lastSyncedCommit, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(branch.Commit.Sha, status.CommitSha, StringComparison.OrdinalIgnoreCase))
                     {
                         return new RefDataDownloadResult();
                     }

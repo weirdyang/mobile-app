@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Diagnostics;
+using System.Threading.Tasks;
+using LH.Forcas.Analytics;
 using LH.Forcas.Domain.RefData;
-using LH.Forcas.Integration;
 using LH.Forcas.Storage;
+using LH.Forcas.Sync.RefData;
 
 namespace LH.Forcas.Services
 {
@@ -14,13 +15,17 @@ namespace LH.Forcas.Services
     public class RefDataService : IRefDataService
     {
         private readonly IRefDataRepository repository;
+        private readonly IRefDataDownloader downloader;
+        private readonly IAnalyticsReporter analyticsReporter;
 
         private readonly object cacheLock = new object();
         private readonly IDictionary<Type, object> cache = new ConcurrentDictionary<Type, object>();
 
-        public RefDataService(IRefDataRepository repository)
+        public RefDataService(IRefDataRepository repository, IRefDataDownloader downloader, IAnalyticsReporter analyticsReporter)
         {
             this.repository = repository;
+            this.downloader = downloader;
+            this.analyticsReporter = analyticsReporter;
         }
 
         public IList<Bank> GetBanks()
@@ -51,6 +56,28 @@ namespace LH.Forcas.Services
         public IList<Currency> GetCurrencies()
         {
             return this.GetRefDataViaCache(() => this.repository.GetCurrencies());
+        }
+
+        public async Task UpdateRefData()
+        {
+            try
+            {
+                var currentStatus = this.repository.GetStatus();
+                var result = await this.downloader.DownloadRefData(currentStatus);
+
+                if (!result.NewDataAvailable)
+                {
+                    return;
+                }
+
+                result.Data.RemoveUnchangedEntities(currentStatus);
+
+                this.repository.SaveRefDataUpdate(result.Data, result.NewStatus);
+            }
+            catch (Exception ex)
+            {
+                this.analyticsReporter.ReportHandledException(ex, "Updating RefData failed");
+            }
         }
 
         private IList<TDomain> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)

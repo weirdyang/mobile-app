@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LH.Forcas.Domain.RefData;
 
 namespace LH.Forcas.Services
@@ -14,5 +15,7 @@ namespace LH.Forcas.Services
         Currency GetCurrency(string id);
 
         IList<Currency> GetCurrencies();
+
+        Task UpdateRefData();
     }
 }
