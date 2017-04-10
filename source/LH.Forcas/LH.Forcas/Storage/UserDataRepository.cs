@@ -1,4 +1,7 @@
-﻿namespace LH.Forcas.Storage
+﻿using System;
+using LH.Forcas.Domain.UserData;
+
+namespace LH.Forcas.Storage
 {
     using Extensions;
     using System.Collections.Generic;
@@ -14,52 +17,51 @@
             this.dbManager = dbManager;
         }
 
-        public IEnumerable<T> GetAll<T>()
+        public UserSettings GetUserSettings()
         {
             using (var db = this.dbManager.GetDatabase())
             {
-                return db.GetCollection<T>().FindAll().ToArray();
+                return db.GetCollection<UserSettings>()
+                    .FindOne(x => x.UserSettingsId == UserSettings.SingleId);
             }
         }
 
-        public T GetOneById<T>(object id)
+        public void SaveUserSettings(UserSettings settings)
         {
             using (var db = this.dbManager.GetDatabase())
             {
-                var bsonId = new BsonValue(id);
-
-                return db.GetCollection<T>().FindById(bsonId);
+                db.GetCollection<UserSettings>().Upsert(settings);
             }
         }
 
-        public void Delete<T>(object id)
+        public IEnumerable<Account> GetAccounts()
         {
-            using (var db = this.dbManager.GetDatabase())
-            {
-                var bsonId = new BsonValue(id);
-                db.GetCollection<T>().Delete(bsonId);
-            }
+            throw new NotImplementedException();
         }
 
-        public void Insert<T>(T item)
+        public Account GetAccount(Guid id)
         {
-            using (var db = this.dbManager.GetDatabase())
-            {
-                db.GetCollection<T>().Insert(item);
-            }
+            throw new NotImplementedException();
         }
 
-        public void Update<T>(T item)
+        public void SaveAccount(Account account)
         {
-            using (var db = this.dbManager.GetDatabase())
-            {
-                db.GetCollection<T>().Update(item);
-            }
+            throw new NotImplementedException();
         }
 
-        public IRepositoryTransaction BeginTransaction()
+        public IEnumerable<Category> GetCategories()
         {
-            return new UserDataRepositoryTransaction(this.dbManager.GetDatabase());
+            throw new NotImplementedException();
+        }
+
+        public Category GetCategory(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveCategory(Category category)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -20,7 +20,7 @@
 
         public void Initialize()
         {
-            this.Settings = this.dataRepository.GetOneById<UserSettings>(UserSettings.SingleId);
+            this.Settings = this.dataRepository.GetUserSettings();
 
             if (this.Settings == null)
             {
@@ -30,13 +30,13 @@
                 this.Settings.DefaultCountryId = country.CountryId;
                 this.Settings.DefaultCurrencyId = country.DefaultCurrencyId;
 
-                this.dataRepository.Insert(this.Settings);
+                this.dataRepository.SaveUserSettings(this.Settings);
             }
         }
 
         public void Save()
         {
-            this.dataRepository.Update(this.Settings);
+            this.dataRepository.SaveUserSettings(this.Settings);
         }
     }
 }

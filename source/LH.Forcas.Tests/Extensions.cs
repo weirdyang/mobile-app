@@ -44,7 +44,7 @@
             Assert.IsNull(viewModel.ValidationResults[propInfo.Name]);
         }
 
-        private static PropertyInfo ExtractPropertyInfoFromLambda(LambdaExpression expression)
+        public static PropertyInfo ExtractPropertyInfoFromLambda(this LambdaExpression expression)
         {
             if (expression == null)
                 throw new ArgumentNullException(nameof(expression));

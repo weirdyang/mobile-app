@@ -81,9 +81,6 @@
     <Compile Include="Services\IDeviceService.cs" />
     <Compile Include="Services\UserSettingsService.cs" />
     <Compile Include="Storage\Data\TestData.cs" />
-    <Compile Include="Storage\IRepositoryActions.cs" />
-    <Compile Include="Storage\IRepositoryTransaction.cs" />
-    <Compile Include="Storage\UserDataRepositoryTransaction.cs" />
     <Compile Include="Sync\RefData\GitHubClientFactory.cs" />
     <Compile Include="Sync\RefData\IGitHubClientFactory.cs" />
     <Compile Include="Sync\RefData\IRefDataDownloader.cs" />

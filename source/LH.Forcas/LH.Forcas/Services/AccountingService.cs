@@ -16,16 +16,16 @@
             this.userDataRepository = userDataRepository;
         }
 
-        #region Accounts
-
         public IEnumerable<Account> GetAccounts()
         {
-            return this.userDataRepository.GetAll<Account>();
+            // return this.userDataRepository.GetAll<Account>();
+            throw new NotImplementedException();
         }
 
         public Account GetAccount(Guid id)
         {
-            return this.userDataRepository.GetOneById<Account>(id);
+            // return this.userDataRepository.GetOneById<Account>(id);
+            throw new NotImplementedException();
         }
 
         public void SaveAccount(Account account)
@@ -35,7 +35,8 @@
 
         public void DeleteAccount(Guid id)
         {
-            this.userDataRepository.Delete<Account>(id);
+            throw new NotImplementedException();
+            // this.userDataRepository.Delete<Account>(id);
         }
 
         public Task<IList<RemoteAccountInfo>> GetAvailableRemoteAccounts(string bankId)
@@ -45,26 +46,23 @@
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region Categories
-
         public IEnumerable<Category> GetCategories()
         {
-            return this.userDataRepository.GetAll<Category>();
+            throw new NotImplementedException();
+            //return this.userDataRepository.GetAll<Category>();
         }
 
         public void DeleteCategory(Guid categoryId, Guid? moveTransactionsIntoCategoryId)
         {
             // TODO: Change category of all transactions in the category
-            this.userDataRepository.Delete<Category>(categoryId);
+            throw new NotImplementedException();
+            // this.userDataRepository.Delete<Category>(categoryId);
         }
 
         public void SaveCategory(Category category)
         {
-            this.userDataRepository.Insert(category);
+            throw new NotImplementedException();
+            // this.userDataRepository.Insert(category);
         }
-
-        #endregion
     }
 }
