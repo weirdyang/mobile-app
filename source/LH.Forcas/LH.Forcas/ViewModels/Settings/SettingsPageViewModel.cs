@@ -64,7 +64,7 @@
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            this.RunAsyncWithBusyIndicator(this.LoadData);
+            this.RunAsyncWithBusyIndicator(() => this.LoadData());
         }
 
         private void LoadData()

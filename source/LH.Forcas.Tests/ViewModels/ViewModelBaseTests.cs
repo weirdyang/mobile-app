@@ -22,7 +22,7 @@ namespace LH.Forcas.Tests.ViewModels
                 var task = viewModel.RunLongRunningLogic();
                 Assert.IsTrue(viewModel.IsBusy);
 
-                viewModel.ResetEvent.Reset(); // Simulates long running stuff is finished
+                viewModel.FinishLongRunningLogic();
                 task.Wait();
 
                 Assert.IsFalse(viewModel.IsBusy);
@@ -35,37 +35,63 @@ namespace LH.Forcas.Tests.ViewModels
                 Assert.IsFalse(viewModel.IsBusy);
 
                 Console.WriteLine("Starting task");
-                var longRunning = viewModel.RunLongRunningLogicAsTask();
+                var longRunning = viewModel.RunLongRunningLogicWithTask();
                 Assert.IsTrue(viewModel.IsBusy);
 
-                viewModel.ResetEvent.Reset(); // Simulates long running stuff is finished
+                Console.WriteLine("Finishing task");
+                viewModel.FinishLongRunningLogic();
 
+                Console.WriteLine("Waiting for the task to exit");
                 longRunning.Wait();
+                Assert.IsFalse(viewModel.IsBusy);
+            }
+
+            [Test]
+            public void ShouldClearIsBusyWhenTaskFinishesImmediately()
+            {
+                var viewModel = new TestViewModel();
+                Assert.IsFalse(viewModel.IsBusy);
+
+                Console.WriteLine("Starting task");
+                var task = viewModel.RunEmptyAction();
+
+                Console.WriteLine("Waiting for the task to exit");
+                task.Wait();
                 Assert.IsFalse(viewModel.IsBusy);
             }
         }
 
         private class TestViewModel : ViewModelBase
         {
-            public readonly ManualResetEvent ResetEvent = new ManualResetEvent(true);
+            private readonly ManualResetEvent resetEvent = new ManualResetEvent(false);
 
             public Task RunLongRunningLogic()
             {
                 return this.RunAsyncWithBusyIndicator(() =>
                                           {
-                                              this.ResetEvent.WaitOne();
+                                              this.resetEvent.WaitOne();
                                           });
             }
 
-            public Task RunLongRunningLogicAsTask()
+            public Task RunLongRunningLogicWithTask()
             {
-                return this.RunAsyncWithBusyIndicator(this.AsyncLongRunningLogic());
+                return this.RunAsyncWithBusyIndicator(this.AsyncLongRunningLogic);
             }
 
-            private Task AsyncLongRunningLogic()
+            public Task RunEmptyAction()
             {
-                this.ResetEvent.WaitOne();
-                return Task.FromResult(0);
+                return this.RunAsyncWithBusyIndicator(() => { });
+            }
+
+            public void FinishLongRunningLogic()
+            {
+                this.resetEvent.Set();
+            }
+
+            private async Task AsyncLongRunningLogic()
+            {
+                this.resetEvent.WaitOne();
+                // return Task.FromResult(0);
             }
         }        
     }

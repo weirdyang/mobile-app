@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace LH.Forcas.ViewModels
+﻿namespace LH.Forcas.ViewModels
 {
     using System;
     using System.Threading.Tasks;
@@ -43,27 +41,34 @@ namespace LH.Forcas.ViewModels
 
         protected Task RunAsyncWithBusyIndicator(Action action)
         {
-            this.IsBusy = true;
-            this.CurrentBackgroundTask = Task.Run(() =>
-                     {
-                         try
-                         {
-                             action.Invoke();
-                         }
-                         finally
-                         {
-                             Debug.WriteLine("Finishing");
-                             this.IsBusy = false;
-                             this.CurrentBackgroundTask = null;
-                         }
-                     });
-
-            return this.CurrentBackgroundTask;
+            return this.RunAsyncWithBusyIndicator(Task.Run(action));
         }
 
-        protected Task RunAsyncWithBusyIndicator(Task task)
+        protected Task RunAsyncWithBusyIndicator(Func<Task> task)
         {
-            return this.RunAsyncWithBusyIndicator(task.Wait);
+            return this.RunAsyncWithBusyIndicator(Task.Run(task.Invoke));
+        }
+
+        private Task RunAsyncWithBusyIndicator(Task task)
+        {
+            if (task.IsCompleted)
+            {
+                return Task.FromResult(0);
+            }
+
+            this.IsBusy = true;
+
+            var wrappedTask =
+                task
+                .ContinueWith(x =>
+                {
+                    this.IsBusy = false;
+                    this.CurrentBackgroundTask = null;
+                });
+
+            this.CurrentBackgroundTask = wrappedTask;
+
+            return wrappedTask;
         }
     }
 }

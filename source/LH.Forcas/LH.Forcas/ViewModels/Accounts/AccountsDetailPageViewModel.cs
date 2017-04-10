@@ -77,7 +77,7 @@
                 if (this.SetProperty(ref this.selectedBank, value) && value != null)
                 {
                     this.SelectedRemoteAccount = null;
-                    this.RunAsyncWithBusyIndicator(this.RefreshRemoteAccounts());
+                    this.RunAsyncWithBusyIndicator(this.RefreshRemoteAccounts);
                 }
             }
         }
@@ -160,7 +160,7 @@
 
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
-            this.RunAsyncWithBusyIndicator(this.LoadData(parameters));
+            this.RunAsyncWithBusyIndicator(() => this.LoadData(parameters));
         }
 
         private async Task LoadData(NavigationParameters parameters)
