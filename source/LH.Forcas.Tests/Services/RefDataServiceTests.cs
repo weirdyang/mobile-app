@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using LH.Forcas.Analytics;
 using LH.Forcas.Domain.RefData;
+using LH.Forcas.RefDataContract;
 using LH.Forcas.Services;
 using LH.Forcas.Storage;
 using LH.Forcas.Sync.RefData;

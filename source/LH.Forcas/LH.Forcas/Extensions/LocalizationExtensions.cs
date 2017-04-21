@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Extensions
+﻿using LH.Forcas.RefDataContract;
+
+namespace LH.Forcas.Extensions
 {
     using Domain.RefData;
     using Localization;

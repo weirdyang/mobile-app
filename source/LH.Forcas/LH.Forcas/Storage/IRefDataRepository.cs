@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using LH.Forcas.Domain.RefData;
-using LH.Forcas.Sync.RefData;
+using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Storage
 {

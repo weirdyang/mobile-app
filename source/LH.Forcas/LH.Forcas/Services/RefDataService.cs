@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LH.Forcas.Analytics;
-using LH.Forcas.Domain.RefData;
+using LH.Forcas.RefDataContract;
 using LH.Forcas.Storage;
 using LH.Forcas.Sync.RefData;
 
@@ -70,8 +70,6 @@ namespace LH.Forcas.Services
                     return;
                 }
 
-                result.Data.RemoveUnchangedEntities(currentStatus);
-
                 this.repository.SaveRefDataUpdate(result.Data, result.NewStatus);
             }
             catch (Exception ex)
@@ -81,7 +79,7 @@ namespace LH.Forcas.Services
         }
 
         private IList<TDomain> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)
-            where TDomain : IIsActive
+            where TDomain : IRefDataEntity
         {
             IList<TDomain> typedResult = null;
 

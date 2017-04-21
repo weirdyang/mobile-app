@@ -1,11 +1,10 @@
 ﻿using System.Linq;
+using LH.Forcas.RefDataContract;
 using LH.Forcas.Storage;
 using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Storage
 {
-    using Forcas.Domain.RefData;
-
     [TestFixture]
     public class RefDataRepositoryTests
     {
@@ -29,8 +28,8 @@ namespace LH.Forcas.Tests.Storage
                 Assert.IsNotNull(rb);
                 Assert.IsNotEmpty(rb.Name);
                 Assert.IsNotEmpty(rb.CountryId);
-                Assert.AreNotEqual(0, rb.BBAN);
-                Assert.AreEqual(BankAuthorizationScope.PerAccount, rb.AuthorizationScheme);
+                Assert.AreNotEqual(0, rb.Bban);
+                Assert.AreEqual(BankAuthorizationScope.PerAccount, rb.AuthorizationScope);
                 Assert.IsTrue(rb.IsActive);
             }
 

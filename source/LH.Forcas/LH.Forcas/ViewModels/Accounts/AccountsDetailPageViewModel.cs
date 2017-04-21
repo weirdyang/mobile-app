@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.ViewModels.Accounts
+﻿using LH.Forcas.RefDataContract;
+
+namespace LH.Forcas.ViewModels.Accounts
 {
     using System;
     using System.Collections.Generic;

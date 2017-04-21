@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using LH.Forcas.Domain.RefData;
+using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Services
 {

@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Tests.ViewModels.Accounts
+﻿using LH.Forcas.RefDataContract;
+
+namespace LH.Forcas.Tests.ViewModels.Accounts
 {
     using System;
     using System.Linq;

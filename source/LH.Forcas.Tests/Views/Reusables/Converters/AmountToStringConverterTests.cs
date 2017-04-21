@@ -1,7 +1,8 @@
-﻿namespace LH.Forcas.Tests.Views.Reusables.Converters
+﻿using LH.Forcas.RefDataContract;
+
+namespace LH.Forcas.Tests.Views.Reusables.Converters
 {
     using System.Globalization;
-    using Forcas.Domain.RefData;
     using Forcas.Services;
     using Forcas.Views.Reusable.Converters;
     using Moq;

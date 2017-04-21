@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using LH.Forcas.Analytics;
 using LH.Forcas.Domain.RefData;
+using LH.Forcas.RefDataContract;
+using LH.Forcas.RefDataContract.Parsing;
 using LH.Forcas.Sync.RefData;
 using Moq;
 using NUnit.Framework;
@@ -14,11 +14,8 @@ using Octokit;
 namespace LH.Forcas.Tests.Sync.RefData
 {
     [TestFixture]
-    public abstract class RefDataDownloaderTests
+    public class RefDataDownloaderTests
     {
-        public const string ValidJsonFilePath = @"Sync\RefData\ValidRefDataUpdate.json";
-        public const string InvalidJsonFilePath = @"Sync\RefData\InvalidRefDataUpdate.json";
-
         protected RefDataDownloader Downloader;
         protected Mock<IApp> AppMock;
         protected Mock<IGitHubClient> GitHubClientMock;
@@ -28,6 +25,7 @@ namespace LH.Forcas.Tests.Sync.RefData
         protected Mock<IRepositoriesClient> GitHubRepositoriesClientMock;
         protected Mock<IRepositoryBranchesClient> GitHubBranchesClientMock;
         protected Mock<IRepositoryContentsClient> GitHubContentsClientMock;
+        protected Mock<IRefDataUpdateParser> UpdateParserMock;
 
         [SetUp]
         public void Setup()
@@ -40,6 +38,7 @@ namespace LH.Forcas.Tests.Sync.RefData
             this.GitHubRepositoriesClientMock = new Mock<IRepositoriesClient>();
             this.GitHubBranchesClientMock = new Mock<IRepositoryBranchesClient>();
             this.GitHubContentsClientMock = new Mock<IRepositoryContentsClient>();
+            this.UpdateParserMock = new Mock<IRefDataUpdateParser>();
 
             this.GitHubClientFactoryMock.Setup(x => x.CreateClient()).Returns(this.GitHubClientMock.Object);
             this.GitHubClientMock.SetupGet(x => x.Repository).Returns(this.GitHubRepositoriesClientMock.Object);
@@ -49,7 +48,8 @@ namespace LH.Forcas.Tests.Sync.RefData
             this.Downloader = new RefDataDownloader(
                 this.AppMock.Object,
                 this.GitHubClientFactoryMock.Object,
-                this.AnalyticsReporterMock.Object);
+                this.AnalyticsReporterMock.Object,
+                this.UpdateParserMock.Object);
         }
 
         public class WhenNoUpdatesAvailable : RefDataDownloaderTests
@@ -71,17 +71,22 @@ namespace LH.Forcas.Tests.Sync.RefData
             {
                 const string newCommitSha = "sha2";
 
+                var expectedUpdate = new RefDataUpdate();
+
                 this.SetupBranchCommit(newCommitSha);
-                this.SetupFileContents(ValidJsonFilePath, newCommitSha);
+                this.SetupFileContents(newCommitSha);
                 this.AppMock.SetupGet(x => x.AppVersion).Returns(new Version(3, 0));
+                this.UpdateParserMock
+                    .Setup(x => x.Parse(It.IsAny<string>(), It.IsAny<Version>(), It.IsAny<int>()))
+                    .Returns(new RefDataUpdateParseResult(4, expectedUpdate));
 
-                var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
+                var result = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
 
-                Assert.IsTrue(update.NewDataAvailable);
-                Assert.IsFalse(update.NewIncompatibleDataAvailable);
-                Assert.IsNotNull(update.Data);
-                Assert.IsNotNull(update.Data.Banks);
-                Assert.AreEqual(1, update.Data.Banks.Count());
+                Assert.IsTrue(result.NewDataAvailable);
+                Assert.IsNotNull(result.Data);
+                Assert.IsNotNull(result.NewStatus);
+                Assert.AreEqual(newCommitSha, result.NewStatus.CommitSha);
+                Assert.AreEqual(4, result.NewStatus.DataVersion);
             }
 
             [Test]
@@ -90,18 +95,23 @@ namespace LH.Forcas.Tests.Sync.RefData
                 const string newCommitSha = "sha2";
 
                 this.SetupBranchCommit(newCommitSha);
-                this.SetupFileContents(ValidJsonFilePath, newCommitSha);
+                this.SetupFileContents(newCommitSha);
                 this.AppMock.SetupGet(x => x.AppVersion).Returns(new Version(1, 0));
 
                 var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
 
                 Assert.IsFalse(update.NewDataAvailable);
-                Assert.IsTrue(update.NewIncompatibleDataAvailable);
             }
         }
 
-        public class WhenHandlingFailures : RefDataDownloaderTests
+        public class WhenHandlingEdgeCases : RefDataDownloaderTests
         {
+			[Test]
+            public void ShouldThrowOnNullArgument()
+			{
+			    Assert.ThrowsAsync<ArgumentNullException>(async () => await this.Downloader.DownloadRefData(null));
+            }
+			
             [Test]
             public async Task ShouldNotReportNetworkFailure()
             {
@@ -114,7 +124,6 @@ namespace LH.Forcas.Tests.Sync.RefData
                 var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha", 1));
 
                 Assert.IsFalse(update.NewDataAvailable);
-                Assert.IsFalse(update.NewIncompatibleDataAvailable);
             }
 
             [Test]
@@ -123,16 +132,16 @@ namespace LH.Forcas.Tests.Sync.RefData
                 const string newCommitSha = "sha2";
 
                 this.SetupBranchCommit(newCommitSha);
-                this.SetupFileContents(InvalidJsonFilePath, newCommitSha);
+                this.SetupFileContents(newCommitSha);
 
                 this.AppMock.SetupGet(x => x.AppVersion).Returns(new Version(3, 0));
-                this.AnalyticsReporterMock
-                    .Setup(x => x.ReportHandledException(It.IsAny<Exception>(), It.IsAny<string>()));
+                this.AnalyticsReporterMock.Setup(x => x.ReportHandledException(It.IsAny<Exception>(), It.IsAny<string>()));
+                this.UpdateParserMock.Setup(x => x.Parse(It.IsAny<string>(), It.IsAny<Version>(), It.IsAny<int>()))
+                    .Throws(new RefDataParseException("Dummy"));
 
                 var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
 
                 Assert.IsFalse(update.NewDataAvailable);
-                Assert.IsFalse(update.NewIncompatibleDataAvailable);
 
                 this.AnalyticsReporterMock.VerifyAll();
             }
@@ -148,10 +157,13 @@ namespace LH.Forcas.Tests.Sync.RefData
                 .ReturnsAsync(branch);
         }
 
-        protected void SetupFileContents(string jsonSourceFilePath, string commitSha)
+        protected void SetupFileContents(string commitSha)
         {
-            var jsonBytes = File.ReadAllBytes(Extensions.GetContentFilePath(jsonSourceFilePath));
-            var base64Json = Convert.ToBase64String(jsonBytes);
+            var random = new Random();
+            var bytes = new byte[2048];
+            random.NextBytes(bytes);
+
+            var base64Json = Convert.ToBase64String(bytes);
 
             var refDataFileContent = new RepositoryContent(null, null, commitSha, 0, ContentType.File, null, null, null, null, "utf8", base64Json, null, null);
 

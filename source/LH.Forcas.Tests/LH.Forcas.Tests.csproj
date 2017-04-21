@@ -55,8 +55,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\LH.Forcas.RefDataContract.1.0.41\lib\portable-net45+win8+wpa81\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="Flurl, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,6 +66,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Flurl.Http.1.1.1\lib\net45\Flurl.Http.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="LH.Forcas.RefDataContract, Version=1.0.41.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LH.Forcas.RefDataContract.1.0.41\lib\portable-net45+win8+wpa81\LH.Forcas.RefDataContract.dll</HintPath>
     </Reference>
     <Reference Include="LiteDB, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -105,9 +107,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\LH.Forcas.RefDataContract.1.0.41\lib\portable-net45+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
@@ -239,6 +239,7 @@
     <Compile Include="Storage\SaveLoadUtil.cs" />
     <Compile Include="Storage\UserDataRepositoryTests.cs" />
     <Compile Include="Storage\TestsDbManager.cs" />
+    <Compile Include="Sync\RefData\GitHubClientFactoryTests.cs" />
     <Compile Include="Sync\RefData\RefDataDownloaderTests.cs" />
     <Compile Include="ViewModels\Accounts\AccountsDetailPageViewModelTests.cs" />
     <Compile Include="ViewModels\Accounts\AccountsListPageViewModelTests.cs" />
@@ -268,12 +269,6 @@
     </Content>
     <None Include="packages.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Sync\RefData\InvalidRefDataUpdate.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Sync\RefData\ValidRefDataUpdate.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

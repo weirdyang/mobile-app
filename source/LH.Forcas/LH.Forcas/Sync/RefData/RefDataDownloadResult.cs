@@ -1,13 +1,13 @@
 ﻿using LH.Forcas.Domain.RefData;
+using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Sync.RefData
 {
     public class RefDataDownloadResult
     {
-        public RefDataDownloadResult(bool newDataAvailable = false, bool newIncompatibleDataAvailable = false)
+        public RefDataDownloadResult(bool newDataAvailable = false)
         {
             this.NewDataAvailable = newDataAvailable;
-            this.NewIncompatibleDataAvailable = newIncompatibleDataAvailable;
         }
 
         public RefDataDownloadResult(RefDataUpdate data, string commitSha, int version)
@@ -19,8 +19,6 @@ namespace LH.Forcas.Sync.RefData
         }
 
         public bool NewDataAvailable { get; }
-
-        public bool NewIncompatibleDataAvailable { get; }
 
         public RefDataUpdate Data { get; }
 

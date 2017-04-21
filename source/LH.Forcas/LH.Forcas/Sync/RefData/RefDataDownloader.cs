@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using LH.Forcas.Analytics;
 using LH.Forcas.Domain.RefData;
-using Newtonsoft.Json;
+using LH.Forcas.RefDataContract.Parsing;
 using Octokit;
 
 namespace LH.Forcas.Sync.RefData
@@ -13,15 +13,15 @@ namespace LH.Forcas.Sync.RefData
         public const string OwnerName = "lholota";
         public const string RepositoryName = "LH.Forcas.Sync";
 
-        private const string JsonSeparator = "//---------------";
-
         private readonly IApp app;
+        private readonly IRefDataUpdateParser updateParser;
         private readonly IGitHubClientFactory clientFactory;
         private readonly IAnalyticsReporter analyticsReporter;
 
-        public RefDataDownloader(IApp app, IGitHubClientFactory clientFactory, IAnalyticsReporter analyticsReporter)
+        public RefDataDownloader(IApp app, IGitHubClientFactory clientFactory, IAnalyticsReporter analyticsReporter, IRefDataUpdateParser updateParser)
         {
             this.analyticsReporter = analyticsReporter;
+            this.updateParser = updateParser;
             this.clientFactory = clientFactory;
             this.app = app;
         }
@@ -40,6 +40,11 @@ namespace LH.Forcas.Sync.RefData
 
         public async Task<RefDataDownloadResult> DownloadRefData(RefDataStatus status)
         {
+            if (status == null)
+            {
+                throw new ArgumentNullException(nameof(status));
+            }
+
             try
             {
                 var client = this.clientFactory.CreateClient();
@@ -57,12 +62,13 @@ namespace LH.Forcas.Sync.RefData
                 var filePath = $"{this.BranchName}/Data.json";
                 var contents = await client.Repository.Content.GetAllContents(OwnerName, RepositoryName, filePath);
 
-                if (!this.TryParseJson(contents[0].Content, out RefDataUpdate update, out int dataVersion))
+                var parserResult = this.updateParser.Parse(contents[0].Content, this.app.AppVersion, status.DataVersion);
+                if (parserResult == null)
                 {
-                    return new RefDataDownloadResult(newIncompatibleDataAvailable: true);
+                    return new RefDataDownloadResult();
                 }
 
-                return new RefDataDownloadResult(update, contents[0].Sha, dataVersion);
+                return new RefDataDownloadResult(parserResult.Update, contents[0].Sha, parserResult.DataVersion);
             }
             catch (ApiException ex)
             {
@@ -74,35 +80,6 @@ namespace LH.Forcas.Sync.RefData
             }
 
             return new RefDataDownloadResult();
-        }
-
-        private bool TryParseJson(string json, out RefDataUpdate update, out int dataVersion)
-        {
-            var parts = json.Split(new[] { JsonSeparator }, StringSplitOptions.None);
-
-            if (parts.Length != 2)
-            {
-                throw new ArgumentException($"The downloaded json must contain UpdateInfo and UpdateData separated by '{JsonSeparator}'", nameof(json));
-            }
-
-            try
-            {
-                var versionInfo = JsonConvert.DeserializeObject<RefDataUpdateInfo>(parts[0]);
-                dataVersion = versionInfo.Version;
-
-                if (this.app.AppVersion < versionInfo.MinAppVersion)
-                {
-                    update = null;
-                    return false;
-                }
-
-                update = JsonConvert.DeserializeObject<RefDataUpdate>(parts[1]);
-                return true;
-            }
-            catch (JsonException ex)
-            {
-                throw new Exception("Deserializing the Json file failed.", ex);
-            }
         }
     }
 }

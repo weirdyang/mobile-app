@@ -58,8 +58,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Domain\RefData\BankAuthorizationScope.cs" />
-    <Compile Include="Domain\RefData\IRefDataEntity.cs" />
     <Compile Include="Domain\RefData\RefDataStatus.cs" />
     <Compile Include="Domain\UserData\Amount.cs" />
     <Compile Include="Domain\UserData\Authorization\BankAuthorizationBase.cs" />
@@ -86,8 +84,6 @@
     <Compile Include="Sync\RefData\IRefDataDownloader.cs" />
     <Compile Include="Sync\RefData\RefDataDownloader.cs" />
     <Compile Include="Sync\RefData\RefDataDownloadResult.cs" />
-    <Compile Include="Sync\RefData\RefDataUpdate.cs" />
-    <Compile Include="Sync\RefData\RefDataUpdateInfo.cs" />
     <Compile Include="ViewModels\Categories\CategoriesDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Categories\CategoriesListPageViewModel.cs" />
     <Compile Include="ViewModels\DetailViewModelBase.cs" />
@@ -124,7 +120,6 @@
     <Compile Include="Views\Reusable\Converters\AmountToCurrencyStringConverter.cs" />
     <Compile Include="Views\Reusable\Converters\StringToResourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\ToResourceConverter.cs" />
-    <Compile Include="Domain\RefData\IIsActive.cs" />
     <Compile Include="Domain\UserData\Account.cs" />
     <Compile Include="Domain\UserData\AccountNumber.cs" />
     <Compile Include="Domain\UserData\Budget.cs" />
@@ -153,12 +148,9 @@
     <Compile Include="Extensions\PollyExtensions.cs" />
     <Compile Include="IAppConfig.cs" />
     <Compile Include="AppConfig.cs" />
-    <Compile Include="Domain\RefData\Bank.cs" />
-    <Compile Include="Domain\RefData\Currency.cs" />
     <Compile Include="Services\IRefDataService.cs" />
     <Compile Include="Services\RefDataService.cs" />
     <Compile Include="Storage\DbManager.cs" />
-    <Compile Include="Domain\RefData\Country.cs" />
     <Compile Include="Storage\IUserDataRepository.cs" />
     <Compile Include="Storage\RefDataRepository.cs" />
     <Compile Include="Storage\UserDataRepository.cs" />
@@ -227,8 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FluentValidation.6.2.1.0\lib\portable-net45+wp80+win8+wpa81\FluentValidation.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\LH.Forcas.RefDataContract.1.0.41\lib\portable-net45+win8+wpa81\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="Flurl, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Flurl.2.3.0\lib\portable40-net40+sl5+win8+wp8+wpa81\Flurl.dll</HintPath>
@@ -243,6 +234,9 @@
     <Reference Include="FreshEssentials, Version=1.0.6234.27073, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FreshEssentials.2.1.3\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FreshEssentials.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="LH.Forcas.RefDataContract, Version=1.0.41.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LH.Forcas.RefDataContract.1.0.41\lib\portable-net45+win8+wpa81\LH.Forcas.RefDataContract.dll</HintPath>
     </Reference>
     <Reference Include="LiteDB">
       <HintPath>..\..\packages\LiteDB.3.0.0\lib\netstandard1.4\LiteDB.dll</HintPath>
@@ -263,9 +257,8 @@
       <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LH.Forcas.RefDataContract.1.0.41\lib\portable-net45+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Octokit, Version=0.24.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Octokit.0.24.0\lib\portable-net45+wp80+win+wpa81\Octokit.dll</HintPath>

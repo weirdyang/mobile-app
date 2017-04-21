@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Extensions
 {
     using System.Linq;
-    using Domain.RefData;
 
     public static class CollectionExtensions
     {

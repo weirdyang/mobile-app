@@ -1,11 +1,12 @@
-﻿namespace LH.Forcas.ViewModels.Dashboard
+﻿using LH.Forcas.RefDataContract;
+
+namespace LH.Forcas.ViewModels.Dashboard
 {
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Windows.Input;
-    using Domain.RefData;
     using Prism.Commands;
     using Prism.Services;
     using Services;

@@ -1,4 +1,4 @@
-﻿using LH.Forcas.Sync.RefData;
+﻿using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Storage
 {
