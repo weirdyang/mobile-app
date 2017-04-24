@@ -65,6 +65,7 @@
     <Compile Include="Domain\UserData\Category.cs" />
     <Compile Include="Domain\UserData\IRoamingObject.cs" />
     <Compile Include="Domain\UserData\UserSettings.cs" />
+    <Compile Include="Events\TrimMemoryRequestedEvent.cs" />
     <Compile Include="Extensions\LocalizationExtensions.cs" />
     <Compile Include="Extensions\PrismExtensions.cs" />
     <Compile Include="IApp.cs" />
@@ -77,7 +78,12 @@
     <Compile Include="Integration\Banks\RemoteAccountInfo.cs" />
     <Compile Include="Integration\Banks\TestBankProvider.cs" />
     <Compile Include="Services\IDeviceService.cs" />
+    <Compile Include="Services\TrimMemoryEventArgs.cs" />
+    <Compile Include="Events\TrimMemorySeverity.cs" />
     <Compile Include="Services\UserSettingsService.cs" />
+    <Compile Include="Storage\Caching\RefDataRepositoryCache.cs" />
+    <Compile Include="Storage\Caching\RepositoryCacheBase.cs" />
+    <Compile Include="Storage\Caching\UserDataRepositoryCache.cs" />
     <Compile Include="Storage\Data\TestData.cs" />
     <Compile Include="Sync\RefData\GitHubClientFactory.cs" />
     <Compile Include="Sync\RefData\IGitHubClientFactory.cs" />
@@ -210,7 +216,6 @@
     <EmbeddedResource Include="Storage\Data\Currency.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Events\" />
     <Folder Include="Views\About\" />
     <Folder Include="Views\Budget\" />
     <Folder Include="Views\Reports\" />

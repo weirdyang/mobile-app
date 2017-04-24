@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Services
+﻿using System;
+
+namespace LH.Forcas.Services
 {
     public interface IDeviceService
     {

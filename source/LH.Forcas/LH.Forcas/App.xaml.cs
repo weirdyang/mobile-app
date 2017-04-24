@@ -1,22 +1,22 @@
 ﻿using System;
+using System.Globalization;
+using LH.Forcas.Extensions;
+using LH.Forcas.Localization;
+using LH.Forcas.Services;
+using LH.Forcas.Storage;
+using LH.Forcas.Storage.Caching;
+using LH.Forcas.Storage.Data;
+using LH.Forcas.Views;
+using LH.Forcas.Views.Accounts;
+using LH.Forcas.Views.Categories;
+using LH.Forcas.Views.Dashboard;
+using LH.Forcas.Views.Root;
+using LH.Forcas.Views.Settings;
+using Microsoft.Practices.Unity;
+using Prism.Unity;
 
 namespace LH.Forcas
 {
-    using System.Globalization;
-    using LH.Forcas.Extensions;
-    using LH.Forcas.Localization;
-    using LH.Forcas.Services;
-    using LH.Forcas.Views.Dashboard;
-    using LH.Forcas.Views.Root;
-    using Microsoft.Practices.Unity;
-    using Prism.Unity;
-    using Storage;
-    using Storage.Data;
-    using Views;
-    using Views.Accounts;
-    using Views.Categories;
-    using Views.Settings;
-
     public partial class App : IApp
     {
         public Version AppVersion { get; private set; }
@@ -52,8 +52,11 @@ namespace LH.Forcas
         {
             this.Container.RegisterType<IDbManager, DbManager>(new ContainerControlledLifetimeManager());
 
-            this.Container.RegisterType<IRefDataRepository, RefDataRepository>(new ContainerControlledLifetimeManager());
-            this.Container.RegisterType<IUserDataRepository, UserDataRepository>(new ContainerControlledLifetimeManager());
+            this.Container.RegisterType<IRefDataRepository, RefDataRepository>("Repository", new ContainerControlledLifetimeManager());
+            this.Container.RegisterType<IRefDataRepository, RefDataRepositoryCache>(new ContainerControlledLifetimeManager());
+
+            this.Container.RegisterType<IUserDataRepository, UserDataRepository>("Repository", new ContainerControlledLifetimeManager());
+            this.Container.RegisterType<IUserDataRepository, UserDataRepositoryCache>(new ContainerControlledLifetimeManager());
 
             this.Container.RegisterType<IAccountingService, AccountingService>(new ContainerControlledLifetimeManager());
             this.Container.RegisterType<IRefDataService, RefDataService>(new ContainerControlledLifetimeManager());
