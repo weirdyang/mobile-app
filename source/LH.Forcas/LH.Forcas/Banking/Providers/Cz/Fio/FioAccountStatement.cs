@@ -1,9 +1,9 @@
-namespace LH.Forcas.Integration.Banks.Cz.Fio
-{
-    using System;
-    using System.Xml.Serialization;
-    using Newtonsoft.Json;
+using System;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
+namespace LH.Forcas.Banking.Providers.Cz.Fio
+{
     public class FioAccountStatementJsonWrapper
     {
         public FioAccountStatement AccountStatement { get; set; }

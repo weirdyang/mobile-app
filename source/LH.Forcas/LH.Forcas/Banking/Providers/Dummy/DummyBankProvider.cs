@@ -1,11 +1,11 @@
-﻿namespace LH.Forcas.Integration.Banks
-{
-    using System;
-    using Domain.UserData;
-    using Domain.UserData.Authorization;
+﻿using System;
+using LH.Forcas.Domain.UserData;
+using LH.Forcas.Domain.UserData.Authorization;
 
+namespace LH.Forcas.Banking.Providers.Dummy
+{
     [BankProviderInfo(typeof(StaticTokenAuthorization), "RB", "UCB")]
-    public class TestBankProvider : IBankProvider
+    public class DummyBankProvider : IBankProvider
     {
         public void Initialize(BankAuthorizationBase authorizationBase) { }
 

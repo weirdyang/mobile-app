@@ -1,10 +1,11 @@
-﻿namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
+﻿using LH.Forcas.Banking.Exceptions;
+using LH.Forcas.Banking.Providers.Cz.Fio;
+
+namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
 {
     using System;
     using System.IO;
     using System.Linq;
-    using Forcas.Integration.Banks.Cz.Fio;
-    using Forcas.Integration.Exceptions;
     using NUnit.Framework;
 
     [TestFixture]

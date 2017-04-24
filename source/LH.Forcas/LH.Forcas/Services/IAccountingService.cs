@@ -1,10 +1,11 @@
-﻿namespace LH.Forcas.Services
+﻿using LH.Forcas.Banking;
+
+namespace LH.Forcas.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Domain.UserData;
-    using Integration.Banks;
 
     public interface IAccountingService
     {

@@ -1,4 +1,5 @@
-﻿using LH.Forcas.RefDataContract;
+﻿using LH.Forcas.Banking;
+using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.ViewModels.Accounts
 {
@@ -6,10 +7,8 @@ namespace LH.Forcas.ViewModels.Accounts
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Domain.RefData;
     using Domain.UserData;
     using FluentValidation;
-    using Integration.Banks;
     using LH.Forcas.Extensions;
     using LH.Forcas.Localization;
     using Prism.Navigation;

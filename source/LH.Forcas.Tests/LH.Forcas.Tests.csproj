@@ -225,10 +225,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Banking\Providers\TestsBankProvider.cs" />
     <Compile Include="Domain\UserData\AccountNumberTests.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Integration\Banks\BankProviderCatalogTests.cs" />
-    <Compile Include="Integration\Banks\BankProviderInfoAttribute.cs" />
+    <Compile Include="Banking\Providers\BankProviderFactoryTests.cs" />
+    <Compile Include="Banking\Providers\BankProviderInfoAttributeTests.cs" />
     <Compile Include="Integration\Banks\Cz\Fio\FioBankIntegrationTests.cs" />
     <Compile Include="Integration\Banks\Cz\Fio\FioOutputParserTests.cs" />
     <Compile Include="MockExtensions.cs" />
@@ -276,6 +277,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -58,6 +58,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Banking\Exceptions\BankNotSupportedException.cs" />
     <Compile Include="Domain\RefData\RefDataStatus.cs" />
     <Compile Include="Domain\UserData\Amount.cs" />
     <Compile Include="Domain\UserData\Authorization\BankAuthorizationBase.cs" />
@@ -69,14 +70,14 @@
     <Compile Include="Extensions\LocalizationExtensions.cs" />
     <Compile Include="Extensions\PrismExtensions.cs" />
     <Compile Include="IApp.cs" />
-    <Compile Include="Integration\Banks\BankProviderCatalog.cs" />
-    <Compile Include="Integration\Banks\BankProviderInfoAttribute.cs" />
-    <Compile Include="Integration\Banks\Cz\Fio\FioOutputParser.cs" />
-    <Compile Include="Integration\Banks\Cz\Fio\FioAccountStatement.cs" />
-    <Compile Include="Integration\Banks\IBankProvider.cs" />
-    <Compile Include="Integration\Banks\IBankProviderCatalog.cs" />
-    <Compile Include="Integration\Banks\RemoteAccountInfo.cs" />
-    <Compile Include="Integration\Banks\TestBankProvider.cs" />
+    <Compile Include="Banking\Providers\BankProviderFactory.cs" />
+    <Compile Include="Banking\Providers\BankProviderInfoAttribute.cs" />
+    <Compile Include="Banking\Providers\Cz\Fio\FioOutputParser.cs" />
+    <Compile Include="Banking\Providers\Cz\Fio\FioAccountStatement.cs" />
+    <Compile Include="Banking\Providers\IBankProvider.cs" />
+    <Compile Include="Banking\Providers\IBankProviderFactory.cs" />
+    <Compile Include="Banking\RemoteAccountInfo.cs" />
+    <Compile Include="Banking\Providers\Dummy\DummyBankProvider.cs" />
     <Compile Include="Services\IDeviceService.cs" />
     <Compile Include="Services\TrimMemoryEventArgs.cs" />
     <Compile Include="Events\TrimMemorySeverity.cs" />
@@ -136,7 +137,7 @@
     <Compile Include="Views\Reusable\Converters\ValidationResultToColorConverter.cs" />
     <Compile Include="Views\Reusable\MarkupExtensions\TranslateExtensions.cs" />
     <Compile Include="Extensions\NavigationExtensions.cs" />
-    <Compile Include="Integration\Exceptions\BankPayloadFormatException.cs" />
+    <Compile Include="Banking\Exceptions\BankPayloadFormatException.cs" />
     <Compile Include="Localization\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -208,7 +209,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Integration\Banks\Cz\Fio\FioXmlSchema.xsd">
+    <None Include="Banking\Providers\Cz\Fio\FioXmlSchema.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

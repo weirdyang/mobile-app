@@ -1,11 +1,10 @@
-﻿using LH.Forcas.RefDataContract;
+﻿using LH.Forcas.Banking;
+using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Tests.ViewModels.Accounts
 {
     using System;
     using System.Linq;
-    using Forcas.Integration.Banks;
-    using LH.Forcas.Domain.RefData;
     using LH.Forcas.Domain.UserData;
     using LH.Forcas.Extensions;
     using LH.Forcas.Services;

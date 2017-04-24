@@ -1,9 +1,9 @@
-﻿namespace LH.Forcas.Integration.Banks
-{
-    using System;
-    using System.Reflection;
-    using Domain.UserData.Authorization;
+﻿using System;
+using System.Reflection;
+using LH.Forcas.Domain.UserData.Authorization;
 
+namespace LH.Forcas.Banking.Providers
+{
     [AttributeUsage(AttributeTargets.Class)]
     public class BankProviderInfoAttribute : Attribute
     {

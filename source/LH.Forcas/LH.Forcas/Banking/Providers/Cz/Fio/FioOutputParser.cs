@@ -1,10 +1,10 @@
-﻿namespace LH.Forcas.Integration.Banks.Cz.Fio
-{
-    using System;
-    using System.IO;
-    using Exceptions;
-    using Newtonsoft.Json;
+﻿using System;
+using System.IO;
+using LH.Forcas.Banking.Exceptions;
+using Newtonsoft.Json;
 
+namespace LH.Forcas.Banking.Providers.Cz.Fio
+{
     public class FioOutputParser
     {
         private readonly JsonSerializer serializer;

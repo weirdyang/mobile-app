@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LH.Forcas.Integration.Exceptions
+namespace LH.Forcas.Banking.Exceptions
 {
     public class BankPayloadFormatException : Exception
     {

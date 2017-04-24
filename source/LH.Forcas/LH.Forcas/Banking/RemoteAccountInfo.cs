@@ -1,7 +1,7 @@
-﻿namespace LH.Forcas.Integration.Banks
-{
-    using Domain.UserData;
+﻿using LH.Forcas.Domain.UserData;
 
+namespace LH.Forcas.Banking
+{
     public class RemoteAccountInfo
     {
         public string CurrencyId { get; set; }
