@@ -1,0 +1,5 @@
+codecov:
+  branch: develop
+  round: down
+  range: 30...100
+  precision: 2
