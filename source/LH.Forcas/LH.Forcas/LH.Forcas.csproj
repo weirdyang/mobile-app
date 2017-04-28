@@ -123,6 +123,7 @@
     <Compile Include="Views\Reusable\Behaviors\HideWhenElementScrolled.cs" />
     <Compile Include="Views\Reusable\Behaviors\ViewCellCommand.cs" />
     <Compile Include="Views\Reusable\Controls\ActivityOverlay.cs" />
+    <Compile Include="Views\Reusable\Controls\CardFrame.cs" />
     <Compile Include="Views\Reusable\Controls\ContentControl.cs" />
     <Compile Include="Views\Reusable\Controls\FloatingActionButtonView.cs" />
     <Compile Include="Views\Reusable\Controls\PickerCell.cs" />
