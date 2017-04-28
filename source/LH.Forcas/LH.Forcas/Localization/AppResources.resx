@@ -270,4 +270,13 @@
   <data name="Currency_EUR" xml:space="preserve">
     <value>Euro</value>
   </data>
+  <data name="BudgetPage_Title" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="CashTransactionPage_Title" xml:space="preserve">
+    <value>Cash payment</value>
+  </data>
+  <data name="MorePage_Title" xml:space="preserve">
+    <value>More</value>
+  </data>
 </root>

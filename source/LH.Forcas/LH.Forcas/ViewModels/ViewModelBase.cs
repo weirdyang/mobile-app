@@ -35,9 +35,9 @@
             }
         }
 
-        public virtual void OnNavigatedFrom(NavigationParameters parameters) { }
+        public virtual void OnNavigatedFrom(NavigationParameters parameters) {}
 
-        public virtual void OnNavigatedTo(NavigationParameters parameters) { }
+        public virtual void OnNavigatedTo(NavigationParameters parameters) {}
 
         protected Task RunAsyncWithBusyIndicator(Action action)
         {
@@ -51,7 +51,7 @@
 
         private Task RunAsyncWithBusyIndicator(Task task)
         {
-            if (task.IsCompleted)
+            if (task.IsCompleted && !task.IsFaulted)
             {
                 return Task.FromResult(0);
             }
@@ -64,6 +64,8 @@
                 {
                     this.IsBusy = false;
                     this.CurrentBackgroundTask = null;
+
+                    x.Exception?.Handle(ex => false);
                 });
 
             this.CurrentBackgroundTask = wrappedTask;

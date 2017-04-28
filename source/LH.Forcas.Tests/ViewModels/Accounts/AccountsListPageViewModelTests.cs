@@ -35,8 +35,8 @@
             this.AccountingServiceMock.Setup(x => x.GetAccounts())
                 .Returns(new[]
                          {
-                             new BankAccount { AccountId = Guid.NewGuid(), Name = "Checking" },
-                             new BankAccount { AccountId = Guid.NewGuid(), Name = "Savings" }
+                             new BankAccount { Id = Guid.NewGuid(), Name = "Checking" },
+                             new BankAccount { Id = Guid.NewGuid(), Name = "Savings" }
                          });
         }
 
@@ -62,7 +62,7 @@
 
                 this.NavigationServiceMock.Setup(x => x.NavigateAsync(
                     It.Is<string>(uri => uri.ToString().Contains("Detail")),
-                    It.Is<NavigationParameters>(p => p.HasParameter(NavigationExtensions.AccountIdParameterName, accountToNavigate.AccountId)),
+                    It.Is<NavigationParameters>(p => p.HasParameter(NavigationExtensions.AccountIdParameterName, accountToNavigate.Id)),
                     null, 
                     true)).ReturnAwaitable();
 
@@ -112,7 +112,7 @@
             public void ShouldDeleteAccountIfConfirmed()
             {
                 this.NavigateTo();
-                var accountId = this.ViewModel.AccountGroups.First().First().AccountId;
+                var accountId = this.ViewModel.AccountGroups.First().First().Id;
 
                 this.SetupDeleteConfirm(true);
                 this.AccountingServiceMock.Setup(x => x.DeleteAccount(It.Is<Guid>(id => id == accountId)));

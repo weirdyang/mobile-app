@@ -10,7 +10,6 @@
     using Views.Categories;
     using Views.Dashboard;
     using Views.Settings;
-    using Xamarin.Forms;
 
     public static class NavigationExtensions
     {
@@ -32,19 +31,22 @@
 
         public static void InitializeNavigation()
         {
-            if (Device.OS == TargetPlatform.Android)
-            {
-                _rootPageName = "RootSideMenuPage";
-            }
-            else
-            {
-                _rootPageName = "RootTabPage";
-            }
+            _rootPageName = "RootTabPage";
+
+            //if (Device.OS == TargetPlatform.Android)
+            //{
+            //    _rootPageName = "RootSideMenuPage";
+            //}
+            //else
+            //{
+            //    _rootPageName = "RootTabPage";
+            //}
         }
 
         public static async Task NavigateToDashboard(this INavigationService navigationService)
         {
-            await navigationService.NavigateAsync(GetAbsoluteUri(nameof(DashboardNavigationPage), nameof(DashboardPage)));
+            await navigationService.NavigateAsync(_rootPageName);
+            //await navigationService.NavigateAsync(GetAbsoluteUri(nameof(DashboardNavigationPage), nameof(DashboardPage)));
         }
 
         public static async Task NavigateToAccounts(this INavigationService navigationService)

@@ -19,8 +19,7 @@ namespace LH.Forcas.Services
 
         public IEnumerable<Account> GetAccounts()
         {
-            // return this.userDataRepository.GetAll<Account>();
-            throw new NotImplementedException();
+            return this.userDataRepository.GetAccounts();
         }
 
         public Account GetAccount(Guid id)

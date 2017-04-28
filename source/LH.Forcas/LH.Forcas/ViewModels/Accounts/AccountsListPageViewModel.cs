@@ -1,7 +1,6 @@
 ﻿namespace LH.Forcas.ViewModels.Accounts
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
@@ -26,7 +25,7 @@
 
         public AccountsListPageViewModel(
             IAccountingService accountingService,
-            INavigationService navigationService, 
+            INavigationService navigationService,
             IPageDialogService dialogService)
         {
             this.accountingService = accountingService;
@@ -55,27 +54,21 @@
             private set { this.SetProperty(ref this.accountGroups, value); }
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override async void OnNavigatedTo(NavigationParameters parameters)
         {
-            this.RefreshAccounts();
+            await this.RunAsyncWithBusyIndicator((Action)this.RefreshAccounts);
         }
 
         private void RefreshAccounts()
-        {
-            this.RunAsyncWithBusyIndicator(() =>
-                                           {
-                                               var groupped = this.accountingService.GetAccounts()
-                                                                .GroupBy(account => account.GetType())
-                                                                .Select(group => new AccountsGroup(group.Key, group.OrderBy(acc => acc.Name)))
-                                                                .OrderBy(group => Array.IndexOf(this.accountTypeOrder, group.AccountType));
-
-                                               this.AccountGroups = new ObservableCollection<AccountsGroup>(groupped);
-                                           });
+        {    
+            var accounts = this.accountingService.GetAccounts();
+            var grouped = this.GroupAccounts(accounts);
+            this.AccountGroups = new ObservableCollection<AccountsGroup>(grouped);
         }
 
         private async Task NavigateToAccountDetail(Account account)
         {
-            await this.navigationService.NavigateToAccountDetail(account.AccountId);
+            await this.navigationService.NavigateToAccountDetail(account.Id);
         }
 
         private async Task DeleteAccount(Account account)
@@ -100,7 +93,7 @@
 
             try
             {
-                this.accountingService.DeleteAccount(account.AccountId);
+                this.accountingService.DeleteAccount(account.Id);
                 this.AccountGroups.Single(x => x.AccountType == account.GetType()).Remove(account);
             }
             catch (Exception ex)
@@ -114,6 +107,15 @@
             {
                 this.RefreshAccounts();
             }
+        }
+
+        private IEnumerable<AccountsGroup> GroupAccounts(IEnumerable<Account> accounts)
+        {
+            Task.Delay(3000).Wait();
+
+            return accounts.GroupBy(account => account.GetType())
+                           .Select(group => new AccountsGroup(group.Key, group.OrderBy(acc => acc.Name)))
+                           .OrderBy(group => Array.IndexOf(this.accountTypeOrder, group.AccountType));
         }
 
         public class AccountsGroup : ObservableCollection<Account>

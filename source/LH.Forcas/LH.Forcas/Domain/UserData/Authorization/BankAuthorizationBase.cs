@@ -3,15 +3,13 @@
     using System;
     using LiteDB;
 
-    public abstract class BankAuthorizationBase : IRoamingObject
+    public abstract class BankAuthorizationBase : UserEntityBase<Guid>
     {
-        public Guid BankAuthId { get; set; }
-
         public string BankId { get; set; }
 
-        public BsonValue GetIdAsBson()
+        public override BsonValue GetIdAsBson()
         {
-            return new BsonValue(this.BankAuthId);
+            return new BsonValue(this.Id);
         }
     }
 }

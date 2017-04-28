@@ -1,4 +1,5 @@
-﻿using LH.Forcas.Domain.UserData;
+﻿using System.Collections.Generic;
+using LH.Forcas.Domain.UserData;
 using LH.Forcas.Events;
 using LH.Forcas.Storage;
 using LH.Forcas.Storage.Caching;
@@ -46,7 +47,7 @@ namespace LH.Forcas.Tests.Storage.Caching
             }
 
             [Test]
-            public void ThenRefDataUpdateContainingBanksShouldInvalidateCache()
+            public void ThenSaveShouldInvalidateCache()
             {
                 this.RepositoryMock.Setup(x => x.GetUserSettings()).Returns(new UserSettings());
 
@@ -55,6 +56,52 @@ namespace LH.Forcas.Tests.Storage.Caching
                 this.Cache.GetUserSettings();
 
                 this.RepositoryMock.Verify(x => x.GetUserSettings(), Times.Exactly(2));
+            }
+
+            [Test]
+            public void ThenSaveShouldCallRepository()
+            {
+                this.RepositoryMock.Setup(x => x.SaveUserSettings(It.IsAny<UserSettings>()));
+
+                this.Cache.SaveUserSettings(new UserSettings());
+                
+                this.RepositoryMock.VerifyAll();
+            }
+        }
+
+        public class WhenHandlingAccounts : UserDataRepositoryCacheTests
+        {
+            [Test]
+            public void ThenShouldHandleSubsequentCallsFromCache()
+            {
+                this.RepositoryMock.Setup(x => x.GetAccounts()).Returns(new List<Account> { new CashAccount()});
+
+                this.Cache.GetAccounts();
+                this.Cache.GetAccounts();
+
+                this.RepositoryMock.Verify(x => x.GetAccounts(), Times.Once);
+            }
+
+            [Test]
+            public void ThenSaveShouldInvalidateCache()
+            {
+                this.RepositoryMock.Setup(x => x.GetAccounts()).Returns(new List<Account> { new CashAccount() });
+
+                this.Cache.GetAccounts();
+                this.Cache.SaveAccount(new CashAccount());
+                this.Cache.GetAccounts();
+
+                this.RepositoryMock.Verify(x => x.GetAccounts(), Times.Exactly(2));
+            }
+
+            [Test]
+            public void ThenSaveShouldCallRepository()
+            {
+                this.RepositoryMock.Setup(x => x.SaveAccount(It.IsAny<Account>()));
+
+                this.Cache.SaveAccount(new CashAccount());
+
+                this.RepositoryMock.VerifyAll();
             }
         }
 

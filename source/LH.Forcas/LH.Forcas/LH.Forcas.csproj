@@ -64,7 +64,7 @@
     <Compile Include="Domain\UserData\Authorization\BankAuthorizationBase.cs" />
     <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />
     <Compile Include="Domain\UserData\Category.cs" />
-    <Compile Include="Domain\UserData\IRoamingObject.cs" />
+    <Compile Include="Domain\UserData\UserEntityBase.cs" />
     <Compile Include="Domain\UserData\UserSettings.cs" />
     <Compile Include="Events\TrimMemoryRequestedEvent.cs" />
     <Compile Include="Extensions\LocalizationExtensions.cs" />
@@ -97,9 +97,14 @@
     <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
     <Compile Include="ViewModels\PropertyValidationResult.cs" />
+    <Compile Include="ViewModels\RootTabPageViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
+    <Compile Include="ViewModels\ViewModelEventArgs.cs" />
+    <Compile Include="Views\Budget\BudgetPage.xaml.cs">
+      <DependentUpon>BudgetPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Categories\CategoriesDetailPage.xaml.cs">
       <DependentUpon>CategoriesDetailPage.xaml</DependentUpon>
     </Compile>
@@ -110,10 +115,14 @@
     <Compile Include="Views\Categories\CategoriesListPage.xaml.cs">
       <DependentUpon>CategoriesListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MorePage.xaml.cs">
+      <DependentUpon>MorePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reusable\Behaviors\DisableListViewSelectionBehavior.cs" />
     <Compile Include="Views\Reusable\Behaviors\DynamicTableViewBehavior.cs" />
     <Compile Include="Views\Reusable\Behaviors\HideWhenElementScrolled.cs" />
     <Compile Include="Views\Reusable\Behaviors\ViewCellCommand.cs" />
+    <Compile Include="Views\Reusable\Controls\ActivityOverlay.cs" />
     <Compile Include="Views\Reusable\Controls\ContentControl.cs" />
     <Compile Include="Views\Reusable\Controls\FloatingActionButtonView.cs" />
     <Compile Include="Views\Reusable\Controls\PickerCell.cs" />
@@ -173,7 +182,6 @@
       <DependentUpon>AccountsNavigationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Dashboard\DashboardPageViewModel.cs" />
-    <Compile Include="ViewModels\Root\RootSideMenuPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Dashboard\DashboardNavigationPage.xaml.cs">
       <DependentUpon>DashboardNavigationPage.xaml</DependentUpon>
@@ -181,10 +189,7 @@
     <Compile Include="Views\Dashboard\DashboardPage.xaml.cs">
       <DependentUpon>DashboardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Root\RootSideMenuPage.xaml.cs">
-      <DependentUpon>RootSideMenuPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Root\RootTabPage.xaml.cs">
+    <Compile Include="Views\RootTabPage.xaml.cs">
       <DependentUpon>RootTabPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\SettingsPage.xaml.cs">
@@ -200,6 +205,9 @@
       <DependentUpon>ProviderSelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Transactions\CashTransactionPage.xaml.cs">
+      <DependentUpon>CashTransactionPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -218,12 +226,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\About\" />
-    <Folder Include="Views\Budget\" />
     <Folder Include="Views\Reports\" />
     <Folder Include="Views\Rules\" />
-    <Folder Include="Views\Transactions\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="BottomBar.XamarinForms, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LH.BottomNavigationBar.XF.1.0.10\lib\portable-net45+win8+wpa81\BottomBar.XamarinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LH.Forcas.RefDataContract.1.0.41\lib\portable-net45+win8+wpa81\FluentValidation.dll</HintPath>
     </Reference>
@@ -390,13 +400,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Root\RootTabPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Root\RootSideMenuPage.xaml">
+    <EmbeddedResource Include="Views\RootTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -460,6 +464,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Categories\CategoriesDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Budget\BudgetPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MorePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Transactions\CashTransactionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -3,9 +3,9 @@ using LiteDB;
 
 namespace LH.Forcas.Domain.UserData
 {
-    public class Budget : IRoamingObject
+    public class Budget : UserEntityBase<int>
     {
-        public int BudgetId
+        public override int Id
         {
             get { return this.Year*100 + this.Month; }
             set
@@ -21,9 +21,9 @@ namespace LH.Forcas.Domain.UserData
 
         public List<BudgetCategory> Categories { get; set; }
 
-        public BsonValue GetIdAsBson()
+        public override BsonValue GetIdAsBson()
         {
-            return new BsonValue(this.BudgetId);
+            return new BsonValue(this.Id);
         }
     }
 }

@@ -1,6 +1,12 @@
-﻿namespace LH.Forcas.Analytics
+﻿using System;
+
+namespace LH.Forcas.Analytics
 {
-    class AnalyticsReporter
+    public class AnalyticsReporter : IAnalyticsReporter
     {
+        public void ReportHandledException(Exception ex, string message = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

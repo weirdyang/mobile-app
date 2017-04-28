@@ -1,4 +1,3 @@
-using System;
 using Android.Content;
 using Android.Content.Res;
 using Android.Net;
@@ -16,18 +15,26 @@ namespace LH.Forcas.Droid.Services
 {
     public class DroidDeviceService : IDeviceService
     {
+        /// <summary>
+        /// The static instance is a workaround for android object lifecycle where the CallbacksAdapter can be removed and re-instantiated at any time
+        /// therefore it's not possible to subscribe to it's events or pass references
+        /// </summary>
+        private static DroidDeviceService deviceServiceInstance;
+
         public static TelephonyManager Manager => Application.Context.GetSystemService(Context.TelephonyService) as TelephonyManager;
 
         public static ConnectivityManager ConnectivityManager => Application.Context.GetSystemService(Context.ConnectivityService) as ConnectivityManager;
 
-        private readonly IEventAggregator eventAggregator;
+        private IEventAggregator eventAggregator;
 
-        public DroidDeviceService(IEventAggregator eventAggregator)
+        public void Initialize(IEventAggregator eventAggregator)
         {
+            deviceServiceInstance = this;
+
             this.eventAggregator = eventAggregator;
 
-            var adapter = new ComponentCallbacksAdapter(this);
-            Application.Context.RegisterComponentCallbacks(adapter);
+            var adapter = new ComponentCallbacksAdapter();
+            Application.Context.RegisterComponentCallbacks((IComponentCallbacks)adapter);
         }
 
         public string CountryCode => Manager.SimCountryIso;
@@ -43,30 +50,19 @@ namespace LH.Forcas.Droid.Services
 
         #region ComponentCallbacksAdapter
 
-        private class ComponentCallbacksAdapter : IComponentCallbacks2
+        private class ComponentCallbacksAdapter : Java.Lang.Object, IComponentCallbacks2
         {
-            private readonly DroidDeviceService deviceService;
-
-            public ComponentCallbacksAdapter(DroidDeviceService deviceService)
-            {
-                this.deviceService = deviceService;
-            }
-
-            public void Dispose() { }
-
-            public IntPtr Handle { get; }
-
             public void OnConfigurationChanged(Configuration newConfig) { }
 
             public void OnLowMemory()
             {
-                this.deviceService.eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(TrimMemorySeverity.ReleaseAll);
+                deviceServiceInstance.eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(TrimMemorySeverity.ReleaseAll);
             }
 
             public void OnTrimMemory(TrimMemory level)
             {
                 var severity = this.TranslateToSeverity(level);
-                this.deviceService.eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(severity);
+                deviceServiceInstance.eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(severity);
             }
 
             private TrimMemorySeverity TranslateToSeverity(TrimMemory level)

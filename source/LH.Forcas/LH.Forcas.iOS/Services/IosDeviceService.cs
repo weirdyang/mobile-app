@@ -16,16 +16,14 @@ namespace LH.Forcas.iOS.Services
     {
         private static readonly Lazy<CTTelephonyNetworkInfo> TelNet = new Lazy<CTTelephonyNetworkInfo>(() => new CTTelephonyNetworkInfo());
 
-        private readonly NSObject memoryWarningListener;
+        private NSObject memoryWarningListener;
 
-        public IosDeviceService(IEventAggregator eventAggregator)
+        public void Initialize(IEventAggregator eventAggregator)
         {
             this.memoryWarningListener = UIApplication.Notifications.ObserveDidReceiveMemoryWarning((sender, args) => {
                 eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(TrimMemorySeverity.ReleaseLevel);
             });
         }
-
-        public event EventHandler<TrimMemoryEventArgs> TrimMemoryRequested;
 
         public string CountryCode => TelNet.Value.SubscriberCellularProvider.IsoCountryCode;
 
@@ -42,7 +40,11 @@ namespace LH.Forcas.iOS.Services
 
         public void Dispose()
         {
-            this.memoryWarningListener.Dispose();
+            if (this.memoryWarningListener != null)
+            {
+                this.memoryWarningListener.Dispose();
+                this.memoryWarningListener = null;
+            }
         }
     }
 }

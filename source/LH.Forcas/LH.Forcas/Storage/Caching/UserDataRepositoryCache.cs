@@ -9,9 +9,11 @@ namespace LH.Forcas.Storage.Caching
     public class UserDataRepositoryCache : RepositoryCacheBase, IUserDataRepository
     {
         private UserSettings userSettingsCacheStore;
+        private IEnumerable<Account> accountsCacheStore;
 
         private readonly IUserDataRepository repository;
         private readonly object userSettingsLock = new object();
+        private readonly object accountsLock = new object();
 
         public UserDataRepositoryCache([Dependency("Repository")] IUserDataRepository repository, IEventAggregator eventAggregator)
             : base(eventAggregator)
@@ -35,17 +37,16 @@ namespace LH.Forcas.Storage.Caching
 
         public IEnumerable<Account> GetAccounts()
         {
-            throw new NotImplementedException();
-        }
-
-        public Account GetAccount(Guid id)
-        {
-            throw new NotImplementedException();
+            return this.GetThroughCache(
+                ref this.accountsCacheStore, 
+                () => this.repository.GetAccounts(), 
+                this.accountsLock);
         }
 
         public void SaveAccount(Account account)
         {
-            throw new NotImplementedException();
+            this.Invalidate(ref this.accountsCacheStore, this.accountsLock);
+            this.repository.SaveAccount(account);
         }
 
         public IEnumerable<Category> GetCategories()

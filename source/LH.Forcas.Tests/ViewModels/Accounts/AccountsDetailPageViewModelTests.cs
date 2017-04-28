@@ -264,9 +264,9 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             public void ShouldDisplayErrorAndNavigateBackIfAccountNotFound()
             {
                 var account = this.GetValidBankAccount();
-                var parameters = NavigationExtensions.CreateAccountDetailParameters(account.AccountId);
+                var parameters = NavigationExtensions.CreateAccountDetailParameters(account.Id);
 
-                this.AccountingServiceMock.Setup(x => x.GetAccount(account.AccountId)).Returns(default(Account));
+                this.AccountingServiceMock.Setup(x => x.GetAccount(account.Id)).Returns(default(Account));
                 this.PageDialogServiceMock.Setup(x => x.DisplayAlertAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnAwaitable();
                 this.NavigationServiceMock.Setup(x => x.GoBackAsync(null, null, true)).ReturnsAsync(true);
 
@@ -280,9 +280,9 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             public void ShouldDisplayErrorAndNavigateBackIfInitFails()
             {
                 var account = this.GetValidBankAccount();
-                var parameters = NavigationExtensions.CreateAccountDetailParameters(account.AccountId);
+                var parameters = NavigationExtensions.CreateAccountDetailParameters(account.Id);
 
-                this.AccountingServiceMock.Setup(x => x.GetAccount(account.AccountId)).Throws<Exception>();
+                this.AccountingServiceMock.Setup(x => x.GetAccount(account.Id)).Throws<Exception>();
                 this.PageDialogServiceMock.Setup(x => x.DisplayAlertAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnAwaitable();
                 this.NavigationServiceMock.Setup(x => x.GoBackAsync(null, null, true)).ReturnsAsync(true);
 
@@ -396,7 +396,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
         {
             if (!ignoreAccountId)
             {
-                Assert.AreEqual(expected.AccountId, actual.AccountId);
+                Assert.AreEqual(expected.Id, actual.Id);
             }
 
             Assert.AreEqual(expected.Name, actual.Name);

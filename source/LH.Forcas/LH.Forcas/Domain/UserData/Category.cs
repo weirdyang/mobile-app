@@ -4,20 +4,17 @@
     using System.Collections.Generic;
     using LiteDB;
 
-    public class Category : IRoamingObject
+    public class Category : UserEntityBase<Guid>
     {
-        [BsonId]
-        public Guid CategoryId { get; set; }
-
         public string Icon { get; set; }
 
         public string Name { get; set; }
 
         public List<Category> Children { get; set; }
 
-        public BsonValue GetIdAsBson()
+        public override BsonValue GetIdAsBson()
         {
-            return new BsonValue(this.CategoryId);
+            return new BsonValue(this.Id);
         }
     }
 }

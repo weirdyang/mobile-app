@@ -251,6 +251,24 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Budget.
+        /// </summary>
+        public static string BudgetPage_Title {
+            get {
+                return ResourceManager.GetString("BudgetPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash payment.
+        /// </summary>
+        public static string CashTransactionPage_Title {
+            get {
+                return ResourceManager.GetString("CashTransactionPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete the account {0} and all related transactions?.
         /// </summary>
         public static string CategoriesListPage_DeleteCategoryConfirmMsgFormat {
@@ -481,6 +499,15 @@ namespace LH.Forcas.Localization {
         public static string DateTimeAgo_Years {
             get {
                 return ResourceManager.GetString("DateTimeAgo_Years", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More.
+        /// </summary>
+        public static string MorePage_Title {
+            get {
+                return ResourceManager.GetString("MorePage_Title", resourceCulture);
             }
         }
         

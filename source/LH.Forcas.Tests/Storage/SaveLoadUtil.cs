@@ -3,41 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using LH.Forcas.Domain.UserData;
 using LiteDB;
 using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Storage
 {
-    public class SaveLoadUtil<TDomain> where TDomain : new()
+    public class SaveLoadUtil<TDomain, TId> 
+        where TDomain : UserEntityBase<TId>, new()
     {
-        private Action<TDomain, Guid> setIdFunc;
-
-        private readonly Func<Guid, TDomain> loadEntityFunc;
+        private readonly TId entityId;
+        private readonly Func<TId, TDomain> loadEntityFunc;
         private readonly Action<TDomain> saveEntityAction;
         private readonly IList<PropertyInfo> ignoredProperties;
         private readonly IList<PropertyConfig> testedProperties;
 
         public SaveLoadUtil(
-            Func<Guid, TDomain> loadEntityFunc, 
-            Action<TDomain> saveEntityAction)
+            Func<TId, TDomain> loadEntityFunc, 
+            Action<TDomain> saveEntityAction,
+            TId entityId)
         {
+            this.entityId = entityId;
             this.loadEntityFunc = loadEntityFunc;
             this.saveEntityAction = saveEntityAction;
             this.ignoredProperties = new List<PropertyInfo>();
             this.testedProperties = new List<PropertyConfig>();
         }
 
-        public SaveLoadUtil<TDomain> WithId(
-            Action<TDomain, Guid> setValue)
+        public SaveLoadUtil(
+           Func<IEnumerable<TDomain>> loadEntityFunc,
+           Action<TDomain> saveEntityAction,
+           TId entityId)
         {
-            this.setIdFunc = setValue;
-
-            return this;
+            this.entityId = entityId;
+            this.loadEntityFunc = id => loadEntityFunc().Single(x => id.Equals(x.Id));
+            this.saveEntityAction = saveEntityAction;
+            this.ignoredProperties = new List<PropertyInfo>();
+            this.testedProperties = new List<PropertyConfig>();
         }
 
-        public SaveLoadUtil<TDomain> WithProperty<TProp>(
+        public SaveLoadUtil<TDomain, TId> WithProperty<TProp>(
             Expression<Func<TDomain, TProp>> propExpression, 
-            Action<TDomain, TProp> setValue,
             TProp createValue, 
             TProp updateValue)
         {
@@ -51,7 +57,7 @@ namespace LH.Forcas.Tests.Storage
             return this;
         }
 
-        public SaveLoadUtil<TDomain> IgnoreProperty<TProp>(Expression<Func<TDomain, TProp>> propExpression)
+        public SaveLoadUtil<TDomain, TId> IgnoreProperty<TProp>(Expression<Func<TDomain, TProp>> propExpression)
         {
             this.ignoredProperties.Add(propExpression.ExtractPropertyInfoFromLambda());
 
@@ -62,28 +68,21 @@ namespace LH.Forcas.Tests.Storage
         {
             this.CheckVerifyAllPropertiesAreTested();
 
-            var id = Guid.NewGuid();
-
             var domain = new TDomain();
-
-            if (this.setIdFunc != null)
-            {
-                Console.WriteLine("SET: ID={0}", id);
-                this.setIdFunc.Invoke(domain, id);
-            }
+            domain.Id = this.entityId;
 
             Console.WriteLine("TEST: CREATE ENTITY");
             this.SetProperties(domain, true);
             this.saveEntityAction.Invoke(domain);
 
-            var loadedEntity = this.loadEntityFunc.Invoke(id);
+            var loadedEntity = this.loadEntityFunc.Invoke(this.entityId);
             this.VerifyProperties(loadedEntity, true);
 
             Console.WriteLine("TEST: UPDATE ENTITY");
             this.SetProperties(domain, false);
             this.saveEntityAction.Invoke(domain);
 
-            loadedEntity = this.loadEntityFunc.Invoke(id);
+            loadedEntity = this.loadEntityFunc.Invoke(this.entityId);
             this.VerifyProperties(loadedEntity, false);
         }
 
@@ -118,9 +117,9 @@ namespace LH.Forcas.Tests.Storage
         private void CheckVerifyAllPropertiesAreTested()
         {
             var missingProperties = typeof(TDomain).GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                .Where(x => x.GetCustomAttribute<BsonIgnoreAttribute>() == null)
-                .Except(this.ignoredProperties)
-                .Except(this.testedProperties.Select(x => x.PropertyInfo))
+                .Where(x => x.GetCustomAttribute<BsonIgnoreAttribute>() == null && x.Name != nameof(UserEntityBase<string>.Id))
+                .Where(x => this.ignoredProperties.All(y => x.Name != y.Name))
+                .Where(x => this.testedProperties.All(y => x.Name != y.PropertyInfo.Name))
                 .ToArray();
 
             if (missingProperties.Any())

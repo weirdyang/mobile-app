@@ -14,14 +14,7 @@ namespace LH.Forcas.UWP.Services
 
     public class UwpDeviceService : IDeviceService
     {
-        private readonly IEventAggregator eventAggregator;
-
-        public UwpDeviceService(IEventAggregator eventAggregator)
-        {
-            this.eventAggregator = eventAggregator;
-
-            MemoryManager.AppMemoryUsageLimitChanging += this.HandleMemoryUsageLimitChanging;
-        }
+        private IEventAggregator eventAggregator;
 
         public string CountryCode => RegionInfo.CurrentRegion.TwoLetterISORegionName;
 
@@ -43,6 +36,13 @@ namespace LH.Forcas.UWP.Services
 
                 return false;
             }
+        }
+
+        public void Initialize(IEventAggregator eventAggregator)
+        {
+            this.eventAggregator = eventAggregator;
+
+            MemoryManager.AppMemoryUsageLimitChanging += this.HandleMemoryUsageLimitChanging;
         }
 
         private void HandleMemoryUsageLimitChanging(object sender, AppMemoryUsageLimitChangingEventArgs args)

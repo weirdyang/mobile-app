@@ -1,14 +1,10 @@
-﻿using LiteDB;
+﻿using System;
+using LiteDB;
 
 namespace LH.Forcas.Domain.UserData
 {
-    using System;
-
-    public class Transaction : IRoamingObject
-    {
-        [BsonId]
-        public Guid TransactionId { get; set; }
-
+    public class Transaction : UserEntityBase<Guid>
+    { 
         public string CounterpartyName { get; set; }
 
         public string CounterpartyAccountNumber { get; set; }
@@ -23,9 +19,9 @@ namespace LH.Forcas.Domain.UserData
 
         public TransactionType TransactionType { get; set; }
 
-        public BsonValue GetIdAsBson()
+        public override BsonValue GetIdAsBson()
         {
-            return new BsonValue(this.TransactionId);
+            return new BsonValue(this.Id);
         }
     }
 }

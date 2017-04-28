@@ -234,6 +234,7 @@
     <Compile Include="Integration\Banks\Cz\Fio\FioOutputParserTests.cs" />
     <Compile Include="MockExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountingServiceTests.cs" />
     <Compile Include="Services\RefDataServiceTests.cs" />
     <Compile Include="Storage\Caching\RefDataRepositoryCacheTests.cs" />
     <Compile Include="Storage\Caching\UserDataRepositoryCacheTests.cs" />

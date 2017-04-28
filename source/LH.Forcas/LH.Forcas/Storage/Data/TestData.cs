@@ -29,7 +29,7 @@
             {
                 BankId = "RB",
                 Name = "RB eKonto",
-                AccountId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 AccountNumber = AccountNumber.FromCzLocal("123456798/5500"),
                 CurrencyId = "CZK",
                 CurrentBalance = new Amount(5555758.17m, "CZK"),
@@ -40,7 +40,7 @@
             {
                 BankId = "AB",
                 Name = "AB Spořící",
-                AccountId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 AccountNumber = AccountNumber.FromCzLocal("555574789789/3300"),
                 CurrencyId = "CZK",
                 CurrentBalance = new Amount(258.17m, "CZK"),
@@ -50,7 +50,7 @@
             collection.Insert(new CashAccount
             {
                 Name = "Peněženka",
-                AccountId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 CurrencyId = "CZK",
                 CurrentBalance = new Amount(-38.17m, "CZK"),
                 LastSyncUtcTime = DateTime.UtcNow.AddMinutes(-25)
@@ -63,19 +63,19 @@
 
             collection.Insert(new Category
             {
-                CategoryId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Name = "Nákupy",
                 Icon = "md-shopping-cart",
                 Children = new List<Category>
                                   {
                                       new Category
                                       {
-                                          CategoryId = Guid.NewGuid(),
+                                          Id = Guid.NewGuid(),
                                           Name = "Oblečení"
                                       },
                                       new Category
                                       {
-                                          CategoryId = Guid.NewGuid(),
+                                          Id = Guid.NewGuid(),
                                           Name = "Potraviny"
                                       }
                                   }
@@ -83,19 +83,19 @@
 
             collection.Insert(new Category
             {
-                CategoryId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Name = "Auto",
                 Icon = "md-directions-car",
                 Children = new List<Category>
                                   {
                                       new Category
                                       {
-                                          CategoryId = Guid.NewGuid(),
+                                          Id = Guid.NewGuid(),
                                           Name = "Servis"
                                       },
                                       new Category
                                       {
-                                          CategoryId = Guid.NewGuid(),
+                                          Id = Guid.NewGuid(),
                                           Name = "Benzín"
                                       }
                                   }

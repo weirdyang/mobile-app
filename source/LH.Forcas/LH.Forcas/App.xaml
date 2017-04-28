@@ -12,6 +12,8 @@
       <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
       
       <OnPlatform x:TypeArguments="Color" Android="White" iOS="White" WinPhone="White" x:Key="IconToolbarItemFontColor" />
+      <OnPlatform x:TypeArguments="Color" Android="#CCCCCCCC" iOS="White" WinPhone="Transparent" x:Key="ActivityOverlayBackgroundColor" />
+      <OnPlatform x:TypeArguments="Color" Android="White" iOS="White" WinPhone="Transparent" x:Key="ActivityOverlayInnerBackgroundColor" />
     </ResourceDictionary>
   </Application.Resources>
 </prism:PrismApplication>

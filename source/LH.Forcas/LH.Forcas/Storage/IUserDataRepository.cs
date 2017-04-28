@@ -12,8 +12,6 @@ namespace LH.Forcas.Storage
 
         IEnumerable<Account> GetAccounts();
 
-        Account GetAccount(Guid id);
-
         void SaveAccount(Account account);
 
         IEnumerable<Category> GetCategories();

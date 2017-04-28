@@ -5,8 +5,6 @@ namespace LH.Forcas.Storage
 {
     using Extensions;
     using System.Collections.Generic;
-    using System.Linq;
-    using LiteDB;
 
     public class UserDataRepository : IUserDataRepository
     {
@@ -22,7 +20,7 @@ namespace LH.Forcas.Storage
             using (var db = this.dbManager.GetDatabase())
             {
                 return db.GetCollection<UserSettings>()
-                    .FindOne(x => x.UserSettingsId == UserSettings.SingleId);
+                    .FindOne(x => x.Id == UserSettings.SingleId);
             }
         }
 
@@ -36,17 +34,18 @@ namespace LH.Forcas.Storage
 
         public IEnumerable<Account> GetAccounts()
         {
-            throw new NotImplementedException();
-        }
-
-        public Account GetAccount(Guid id)
-        {
-            throw new NotImplementedException();
+            using (var db = this.dbManager.GetDatabase())
+            {
+                return db.GetCollection<Account>().FindAll();
+            }
         }
 
         public void SaveAccount(Account account)
         {
-            throw new NotImplementedException();
+            using (var db = this.dbManager.GetDatabase())
+            {
+                db.GetCollection<Account>().Upsert(account);
+            }
         }
 
         public IEnumerable<Category> GetCategories()

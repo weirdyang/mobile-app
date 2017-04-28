@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Globalization;
+using System.Reflection;
+using LH.Forcas.Analytics;
 using LH.Forcas.Extensions;
 using LH.Forcas.Localization;
+using LH.Forcas.RefDataContract.Parsing;
 using LH.Forcas.Services;
 using LH.Forcas.Storage;
 using LH.Forcas.Storage.Caching;
 using LH.Forcas.Storage.Data;
+using LH.Forcas.Sync.RefData;
 using LH.Forcas.Views;
 using LH.Forcas.Views.Accounts;
 using LH.Forcas.Views.Categories;
 using LH.Forcas.Views.Dashboard;
-using LH.Forcas.Views.Root;
 using LH.Forcas.Views.Settings;
 using Microsoft.Practices.Unity;
+using Prism.Events;
 using Prism.Unity;
 
 namespace LH.Forcas
@@ -25,6 +29,7 @@ namespace LH.Forcas
 
         protected override void OnInitialized()
         {
+            this.SetVersion();
             this.InitializeComponent();
 
             NavigationExtensions.InitializeNavigation();
@@ -32,6 +37,9 @@ namespace LH.Forcas
             this.Container.Resolve<IPathResolver>().Initialize();
             var dbManager = this.Container.Resolve<IDbManager>();
             dbManager.Initialize();
+
+            var deviceService = this.Container.Resolve<IDeviceService>();
+            deviceService.Initialize(this.Container.Resolve<IEventAggregator>());
 
             this.AmountToCurrencyStringConverter.RefDataService = this.Container.Resolve<IRefDataService>();
 
@@ -44,12 +52,28 @@ namespace LH.Forcas
             CurrentCultureInfo = this.Container.Resolve<ILocale>().GetCultureInfo();
 
             #pragma warning disable 4014
-            this.NavigationService.NavigateToDashboard();
+            this.NavigationService.NavigateToDashboard()
+                .ContinueWith(x =>
+                                {
+                                    if (x.Exception != null)
+                                    {
+                                        // TODO: Log and report the exception as fatal
+                                        throw x.Exception;
+                                    }
+                                });
             #pragma warning restore 4014
         }
 
         protected override void RegisterTypes()
         {
+            this.Container.RegisterInstance(typeof(IApp), this, new ContainerControlledLifetimeManager());
+
+            this.Container.RegisterType<IAnalyticsReporter, AnalyticsReporter>(new ContainerControlledLifetimeManager());
+
+            this.Container.RegisterType<IGitHubClientFactory, GitHubClientFactory>(new ContainerControlledLifetimeManager());
+            this.Container.RegisterType<IRefDataDownloader, RefDataDownloader>(new ContainerControlledLifetimeManager());
+            this.Container.RegisterType<IRefDataUpdateParser, RefDataUpdateParser>(new ContainerControlledLifetimeManager());
+
             this.Container.RegisterType<IDbManager, DbManager>(new ContainerControlledLifetimeManager());
 
             this.Container.RegisterType<IRefDataRepository, RefDataRepository>("Repository", new ContainerControlledLifetimeManager());
@@ -62,9 +86,7 @@ namespace LH.Forcas
             this.Container.RegisterType<IRefDataService, RefDataService>(new ContainerControlledLifetimeManager());
             this.Container.RegisterType<IUserSettingsService, UserSettingsService>(new ContainerControlledLifetimeManager());
 
-            this.Container.RegisterTypeForNavigation<RootSideMenuPage>();
             this.Container.RegisterTypeForNavigation<RootTabPage>();
-            this.Container.RegisterTypeForNavigation<RootSideMenuPage>();
             this.Container.RegisterTypeForNavigation<GenericNavigationPage>();
 
             this.Container.RegisterTypeForNavigation<DashboardPage>();
@@ -78,6 +100,14 @@ namespace LH.Forcas
             this.Container.RegisterTypeForNavigation<CategoriesDetailPage>();
 
             this.Container.RegisterTypeForNavigation<SettingsPage>();
+        }
+
+        private void SetVersion()
+        {
+            var type = this.GetType().GetTypeInfo();
+            var assemblyName = new AssemblyName(type.FullName);
+
+            this.AppVersion = assemblyName.Version;
         }
     }
 }

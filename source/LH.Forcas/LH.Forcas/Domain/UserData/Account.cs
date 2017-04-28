@@ -3,11 +3,8 @@
     using System;
     using LiteDB;
 
-    public abstract class Account : IRoamingObject
+    public abstract class Account : UserEntityBase<Guid>
     {
-        [BsonId]
-        public Guid AccountId { get; set; }
-
         public string Name { get; set; }
 
         public string CurrencyId { get; set; }
@@ -16,9 +13,9 @@
 
         public DateTime LastSyncUtcTime { get; set; }
 
-        public BsonValue GetIdAsBson()
+        public override BsonValue GetIdAsBson()
         {
-            return new BsonValue(this.AccountId);
+            return new BsonValue(this.Id);
         }
     }
 

@@ -79,7 +79,7 @@
 
             try
             {
-                this.accountingService.DeleteCategory(category.CategoryId, null);
+                this.accountingService.DeleteCategory(category.Id, null);
             }
             catch (Exception ex)
             {
