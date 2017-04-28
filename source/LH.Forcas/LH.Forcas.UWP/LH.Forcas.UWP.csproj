@@ -17,7 +17,8 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>LH.Forcas.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>93FA67DEFE3AA2791BDCD0165DD874B348BAD82F</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -90,6 +91,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="LH.Forcas.UWP_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="project.json" />
   </ItemGroup>
@@ -100,16 +102,738 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Storage\WindowsDbManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\UwpDeviceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AD.png">
+      <Link>Assets\Flags\AD.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AE.png">
+      <Link>Assets\Flags\AE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AF.png">
+      <Link>Assets\Flags\AF.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AG.png">
+      <Link>Assets\Flags\AG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AI.png">
+      <Link>Assets\Flags\AI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AL.png">
+      <Link>Assets\Flags\AL.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AM.png">
+      <Link>Assets\Flags\AM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AN.png">
+      <Link>Assets\Flags\AN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AO.png">
+      <Link>Assets\Flags\AO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AQ.png">
+      <Link>Assets\Flags\AQ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AR.png">
+      <Link>Assets\Flags\AR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AS.png">
+      <Link>Assets\Flags\AS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AT.png">
+      <Link>Assets\Flags\AT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AU.png">
+      <Link>Assets\Flags\AU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AW.png">
+      <Link>Assets\Flags\AW.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AX.png">
+      <Link>Assets\Flags\AX.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\AZ.png">
+      <Link>Assets\Flags\AZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BA.png">
+      <Link>Assets\Flags\BA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BB.png">
+      <Link>Assets\Flags\BB.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BD.png">
+      <Link>Assets\Flags\BD.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BE.png">
+      <Link>Assets\Flags\BE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BF.png">
+      <Link>Assets\Flags\BF.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BG.png">
+      <Link>Assets\Flags\BG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BH.png">
+      <Link>Assets\Flags\BH.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BI.png">
+      <Link>Assets\Flags\BI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BJ.png">
+      <Link>Assets\Flags\BJ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BL.png">
+      <Link>Assets\Flags\BL.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BM.png">
+      <Link>Assets\Flags\BM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BN.png">
+      <Link>Assets\Flags\BN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BO.png">
+      <Link>Assets\Flags\BO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BR.png">
+      <Link>Assets\Flags\BR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BS.png">
+      <Link>Assets\Flags\BS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BT.png">
+      <Link>Assets\Flags\BT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BW.png">
+      <Link>Assets\Flags\BW.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BY.png">
+      <Link>Assets\Flags\BY.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\BZ.png">
+      <Link>Assets\Flags\BZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CA.png">
+      <Link>Assets\Flags\CA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CC.png">
+      <Link>Assets\Flags\CC.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CD.png">
+      <Link>Assets\Flags\CD.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CF.png">
+      <Link>Assets\Flags\CF.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CG.png">
+      <Link>Assets\Flags\CG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CH.png">
+      <Link>Assets\Flags\CH.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CI.png">
+      <Link>Assets\Flags\CI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CK.png">
+      <Link>Assets\Flags\CK.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CL.png">
+      <Link>Assets\Flags\CL.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CM.png">
+      <Link>Assets\Flags\CM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CN.png">
+      <Link>Assets\Flags\CN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CO.png">
+      <Link>Assets\Flags\CO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CR.png">
+      <Link>Assets\Flags\CR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CU.png">
+      <Link>Assets\Flags\CU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CV.png">
+      <Link>Assets\Flags\CV.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CW.png">
+      <Link>Assets\Flags\CW.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CX.png">
+      <Link>Assets\Flags\CX.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CY.png">
+      <Link>Assets\Flags\CY.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\CZ.png">
+      <Link>Assets\Flags\CZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DE.png">
+      <Link>Assets\Flags\DE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DJ.png">
+      <Link>Assets\Flags\DJ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DK.png">
+      <Link>Assets\Flags\DK.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DM.png">
+      <Link>Assets\Flags\DM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DO.png">
+      <Link>Assets\Flags\DO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\DZ.png">
+      <Link>Assets\Flags\DZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EC.png">
+      <Link>Assets\Flags\EC.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EE.png">
+      <Link>Assets\Flags\EE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EG.png">
+      <Link>Assets\Flags\EG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EH.png">
+      <Link>Assets\Flags\EH.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ER.png">
+      <Link>Assets\Flags\ER.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ES.png">
+      <Link>Assets\Flags\ES.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ET.png">
+      <Link>Assets\Flags\ET.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\EU.png">
+      <Link>Assets\Flags\EU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FI.png">
+      <Link>Assets\Flags\FI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FJ.png">
+      <Link>Assets\Flags\FJ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FK.png">
+      <Link>Assets\Flags\FK.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FM.png">
+      <Link>Assets\Flags\FM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FO.png">
+      <Link>Assets\Flags\FO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\FR.png">
+      <Link>Assets\Flags\FR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GA.png">
+      <Link>Assets\Flags\GA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GB.png">
+      <Link>Assets\Flags\GB.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GD.png">
+      <Link>Assets\Flags\GD.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GE.png">
+      <Link>Assets\Flags\GE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GG.png">
+      <Link>Assets\Flags\GG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GH.png">
+      <Link>Assets\Flags\GH.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GI.png">
+      <Link>Assets\Flags\GI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GL.png">
+      <Link>Assets\Flags\GL.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GM.png">
+      <Link>Assets\Flags\GM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GN.png">
+      <Link>Assets\Flags\GN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GQ.png">
+      <Link>Assets\Flags\GQ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GR.png">
+      <Link>Assets\Flags\GR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GS.png">
+      <Link>Assets\Flags\GS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GT.png">
+      <Link>Assets\Flags\GT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GU.png">
+      <Link>Assets\Flags\GU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GW.png">
+      <Link>Assets\Flags\GW.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\GY.png">
+      <Link>Assets\Flags\GY.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HK.png">
+      <Link>Assets\Flags\HK.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HN.png">
+      <Link>Assets\Flags\HN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HR.png">
+      <Link>Assets\Flags\HR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HT.png">
+      <Link>Assets\Flags\HT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\HU.png">
+      <Link>Assets\Flags\HU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IC.png">
+      <Link>Assets\Flags\IC.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ID.png">
+      <Link>Assets\Flags\ID.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IE.png">
+      <Link>Assets\Flags\IE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IL.png">
+      <Link>Assets\Flags\IL.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IM.png">
+      <Link>Assets\Flags\IM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IN.png">
+      <Link>Assets\Flags\IN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IQ.png">
+      <Link>Assets\Flags\IQ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IR.png">
+      <Link>Assets\Flags\IR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IS.png">
+      <Link>Assets\Flags\IS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\IT.png">
+      <Link>Assets\Flags\IT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\JE.png">
+      <Link>Assets\Flags\JE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\JM.png">
+      <Link>Assets\Flags\JM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\JO.png">
+      <Link>Assets\Flags\JO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\JP.png">
+      <Link>Assets\Flags\JP.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KE.png">
+      <Link>Assets\Flags\KE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KG.png">
+      <Link>Assets\Flags\KG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KH.png">
+      <Link>Assets\Flags\KH.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KI.png">
+      <Link>Assets\Flags\KI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KM.png">
+      <Link>Assets\Flags\KM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KN.png">
+      <Link>Assets\Flags\KN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KP.png">
+      <Link>Assets\Flags\KP.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KR.png">
+      <Link>Assets\Flags\KR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KW.png">
+      <Link>Assets\Flags\KW.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KY.png">
+      <Link>Assets\Flags\KY.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\KZ.png">
+      <Link>Assets\Flags\KZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LA.png">
+      <Link>Assets\Flags\LA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LB.png">
+      <Link>Assets\Flags\LB.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LC.png">
+      <Link>Assets\Flags\LC.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LI.png">
+      <Link>Assets\Flags\LI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LK.png">
+      <Link>Assets\Flags\LK.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LR.png">
+      <Link>Assets\Flags\LR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LS.png">
+      <Link>Assets\Flags\LS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LT.png">
+      <Link>Assets\Flags\LT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LU.png">
+      <Link>Assets\Flags\LU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LV.png">
+      <Link>Assets\Flags\LV.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\LY.png">
+      <Link>Assets\Flags\LY.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MA.png">
+      <Link>Assets\Flags\MA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MC.png">
+      <Link>Assets\Flags\MC.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MD.png">
+      <Link>Assets\Flags\MD.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ME.png">
+      <Link>Assets\Flags\ME.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MF.png">
+      <Link>Assets\Flags\MF.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MG.png">
+      <Link>Assets\Flags\MG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MH.png">
+      <Link>Assets\Flags\MH.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MK.png">
+      <Link>Assets\Flags\MK.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ML.png">
+      <Link>Assets\Flags\ML.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MM.png">
+      <Link>Assets\Flags\MM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MN.png">
+      <Link>Assets\Flags\MN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MO.png">
+      <Link>Assets\Flags\MO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MP.png">
+      <Link>Assets\Flags\MP.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MQ.png">
+      <Link>Assets\Flags\MQ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MR.png">
+      <Link>Assets\Flags\MR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MS.png">
+      <Link>Assets\Flags\MS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MT.png">
+      <Link>Assets\Flags\MT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MU.png">
+      <Link>Assets\Flags\MU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MV.png">
+      <Link>Assets\Flags\MV.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MW.png">
+      <Link>Assets\Flags\MW.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MX.png">
+      <Link>Assets\Flags\MX.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MY.png">
+      <Link>Assets\Flags\MY.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\MZ.png">
+      <Link>Assets\Flags\MZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NA.png">
+      <Link>Assets\Flags\NA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NC.png">
+      <Link>Assets\Flags\NC.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NE.png">
+      <Link>Assets\Flags\NE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NF.png">
+      <Link>Assets\Flags\NF.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NG.png">
+      <Link>Assets\Flags\NG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NI.png">
+      <Link>Assets\Flags\NI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NL.png">
+      <Link>Assets\Flags\NL.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NO.png">
+      <Link>Assets\Flags\NO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NP.png">
+      <Link>Assets\Flags\NP.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NR.png">
+      <Link>Assets\Flags\NR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NU.png">
+      <Link>Assets\Flags\NU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\NZ.png">
+      <Link>Assets\Flags\NZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\OM.png">
+      <Link>Assets\Flags\OM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PA.png">
+      <Link>Assets\Flags\PA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PE.png">
+      <Link>Assets\Flags\PE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PF.png">
+      <Link>Assets\Flags\PF.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PG.png">
+      <Link>Assets\Flags\PG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PH.png">
+      <Link>Assets\Flags\PH.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PK.png">
+      <Link>Assets\Flags\PK.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PL.png">
+      <Link>Assets\Flags\PL.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PN.png">
+      <Link>Assets\Flags\PN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PR.png">
+      <Link>Assets\Flags\PR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PS.png">
+      <Link>Assets\Flags\PS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PT.png">
+      <Link>Assets\Flags\PT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PW.png">
+      <Link>Assets\Flags\PW.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\PY.png">
+      <Link>Assets\Flags\PY.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\QA.png">
+      <Link>Assets\Flags\QA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\RO.png">
+      <Link>Assets\Flags\RO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\RS.png">
+      <Link>Assets\Flags\RS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\RU.png">
+      <Link>Assets\Flags\RU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\RW.png">
+      <Link>Assets\Flags\RW.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SA.png">
+      <Link>Assets\Flags\SA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SB.png">
+      <Link>Assets\Flags\SB.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SC.png">
+      <Link>Assets\Flags\SC.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SD.png">
+      <Link>Assets\Flags\SD.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SE.png">
+      <Link>Assets\Flags\SE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SG.png">
+      <Link>Assets\Flags\SG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SH.png">
+      <Link>Assets\Flags\SH.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SI.png">
+      <Link>Assets\Flags\SI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SK.png">
+      <Link>Assets\Flags\SK.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SL.png">
+      <Link>Assets\Flags\SL.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SM.png">
+      <Link>Assets\Flags\SM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SN.png">
+      <Link>Assets\Flags\SN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SO.png">
+      <Link>Assets\Flags\SO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SR.png">
+      <Link>Assets\Flags\SR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SS.png">
+      <Link>Assets\Flags\SS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ST.png">
+      <Link>Assets\Flags\ST.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SV.png">
+      <Link>Assets\Flags\SV.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SY.png">
+      <Link>Assets\Flags\SY.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\SZ.png">
+      <Link>Assets\Flags\SZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TC.png">
+      <Link>Assets\Flags\TC.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TD.png">
+      <Link>Assets\Flags\TD.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TF.png">
+      <Link>Assets\Flags\TF.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TG.png">
+      <Link>Assets\Flags\TG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TH.png">
+      <Link>Assets\Flags\TH.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TJ.png">
+      <Link>Assets\Flags\TJ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TK.png">
+      <Link>Assets\Flags\TK.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TL.png">
+      <Link>Assets\Flags\TL.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TM.png">
+      <Link>Assets\Flags\TM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TN.png">
+      <Link>Assets\Flags\TN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TO.png">
+      <Link>Assets\Flags\TO.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TR.png">
+      <Link>Assets\Flags\TR.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TT.png">
+      <Link>Assets\Flags\TT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TV.png">
+      <Link>Assets\Flags\TV.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TW.png">
+      <Link>Assets\Flags\TW.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\TZ.png">
+      <Link>Assets\Flags\TZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\UA.png">
+      <Link>Assets\Flags\UA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\UG.png">
+      <Link>Assets\Flags\UG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\US.png">
+      <Link>Assets\Flags\US.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\UY.png">
+      <Link>Assets\Flags\UY.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\UZ.png">
+      <Link>Assets\Flags\UZ.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VA.png">
+      <Link>Assets\Flags\VA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VC.png">
+      <Link>Assets\Flags\VC.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VE.png">
+      <Link>Assets\Flags\VE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VG.png">
+      <Link>Assets\Flags\VG.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VI.png">
+      <Link>Assets\Flags\VI.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VN.png">
+      <Link>Assets\Flags\VN.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\VU.png">
+      <Link>Assets\Flags\VU.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\WF.png">
+      <Link>Assets\Flags\WF.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\WS.png">
+      <Link>Assets\Flags\WS.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\YE.png">
+      <Link>Assets\Flags\YE.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\YT.png">
+      <Link>Assets\Flags\YT.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ZA.png">
+      <Link>Assets\Flags\ZA.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ZM.png">
+      <Link>Assets\Flags\ZM.png</Link>
+    </Content>
+    <Content Include="..\LH.Forcas.Droid\Resources\drawable\Flags\ZW.png">
+      <Link>Assets\Flags\ZW.png</Link>
+    </Content>
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -136,9 +860,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.VCLibs.120, Version=14.0">
-      <Name>Microsoft Visual C++ 2013 Runtime Package for Windows Universal</Name>
-    </SDKReference>
+    <Reference Include="BottomBar.XamarinForms">
+      <HintPath>..\..\packages\ThriveGmbH.BottomNavigationBar.XF.1.0.1\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\BottomBar.XamarinForms.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
@@ -182,6 +906,46 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
     <WarningLevel>1</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS-iOS|ARM'">
+    <OutputPath>bin\ARM\VSTS-iOS\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;CODE_ANALYSIS</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS-iOS|x64'">
+    <OutputPath>bin\x64\VSTS-iOS\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;CODE_ANALYSIS</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'VSTS-iOS|x86'">
+    <OutputPath>bin\x86\VSTS-iOS\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS;CODE_ANALYSIS</DefineConstants>
+    <Optimize>true</Optimize>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
 </Project>

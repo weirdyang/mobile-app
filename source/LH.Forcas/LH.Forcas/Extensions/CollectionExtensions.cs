@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Extensions
 {
+    using System.Linq;
+
     public static class CollectionExtensions
     {
         public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
@@ -20,6 +23,21 @@ namespace LH.Forcas.Extensions
             {
                 await action.Invoke(item);
             }
+        }
+
+        public static Bank SingleById(this IEnumerable<Bank> banks, string bankId)
+        {
+            return banks.Single(x => x.BankId == bankId);
+        }
+
+        public static Country SingleById(this IEnumerable<Country> countries, string countryId)
+        {
+            return countries.Single(x => x.CountryId == countryId);
+        }
+
+        public static Currency SingleById(this IEnumerable<Currency> currencies, string currencyId)
+        {
+            return currencies.Single(x => x.CurrencyId == currencyId);
         }
     }
 }

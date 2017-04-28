@@ -1,0 +1,12 @@
+﻿[
+  {
+    "currencyId": "CZK",
+    "displayFormat": "{0:n} Kč",
+    "isActive": "true" 
+  },
+  {
+    "currencyId": "EUR",
+    "displayFormat": "€{0}",
+    "isActive": "true" 
+  }
+]

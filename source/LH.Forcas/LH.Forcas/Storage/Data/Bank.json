@@ -1,0 +1,34 @@
+﻿[
+  {
+    "bankId": "RB",
+    "name": "Raiffeisenbank",
+    "bban": 5500,
+    "countryId": "CZ",
+    "authorizationScheme": "PerAccount",
+    "isActive": true
+  },
+  {
+    "bankId": "FIO",
+    "name": "FIO banka",
+    "bban": 2010,
+    "countryId": "CZ",
+    "authorizationScheme": "PerAccount",
+    "isActive": true
+  },
+  {
+    "bankId": "UCB",
+    "name": "Unicredit Bank",
+    "bban": 2700,
+    "countryId": "CZ",
+    "authorizationScheme": "PerPersona",
+    "isActive": true
+  },
+  {
+    "bankId": "AB",
+    "name": "Air Bank",
+    "bban": 3030,
+    "countryId": "CZ",
+    "authorizationScheme": "PerPersona",
+    "isActive": true
+  }
+]

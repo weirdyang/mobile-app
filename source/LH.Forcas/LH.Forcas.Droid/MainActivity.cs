@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 
@@ -14,9 +15,20 @@ namespace LH.Forcas.Droid
 
             base.OnCreate(bundle);
 
+            AppDomain.CurrentDomain.UnhandledException += this.LogUnhandledException;
+
             Xamarin.Forms.Forms.Init(this, bundle);
 
+            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.MaterialModule());
+
+            FormsPlugin.Iconize.Droid.IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
+
             this.LoadApplication(new App());
+        }
+
+        private void LogUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace LH.Forcas
 {
     public interface IApp
     {
-        IAppConstants Constants { get; }
-
-        IDictionary<string, object> Properties { get; }
+        Version AppVersion { get; }
     }
 }

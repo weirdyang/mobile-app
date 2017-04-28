@@ -1,98 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using LH.Forcas.Domain.RefData;
-using LH.Forcas.Extensions;
-using LH.Forcas.Storage;
-using LH.Forcas.Storage.Entities.RefData;
-using SQLite.Net;
-using Xamarin.Forms;
-
-[assembly: Dependency(typeof(RefDataRepository))]
+﻿using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Storage
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Reflection;
+    using Domain.RefData;
+    using Newtonsoft.Json;
+
     public class RefDataRepository : IRefDataRepository
     {
-        private static readonly IDictionary<Type, Type> DomainToEntityMapping = new Dictionary<Type, Type>
+        public RefDataStatus GetStatus()
         {
-            { typeof(Country), typeof(CountryEntity) },
-            { typeof(Bank), typeof(BankEntity) },
-            { typeof(Currency), typeof(CurrencyEntity) },
-        };
-
-        private readonly IDbManager dbManager;
-
-        public RefDataRepository() : this(XamarinDependencyService.Default)
-        {
+            throw new System.NotImplementedException();
         }
 
-        public RefDataRepository(IDependencyService dependencyService)
+        public IEnumerable<Bank> GetBanks()
         {
-            this.dbManager = dependencyService.Get<IDbManager>();
+            return this.ReadJsonResource<Bank>();
         }
 
-        public async Task<IList<Bank>> GetBanksAsync()
+        public IEnumerable<Currency> GetCurrencies()
         {
-            var result = await this.dbManager.GetAsyncConnection()
-                .Table<BankEntity>()
-                .ToListAsync();
-
-            return Mapper.Instance.Map<List<Bank>>(result);
+            return this.ReadJsonResource<Currency>();
         }
 
-        public async Task<IList<Currency>> GetCurrenciesAsync()
+        public IEnumerable<Country> GetCountries()
         {
-            var result = await this.dbManager.GetAsyncConnection()
-                .Table<CurrencyEntity>()
-                .ToListAsync();
-
-            return Mapper.Instance.Map<List<Currency>>(result);
+            return this.ReadJsonResource<Country>();
         }
 
-        public async Task<IList<Country>> GetCountriesAsync()
+        public void SaveRefDataUpdate(RefDataUpdate update, RefDataStatus status)
         {
-            var result = await this.dbManager.GetAsyncConnection()
-               .Table<CountryEntity>()
-               .ToListAsync();
-
-            return Mapper.Instance.Map<List<Country>>(result);
+            throw new System.NotImplementedException();
         }
 
-        public async Task SaveRefDataUpdates(IRefDataUpdate[] updates)
+        private IEnumerable<T> ReadJsonResource<T>()
         {
-            // ReSharper disable once RedundantLambdaParameterType
-            await this.dbManager.GetAsyncConnection().RunInTransactionAsync((SQLiteConnection conn) =>
+            var type = this.GetType();
+            var resourceName = $"{type.Namespace}.Data.{typeof(T).Name}.json";
+
+            var assembly = type.GetTypeInfo().Assembly;
+
+            foreach (var name in assembly.GetManifestResourceNames())
             {
-                var currentVersions = conn.Table<RefDataVersionEntity>().ToList();
+                Debug.WriteLine(name);
+            }
 
-                foreach (var update in updates)
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
                 {
-                    var version = currentVersions.SingleOrDefault(x => x.EntityTypeName == update.DomainType.Name);
-
-                    if (version == null || version.Version < update.Version)
-                    {
-                        var targetType = DomainToEntityMapping[update.DomainType];
-                        
-                        update.Data.ForEach(item =>
-                        {
-                            var mapped = Mapper.Map(item, update.DomainType, targetType);
-                            conn.InsertOrReplace(mapped);
-                        });
-
-                        if (version == null)
-                        {
-                            version = new RefDataVersionEntity();
-                            version.EntityTypeName = update.DomainType.Name;
-                        }
-
-                        version.Version = update.Version;
-                        conn.InsertOrReplace(version);
-                    }
+                    throw new FileNotFoundException($"The resource with the name {resourceName} could not be found.");
                 }
-            });
+
+                using (var textReader = new StreamReader(stream))
+                using (var jsonReader = new JsonTextReader(textReader))
+                {
+                    var serializer = new JsonSerializer();
+                    var result = serializer.Deserialize(jsonReader, typeof(T).MakeArrayType());
+
+                    return (IEnumerable<T>) result;
+                }
+            }
         }
     }
 }

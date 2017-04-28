@@ -1,10 +1,23 @@
-﻿using System.Threading.Tasks;
-using LH.Forcas.Domain;
+﻿using System;
+using System.Collections.Generic;
+using LH.Forcas.Domain.UserData;
 
 namespace LH.Forcas.Storage
 {
     public interface IUserDataRepository
     {
-        Task<UserPreferences> GetUserPreferencesAsync();
+        UserSettings GetUserSettings();
+
+        void SaveUserSettings(UserSettings settings);
+
+        IEnumerable<Account> GetAccounts();
+
+        void SaveAccount(Account account);
+
+        IEnumerable<Category> GetCategories();
+
+        Category GetCategory(Guid id);
+
+        void SaveCategory(Category category);
     }
 }

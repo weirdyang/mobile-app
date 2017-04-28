@@ -1,107 +1,115 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using LH.Forcas.Domain.RefData;
-using LH.Forcas.Integration;
+using LH.Forcas.Analytics;
+using LH.Forcas.RefDataContract;
 using LH.Forcas.Storage;
+using LH.Forcas.Sync.RefData;
 
 namespace LH.Forcas.Services
 {
+    using System.Collections.Concurrent;
+    using System.Diagnostics;
+
     public class RefDataService : IRefDataService
     {
-        private readonly ICrashReporter crashReporter;
-        private readonly IRefDataDownloader downloader;
         private readonly IRefDataRepository repository;
+        private readonly IRefDataDownloader downloader;
+        private readonly IAnalyticsReporter analyticsReporter;
 
-        private readonly SemaphoreSlim cacheSemaphore = new SemaphoreSlim(1, 1);
-        private readonly IDictionary<Type, object> cache = new Dictionary<Type, object>();
+        private readonly object cacheLock = new object();
+        private readonly IDictionary<Type, object> cache = new ConcurrentDictionary<Type, object>();
 
-        public RefDataService() : this(XamarinDependencyService.Default)
+        public RefDataService(IRefDataRepository repository, IRefDataDownloader downloader, IAnalyticsReporter analyticsReporter)
         {
+            this.repository = repository;
+            this.downloader = downloader;
+            this.analyticsReporter = analyticsReporter;
         }
 
-        public RefDataService(IDependencyService dependencyService)
+        public IList<Bank> GetBanks()
         {
-            this.crashReporter = dependencyService.Get<ICrashReporter>();
-            this.downloader = dependencyService.Get<IRefDataDownloader>();
-            this.repository = dependencyService.Get<IRefDataRepository>();
+            return this.GetRefDataViaCache(() => this.repository.GetBanks());
         }
 
-        public async Task<IList<Bank>> GetBanks()
+        public IList<Country> GetCountries()
         {
-            return await this.GetRefDataViaCacheAsync(() => this.repository.GetBanksAsync());
+            return this.GetRefDataViaCache(() => this.repository.GetCountries());
         }
 
-        public async Task<IList<Country>> GetCountriesAsync()
+        public Country GetCountry(string id)
         {
-            return await this.GetRefDataViaCacheAsync(() => this.repository.GetCountriesAsync());
+            var countries = this.GetCountries();
+            var unifiedId = id.ToUpper();
+
+            return countries.Single(x => x.CountryId == unifiedId); // TODO: this should be done via dictionary...
         }
 
-        public async Task<IList<Currency>> GetCurrencies()
+        public Currency GetCurrency(string id)
         {
-            return await this.GetRefDataViaCacheAsync(() => this.repository.GetCurrenciesAsync());
+            var currencies = this.GetCurrencies();
+
+            return currencies.Single(x => x.CurrencyId == id); // TODO: this should be done via dictionary...
         }
 
-        public async Task UpdateRefDataAsync()
+        public IList<Currency> GetCurrencies()
+        {
+            return this.GetRefDataViaCache(() => this.repository.GetCurrencies());
+        }
+
+        public async Task UpdateRefData()
         {
             try
             {
-                var lastSyncTime = DateTime.MaxValue; // TODO: !!!
+                var currentStatus = this.repository.GetStatus();
+                var result = await this.downloader.DownloadRefData(currentStatus);
 
-                IRefDataUpdate[] updates;
-                try
+                if (!result.NewDataAvailable)
                 {
-                     updates = await this.downloader.GetRefDataUpdates(lastSyncTime);
-                }
-                catch (Exception ex)
-                {
-                    this.crashReporter.ReportException(ex);
                     return;
                 }
 
-                if (updates == null || !updates.Any())
-                {
-                    return; // No updates available
-                }
-
-                await this.repository.SaveRefDataUpdates(updates);
-
-                this.cache.Clear(); // Invalidate cache
+                this.repository.SaveRefDataUpdate(result.Data, result.NewStatus);
             }
             catch (Exception ex)
             {
-                this.crashReporter.ReportException(ex);
-                throw;
+                this.analyticsReporter.ReportHandledException(ex, "Updating RefData failed");
             }
         }
 
-        private async Task<IList<TDomain>> GetRefDataViaCacheAsync<TDomain>(Func<Task<IList<TDomain>>> fetchDataDelegate)
+        private IList<TDomain> GetRefDataViaCache<TDomain>(Func<IEnumerable<TDomain>> fetchDataDelegate)
+            where TDomain : IRefDataEntity
         {
-            await this.cacheSemaphore.WaitAsync();
-
-            object result;
-            if (this.cache.TryGetValue(typeof(TDomain), out result))
-            {
-                return (IList<TDomain>)result;
-            }
-
-            IList<TDomain> typedResult;
+            IList<TDomain> typedResult = null;
 
             try
             {
-                typedResult = await fetchDataDelegate.Invoke();
+                lock (this.cacheLock)
+                {
+                    object result;
+                    if (this.cache.TryGetValue(typeof(TDomain), out result))
+                    {
+                        return (IList<TDomain>)result;
+                    }
+
+                    var data = fetchDataDelegate.Invoke();
+                    if (data != null)
+                    {
+                        typedResult = data.Where(x => x.IsActive).ToArray();
+                    }
+
+                    this.cache.Add(typeof(TDomain), typedResult);
+                }
             }
             catch (Exception ex)
             {
-                this.cacheSemaphore.Release();
-                this.crashReporter.ReportFatal(ex);
+                // TODO: Handle network exceptions differently
+                Debug.WriteLine(ex);
+#if DEBUG
                 throw;
+#endif
             }
-
-            this.cache.Add(typeof(TDomain), typedResult);
-            this.cacheSemaphore.Release();
 
             return typedResult;
         }

@@ -1,115 +1,148 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using LH.Forcas.Analytics;
 using LH.Forcas.Domain.RefData;
-using LH.Forcas.Integration;
+using LH.Forcas.RefDataContract;
 using LH.Forcas.Services;
 using LH.Forcas.Storage;
+using LH.Forcas.Sync.RefData;
 using Moq;
 using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Services
 {
+    using System.Linq;
+
     [TestFixture]
     public class RefDataServiceTests
     {
+        protected RefDataService RefDataService;
+        protected Mock<IRefDataRepository> RepositoryMock;
+        protected Mock<IRefDataDownloader> DownloaderMock;
+        protected Mock<IAnalyticsReporter> AnalyticsReporterMock;
+
         [SetUp]
         public void Setup()
         {
-            this.crashReporterMock = new Mock<ICrashReporter>();
-            this.repositoryMock = new Mock<IRefDataRepository>(MockBehavior.Strict);
-            this.downloaderMock = new Mock<IRefDataDownloader>();
-            
-            this.dependencyService = new TestsDependencyService();
-            this.dependencyService.Register(this.crashReporterMock.Object);
-            this.dependencyService.Register(this.repositoryMock.Object);
-            this.dependencyService.Register(this.downloaderMock.Object);
+            this.RepositoryMock = new Mock<IRefDataRepository>(MockBehavior.Strict);
+            this.DownloaderMock = new Mock<IRefDataDownloader>();
+            this.AnalyticsReporterMock = new Mock<IAnalyticsReporter>();
 
-            this.refDataService = new RefDataService(this.dependencyService);
+            this.RefDataService = new RefDataService(
+                this.RepositoryMock.Object, 
+                this.DownloaderMock.Object,
+                this.AnalyticsReporterMock.Object);
         }
 
-        private RefDataService refDataService;
-        private TestsDependencyService dependencyService;
-        private Mock<ICrashReporter> crashReporterMock;
-        private Mock<IRefDataDownloader> downloaderMock;
-        private Mock<IRefDataRepository> repositoryMock;
-
-        [Test]
-        public async Task ShouldServeSubsequenceFetchFromCache()
+        public class WhenLoadingData : RefDataServiceTests
         {
-            this.repositoryMock.Setup(x => x.GetCountriesAsync()).ReturnsAsync(new[] { new Country() });
+            [Test]
+            public void ShouldFilterOutInactiveData()
+            {
+                this.RepositoryMock.Setup(x => x.GetCountries())
+                    .Returns(new[]
+                    {
+                        new Country { IsActive = true, CountryId = "CZ" },
+                        new Country { IsActive = false, CountryId = "GB" }
+                    });
 
-            await this.refDataService.GetCountriesAsync();
-            await this.refDataService.GetCountriesAsync();
+                var countries = this.RefDataService.GetCountries();
 
-            this.repositoryMock.Verify(x => x.GetCountriesAsync(), Times.Once);
+                Assert.AreEqual(1, countries.Count);
+                Assert.AreEqual("CZ", countries.Single().CountryId);
+            }
+
+            [Test]
+            public void ShouldServeSubsequentFetchFromCache()
+            {
+                this.RepositoryMock.Setup(x => x.GetCountries()).Returns(new[] { new Country() });
+
+                this.RefDataService.GetCountries();
+                this.RefDataService.GetCountries();
+
+                this.RepositoryMock.Verify(x => x.GetCountries(), Times.Once);
+            }
         }
 
-        [Test]
-        public async Task UpdateShouldInvalidateCache()
+        public class WhenUpdatingData : RefDataServiceTests
         {
-            var updates = new IRefDataUpdate[1];
+            [Test]
+            public async Task ShouldNotSaveWhenUpdateNotAvailable()
+            {
+                var updateStatus = new RefDataStatus();
+                var downloaderResult = new RefDataDownloadResult();
 
-            this.repositoryMock.Setup(x => x.GetCountriesAsync()).ReturnsAsync(new[] { new Country() });
-            this.downloaderMock.Setup(x => x.GetRefDataUpdates(It.IsAny<DateTime>())).ReturnsAsync(updates);
-            this.repositoryMock.Setup(x => x.SaveRefDataUpdates(updates)).Returns(Task.FromResult(0));
+                this.RepositoryMock
+                    .Setup(x => x.GetStatus())
+                    .Returns(updateStatus);
 
-            await this.refDataService.GetCountriesAsync();
-            await this.refDataService.UpdateRefDataAsync();
-            await this.refDataService.GetCountriesAsync();
+                this.DownloaderMock
+                    .Setup(x => x.DownloadRefData(It.IsAny<RefDataStatus>()))
+                    .ReturnsAsync(downloaderResult);
 
-            this.repositoryMock.Verify(x => x.GetCountriesAsync(), Times.Exactly(2));
-            this.repositoryMock.Verify(x => x.SaveRefDataUpdates(updates), Times.Once);
-        }
+                await this.RefDataService.UpdateRefData();
 
-        [Test]
-        public async Task UpdateWithNoResultShouldNotInvalidateCache()
-        {
-            this.repositoryMock.Setup(x => x.GetCountriesAsync()).ReturnsAsync(new[] { new Country() });
-            this.downloaderMock.Setup(x => x.GetRefDataUpdates(It.IsAny<DateTime>())).ReturnsAsync((IRefDataUpdate[])null);
+                this.RepositoryMock.VerifyAll();
+            }
 
-            await this.refDataService.GetCountriesAsync();
-            await this.refDataService.UpdateRefDataAsync();
-            await this.refDataService.GetCountriesAsync();
+            [Test]
+            public async Task ShouldSaveRefDataAndStatusWhenUpdateAvailable()
+            {
+                var updateStatus = new RefDataStatus("sha1", 1);
 
-            this.repositoryMock.Verify(x => x.GetCountriesAsync(), Times.Once);
-        }
+                var update = new RefDataUpdate
+                {
+                    Banks = new List<Bank>
+                    {
+                        new Bank {BankId = "B1", LastChangedVersion = 2}
+                    }
+                };
 
-        [Test]
-        public async Task UpdateWithNoResultShouldNotBeSaved()
-        {
-            this.repositoryMock.Setup(x => x.GetCountriesAsync()).ReturnsAsync(new[] { new Country() });
-            this.downloaderMock.Setup(x => x.GetRefDataUpdates(It.IsAny<DateTime>())).ReturnsAsync((IRefDataUpdate[])null);
+                var downloaderResult = new RefDataDownloadResult(update, "sha2", 2);
 
-            await this.refDataService.GetCountriesAsync();
-            await this.refDataService.UpdateRefDataAsync();
+                this.RepositoryMock.Setup(x => x.GetStatus()).Returns(updateStatus);
+                this.RepositoryMock
+                    .Setup(x => x.SaveRefDataUpdate(update,It.Is<RefDataStatus>(s => s.CommitSha == "sha2" && s.DataVersion == 2)));
 
-            this.repositoryMock.Verify(x => x.GetCountriesAsync(), Times.Once);
-        }
+                this.DownloaderMock
+                    .Setup(x => x.DownloadRefData(It.IsAny<RefDataStatus>()))
+                    .ReturnsAsync(downloaderResult);
 
-        [Test]
-        public void ShouldReportFatalCrashWhenFetchFails()
-        {
-            var ex = new Exception("Dummy");
+                await this.RefDataService.UpdateRefData();
 
-            this.repositoryMock.Setup(x => x.GetCountriesAsync()).ThrowsAsync(ex);
-            this.crashReporterMock.Setup(x => x.ReportFatal(ex));
+                this.RepositoryMock.VerifyAll();
+            }
 
-            Assert.ThrowsAsync<Exception>(async () => await this.refDataService.GetCountriesAsync());
+            [Test]
+            public async Task ShouldNotSaveUnchangedEntities()
+            {
+                var updateStatus = new RefDataStatus("sha1", 1);
 
-            this.crashReporterMock.Verify(x => x.ReportFatal(ex), Times.Once);
-        }
+                var update = new RefDataUpdate
+                {
+                    Banks = new List<Bank>
+                    {
+                        new Bank {BankId = "B1", LastChangedVersion = 2},
+                        new Bank {BankId = "B2", LastChangedVersion = 1}
+                    }
+                };
 
-        [Test]
-        public async Task ShouldReportErrorsOccuringDuringUpdate()
-        {
-            var ex = new Exception("Dummy");
+                var downloaderResult = new RefDataDownloadResult(update, "sha2", 2);
 
-            this.downloaderMock.Setup(x => x.GetRefDataUpdates(It.IsAny<DateTime>())).ThrowsAsync(ex);
-            this.crashReporterMock.Setup(x => x.ReportException(ex));
+                this.RepositoryMock.Setup(x => x.GetStatus()).Returns(updateStatus);
+                this.RepositoryMock
+                    .Setup(x => x.SaveRefDataUpdate(
+                        It.Is<RefDataUpdate>(u => u.Banks.Count() == 1),
+                        It.Is<RefDataStatus>(s => s.CommitSha == "sha2" && s.DataVersion == 2)));
 
-            await this.refDataService.UpdateRefDataAsync();
-            
-            this.crashReporterMock.Verify(x => x.ReportException(ex), Times.Once);
+                this.DownloaderMock
+                    .Setup(x => x.DownloadRefData(It.IsAny<RefDataStatus>()))
+                    .ReturnsAsync(downloaderResult);
+
+                await this.RefDataService.UpdateRefData();
+
+                this.RepositoryMock.VerifyAll();
+            }
         }
     }
 }

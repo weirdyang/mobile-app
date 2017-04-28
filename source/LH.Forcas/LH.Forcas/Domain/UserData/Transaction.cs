@@ -1,11 +1,10 @@
 ﻿using System;
+using LiteDB;
 
 namespace LH.Forcas.Domain.UserData
 {
-    public class Transaction
-    {
-        public Guid TransactionId { get; set; }
-
+    public class Transaction : UserEntityBase<Guid>
+    { 
         public string CounterpartyName { get; set; }
 
         public string CounterpartyAccountNumber { get; set; }
@@ -19,5 +18,10 @@ namespace LH.Forcas.Domain.UserData
         public string SpecificSymbol { get; set; }
 
         public TransactionType TransactionType { get; set; }
+
+        public override BsonValue GetIdAsBson()
+        {
+            return new BsonValue(this.Id);
+        }
     }
 }

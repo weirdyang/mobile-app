@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
-using LH.Forcas.Domain.RefData;
+using LH.Forcas.RefDataContract;
 using LH.Forcas.Storage;
 using NUnit.Framework;
 
@@ -9,68 +8,50 @@ namespace LH.Forcas.Tests.Storage
     [TestFixture]
     public class RefDataRepositoryTests
     {
+        private IRefDataRepository refDataRepository;
+
         [SetUp]
         public void Setup()
         {
-            AutoMapperConfig.Configure();
-
-            this.dbManager = new TestsDbManager();
-            this.dbManager.Initialize();
-
-            this.dependencyService = new TestsDependencyService();
-            this.dependencyService.Register((IDbManager)this.dbManager);
-
-            this.refDataRepository = new RefDataRepository(this.dependencyService);
+            this.refDataRepository = new RefDataRepository();
         }
 
-        [TearDown]
-        public void TearDown()
+        [TestFixture]
+        public class LoadDataTests : RefDataRepositoryTests
         {
-            this.dbManager.Dispose();
-        }
+            [Test]
+            public void LoadBanks()
+            {
+                var banks = this.refDataRepository.GetBanks();
+                var rb = banks.SingleOrDefault(x => x.BankId == "RB");
 
-        private TestsDbManager dbManager;
-        private IRefDataRepository refDataRepository;
-        private TestsDependencyService dependencyService;
+                Assert.IsNotNull(rb);
+                Assert.IsNotEmpty(rb.Name);
+                Assert.IsNotEmpty(rb.CountryId);
+                Assert.AreNotEqual(0, rb.Bban);
+                Assert.AreEqual(BankAuthorizationScope.PerAccount, rb.AuthorizationScope);
+                Assert.IsTrue(rb.IsActive);
+            }
 
-        [Test]
-        public async Task ShouldLoadSavedEntity()
-        {
-            var countries = await this.refDataRepository.GetCountriesAsync();
+            [Test]
+            public void LoadCountries()
+            {
+                var countries = this.refDataRepository.GetCountries();
+                var cz = countries.SingleOrDefault(x => x.CountryId == "CZ");
 
-            Assert.IsNotNull(countries);
-            Assert.IsFalse(countries.Any());
+                Assert.IsNotNull(cz);
+                Assert.IsNotEmpty(cz.DefaultCurrencyId);
+            }
 
-            await this.SaveCountryUpdate("CZE", 1);
+            [Test]
+            public void LoadCurrencies()
+            {
+                var currencies = this.refDataRepository.GetCurrencies();
+                var cz = currencies.SingleOrDefault(x => x.CurrencyId == "CZK");
 
-            countries = await this.refDataRepository.GetCountriesAsync();
-            var actualCountry = countries.Single();
-
-            Assert.AreEqual("CZE", actualCountry.Code);
-        }
-
-        [Test]
-        public async Task ShouldNotSaveUpdateIfSameVersionAlreadyExists()
-        {
-            await this.SaveCountryUpdate("CZE", 1);
-
-            var countries = await this.refDataRepository.GetCountriesAsync();
-            Assert.IsTrue(countries.Any());
-
-            await this.SaveCountryUpdate("UK", 1);
-
-            countries = await this.refDataRepository.GetCountriesAsync();
-
-            Assert.IsTrue(countries.Any());
-            Assert.AreEqual("CZE", countries.Single().Code);
-        }
-
-        private async Task SaveCountryUpdate(string countryCode, int version)
-        {
-            var country = new Country { Code = countryCode, DefaultCurrencyCode = "CZK" };
-            var update = new RefDataUpdate<Country> { TypedData = new[] { country }, DomainType = typeof(Country), Version = version };
-
-            await this.refDataRepository.SaveRefDataUpdates(new IRefDataUpdate[] { update });
+                Assert.IsNotNull(cz);
+                Assert.IsNotEmpty(cz.DisplayFormat);
+            }
         }
     }
 }
