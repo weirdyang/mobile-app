@@ -111,8 +111,6 @@
 
         private IEnumerable<AccountsGroup> GroupAccounts(IEnumerable<Account> accounts)
         {
-            Task.Delay(3000).Wait();
-
             return accounts.GroupBy(account => account.GetType())
                            .Select(group => new AccountsGroup(group.Key, group.OrderBy(acc => acc.Name)))
                            .OrderBy(group => Array.IndexOf(this.accountTypeOrder, group.AccountType));
