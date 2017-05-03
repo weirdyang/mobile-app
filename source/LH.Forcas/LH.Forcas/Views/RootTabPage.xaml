@@ -14,7 +14,9 @@
   <budget:BudgetPage Title="{ ext:Translate BudgetPage_Title }" Icon="budget.png" />
   <transactions:CashTransactionPage Title="{ ext:Translate CashTransactionPage_Title }" Icon="cash_euro.png" />
   <NavigationPage Title="{ ext:Translate AccountsListPage_Title }" Icon="account.png">
-    <accounts:AccountsListPage BindingContext="{ Binding AccountsListPageViewModel }" />
+    <x:Arguments>
+      <accounts:AccountsListPage BindingContext="{ Binding AccountsListPageViewModel }" />
+    </x:Arguments>
   </NavigationPage>
   <views:MorePage Title="{ ext:Translate MorePage_Title }" Icon="more.png" />
 </bbar:BottomBarPage>
