@@ -19,32 +19,35 @@
         }
     }
 
-    public abstract class BankProductAccount : Account
+    public abstract class BankAccount : Account
     {
         public string BankId { get; set; }
-    }
 
-    public class BankAccount : BankProductAccount
-    { 
         public AccountNumber AccountNumber { get; set; }
     }
 
-    public class CreditCardAccount : BankProductAccount
+    public class CheckingAccount : BankAccount
+    {
+    }
+
+    public class SavingsAccount : BankAccount
+    {
+    }
+
+    public class CreditCardAccount : LoanAccount
     {
         public string CardNumber { get; set; }
     }
 
     public class CashAccount : Account
     {
-
     }
 
     public class InvestmentAccount : Account
     {
-        
     }
 
-    public class LoanAccount : Account
+    public abstract class LoanAccount : Account
     {
         
     }

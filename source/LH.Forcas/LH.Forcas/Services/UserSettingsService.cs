@@ -24,6 +24,7 @@
 
             if (this.Settings == null)
             {
+                // TODO: Handle when device can't return country code -> switch to UK/English or cs-CZ
                 var country = this.refDataService.GetCountry(this.deviceService.CountryCode);
 
                 this.Settings = new UserSettings();

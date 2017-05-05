@@ -1,32 +1,12 @@
-﻿using LiteDB;
+﻿using System;
+using LH.Forcas.Domain.UserData;
+using LiteDB;
 
 namespace LH.Forcas.Storage
 {
-    using System;
-    using Domain.UserData;
-
     public class DbManager : IDbManager
     {
-        private readonly IPathResolver pathResolver;
-
-        public DbManager(IPathResolver pathResolver)
-        {
-            this.pathResolver = pathResolver;
-        }
-
-        public virtual LiteDatabase GetDatabase()
-        {
-            return new LiteDatabase(this.pathResolver.DbFilePath);
-        }
-
-        public void Initialize()
-        {
-            // Schema conversions to be done here
-
-            this.RegisterBsonMappings();
-        }
-
-        private void RegisterBsonMappings()
+        public static void RegisterBsonMappings()
         {
             BsonMapper.Global.RegisterType(
                 number => number.Iban,
@@ -35,6 +15,24 @@ namespace LH.Forcas.Storage
             BsonMapper.Global.RegisterType(
                 guid => guid.ToString("N"),
                 str => Guid.Parse(str));
+        }
+
+        public DbManager(IPathResolver pathResolver)
+        {
+            RegisterBsonMappings();
+            this.LiteRepository = new LiteRepository(pathResolver.DbFilePath);
+        }
+
+        public LiteRepository LiteRepository { get; }
+
+        public void ApplyMigrations()
+        {
+            // Schema conversions to be done here
+        }
+
+        public void Dispose()
+        {
+            this.LiteRepository.Dispose();
         }
     }
 }

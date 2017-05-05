@@ -9,7 +9,7 @@ namespace LH.Forcas.Storage.Caching
     public class UserDataRepositoryCache : RepositoryCacheBase, IUserDataRepository
     {
         private UserSettings userSettingsCacheStore;
-        private IEnumerable<Account> accountsCacheStore;
+        private IList<Account> accountsCacheStore;
 
         private readonly IUserDataRepository repository;
         private readonly object userSettingsLock = new object();
@@ -35,7 +35,7 @@ namespace LH.Forcas.Storage.Caching
             this.repository.SaveUserSettings(settings);
         }
 
-        public IEnumerable<Account> GetAccounts()
+        public IList<Account> GetAccounts()
         {
             return this.GetThroughCache(
                 ref this.accountsCacheStore, 
@@ -49,7 +49,7 @@ namespace LH.Forcas.Storage.Caching
             this.repository.SaveAccount(account);
         }
 
-        public IEnumerable<Category> GetCategories()
+        public IList<Category> GetCategories()
         {
             throw new NotImplementedException();
         }
@@ -63,6 +63,13 @@ namespace LH.Forcas.Storage.Caching
         {
             throw new NotImplementedException();
         }
+
+#if DEBUG
+        public void DeleteAll()
+        {
+            throw new NotSupportedException("This method is only for TestData insertion and is not allowed to be called through cache.");
+        }
+#endif
 
         protected override IEnumerable<Func<bool>> GetTrimPriorities()
         {

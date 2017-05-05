@@ -36,7 +36,7 @@ namespace LH.Forcas
 
             this.Container.Resolve<IPathResolver>().Initialize();
             var dbManager = this.Container.Resolve<IDbManager>();
-            dbManager.Initialize();
+            dbManager.ApplyMigrations();
 
             var deviceService = this.Container.Resolve<IDeviceService>();
             deviceService.Initialize(this.Container.Resolve<IEventAggregator>());
@@ -44,7 +44,7 @@ namespace LH.Forcas
             this.AmountToCurrencyStringConverter.RefDataService = this.Container.Resolve<IRefDataService>();
 
 #if DEBUG
-            TestData.InsertTestData(dbManager);
+            TestData.InsertTestData(this.Container.Resolve<IUserDataRepository>());
 #endif
 
             this.Container.Resolve<IUserSettingsService>().Initialize();

@@ -15,7 +15,7 @@ namespace LH.Forcas.Tests.Storage
         public void Setup()
         {
             var dbManager = new TestsDbManager();
-            dbManager.Initialize();
+            dbManager.ApplyMigrations();
 
             this.Repository = new UserDataRepository(dbManager);
         }
@@ -52,10 +52,10 @@ namespace LH.Forcas.Tests.Storage
             }
 
             [Test]
-            public void ShouldSaveLoadBankAccount()
+            public void ShouldSaveLoadCheckingAccount()
             {
-                new SaveLoadUtil<BankAccount, Guid>(
-                   () => this.Repository.GetAccounts().OfType<BankAccount>(),
+                new SaveLoadUtil<CheckingAccount, Guid>(
+                   () => this.Repository.GetAccounts().OfType<CheckingAccount>(),
                    account => this.Repository.SaveAccount(account),
                    Guid.NewGuid())
                    .WithProperty(d => d.BankId, "B1", "B2")
@@ -74,7 +74,6 @@ namespace LH.Forcas.Tests.Storage
                    () => this.Repository.GetAccounts().OfType<CreditCardAccount>(),
                    account => this.Repository.SaveAccount(account),
                    Guid.NewGuid())
-                   .WithProperty(d => d.BankId, "B1", "B2")
                    .WithProperty(d => d.CardNumber, "123456", "99999")
                    .WithProperty(d => d.CurrencyId, "CZK", "GBP")
                    .WithProperty(d => d.Name, "Name1", "Name2")
