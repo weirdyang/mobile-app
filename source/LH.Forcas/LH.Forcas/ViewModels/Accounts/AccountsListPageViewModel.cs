@@ -41,7 +41,7 @@ namespace LH.Forcas.ViewModels.Accounts
 
             this.DeleteAccountCommand = DelegateCommand<Account>.FromAsyncHandler(this.DeleteAccount);
 
-            this.RefreshAccountsCommand = new DelegateCommand(this.RefreshAccounts);
+            this.RefreshAccountsCommand = DelegateCommand.FromAsyncHandler(this.RefreshAccounts);
         }
 
         public DelegateCommand NavigateToAddAccountCommand { get; private set; }
@@ -58,16 +58,19 @@ namespace LH.Forcas.ViewModels.Accounts
             private set { this.SetProperty(ref this.accountGroups, value); }
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override async void OnNavigatedTo(NavigationParameters parameters)
         {
-            this.RunAsyncWithBusyIndicator((Action)this.RefreshAccounts);
+            await this.RefreshAccounts();
         }
 
-        private void RefreshAccounts()
+        private async Task RefreshAccounts()
         {
-            var accounts = this.accountingService.GetAccounts();
-            var grouped = this.GroupAccounts(accounts);
-            this.AccountGroups = new ObservableCollection<AccountsGroup>(grouped);
+            await this.RunAsyncWithBusyIndicator(() =>
+                                                 {
+                                                     var accounts = this.accountingService.GetAccounts();
+                                                     var grouped = this.GroupAccounts(accounts);
+                                                     this.AccountGroups = new ObservableCollection<AccountsGroup>(grouped);
+                                                 });
         }
 
         private async Task NavigateToAccountDetail(Account account)

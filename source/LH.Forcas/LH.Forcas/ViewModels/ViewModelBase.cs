@@ -39,10 +39,7 @@ namespace LH.Forcas.ViewModels
 
         public virtual void OnNavigatedFrom(NavigationParameters parameters) { }
 
-        public virtual void OnNavigatedTo(NavigationParameters parameters)
-        {
-            
-        }
+        public virtual void OnNavigatedTo(NavigationParameters parameters) { }
 
         protected Task RunAsyncWithBusyIndicator(Action action)
         {
@@ -63,22 +60,23 @@ namespace LH.Forcas.ViewModels
             }
 
             this.IsBusy = true;
-
-            var wrappedTask =
-                task
-                .ContinueWith(x =>
+            
+            task.ContinueWith(x =>
                 {
                     this.IsBusy = false;
                     this.CurrentBackgroundTask = null;
 
                     x.Exception?.Handle(ex => false);
-                });
+                }, 
+                CancellationToken.None,
+                TaskContinuationOptions.HideScheduler,
+                TaskScheduler.FromCurrentSynchronizationContext());
 
-            this.CurrentBackgroundTask = wrappedTask;
+            this.CurrentBackgroundTask = task;
 
             task.Start(TaskScheduler.Current);
 
-            return wrappedTask;
+            return task;
         }
     }
 }

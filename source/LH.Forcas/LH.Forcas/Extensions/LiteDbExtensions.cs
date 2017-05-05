@@ -24,7 +24,11 @@ namespace LH.Forcas.Extensions
 
         public static T SingleOrDefault<T>(this LiteDatabase database, BsonValue id)
         {
-            return database.GetCollection<T>().FindById(id);
+            var collection = database.GetCollection<T>();
+            var item = collection.FindById(id);
+
+            return item;
+            //return database.GetCollection<T>().FindById(id);
         }
 
         public static void Upsert<T>(this LiteDatabase database, T item)
@@ -37,9 +41,9 @@ namespace LH.Forcas.Extensions
             database.GetCollection<T>().Delete(item.GetIdAsBson());
         }
 
-        public static int DeleteAll<T>(this LiteDatabase database)
+        public static void DeleteAll<T>(this LiteDatabase database)
         {
-            return database.GetCollection<T>().Delete(x => true);
+            database.DropCollection(typeof(T).Name);
         }
     }
 }

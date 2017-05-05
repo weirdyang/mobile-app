@@ -5,6 +5,7 @@
     public class UserSettings : UserEntityBase<string>
     {
         public static string SingleId = nameof(UserSettings);
+        public static readonly BsonValue BsonId = new BsonValue(SingleId);
 
         [BsonId]
         public override string Id

@@ -16,7 +16,7 @@ namespace LH.Forcas.Storage
 
         public UserSettings GetUserSettings()
         {
-            return this.dbManager.Database.SingleOrDefault<UserSettings>(UserSettings.SingleId);
+            return this.dbManager.Database.SingleOrDefault<UserSettings>(UserSettings.BsonId);
         }
 
         public void SaveUserSettings(UserSettings settings)
@@ -55,6 +55,7 @@ namespace LH.Forcas.Storage
             this.dbManager.Database.DeleteAll<Account>();
             this.dbManager.Database.DeleteAll<Category>();
             this.dbManager.Database.DeleteAll<Budget>();
+            this.dbManager.Database.DeleteAll<UserSettings>();
         }
 #endif
     }
