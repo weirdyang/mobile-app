@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LH.Forcas.Domain.UserData.Account" Collapsed="true">
+    <Position X="18" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABoAAAAAAAAAAAAQAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Domain\UserData\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LH.Forcas.Domain.UserData.BankAccount" Collapsed="true">
+    <Position X="16.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Domain\UserData\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LH.Forcas.Domain.UserData.CheckingAccount" Collapsed="true">
+    <Position X="15.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\UserData\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LH.Forcas.Domain.UserData.SavingsAccount" Collapsed="true">
+    <Position X="17.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\UserData\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LH.Forcas.Domain.UserData.CreditCardAccount" Collapsed="true">
+    <Position X="22.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\UserData\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LH.Forcas.Domain.UserData.CashAccount" Collapsed="true">
+    <Position X="13.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\UserData\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LH.Forcas.Domain.UserData.InvestmentAccount" Collapsed="true">
+    <Position X="20" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\UserData\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LH.Forcas.Domain.UserData.LoanAccount" Collapsed="true">
+    <Position X="22.5" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\UserData\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

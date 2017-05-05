@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Views.Accounts
+﻿using System;
+
+namespace LH.Forcas.Views.Accounts
 {
     using Domain.UserData;
     using Xamarin.Forms;
@@ -16,7 +18,7 @@
                 return null;
             }
 
-            if (item is BankProductAccount)
+            if (item is BankAccount)
             {
                 return this.BankProductAccountDataTemplate;
             }
@@ -26,7 +28,7 @@
                 return this.CashAccountDataTemplate;
             }
 
-            return null;
+            throw new NotSupportedException($"The account type {item.GetType()} is not supported.");
         }
     }
 }

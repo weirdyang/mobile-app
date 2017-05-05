@@ -120,8 +120,8 @@
   <data name="AccountsListPage_Title" xml:space="preserve">
     <value>Accounts</value>
   </data>
-  <data name="AccountType_BankAccount" xml:space="preserve">
-    <value>Bank</value>
+  <data name="AccountType_CheckingAccount" xml:space="preserve">
+    <value>Checking</value>
   </data>
   <data name="Dashboard_Title" xml:space="preserve">
     <value>Overview</value>
@@ -152,18 +152,21 @@
   </data>
   <data name="AccountType_Bank_Description" xml:space="preserve">
     <value>Your checking or other account in a bank we will connect to and download the transactions.</value>
+    <comment>Obsolete</comment>
   </data>
   <data name="AccountType_CashAccount" xml:space="preserve">
     <value>Cash</value>
   </data>
   <data name="AccountType_Cash_Description" xml:space="preserve">
     <value>To track the balance of your wallet or money you have under the pillow...</value>
+    <comment>Obsolete</comment>
   </data>
   <data name="AccountType_LoanAccount" xml:space="preserve">
     <value>Loan</value>
   </data>
   <data name="AccountType_Loan_Description" xml:space="preserve">
     <value>Any kind of money you own to anyone, like mortgage, car loan and similar</value>
+    <comment>Obsolete</comment>
   </data>
   <data name="AccountsDetailPage_AccountType" xml:space="preserve">
     <value>Account Type</value>
@@ -278,5 +281,11 @@
   </data>
   <data name="MorePage_Title" xml:space="preserve">
     <value>More</value>
+  </data>
+  <data name="AccountsListPage_BusyText" xml:space="preserve">
+    <value>Loading accounts...</value>
+  </data>
+  <data name="AccountType_SavingsAccount" xml:space="preserve">
+    <value>Savings</value>
   </data>
 </root>

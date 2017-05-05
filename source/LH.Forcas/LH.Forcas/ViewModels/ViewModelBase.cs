@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.ViewModels
+﻿using System.Threading;
+
+namespace LH.Forcas.ViewModels
 {
     using System;
     using System.Threading.Tasks;
@@ -35,13 +37,17 @@
             }
         }
 
-        public virtual void OnNavigatedFrom(NavigationParameters parameters) {}
+        public virtual void OnNavigatedFrom(NavigationParameters parameters) { }
 
-        public virtual void OnNavigatedTo(NavigationParameters parameters) {}
+        public virtual void OnNavigatedTo(NavigationParameters parameters)
+        {
+            
+        }
 
         protected Task RunAsyncWithBusyIndicator(Action action)
         {
-            return this.RunAsyncWithBusyIndicator(Task.Run(action));
+            var task = new Task(action, CancellationToken.None, TaskCreationOptions.None);
+            return this.RunAsyncWithBusyIndicator(task);
         }
 
         protected Task RunAsyncWithBusyIndicator(Func<Task> task)
@@ -69,6 +75,8 @@
                 });
 
             this.CurrentBackgroundTask = wrappedTask;
+
+            task.Start(TaskScheduler.Current);
 
             return wrappedTask;
         }

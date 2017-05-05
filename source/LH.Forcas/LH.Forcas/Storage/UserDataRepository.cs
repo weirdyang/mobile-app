@@ -12,28 +12,26 @@ namespace LH.Forcas.Storage
         public UserDataRepository(IDbManager dbManager)
         {
             this.dbManager = dbManager;
-            
         }
 
         public UserSettings GetUserSettings()
         {
-            return this.dbManager.LiteRepository
-                .SingleOrDefault<UserSettings>(x => x.Id == UserSettings.SingleId);
+            return this.dbManager.Database.SingleOrDefault<UserSettings>(UserSettings.SingleId);
         }
 
         public void SaveUserSettings(UserSettings settings)
         {
-            this.dbManager.LiteRepository.Upsert(settings);
+            this.dbManager.Database.Upsert(settings);
         }
 
         public IList<Account> GetAccounts()
         {
-            return this.dbManager.LiteRepository.Fetch<Account>();
+            return this.dbManager.Database.Fetch<Account>();
         }
 
         public void SaveAccount(Account account)
         {
-            this.dbManager.LiteRepository.Upsert(account);
+            this.dbManager.Database.Upsert(account);
         }
 
         public IList<Category> GetCategories()
@@ -54,9 +52,9 @@ namespace LH.Forcas.Storage
 #if DEBUG
         public void DeleteAll()
         {
-            this.dbManager.LiteRepository.DeleteAll<Account>();
-            this.dbManager.LiteRepository.DeleteAll<Category>();
-            this.dbManager.LiteRepository.DeleteAll<Budget>();
+            this.dbManager.Database.DeleteAll<Account>();
+            this.dbManager.Database.DeleteAll<Category>();
+            this.dbManager.Database.DeleteAll<Budget>();
         }
 #endif
     }

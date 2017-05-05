@@ -1,9 +1,10 @@
-﻿namespace LH.Forcas.ViewModels.Accounts
+﻿using LH.Forcas.Analytics;
+
+namespace LH.Forcas.ViewModels.Accounts
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using Domain.UserData;
@@ -18,19 +19,22 @@
     {
         private readonly INavigationService navigationService;
         private readonly IPageDialogService dialogService;
+        private readonly IAnalyticsReporter analyticsReporter;
         private readonly IAccountingService accountingService;
-        private readonly Type[] accountTypeOrder = { typeof(CashAccount), typeof(BankAccount), typeof(CreditCardAccount), typeof(LoanAccount), typeof(InvestmentAccount) };
+        private readonly Type[] accountTypeOrder = { typeof(CashAccount), typeof(CheckingAccount), typeof(CreditCardAccount), typeof(SavingsAccount), typeof(LoanAccount), typeof(InvestmentAccount) };
 
         private ObservableCollection<AccountsGroup> accountGroups;
 
         public AccountsListPageViewModel(
             IAccountingService accountingService,
             INavigationService navigationService,
-            IPageDialogService dialogService)
+            IPageDialogService dialogService,
+            IAnalyticsReporter analyticsReporter)
         {
             this.accountingService = accountingService;
             this.navigationService = navigationService;
             this.dialogService = dialogService;
+            this.analyticsReporter = analyticsReporter;
 
             this.NavigateToAddAccountCommand = DelegateCommand.FromAsyncHandler(this.navigationService.NavigateToAccountAdd);
             this.NavigateToAccountDetailCommand = DelegateCommand<Account>.FromAsyncHandler(this.NavigateToAccountDetail);
@@ -54,13 +58,13 @@
             private set { this.SetProperty(ref this.accountGroups, value); }
         }
 
-        public override async void OnNavigatedTo(NavigationParameters parameters)
+        public override void OnNavigatedTo(NavigationParameters parameters)
         {
-            await this.RunAsyncWithBusyIndicator((Action)this.RefreshAccounts);
+            this.RunAsyncWithBusyIndicator((Action)this.RefreshAccounts);
         }
 
         private void RefreshAccounts()
-        {    
+        {
             var accounts = this.accountingService.GetAccounts();
             var grouped = this.GroupAccounts(accounts);
             this.AccountGroups = new ObservableCollection<AccountsGroup>(grouped);
@@ -68,6 +72,11 @@
 
         private async Task NavigateToAccountDetail(Account account)
         {
+            if (account == null)
+            {
+                return;
+            }
+
             await this.navigationService.NavigateToAccountDetail(account.Id);
         }
 
@@ -98,9 +107,7 @@
             }
             catch (Exception ex)
             {
-                // TODO: Log the exception
-                Debug.WriteLine(ex);
-
+                this.analyticsReporter.ReportHandledException(ex);
                 await this.dialogService.DisplayErrorAlert(AppResources.AccountsListPage_DeleteAccountError);
             }
             finally

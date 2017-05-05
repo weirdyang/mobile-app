@@ -134,6 +134,15 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading accounts....
+        /// </summary>
+        public static string AccountsListPage_BusyText {
+            get {
+                return ResourceManager.GetString("AccountsListPage_BusyText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete the account {0} and all related transactions?.
         /// </summary>
         public static string AccountsListPage_DeleteAccountConfirmMsgFormat {
@@ -188,15 +197,6 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bank.
-        /// </summary>
-        public static string AccountType_BankAccount {
-            get {
-                return ResourceManager.GetString("AccountType_BankAccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to To track the balance of your wallet or money you have under the pillow....
         /// </summary>
         public static string AccountType_Cash_Description {
@@ -215,6 +215,15 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking.
+        /// </summary>
+        public static string AccountType_CheckingAccount {
+            get {
+                return ResourceManager.GetString("AccountType_CheckingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Any kind of money you own to anyone, like mortgage, car loan and similar.
         /// </summary>
         public static string AccountType_Loan_Description {
@@ -229,6 +238,15 @@ namespace LH.Forcas.Localization {
         public static string AccountType_LoanAccount {
             get {
                 return ResourceManager.GetString("AccountType_LoanAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Savings.
+        /// </summary>
+        public static string AccountType_SavingsAccount {
+            get {
+                return ResourceManager.GetString("AccountType_SavingsAccount", resourceCulture);
             }
         }
         

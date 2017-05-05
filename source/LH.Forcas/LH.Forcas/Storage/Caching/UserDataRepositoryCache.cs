@@ -67,7 +67,7 @@ namespace LH.Forcas.Storage.Caching
 #if DEBUG
         public void DeleteAll()
         {
-            throw new NotSupportedException("This method is only for TestData insertion and is not allowed to be called through cache.");
+            this.repository.DeleteAll();
         }
 #endif
 

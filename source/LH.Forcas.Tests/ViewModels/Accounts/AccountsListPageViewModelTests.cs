@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Tests.ViewModels.Accounts
+﻿using LH.Forcas.Analytics;
+
+namespace LH.Forcas.Tests.ViewModels.Accounts
 {
     using System;
     using System.Linq;
@@ -19,6 +21,7 @@
         protected Mock<IAccountingService> AccountingServiceMock;
         protected Mock<INavigationService> NavigationServiceMock;
         protected Mock<IPageDialogService> DialogServiceMock;
+        protected Mock<IAnalyticsReporter> AnalyticsReporterMock;
 
         [SetUp]
         public void Setup()
@@ -26,22 +29,35 @@
             this.AccountingServiceMock = new Mock<IAccountingService>();
             this.NavigationServiceMock = new Mock<INavigationService>();
             this.DialogServiceMock = new Mock<IPageDialogService>();
+            this.AnalyticsReporterMock = new Mock<IAnalyticsReporter>();
 
             this.ViewModel = new AccountsListPageViewModel(
                 this.AccountingServiceMock.Object,
                 this.NavigationServiceMock.Object,
-                this.DialogServiceMock.Object);
+                this.DialogServiceMock.Object,
+                this.AnalyticsReporterMock.Object);
 
             this.AccountingServiceMock.Setup(x => x.GetAccounts())
-                .Returns(new[]
+                .Returns(new Account[]
                          {
-                             new BankAccount { Id = Guid.NewGuid(), Name = "Checking" },
-                             new BankAccount { Id = Guid.NewGuid(), Name = "Savings" }
+                             new CheckingAccount { Id = Guid.NewGuid(), Name = "Checking" },
+                             new SavingsAccount { Id = Guid.NewGuid(), Name = "Savings" }
                          });
         }
 
         [TestFixture]
-        public class NavigationTests : AccountsListPageViewModelTests
+        public class WhenNavigatingTo : AccountsListPageViewModelTests
+        {
+            [Test]
+            public void ShouldLoadAccountsWhenNavigatedTo()
+            {
+                this.NavigateTo();
+                this.AccountingServiceMock.VerifyAll();
+            }
+        }
+
+        [TestFixture]
+        public class WhenNavigatingAway : AccountsListPageViewModelTests
         {
             [Test]
             public async Task ShouldNavigateWhenNavigateToAddCommandIsExecuted()
@@ -70,17 +86,10 @@
 
                 this.NavigationServiceMock.VerifyAll();
             }
-
-            [Test]
-            public void ShouldLoadAccountsWhenNavigatedTo()
-            {
-                this.NavigateTo();
-                this.AccountingServiceMock.VerifyAll();
-            }
         }
         
         [TestFixture]
-        public class DeleteAccountTests : AccountsListPageViewModelTests
+        public class WhenDeletingAccount : AccountsListPageViewModelTests
         {
             [Test]
             public void ShouldDisplayConfirmDialog()
@@ -143,6 +152,21 @@
             }
 
             [Test]
+            public void ShouldReportFailureToAnalytics()
+            {
+                this.SetupDeleteConfirm(true);
+                this.AccountingServiceMock.Setup(x => x.DeleteAccount(It.IsAny<Guid>())).Throws<Exception>();
+
+                this.AnalyticsReporterMock.Setup(x => x.ReportHandledException(It.IsAny<Exception>(), null));
+
+                this.NavigateTo();
+
+                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
+
+                this.AnalyticsReporterMock.VerifyAll();
+            }
+
+            [Test]
             public void ShouldIgnoreCommandCalledWithoutParameter()
             {
                 this.NavigateTo();
@@ -152,10 +176,6 @@
                 this.DialogServiceMock.VerifyAll();
             }
         }
-        /*
-         * Refresh commands reloads data and clears selection
-         * Data loaded when the view is navigated to
-         */
 
         protected void SetupDeleteConfirm(bool result)
         {

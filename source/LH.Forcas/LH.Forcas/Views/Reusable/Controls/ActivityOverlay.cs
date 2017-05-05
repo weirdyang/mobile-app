@@ -19,18 +19,10 @@ namespace LH.Forcas.Views.Reusable.Controls
         {
             this.BackgroundColor = (OnPlatform<Color>)Application.Current.Resources["ActivityOverlayBackgroundColor"];
 
-            var innerFrame = new Frame();
-            innerFrame.BackgroundColor = (OnPlatform<Color>)Application.Current.Resources["ActivityOverlayInnerBackgroundColor"];
-            innerFrame.HeightRequest = 80;
-            innerFrame.WidthRequest = 300;
-            innerFrame.VerticalOptions = LayoutOptions.Center;
-            innerFrame.HorizontalOptions = LayoutOptions.Center;
-            this.Content = innerFrame;
-
             var stack = new StackLayout();
             stack.Orientation = StackOrientation.Horizontal;
-            stack.HorizontalOptions = LayoutOptions.StartAndExpand;
-            innerFrame.Content = stack;
+            stack.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            this.Content = stack;
             
             var indicator = new ActivityIndicator();
             indicator.Margin = 10;

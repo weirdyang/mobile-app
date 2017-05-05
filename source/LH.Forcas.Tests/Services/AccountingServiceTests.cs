@@ -28,7 +28,7 @@ namespace LH.Forcas.Tests.Services
                 var expected = new List<Account>
                 {
                     new CashAccount(),
-                    new BankAccount()
+                    new CheckingAccount()
                 };
 
                 this.UserDataRepositoryMock.Setup(x => x.GetAccounts()).Returns(expected);

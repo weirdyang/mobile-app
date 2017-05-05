@@ -27,31 +27,32 @@ namespace LH.Forcas
 
         public static CultureInfo CurrentCultureInfo { get; private set; }
 
-        protected override void OnInitialized()
+        public override void Initialize()
         {
+            base.Initialize();
+
             this.SetVersion();
             this.InitializeComponent();
 
             NavigationExtensions.InitializeNavigation();
 
             this.Container.Resolve<IPathResolver>().Initialize();
-            var dbManager = this.Container.Resolve<IDbManager>();
-            dbManager.ApplyMigrations();
-
-            var deviceService = this.Container.Resolve<IDeviceService>();
-            deviceService.Initialize(this.Container.Resolve<IEventAggregator>());
+            this.Container.Resolve<IDbManager>().ApplyMigrations();
 
             this.AmountToCurrencyStringConverter.RefDataService = this.Container.Resolve<IRefDataService>();
 
 #if DEBUG
             TestData.InsertTestData(this.Container.Resolve<IUserDataRepository>());
 #endif
-
+            this.Container.Resolve<IDeviceService>().Initialize(this.Container.Resolve<IEventAggregator>());
             this.Container.Resolve<IUserSettingsService>().Initialize();
 
             CurrentCultureInfo = this.Container.Resolve<ILocale>().GetCultureInfo();
+        }
 
-            #pragma warning disable 4014
+#pragma warning disable 4014
+        protected override void OnInitialized()
+        {
             this.NavigationService.NavigateToDashboard()
                 .ContinueWith(x =>
                                 {
@@ -61,8 +62,8 @@ namespace LH.Forcas
                                         throw x.Exception;
                                     }
                                 });
-            #pragma warning restore 4014
         }
+#pragma warning restore 4014
 
         protected override void RegisterTypes()
         {
@@ -73,6 +74,16 @@ namespace LH.Forcas
             this.Container.RegisterType<IGitHubClientFactory, GitHubClientFactory>(new ContainerControlledLifetimeManager());
             this.Container.RegisterType<IRefDataDownloader, RefDataDownloader>(new ContainerControlledLifetimeManager());
             this.Container.RegisterType<IRefDataUpdateParser, RefDataUpdateParser>(new ContainerControlledLifetimeManager());
+
+            //var a = typeof(IDbManager);
+            //var b = typeof(DbManager);
+
+            //var aInfo = a.GetTypeInfo();
+            //var bInfo = b.GetTypeInfo();
+
+            //var res = aInfo.IsAssignableFrom(bInfo);
+
+            //var manager = new DbManager(null);
 
             this.Container.RegisterType<IDbManager, DbManager>(new ContainerControlledLifetimeManager());
 
