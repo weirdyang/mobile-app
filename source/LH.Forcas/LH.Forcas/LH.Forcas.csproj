@@ -68,6 +68,7 @@
     <Compile Include="Domain\UserData\UserEntityBase.cs" />
     <Compile Include="Domain\UserData\UserSettings.cs" />
     <Compile Include="Events\TrimMemoryRequestedEvent.cs" />
+    <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
     <Compile Include="Extensions\LocalizationExtensions.cs" />
     <Compile Include="Extensions\PrismExtensions.cs" />
     <Compile Include="IApp.cs" />

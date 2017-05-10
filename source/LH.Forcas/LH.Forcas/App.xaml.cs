@@ -75,16 +75,6 @@ namespace LH.Forcas
             this.Container.RegisterType<IRefDataDownloader, RefDataDownloader>(new ContainerControlledLifetimeManager());
             this.Container.RegisterType<IRefDataUpdateParser, RefDataUpdateParser>(new ContainerControlledLifetimeManager());
 
-            //var a = typeof(IDbManager);
-            //var b = typeof(DbManager);
-
-            //var aInfo = a.GetTypeInfo();
-            //var bInfo = b.GetTypeInfo();
-
-            //var res = aInfo.IsAssignableFrom(bInfo);
-
-            //var manager = new DbManager(null);
-
             this.Container.RegisterType<IDbManager, DbManager>(new ContainerControlledLifetimeManager());
 
             this.Container.RegisterType<IRefDataRepository, RefDataRepository>("Repository", new ContainerControlledLifetimeManager());

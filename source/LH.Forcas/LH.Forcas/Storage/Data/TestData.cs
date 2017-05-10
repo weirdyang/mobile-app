@@ -1,9 +1,12 @@
-﻿namespace LH.Forcas.Storage.Data
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace LH.Forcas.Storage.Data
 {
     using System;
     using System.Collections.Generic;
     using Domain.UserData;
 
+    [ExcludeFromCodeCoverage]
     public static class TestData
     {
         public static void InsertTestData(IUserDataRepository userDataRepository)

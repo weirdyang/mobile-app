@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using LH.Forcas.Analytics;
 using LH.Forcas.Domain.UserData;
-using LH.Forcas.RefDataContract.Parsing;
 using LH.Forcas.Storage;
-using LH.Forcas.Sync.RefData;
-using Microsoft.Practices.Unity;
 using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Storage
@@ -25,20 +20,7 @@ namespace LH.Forcas.Tests.Storage
             this.Repository = new UserDataRepository(dbManager);
         }
 
-        [Test]
-        public void Dummy()
-        {
-            var container = new UnityContainer();
-
-            container.RegisterType<IAnalyticsReporter, AnalyticsReporter>(new ContainerControlledLifetimeManager());
-
-            container.RegisterType<IGitHubClientFactory, GitHubClientFactory>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IRefDataDownloader, RefDataDownloader>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IRefDataUpdateParser, RefDataUpdateParser>(new ContainerControlledLifetimeManager());
-
-            container.RegisterType<IDbManager, DbManager>(new ContainerControlledLifetimeManager());
-        }
-
+        [TestFixture]
         public class WhenHandlingSettings : UserDataRepositoryTests
         {
             [Test]
@@ -54,6 +36,7 @@ namespace LH.Forcas.Tests.Storage
             }
         }
 
+        [TestFixture]
         public class WhenHandlingAccounts : UserDataRepositoryTests
         {
             [Test]
