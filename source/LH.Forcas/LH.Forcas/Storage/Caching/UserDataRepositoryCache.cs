@@ -49,6 +49,12 @@ namespace LH.Forcas.Storage.Caching
             this.repository.SaveAccount(account);
         }
 
+        public void SoftDeleteAccount(Guid id)
+        {
+            this.Invalidate(ref this.accountsCacheStore, this.accountsLock);
+            this.repository.SoftDeleteAccount(id);
+        }
+
         public IList<Category> GetCategories()
         {
             throw new NotImplementedException();

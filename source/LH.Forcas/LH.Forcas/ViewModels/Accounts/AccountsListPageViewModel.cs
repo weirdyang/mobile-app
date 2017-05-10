@@ -1,20 +1,19 @@
-﻿using LH.Forcas.Analytics;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using LH.Forcas.Analytics;
+using LH.Forcas.Domain.UserData;
+using LH.Forcas.Extensions;
+using LH.Forcas.Localization;
+using LH.Forcas.Services;
+using Prism.Commands;
+using Prism.Navigation;
+using Prism.Services;
 
 namespace LH.Forcas.ViewModels.Accounts
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Domain.UserData;
-    using Extensions;
-    using Localization;
-    using Prism.Commands;
-    using Prism.Navigation;
-    using Prism.Services;
-    using Services;
-
     public class AccountsListPageViewModel : ViewModelBase
     {
         private readonly INavigationService navigationService;
@@ -44,6 +43,8 @@ namespace LH.Forcas.ViewModels.Accounts
             this.RefreshAccountsCommand = DelegateCommand.FromAsyncHandler(this.RefreshAccounts);
         }
 
+        public bool NoAccountsTextDisplayed => (this.AccountGroups == null || this.AccountGroups.Count == 0) && !this.IsBusy;
+
         public DelegateCommand NavigateToAddAccountCommand { get; private set; }
 
         public DelegateCommand<Account> NavigateToAccountDetailCommand { get; private set; }
@@ -63,13 +64,28 @@ namespace LH.Forcas.ViewModels.Accounts
             await this.RefreshAccounts();
         }
 
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            // ReSharper disable once ExplicitCallerInfoArgument
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(this.IsBusy) || propertyName == nameof(this.AccountGroups))
+            {
+                this.OnPropertyChanged(nameof(this.NoAccountsTextDisplayed));
+            }
+        }
+
         private async Task RefreshAccounts()
         {
             await this.RunAsyncWithBusyIndicator(() =>
                                                  {
                                                      var accounts = this.accountingService.GetAccounts();
-                                                     var grouped = this.GroupAccounts(accounts);
-                                                     this.AccountGroups = new ObservableCollection<AccountsGroup>(grouped);
+
+                                                     if (accounts != null)
+                                                     {
+                                                         var filtered = accounts.Where(x => !x.IsDeleted);
+                                                         this.AccountGroups = this.GroupAccounts(filtered);
+                                                     }
                                                  });
         }
 
@@ -115,15 +131,17 @@ namespace LH.Forcas.ViewModels.Accounts
             }
             finally
             {
-                this.RefreshAccounts();
+                await this.RefreshAccounts();
             }
         }
 
-        private IEnumerable<AccountsGroup> GroupAccounts(IEnumerable<Account> accounts)
+        private ObservableCollection<AccountsGroup> GroupAccounts(IEnumerable<Account> accounts)
         {
-            return accounts.GroupBy(account => account.GetType())
+            var groups = accounts.GroupBy(account => account.GetType())
                            .Select(group => new AccountsGroup(group.Key, group.OrderBy(acc => acc.Name)))
                            .OrderBy(group => Array.IndexOf(this.accountTypeOrder, group.AccountType));
+
+            return new ObservableCollection<AccountsGroup>(groups);
         }
 
         public class AccountsGroup : ObservableCollection<Account>

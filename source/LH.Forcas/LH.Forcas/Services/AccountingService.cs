@@ -1,4 +1,5 @@
-﻿using LH.Forcas.Banking;
+﻿using System.Linq;
+using LH.Forcas.Banking;
 
 namespace LH.Forcas.Services
 {
@@ -35,8 +36,7 @@ namespace LH.Forcas.Services
 
         public void DeleteAccount(Guid id)
         {
-            throw new NotImplementedException();
-            // this.userDataRepository.Delete<Account>(id);
+            this.userDataRepository.SoftDeleteAccount(id);
         }
 
         public Task<IList<RemoteAccountInfo>> GetAvailableRemoteAccounts(string bankId)

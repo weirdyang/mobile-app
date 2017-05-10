@@ -37,46 +37,39 @@ namespace LH.Forcas.ViewModels
             }
         }
 
-        public virtual void OnNavigatedFrom(NavigationParameters parameters) { }
+        public virtual void OnNavigatedFrom(NavigationParameters parameters) {}
 
-        public virtual void OnNavigatedTo(NavigationParameters parameters) { }
+        public virtual void OnNavigatedTo(NavigationParameters parameters) {}
 
         protected Task RunAsyncWithBusyIndicator(Action action)
         {
-            var task = new Task(action, CancellationToken.None, TaskCreationOptions.None);
-            return this.RunAsyncWithBusyIndicator(task);
+            return this.RunAsyncWithBusyIndicatorImpl(() => Task.Run(action));
         }
 
-        protected Task RunAsyncWithBusyIndicator(Func<Task> task)
+        protected Task RunAsyncWithBusyIndicator(Func<Task> asyncCall)
         {
-            return this.RunAsyncWithBusyIndicator(Task.Run(task.Invoke));
+            return this.RunAsyncWithBusyIndicatorImpl(asyncCall);
         }
 
-        private Task RunAsyncWithBusyIndicator(Task task)
+        private Task RunAsyncWithBusyIndicatorImpl(Func<Task> innerAsyncCall)
         {
-            if (task.IsCompleted && !task.IsFaulted)
-            {
-                return Task.FromResult(0);
-            }
-
             this.IsBusy = true;
-            
-            task.ContinueWith(x =>
+
+            var result = Task.Run(async () =>
+            {
+                try
+                {
+                    await innerAsyncCall.Invoke();
+                }
+                finally
                 {
                     this.IsBusy = false;
-                    this.CurrentBackgroundTask = null;
+                }
+            });
 
-                    x.Exception?.Handle(ex => false);
-                }, 
-                CancellationToken.None,
-                TaskContinuationOptions.HideScheduler,
-                TaskScheduler.FromCurrentSynchronizationContext());
+            this.CurrentBackgroundTask = result;
 
-            this.CurrentBackgroundTask = task;
-
-            task.Start(TaskScheduler.Current);
-
-            return task;
+            return result;
         }
     }
 }

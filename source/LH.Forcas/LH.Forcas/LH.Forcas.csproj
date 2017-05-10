@@ -103,6 +103,9 @@
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
     <Compile Include="ViewModels\ViewModelEventArgs.cs" />
+    <Compile Include="Views\Accounts\AccountCellView.xaml.cs">
+      <DependentUpon>AccountCellView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Budget\BudgetPage.xaml.cs">
       <DependentUpon>BudgetPage.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,9 @@
     <Compile Include="Views\Reusable\Controls\CardFrame.cs" />
     <Compile Include="Views\Reusable\Controls\ContentControl.cs" />
     <Compile Include="Views\Reusable\Controls\FloatingActionButtonView.cs" />
+    <Compile Include="Views\Reusable\Controls\GroupHeader.xaml.cs">
+      <DependentUpon>GroupHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reusable\Controls\PickerCell.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationIcon.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationLabel.cs" />
@@ -253,6 +259,10 @@
     </Reference>
     <Reference Include="FreshEssentials, Version=1.0.6234.27073, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FreshEssentials.2.1.3\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FreshEssentials.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\portable-net45+wp80+win8+wpa81\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LH.Forcas.RefDataContract, Version=1.0.41.0, Culture=neutral, processorArchitecture=MSIL">
@@ -486,6 +496,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Transactions\CashTransactionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reusable\Controls\GroupHeader.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Accounts\AccountCellView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

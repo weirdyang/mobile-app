@@ -179,6 +179,15 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have any accounts, create one using the + button and get things started :).
+        /// </summary>
+        public static string AccountsListPage_NoAccounts {
+            get {
+                return ResourceManager.GetString("AccountsListPage_NoAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accounts.
         /// </summary>
         public static string AccountsListPage_Title {

@@ -288,4 +288,7 @@
   <data name="AccountType_SavingsAccount" xml:space="preserve">
     <value>Savings</value>
   </data>
+  <data name="AccountsListPage_NoAccounts" xml:space="preserve">
+    <value>You don't have any accounts, create one using the + button and get things started :)</value>
+  </data>
 </root>

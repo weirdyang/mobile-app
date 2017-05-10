@@ -31,11 +31,6 @@ namespace LH.Forcas.Extensions
             //return database.GetCollection<T>().FindById(id);
         }
 
-        public static void Upsert<T>(this LiteDatabase database, T item)
-        {
-            database.GetCollection<T>().Upsert(item);
-        }
-
         public static void Delete<T>(this LiteDatabase database, T item) where T : IUserEntity
         {
             database.GetCollection<T>().Delete(item.GetIdAsBson());

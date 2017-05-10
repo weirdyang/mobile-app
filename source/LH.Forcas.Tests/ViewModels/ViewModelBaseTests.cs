@@ -11,7 +11,7 @@ namespace LH.Forcas.Tests.ViewModels
     public class ViewModelBaseTests
     {
         [TestFixture]
-        public class IsBusyTests
+        public class WhenRunningBackgroundTasks : ViewModelBaseTests
         {
             [Test]
             public void ShouldSetIsBusyWhenRunningWithBusyIndicator()
@@ -67,7 +67,6 @@ namespace LH.Forcas.Tests.ViewModels
                 Assert.IsFalse(viewModel.IsBusy);
 
                 var task = viewModel.RunFailingAction();
-
                 var ex = Assert.Throws<AggregateException>(() => task.Wait());
 
                 var flatEx = ex.Flatten();
@@ -120,7 +119,7 @@ namespace LH.Forcas.Tests.ViewModels
 
             public Task RunFailingAction()
             {
-                return this.RunAsyncWithBusyIndicator(() => { throw new Exception(ExceptionMessage); });
+                return this.RunAsyncWithBusyIndicator((Action)(() => { throw new Exception(ExceptionMessage); }));
             }
 
             public Task RunFailingAsTask()

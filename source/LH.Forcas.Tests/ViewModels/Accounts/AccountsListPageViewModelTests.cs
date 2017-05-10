@@ -1,19 +1,18 @@
-﻿using LH.Forcas.Analytics;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using LH.Forcas.Analytics;
+using LH.Forcas.Domain.UserData;
+using LH.Forcas.Extensions;
+using LH.Forcas.Services;
+using LH.Forcas.ViewModels.Accounts;
+using Moq;
+using NUnit.Framework;
+using Prism.Navigation;
+using Prism.Services;
 
 namespace LH.Forcas.Tests.ViewModels.Accounts
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Forcas.Domain.UserData;
-    using Forcas.Extensions;
-    using Forcas.Services;
-    using Forcas.ViewModels.Accounts;
-    using Moq;
-    using NUnit.Framework;
-    using Prism.Navigation;
-    using Prism.Services;
-
     [TestFixture]
     public class AccountsListPageViewModelTests
     {
@@ -36,12 +35,13 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
                 this.NavigationServiceMock.Object,
                 this.DialogServiceMock.Object,
                 this.AnalyticsReporterMock.Object);
-
+            
             this.AccountingServiceMock.Setup(x => x.GetAccounts())
                 .Returns(new Account[]
                          {
                              new CheckingAccount { Id = Guid.NewGuid(), Name = "Checking" },
-                             new SavingsAccount { Id = Guid.NewGuid(), Name = "Savings" }
+                             new SavingsAccount { Id = Guid.NewGuid(), Name = "Savings" },
+                             new CheckingAccount { Id = Guid.NewGuid(), Name = "Deleted Account", IsDeleted = true }
                          });
         }
 
@@ -49,10 +49,25 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
         public class WhenNavigatingTo : AccountsListPageViewModelTests
         {
             [Test]
-            public void ShouldLoadAccountsWhenNavigatedTo()
+            public void ShouldLoadActiveAccountsWhenNavigatedTo()
             {
                 this.NavigateTo();
                 this.AccountingServiceMock.VerifyAll();
+
+                Assert.IsFalse(this.ViewModel.AccountGroups.SelectMany(x => x).Any(x => x.IsDeleted));
+                Assert.IsFalse(this.ViewModel.NoAccountsTextDisplayed);
+            }
+
+            [Test]
+            public void ShouldDisplayNoAccountsTestsWhenNoAccountsExist()
+            {
+                this.AccountingServiceMock.Reset();
+                this.AccountingServiceMock.Setup(x => x.GetAccounts()).Returns(() => null);
+
+                this.NavigateTo();
+                this.AccountingServiceMock.VerifyAll();
+
+                Assert.True(this.ViewModel.NoAccountsTextDisplayed);
             }
         }
 
@@ -118,19 +133,18 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             }
 
             [Test]
-            public void ShouldDeleteAccountIfConfirmed()
+            public async Task ShouldDeleteAccountIfConfirmed()
             {
                 this.NavigateTo();
                 var accountId = this.ViewModel.AccountGroups.First().First().Id;
-
+                
                 this.SetupDeleteConfirm(true);
                 this.AccountingServiceMock.Setup(x => x.DeleteAccount(It.Is<Guid>(id => id == accountId)));
-
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
-
+                
+                await this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
+                
                 this.DialogServiceMock.VerifyAll();
-                this.AccountingServiceMock.Verify(x => x.DeleteAccount(It.Is<Guid>(id => id == accountId)), Times.Once);
-                this.AccountingServiceMock.Verify(x => x.GetAccounts(), Times.Exactly(2));
+                this.AccountingServiceMock.VerifyAll();
             }
 
             [Test]

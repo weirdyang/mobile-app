@@ -14,6 +14,8 @@ namespace LH.Forcas.Storage
 
         void SaveAccount(Account account);
 
+        void SoftDeleteAccount(Guid id);
+
         IList<Category> GetCategories();
 
         Category GetCategory(Guid id);

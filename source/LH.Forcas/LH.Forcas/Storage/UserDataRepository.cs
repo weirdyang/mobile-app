@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using LH.Forcas.Domain.UserData;
 using LH.Forcas.Extensions;
+using LiteDB;
 
 namespace LH.Forcas.Storage
 {
@@ -21,7 +22,7 @@ namespace LH.Forcas.Storage
 
         public void SaveUserSettings(UserSettings settings)
         {
-            this.dbManager.Database.Upsert(settings);
+            this.dbManager.Database.GetCollection<UserSettings>().Upsert(settings);
         }
 
         public IList<Account> GetAccounts()
@@ -31,7 +32,20 @@ namespace LH.Forcas.Storage
 
         public void SaveAccount(Account account)
         {
-            this.dbManager.Database.Upsert(account);
+            this.dbManager.Database.GetCollection<Account>().Upsert(account);
+        }
+
+        public void SoftDeleteAccount(Guid id)
+        {
+            using (var transaction = this.dbManager.Database.BeginTrans())
+            {
+                var collection = this.dbManager.Database.GetCollection<Account>();
+                var account = collection.FindById(new BsonValue(id));
+                account.IsDeleted = true;
+
+                collection.Update(account);
+                transaction.Commit();
+            }
         }
 
         public IList<Category> GetCategories()
