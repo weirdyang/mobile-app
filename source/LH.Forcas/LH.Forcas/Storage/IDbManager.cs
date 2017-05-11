@@ -1,11 +1,12 @@
-﻿using LiteDB;
+﻿using System;
+using LiteDB;
 
 namespace LH.Forcas.Storage
 {
-    public interface IDbManager
+    public interface IDbManager : IDisposable
     {
-        void Initialize();
+        LiteDatabase Database { get; }
 
-        LiteDatabase GetDatabase();
+        void ApplyMigrations();
     }
 }

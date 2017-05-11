@@ -9,7 +9,7 @@ namespace LH.Forcas.Storage.Caching
     public class UserDataRepositoryCache : RepositoryCacheBase, IUserDataRepository
     {
         private UserSettings userSettingsCacheStore;
-        private IEnumerable<Account> accountsCacheStore;
+        private IList<Account> accountsCacheStore;
 
         private readonly IUserDataRepository repository;
         private readonly object userSettingsLock = new object();
@@ -35,7 +35,7 @@ namespace LH.Forcas.Storage.Caching
             this.repository.SaveUserSettings(settings);
         }
 
-        public IEnumerable<Account> GetAccounts()
+        public IList<Account> GetAccounts()
         {
             return this.GetThroughCache(
                 ref this.accountsCacheStore, 
@@ -49,7 +49,13 @@ namespace LH.Forcas.Storage.Caching
             this.repository.SaveAccount(account);
         }
 
-        public IEnumerable<Category> GetCategories()
+        public void SoftDeleteAccount(Guid id)
+        {
+            this.Invalidate(ref this.accountsCacheStore, this.accountsLock);
+            this.repository.SoftDeleteAccount(id);
+        }
+
+        public IList<Category> GetCategories()
         {
             throw new NotImplementedException();
         }
@@ -63,6 +69,13 @@ namespace LH.Forcas.Storage.Caching
         {
             throw new NotImplementedException();
         }
+
+#if DEBUG
+        public void DeleteAll()
+        {
+            this.repository.DeleteAll();
+        }
+#endif
 
         protected override IEnumerable<Func<bool>> GetTrimPriorities()
         {

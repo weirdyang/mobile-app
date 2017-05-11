@@ -1,4 +1,5 @@
-﻿using LH.Forcas.RefDataContract;
+﻿using LH.Forcas.Domain.UserData;
+using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Tests.Views.Reusables.Converters
 {
@@ -25,12 +26,13 @@ namespace LH.Forcas.Tests.Views.Reusables.Converters
             this.refDataServiceMock.Setup(x => x.GetCurrency("EUR")).Returns(this.currency);
 
             this.converter = new AmountToCurrencyStringConverter();
+            this.converter.RefDataService = this.refDataServiceMock.Object;
         }
 
         [Test]
         public void ToEuroConversionTest()
         {
-            var result = this.converter.Convert(10.58m, typeof(string), "EUR", CultureInfo.CurrentCulture);
+            var result = this.converter.Convert(new Amount(10.58m, "EUR"), typeof(string), null, CultureInfo.CurrentCulture);
             Assert.AreEqual("€10.58", result);
 
             this.refDataServiceMock.VerifyAll();

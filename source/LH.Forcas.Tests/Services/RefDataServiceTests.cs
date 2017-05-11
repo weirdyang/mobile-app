@@ -112,37 +112,6 @@ namespace LH.Forcas.Tests.Services
 
                 this.RepositoryMock.VerifyAll();
             }
-
-            [Test]
-            public async Task ShouldNotSaveUnchangedEntities()
-            {
-                var updateStatus = new RefDataStatus("sha1", 1);
-
-                var update = new RefDataUpdate
-                {
-                    Banks = new List<Bank>
-                    {
-                        new Bank {BankId = "B1", LastChangedVersion = 2},
-                        new Bank {BankId = "B2", LastChangedVersion = 1}
-                    }
-                };
-
-                var downloaderResult = new RefDataDownloadResult(update, "sha2", 2);
-
-                this.RepositoryMock.Setup(x => x.GetStatus()).Returns(updateStatus);
-                this.RepositoryMock
-                    .Setup(x => x.SaveRefDataUpdate(
-                        It.Is<RefDataUpdate>(u => u.Banks.Count() == 1),
-                        It.Is<RefDataStatus>(s => s.CommitSha == "sha2" && s.DataVersion == 2)));
-
-                this.DownloaderMock
-                    .Setup(x => x.DownloadRefData(It.IsAny<RefDataStatus>()))
-                    .ReturnsAsync(downloaderResult);
-
-                await this.RefDataService.UpdateRefData();
-
-                this.RepositoryMock.VerifyAll();
-            }
         }
     }
 }

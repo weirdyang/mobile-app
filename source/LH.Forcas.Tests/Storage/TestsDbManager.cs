@@ -1,26 +1,28 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using LH.Forcas.Storage;
 using LiteDB;
 
 namespace LH.Forcas.Tests.Storage
 {
-    public class TestsDbManager : DbManager, IDisposable
+    public class TestsDbManager : IDbManager
     {
         private readonly MemoryStream stream;
 
-        public TestsDbManager() : base(null)
+        public TestsDbManager()
         {
+            DbManager.RegisterBsonMappings();
+
             this.stream = new MemoryStream();
+            this.Database = new LiteDatabase(this.stream);
         }
 
-        public override LiteDatabase GetDatabase()
-        {
-            return new LiteDatabase(this.stream);
-        }
+        public LiteDatabase Database { get; }
+
+        public void ApplyMigrations() { }
 
         public void Dispose()
         {
+            this.Database.Dispose();
             this.stream.Dispose();
         }
     }

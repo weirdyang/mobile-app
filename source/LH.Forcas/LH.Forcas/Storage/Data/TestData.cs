@@ -1,31 +1,25 @@
-﻿namespace LH.Forcas.Storage.Data
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace LH.Forcas.Storage.Data
 {
     using System;
     using System.Collections.Generic;
     using Domain.UserData;
-    using Extensions;
-    using LiteDB;
 
+    [ExcludeFromCodeCoverage]
     public static class TestData
     {
-        public static void InsertTestData(IDbManager dbManager)
+        public static void InsertTestData(IUserDataRepository userDataRepository)
         {
-            using (var db = dbManager.GetDatabase())
-            {
-                db.DropCollection(nameof(Category));
-                db.DropCollection(nameof(Account));
-                db.DropCollection(nameof(Budget));
+            userDataRepository.DeleteAll();
 
-                InsertAccounts(db);
-                InsertCategories(db);
-            }
+            InsertAccounts(userDataRepository);
+            // InsertCategories(userDataRepository);
         }
 
-        private static void InsertAccounts(LiteDatabase db)
+        private static void InsertAccounts(IUserDataRepository userDataRepository)
         {
-            var collection = db.GetCollection<Account>();
-
-            collection.Insert(new BankAccount
+            userDataRepository.SaveAccount(new CheckingAccount
             {
                 BankId = "RB",
                 Name = "RB eKonto",
@@ -36,7 +30,7 @@
                 LastSyncUtcTime = DateTime.UtcNow.AddDays(-2)
             });
 
-            collection.Insert(new BankAccount
+            userDataRepository.SaveAccount(new SavingsAccount
             {
                 BankId = "AB",
                 Name = "AB Spořící",
@@ -47,7 +41,7 @@
                 LastSyncUtcTime = DateTime.UtcNow.AddHours(-5)
             });
 
-            collection.Insert(new CashAccount
+            userDataRepository.SaveAccount(new CashAccount
             {
                 Name = "Peněženka",
                 Id = Guid.NewGuid(),
@@ -57,11 +51,9 @@
             });
         }
 
-        private static void InsertCategories(LiteDatabase db)
+        private static void InsertCategories(IUserDataRepository userDataRepository)
         {
-            var collection = db.GetCollection<Category>();
-
-            collection.Insert(new Category
+            userDataRepository.SaveCategory(new Category
             {
                 Id = Guid.NewGuid(),
                 Name = "Nákupy",
@@ -81,7 +73,7 @@
                                   }
             });
 
-            collection.Insert(new Category
+            userDataRepository.SaveCategory(new Category
             {
                 Id = Guid.NewGuid(),
                 Name = "Auto",

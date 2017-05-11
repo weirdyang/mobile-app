@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using LH.Forcas.Domain.UserData;
+using LH.Forcas.Extensions;
+using LiteDB;
 
 namespace LH.Forcas.Storage
 {
-    using Extensions;
-    using System.Collections.Generic;
-
     public class UserDataRepository : IUserDataRepository
     {
         private readonly IDbManager dbManager;
@@ -17,38 +17,38 @@ namespace LH.Forcas.Storage
 
         public UserSettings GetUserSettings()
         {
-            using (var db = this.dbManager.GetDatabase())
-            {
-                return db.GetCollection<UserSettings>()
-                    .FindOne(x => x.Id == UserSettings.SingleId);
-            }
+            return this.dbManager.Database.SingleOrDefault<UserSettings>(UserSettings.BsonId);
         }
 
         public void SaveUserSettings(UserSettings settings)
         {
-            using (var db = this.dbManager.GetDatabase())
-            {
-                db.GetCollection<UserSettings>().Upsert(settings);
-            }
+            this.dbManager.Database.GetCollection<UserSettings>().Upsert(settings);
         }
 
-        public IEnumerable<Account> GetAccounts()
+        public IList<Account> GetAccounts()
         {
-            using (var db = this.dbManager.GetDatabase())
-            {
-                return db.GetCollection<Account>().FindAll();
-            }
+            return this.dbManager.Database.Fetch<Account>();
         }
 
         public void SaveAccount(Account account)
         {
-            using (var db = this.dbManager.GetDatabase())
+            this.dbManager.Database.GetCollection<Account>().Upsert(account);
+        }
+
+        public void SoftDeleteAccount(Guid id)
+        {
+            using (var transaction = this.dbManager.Database.BeginTrans())
             {
-                db.GetCollection<Account>().Upsert(account);
+                var collection = this.dbManager.Database.GetCollection<Account>();
+                var account = collection.FindById(new BsonValue(id));
+                account.IsDeleted = true;
+
+                collection.Update(account);
+                transaction.Commit();
             }
         }
 
-        public IEnumerable<Category> GetCategories()
+        public IList<Category> GetCategories()
         {
             throw new NotImplementedException();
         }
@@ -62,5 +62,15 @@ namespace LH.Forcas.Storage
         {
             throw new NotImplementedException();
         }
+
+#if DEBUG
+        public void DeleteAll()
+        {
+            this.dbManager.Database.DeleteAll<Account>();
+            this.dbManager.Database.DeleteAll<Category>();
+            this.dbManager.Database.DeleteAll<Budget>();
+            this.dbManager.Database.DeleteAll<UserSettings>();
+        }
+#endif
     }
 }

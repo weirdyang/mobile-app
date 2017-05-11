@@ -2,6 +2,7 @@
 using System.Linq;
 using LH.Forcas.ViewModels;
 using Prism.Mvvm;
+using Xamarin.Forms;
 
 namespace LH.Forcas.Views
 {
@@ -19,9 +20,15 @@ namespace LH.Forcas.Views
 
         private void OnCurrentPageChanged(object sender, EventArgs eventArgs)
         {
-            if (this.CurrentPage.BindingContext.GetType() != typeof(RootTabPageViewModel))
+            var navPage = this.CurrentPage as NavigationPage;
+
+            var viewModel = navPage != null
+                ? navPage.CurrentPage.BindingContext
+                : this.CurrentPage.BindingContext;
+
+            if (viewModel != null && !(viewModel is RootTabPageViewModel))
             {
-                this.ViewModel.HandlePageSelectionChanged((ViewModelBase) this.CurrentPage.BindingContext);
+                this.ViewModel.HandlePageSelectionChanged((ViewModelBase) viewModel);
             }
         }
 

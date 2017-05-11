@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LH.Forcas.Domain.UserData;
 using LH.Forcas.Services;
 using LH.Forcas.Storage;
@@ -28,7 +29,7 @@ namespace LH.Forcas.Tests.Services
                 var expected = new List<Account>
                 {
                     new CashAccount(),
-                    new BankAccount()
+                    new CheckingAccount()
                 };
 
                 this.UserDataRepositoryMock.Setup(x => x.GetAccounts()).Returns(expected);
@@ -36,6 +37,28 @@ namespace LH.Forcas.Tests.Services
                 var actual = this.Service.GetAccounts();
 
                 Assert.AreEqual(expected, actual);
+            }
+
+            [Test]
+            public void ShouldSaveAccountToRepository()
+            {
+                var account = new CashAccount();
+
+                this.UserDataRepositoryMock.Setup(x => x.SaveAccount(account));
+                this.Service.SaveAccount(account);
+
+                this.UserDataRepositoryMock.VerifyAll();
+            }
+
+            [Test]
+            public void ShouldDeleteAccountInRepository()
+            {
+                var id = Guid.NewGuid();
+
+                this.UserDataRepositoryMock.Setup(x => x.SoftDeleteAccount(id));
+                this.Service.DeleteAccount(id);
+
+                this.UserDataRepositoryMock.VerifyAll();
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Tests.Views.Reusables.Converters
+﻿using LH.Forcas.Domain.UserData;
+
+namespace LH.Forcas.Tests.Views.Reusables.Converters
 {
     using System;
     using System.Globalization;
@@ -20,17 +22,17 @@
         }
 
         [Test]
-        public void ShouldConvertPositiveNumberToPositiveColor()
+        public void ShouldConvertPositiveAmountToPositiveColor()
         {
-            var color = this.converter.Convert(10m, typeof(Color), null, CultureInfo.CurrentCulture);
+            var color = this.converter.Convert(new Amount(10m, "EUR"), typeof(Color), null, CultureInfo.CurrentCulture);
 
             Assert.AreEqual(Color.Green, color);
         }
 
         [Test]
-        public void ShouldConvertNegativeNumberToNegativeColor()
+        public void ShouldConvertNegativeAmountToNegativeColor()
         {
-            var color = this.converter.Convert(-10m, typeof(Color), null, CultureInfo.CurrentCulture);
+            var color = this.converter.Convert(new Amount(-10m, "EUR"), typeof(Color), null, CultureInfo.CurrentCulture);
 
             Assert.AreEqual(Color.Red, color);
         }

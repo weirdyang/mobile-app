@@ -370,7 +370,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
 
         private BankAccount GetValidBankAccount()
         {
-            return new BankAccount
+            return new CheckingAccount
             {
                 AccountNumber = AccountNumber.FromCzLocal("123/5500"),
                 BankId = "TestBank",
@@ -382,7 +382,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
 
         private BankAccount GetDifferentBankAccount()
         {
-            return new BankAccount
+            return new CheckingAccount
             {
                 AccountNumber = AccountNumber.FromCzLocal("456/5577"),
                 BankId = "OtherBank",

@@ -27,31 +27,32 @@ namespace LH.Forcas
 
         public static CultureInfo CurrentCultureInfo { get; private set; }
 
-        protected override void OnInitialized()
+        public override void Initialize()
         {
+            base.Initialize();
+
             this.SetVersion();
             this.InitializeComponent();
 
             NavigationExtensions.InitializeNavigation();
 
             this.Container.Resolve<IPathResolver>().Initialize();
-            var dbManager = this.Container.Resolve<IDbManager>();
-            dbManager.Initialize();
-
-            var deviceService = this.Container.Resolve<IDeviceService>();
-            deviceService.Initialize(this.Container.Resolve<IEventAggregator>());
+            this.Container.Resolve<IDbManager>().ApplyMigrations();
 
             this.AmountToCurrencyStringConverter.RefDataService = this.Container.Resolve<IRefDataService>();
 
 #if DEBUG
-            TestData.InsertTestData(dbManager);
+            TestData.InsertTestData(this.Container.Resolve<IUserDataRepository>());
 #endif
-
+            this.Container.Resolve<IDeviceService>().Initialize(this.Container.Resolve<IEventAggregator>());
             this.Container.Resolve<IUserSettingsService>().Initialize();
 
             CurrentCultureInfo = this.Container.Resolve<ILocale>().GetCultureInfo();
+        }
 
-            #pragma warning disable 4014
+#pragma warning disable 4014
+        protected override void OnInitialized()
+        {
             this.NavigationService.NavigateToDashboard()
                 .ContinueWith(x =>
                                 {
@@ -61,8 +62,8 @@ namespace LH.Forcas
                                         throw x.Exception;
                                     }
                                 });
-            #pragma warning restore 4014
         }
+#pragma warning restore 4014
 
         protected override void RegisterTypes()
         {

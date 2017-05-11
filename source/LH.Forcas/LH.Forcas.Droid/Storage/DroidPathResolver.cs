@@ -15,6 +15,13 @@ namespace LH.Forcas.Droid.Storage
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             this.DbFilePath = Path.Combine(path, "Forcas.ldb");
+
+#if DEBUG
+            if (File.Exists(this.DbFilePath))
+            {
+                File.Delete(this.DbFilePath);
+            }
+#endif
         }
 
         public string DbFilePath { get; set; }

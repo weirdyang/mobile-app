@@ -15,11 +15,12 @@ namespace LH.Forcas.Tests.Storage
         public void Setup()
         {
             var dbManager = new TestsDbManager();
-            dbManager.Initialize();
+            dbManager.ApplyMigrations();
 
             this.Repository = new UserDataRepository(dbManager);
         }
 
+        [TestFixture]
         public class WhenHandlingSettings : UserDataRepositoryTests
         {
             [Test]
@@ -35,6 +36,7 @@ namespace LH.Forcas.Tests.Storage
             }
         }
 
+        [TestFixture]
         public class WhenHandlingAccounts : UserDataRepositoryTests
         {
             [Test]
@@ -48,14 +50,15 @@ namespace LH.Forcas.Tests.Storage
                    .WithProperty(d => d.Name, "Name1", "Name2")
                    .WithProperty(d => d.CurrentBalance, new Amount(10, "CZK"), new Amount(20, "CZK"))
                    .WithProperty(d => d.LastSyncUtcTime, new DateTime(2017, 1, 1), new DateTime(2018, 1, 1))
+                   .WithProperty(d => d.IsDeleted, false, true)
                    .Run();
             }
 
             [Test]
-            public void ShouldSaveLoadBankAccount()
+            public void ShouldSaveLoadCheckingAccount()
             {
-                new SaveLoadUtil<BankAccount, Guid>(
-                   () => this.Repository.GetAccounts().OfType<BankAccount>(),
+                new SaveLoadUtil<CheckingAccount, Guid>(
+                   () => this.Repository.GetAccounts().OfType<CheckingAccount>(),
                    account => this.Repository.SaveAccount(account),
                    Guid.NewGuid())
                    .WithProperty(d => d.BankId, "B1", "B2")
@@ -64,6 +67,7 @@ namespace LH.Forcas.Tests.Storage
                    .WithProperty(d => d.Name, "Name1", "Name2")
                    .WithProperty(d => d.CurrentBalance, new Amount(10, "CZK"), new Amount(20, "CZK"))
                    .WithProperty(d => d.LastSyncUtcTime, new DateTime(2017, 1, 1), new DateTime(2018, 1, 1))
+                   .WithProperty(d => d.IsDeleted, false, true)
                    .Run();
             }
 
@@ -74,12 +78,12 @@ namespace LH.Forcas.Tests.Storage
                    () => this.Repository.GetAccounts().OfType<CreditCardAccount>(),
                    account => this.Repository.SaveAccount(account),
                    Guid.NewGuid())
-                   .WithProperty(d => d.BankId, "B1", "B2")
                    .WithProperty(d => d.CardNumber, "123456", "99999")
                    .WithProperty(d => d.CurrencyId, "CZK", "GBP")
                    .WithProperty(d => d.Name, "Name1", "Name2")
                    .WithProperty(d => d.CurrentBalance, new Amount(10, "CZK"), new Amount(20, "CZK"))
                    .WithProperty(d => d.LastSyncUtcTime, new DateTime(2017, 1, 1), new DateTime(2018, 1, 1))
+                   .WithProperty(d => d.IsDeleted, false, true)
                    .Run();
             }
         }

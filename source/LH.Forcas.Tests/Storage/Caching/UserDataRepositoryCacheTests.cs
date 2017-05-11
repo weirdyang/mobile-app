@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LH.Forcas.Domain.UserData;
 using LH.Forcas.Events;
 using LH.Forcas.Storage;
@@ -100,6 +101,29 @@ namespace LH.Forcas.Tests.Storage.Caching
                 this.RepositoryMock.Setup(x => x.SaveAccount(It.IsAny<Account>()));
 
                 this.Cache.SaveAccount(new CashAccount());
+
+                this.RepositoryMock.VerifyAll();
+            }
+
+            [Test]
+            public void ThenDeleteShouldInvalidateCache()
+            {
+                this.RepositoryMock.Setup(x => x.GetAccounts()).Returns(new List<Account> { new CashAccount() });
+
+                this.Cache.GetAccounts();
+                this.Cache.SoftDeleteAccount(Guid.NewGuid());
+                this.Cache.GetAccounts();
+
+                this.RepositoryMock.Verify(x => x.GetAccounts(), Times.Exactly(2));
+            }
+
+            [Test]
+            public void ThenDeleteShouldCallRepository()
+            {
+                var id = Guid.NewGuid();
+                this.RepositoryMock.Setup(x => x.SoftDeleteAccount(id));
+
+                this.Cache.SoftDeleteAccount(id);
 
                 this.RepositoryMock.VerifyAll();
             }

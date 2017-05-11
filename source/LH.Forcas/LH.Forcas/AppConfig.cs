@@ -4,7 +4,7 @@ namespace LH.Forcas
 {
     public class AppConfig : IAppConfig
     {
-        public string ConfigDataGitHubRepoUrl => "https://github.com/repos/lholota/LH.Forcas.Sync/";
+        public string ConfigDataGitHubRepoUrl => "https://github.com/repos/lh-forcas/sync/";
 
         public TimeSpan ConfigDataMaxAge => TimeSpan.FromHours(4);
 

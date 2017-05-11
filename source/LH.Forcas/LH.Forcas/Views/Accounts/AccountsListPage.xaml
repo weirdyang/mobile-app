@@ -1,94 +1,91 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              xmlns:converters="clr-namespace:LH.Forcas.Views.Reusable.Converters;assembly=LH.Forcas"
              xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
              xmlns:behaviors="clr-namespace:LH.Forcas.Views.Reusable.Behaviors;assembly=LH.Forcas"
              xmlns:accounts="clr-namespace:LH.Forcas.Views.Accounts;assembly=LH.Forcas"
              xmlns:controls="clr-namespace:LH.Forcas.Views.Reusable.Controls;assembly=LH.Forcas"
              x:Class="LH.Forcas.Views.Accounts.AccountsListPage"
+             BackgroundColor="{ DynamicResource WindowBackground }"
              Title="{ ext:Translate AccountsListPage_Title }"
              x:Name="Page" NavigationPage.HasBackButton="False">
-  <ContentPage.Resources>
-    <ResourceDictionary>
-      <converters:ToResourceConverter x:Key="ToResourceConverter" ResxPrefix="AccountType" />
-      <converters:BankIdToImageSourceConverter x:Key="BankIdToImageSourceConverter" />
-    </ResourceDictionary>
-  </ContentPage.Resources>
-  <ContentPage.ToolbarItems>
-    <iconize:IconToolbarItem Command="{ Binding NavigateToAddAccountCommand }" Icon="md-add" IconColor="{ StaticResource IconToolbarItemFontColor }" />
-  </ContentPage.ToolbarItems>
-  <Grid>
-    <controls:ActivityOverlay IsVisible="{ Binding IsBusy }" ActivityText="Loading accounts..." />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ToResourceConverter x:Key="AccountTypeToResourceConverter" ResxPrefix="AccountType" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="add.png" Text="Add" Command="{ Binding NavigateToAddAccountCommand }" />
+    </ContentPage.ToolbarItems>
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ListView 
+            ItemsSource="{ Binding AccountGroups }"
+            IsGroupingEnabled="true"
+            IsPullToRefreshEnabled="{Binding IsBusy, Converter={ StaticResource NegateBoolConverter }}"
+            RefreshCommand="{ Binding RefreshAccountsCommand }"
+            IsRefreshing="{ Binding IsBusy, Mode=OneWay }"
+            HasUnevenRows="true"
+            IsVisible="{ Binding IsBusy, Converter={ StaticResource NegateBoolConverter } }"
+            BackgroundColor="White"
+            AbsoluteLayout.LayoutFlags="All" 
+            AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <ListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" iOS="{ StaticResource ListSeparator }" WinPhone="{ StaticResource ListSeparator }"/>
+            </ListView.SeparatorColor>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.Height>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="28"/>
+                        </ViewCell.Height>
+                        <ViewCell.View>
+                            <controls:GroupHeader HeaderText="{ Binding AccountType, Converter={ StaticResource AccountTypeToResourceConverter } }" />
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell
+                        Height="80"
+                        behaviors:ViewCellCommand.Command="{ Binding BindingContext.NavigateToAccountDetailCommand, Source={ x:Reference Page } }"
+                        behaviors:ViewCellCommand.CommandParameter="{ Binding . }">
+                        <ViewCell.ContextActions>
+                            <MenuItem IsDestructive="True" Text="Delete" Icon="delete.png"
+                                Command="{ Binding BindingContext.DeleteAccountCommand, Source={ x:Reference Page } }"
+                                CommandParameter="{ Binding . }" />
+                        </ViewCell.ContextActions>
+                        <ViewCell.View>
+                            <accounts:AccountCellView />
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-    <ListView ItemsSource="{ Binding AccountGroups }"
-              RefreshCommand="{ Binding RefreshAccountsCommand }"
-              IsVisible="{ Binding IsBusy, Converter={ StaticResource NegateBoolConverter } }"
-              IsRefreshing="{ Binding IsBusy }"
-              IsPullToRefreshEnabled="True"
-              IsGroupingEnabled="True"
-              GroupShortNameBinding="{ Binding AccountType, Converter={ StaticResource ToResourceConverter } }"
-              HasUnevenRows="True">
-      <ListView.GroupHeaderTemplate>
-        <DataTemplate>
-          <ViewCell Height="25">
-            <Label Text="{ Binding AccountType, Converter={ StaticResource ToResourceConverter } }" VerticalOptions="End" Style="{ DynamicResource SubtitleStyle }" Margin="8,2,7,0" />
-          </ViewCell>
-        </DataTemplate>
-      </ListView.GroupHeaderTemplate>
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell
-            Height="80"
-            behaviors:ViewCellCommand.Command="{ Binding BindingContext.NavigateToAccountDetailCommand, Source={ x:Reference Page } }"
-            behaviors:ViewCellCommand.CommandParameter="{ Binding . }">
-            <ViewCell.ContextActions>
-              <MenuItem IsDestructive="True" Text="Delete"
-                        Command="{ Binding BindingContext.DeleteAccountCommand, Source={ x:Reference Page } }" CommandParameter="{ Binding . }">
-              </MenuItem>
-            </ViewCell.ContextActions>
-            <ViewCell.View>
-              <Grid Margin="10,15,5,15">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="55" />
-                  <ColumnDefinition Width="*" />
-                  <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="Auto" />
-                  <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <StackLayout IsVisible="{Binding IsBusy}"
+                                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                                   AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <StackLayout.Orientation>
+                <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+            </StackLayout.Orientation>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                <ActivityIndicator.Color>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                </ActivityIndicator.Color>
+            </ActivityIndicator>
+            <Label Text="{ ext:Translate AccountsListPage_BusyText }" HorizontalOptions="Center" Style="{DynamicResource ForcasListItemTextStyle}"/>
+        </StackLayout>
 
-                <controls:ContentControl Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Center">
-                  <accounts:AccountImageTemplateSelector>
-                    <accounts:AccountImageTemplateSelector.BankProductAccountDataTemplate>
-                      <DataTemplate>
-                        <Image Source="{ Binding BankId, Converter={ StaticResource BankIdToImageSourceConverter } }" />
-                      </DataTemplate>
-                    </accounts:AccountImageTemplateSelector.BankProductAccountDataTemplate>
-                    <accounts:AccountImageTemplateSelector.CashAccountDataTemplate>
-                      <DataTemplate>
-                        <iconize:IconImage Icon="md-account-balance-wallet" IconSize="50"></iconize:IconImage>
-                      </DataTemplate>
-                    </accounts:AccountImageTemplateSelector.CashAccountDataTemplate>
-                  </accounts:AccountImageTemplateSelector>
-                </controls:ContentControl>
-
-                <Label Grid.Row="0" Grid.Column="1" Text="{ Binding Name }" Style="{ DynamicResource ListItemTextStyle }"/>
-
-                <Label Grid.Row="0" Grid.Column="2"
-                       Text="{ Binding CurrentBalance, Converter={ StaticResource AmountToCurrencyStringConverter }, ConverterParameter={ Binding CurrencyId } }"
-                       TextColor="{ Binding CurrentBalance, Converter={ StaticResource AmountToColorConverter } }" />
-
-                <!-- TODO: Create a warning color converter for this (warning = orange, false = normal color) -->
-                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Style="{ DynamicResource ListItemDetailTextStyle }"
-                       Text="{ Binding LastSyncUtcTime, Converter={ StaticResource DateTimeAgoConverter }, StringFormat={ ext:Translate AccountsListPage_LastSyncLabelFormat } }" />
-              </Grid>
-            </ViewCell.View>
-          </ViewCell>
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
-  </Grid>
+        <StackLayout IsVisible="{ Binding NoAccountsTextDisplayed }"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="CenterAndExpand"
+                                   AbsoluteLayout.LayoutFlags="All"
+                                   AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    BackgroundColor="{DynamicResource WindowBackground}"
+                    Padding="16,0">
+            <Label Text="{ext:Translate AccountsListPage_NoAccounts}" HorizontalOptions="Center" HorizontalTextAlignment="Center" 
+                   VerticalOptions="CenterAndExpand" FontSize="22" TextColor="#D3D2D2"/>
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>

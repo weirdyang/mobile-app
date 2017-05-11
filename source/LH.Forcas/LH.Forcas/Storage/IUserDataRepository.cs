@@ -10,14 +10,20 @@ namespace LH.Forcas.Storage
 
         void SaveUserSettings(UserSettings settings);
 
-        IEnumerable<Account> GetAccounts();
+        IList<Account> GetAccounts();
 
         void SaveAccount(Account account);
 
-        IEnumerable<Category> GetCategories();
+        void SoftDeleteAccount(Guid id);
+
+        IList<Category> GetCategories();
 
         Category GetCategory(Guid id);
 
         void SaveCategory(Category category);
+
+#if DEBUG
+        void DeleteAll();
+#endif
     }
 }

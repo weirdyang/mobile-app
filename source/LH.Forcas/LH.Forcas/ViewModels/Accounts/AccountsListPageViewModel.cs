@@ -1,44 +1,49 @@
-﻿namespace LH.Forcas.ViewModels.Accounts
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Domain.UserData;
-    using Extensions;
-    using Localization;
-    using Prism.Commands;
-    using Prism.Navigation;
-    using Prism.Services;
-    using Services;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using LH.Forcas.Analytics;
+using LH.Forcas.Domain.UserData;
+using LH.Forcas.Extensions;
+using LH.Forcas.Localization;
+using LH.Forcas.Services;
+using Prism.Commands;
+using Prism.Navigation;
+using Prism.Services;
 
+namespace LH.Forcas.ViewModels.Accounts
+{
     public class AccountsListPageViewModel : ViewModelBase
     {
         private readonly INavigationService navigationService;
         private readonly IPageDialogService dialogService;
+        private readonly IAnalyticsReporter analyticsReporter;
         private readonly IAccountingService accountingService;
-        private readonly Type[] accountTypeOrder = { typeof(CashAccount), typeof(BankAccount), typeof(CreditCardAccount), typeof(LoanAccount), typeof(InvestmentAccount) };
+        private readonly Type[] accountTypeOrder = { typeof(CashAccount), typeof(CheckingAccount), typeof(CreditCardAccount), typeof(SavingsAccount), typeof(LoanAccount), typeof(InvestmentAccount) };
 
         private ObservableCollection<AccountsGroup> accountGroups;
 
         public AccountsListPageViewModel(
             IAccountingService accountingService,
             INavigationService navigationService,
-            IPageDialogService dialogService)
+            IPageDialogService dialogService,
+            IAnalyticsReporter analyticsReporter)
         {
             this.accountingService = accountingService;
             this.navigationService = navigationService;
             this.dialogService = dialogService;
+            this.analyticsReporter = analyticsReporter;
 
             this.NavigateToAddAccountCommand = DelegateCommand.FromAsyncHandler(this.navigationService.NavigateToAccountAdd);
             this.NavigateToAccountDetailCommand = DelegateCommand<Account>.FromAsyncHandler(this.NavigateToAccountDetail);
 
             this.DeleteAccountCommand = DelegateCommand<Account>.FromAsyncHandler(this.DeleteAccount);
 
-            this.RefreshAccountsCommand = new DelegateCommand(this.RefreshAccounts);
+            this.RefreshAccountsCommand = DelegateCommand.FromAsyncHandler(this.RefreshAccounts);
         }
+
+        public bool NoAccountsTextDisplayed => (this.AccountGroups == null || this.AccountGroups.Count == 0) && !this.IsBusy;
 
         public DelegateCommand NavigateToAddAccountCommand { get; private set; }
 
@@ -56,18 +61,41 @@
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
         {
-            await this.RunAsyncWithBusyIndicator((Action)this.RefreshAccounts);
+            await this.RefreshAccounts();
         }
 
-        private void RefreshAccounts()
-        {    
-            var accounts = this.accountingService.GetAccounts();
-            var grouped = this.GroupAccounts(accounts);
-            this.AccountGroups = new ObservableCollection<AccountsGroup>(grouped);
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            // ReSharper disable once ExplicitCallerInfoArgument
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(this.IsBusy) || propertyName == nameof(this.AccountGroups))
+            {
+                this.OnPropertyChanged(nameof(this.NoAccountsTextDisplayed));
+            }
+        }
+
+        private async Task RefreshAccounts()
+        {
+            await this.RunAsyncWithBusyIndicator(() =>
+                                                 {
+                                                     var accounts = this.accountingService.GetAccounts();
+
+                                                     if (accounts != null)
+                                                     {
+                                                         var filtered = accounts.Where(x => !x.IsDeleted);
+                                                         this.AccountGroups = this.GroupAccounts(filtered);
+                                                     }
+                                                 });
         }
 
         private async Task NavigateToAccountDetail(Account account)
         {
+            if (account == null)
+            {
+                return;
+            }
+
             await this.navigationService.NavigateToAccountDetail(account.Id);
         }
 
@@ -98,24 +126,22 @@
             }
             catch (Exception ex)
             {
-                // TODO: Log the exception
-                Debug.WriteLine(ex);
-
+                this.analyticsReporter.ReportHandledException(ex);
                 await this.dialogService.DisplayErrorAlert(AppResources.AccountsListPage_DeleteAccountError);
             }
             finally
             {
-                this.RefreshAccounts();
+                await this.RefreshAccounts();
             }
         }
 
-        private IEnumerable<AccountsGroup> GroupAccounts(IEnumerable<Account> accounts)
+        private ObservableCollection<AccountsGroup> GroupAccounts(IEnumerable<Account> accounts)
         {
-            Task.Delay(3000).Wait();
-
-            return accounts.GroupBy(account => account.GetType())
+            var groups = accounts.GroupBy(account => account.GetType())
                            .Select(group => new AccountsGroup(group.Key, group.OrderBy(acc => acc.Name)))
                            .OrderBy(group => Array.IndexOf(this.accountTypeOrder, group.AccountType));
+
+            return new ObservableCollection<AccountsGroup>(groups);
         }
 
         public class AccountsGroup : ObservableCollection<Account>

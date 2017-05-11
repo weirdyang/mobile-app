@@ -2,7 +2,7 @@
 
 namespace LH.Forcas.Domain.UserData
 {
-    public abstract class UserEntityBase<TId>
+    public abstract class UserEntityBase<TId> : IUserEntity
     {
         [BsonId]
         public virtual TId Id { get; set; }
