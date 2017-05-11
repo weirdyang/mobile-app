@@ -7,8 +7,6 @@ namespace LH.Forcas.Domain.UserData
         [BsonId]
         public virtual TId Id { get; set; }
 
-        public bool IsDeleted { get; set; }
-
         public abstract BsonValue GetIdAsBson();
     }
 }

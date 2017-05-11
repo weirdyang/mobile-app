@@ -3,7 +3,7 @@
     using System;
     using LiteDB;
 
-    public abstract class Account : UserEntityBase<Guid>
+    public abstract class Account : UserEntityBase<Guid>, ISoftDeletable
     {
         public string Name { get; set; }
 
@@ -12,6 +12,8 @@
         public Amount CurrentBalance { get; set; }
 
         public DateTime LastSyncUtcTime { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         public override BsonValue GetIdAsBson()
         {

@@ -50,6 +50,7 @@ namespace LH.Forcas.Tests.Storage
                    .WithProperty(d => d.Name, "Name1", "Name2")
                    .WithProperty(d => d.CurrentBalance, new Amount(10, "CZK"), new Amount(20, "CZK"))
                    .WithProperty(d => d.LastSyncUtcTime, new DateTime(2017, 1, 1), new DateTime(2018, 1, 1))
+                   .WithProperty(d => d.IsDeleted, false, true)
                    .Run();
             }
 
@@ -66,6 +67,7 @@ namespace LH.Forcas.Tests.Storage
                    .WithProperty(d => d.Name, "Name1", "Name2")
                    .WithProperty(d => d.CurrentBalance, new Amount(10, "CZK"), new Amount(20, "CZK"))
                    .WithProperty(d => d.LastSyncUtcTime, new DateTime(2017, 1, 1), new DateTime(2018, 1, 1))
+                   .WithProperty(d => d.IsDeleted, false, true)
                    .Run();
             }
 
@@ -81,6 +83,7 @@ namespace LH.Forcas.Tests.Storage
                    .WithProperty(d => d.Name, "Name1", "Name2")
                    .WithProperty(d => d.CurrentBalance, new Amount(10, "CZK"), new Amount(20, "CZK"))
                    .WithProperty(d => d.LastSyncUtcTime, new DateTime(2017, 1, 1), new DateTime(2018, 1, 1))
+                   .WithProperty(d => d.IsDeleted, false, true)
                    .Run();
             }
         }

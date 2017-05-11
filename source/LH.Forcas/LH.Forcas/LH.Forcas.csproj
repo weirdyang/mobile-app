@@ -64,6 +64,7 @@
     <Compile Include="Domain\UserData\Authorization\BankAuthorizationBase.cs" />
     <Compile Include="Domain\UserData\Authorization\StaticTokenAuthorizationInfo.cs" />
     <Compile Include="Domain\UserData\Category.cs" />
+    <Compile Include="Domain\UserData\ISoftDeletable.cs" />
     <Compile Include="Domain\UserData\IUserEntity.cs" />
     <Compile Include="Domain\UserData\UserEntityBase.cs" />
     <Compile Include="Domain\UserData\UserSettings.cs" />
