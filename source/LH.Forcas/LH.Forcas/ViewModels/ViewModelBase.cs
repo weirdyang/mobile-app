@@ -5,7 +5,7 @@
     using Prism.Mvvm;
     using Prism.Navigation;
 
-    public abstract class ViewModelBase : BindableBase, INavigationAware
+    public abstract class ViewModelBase : BindableBase, INavigatingAware
     {
         private bool isBusy;
         private Task currentBackgroundTask;
@@ -37,12 +37,12 @@
 
         public virtual void OnNavigatedFrom(NavigationParameters parameters) { }
 
-        public virtual void OnNavigatedTo(NavigationParameters parameters)
+        public void OnNavigatingTo(NavigationParameters parameters)
         {
-            this.OnNavigatedToAsync(parameters);
+            this.OnNavigatingToAsync(parameters);
         }
 
-        public virtual Task OnNavigatedToAsync(NavigationParameters parameters)
+        public virtual Task OnNavigatingToAsync(NavigationParameters parameters)
         {
             return Task.FromResult(0);
         }

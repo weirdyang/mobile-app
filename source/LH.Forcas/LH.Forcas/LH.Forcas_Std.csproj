@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+	<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+    <DebugType>full</DebugType>
+	
+    <RootNamespace>LH.Forcas</RootNamespace>
+    <AssemblyName>LH.Forcas</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="LiteDB" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="Prism.Unity.Forms" Version="6.3.0" />
+    <PackageReference Include="Xamarin.Forms" Version="2.3.4.231" />
+  </ItemGroup>
+</Project>

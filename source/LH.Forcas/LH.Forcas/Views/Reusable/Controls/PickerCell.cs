@@ -1,9 +1,8 @@
-﻿namespace LH.Forcas.Views.Reusable.Controls
-{
-    using System.Collections;
-    using FreshEssentials;
-    using Xamarin.Forms;
+﻿using System.Collections;
+using Xamarin.Forms;
 
+namespace LH.Forcas.Views.Reusable.Controls
+{
     public class PickerCell : ViewCell
     {
         public static readonly BindableProperty LabelTextProperty = BindableProperty.Create(
@@ -54,20 +53,20 @@
         public PickerCell()
         {
             var label = new Label();
-            var picker = new BindablePicker();
+            var picker = new Picker();
             
             var grid = new Grid();
             this.View = grid;
 
             label.BindingContext = this;
             label.VerticalOptions = LayoutOptions.Center;
-            label.SetBinding(Label.TextProperty, (PickerCell c) => c.LabelText, BindingMode.OneWay);
+            label.SetBinding(Label.TextProperty, nameof(this.LabelText), BindingMode.OneWay);
 
             picker.BindingContext = this;
             picker.SetValue(Grid.ColumnProperty, 1);
-            picker.SetBinding(BindablePicker.ItemsSourceProperty, nameof(this.ItemsSource), BindingMode.OneWay);
-            picker.SetBinding(BindablePicker.SelectedItemProperty, nameof(this.SelectedItem), BindingMode.TwoWay);
-            picker.SetBinding(BindablePicker.DisplayPropertyProperty, nameof(this.DisplayProperty), BindingMode.OneWay);
+            picker.SetBinding(Picker.ItemsSourceProperty, nameof(this.ItemsSource), BindingMode.OneWay);
+            picker.SetBinding(Picker.SelectedItemProperty, nameof(this.SelectedItem), BindingMode.TwoWay);
+            // picker.SetBinding(Picker.DisplayPropertyProperty, nameof(this.DisplayProperty), BindingMode.OneWay);
 
             grid.Padding = new Thickness(15, 0, 0, 0);
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
