@@ -1,6 +1,56 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LH.Forcas.Views.MorePage">
-  <Label Text="More..." VerticalOptions="Center" HorizontalOptions="Center" />
+             xmlns:controls="clr-namespace:LH.Forcas.Views.Reusable.Controls;assembly=LH.Forcas"
+             xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
+             x:Class="LH.Forcas.Views.MorePage"
+             BackgroundColor="{DynamicResource WindowBackgroundTable}">
+    <ScrollView>
+        <StackLayout Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+
+            <controls:CardFrame>
+                <StackLayout Spacing="0">
+                    <controls:CardHeader HeaderText="{ ext:Translate MorePage_CalculatorsSection_Header }" />
+
+                    <StackLayout BackgroundColor="White" Padding="{ StaticResource StandardPadding }">
+                        <Label Text="Dummy calculator"
+                                   Style="{ DynamicResource ForcasListItemTextStyle }"/>
+                    </StackLayout>
+                </StackLayout>
+            </controls:CardFrame>
+
+            <controls:CardFrame BackgroundColor="White">
+                <StackLayout Spacing="0">
+                    <controls:CardHeader HeaderText="{ ext:Translate MorePage_AppSection_Header }" />
+
+                    <StackLayout Padding="{StaticResource StandardPadding}">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{ Binding NavigateToPreferencesCommand }" />
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{ ext:Translate PreferencesPage_Title }"
+                                   Style="{ DynamicResource ForcasListItemTextStyle }"/>
+                    </StackLayout>
+                    <controls:CardItemSeparator />
+
+                    <StackLayout Padding="{StaticResource StandardPadding}">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{ Binding NavigateToLicenseCommand }" />
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{ ext:Translate LicensePage_Title }"
+                                   Style="{ DynamicResource ForcasListItemTextStyle }"/>
+                    </StackLayout>
+                    <controls:CardItemSeparator />
+
+                    <StackLayout Padding="{StaticResource StandardPadding}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{ Binding NavigateToAboutCommand }" />
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{ ext:Translate AboutPage_Title }" 
+                                   Style="{ DynamicResource ForcasListItemTextStyle }"/>
+                    </StackLayout>
+                    
+                    <controls:CardFooter FooterText="App by Lukas Holota" />
+                </StackLayout>
+            </controls:CardFrame>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

@@ -8,7 +8,7 @@
              x:Class="LH.Forcas.Views.Accounts.AccountsListPage"
              BackgroundColor="{ DynamicResource WindowBackground }"
              Title="{ ext:Translate AccountsListPage_Title }"
-             x:Name="Page" NavigationPage.HasBackButton="False">
+             x:Name="Page">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ToResourceConverter x:Key="AccountTypeToResourceConverter" ResxPrefix="AccountType" />

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using LH.Forcas.ViewModels;
-using Prism.Mvvm;
 using Xamarin.Forms;
 
 namespace LH.Forcas.Views
@@ -14,27 +13,33 @@ namespace LH.Forcas.Views
 
             this.BindingContextChanged += this.OnBindingContextChanged;
             this.CurrentPageChanged += this.OnCurrentPageChanged;
+
+            this.Appearing += (sender, args) => this.UpdatePropagatedProperties(this.CurrentPage);
         }
 
         private RootTabPageViewModel ViewModel => (RootTabPageViewModel)this.BindingContext;
 
         private void OnCurrentPageChanged(object sender, EventArgs eventArgs)
         {
-            var navPage = this.CurrentPage as NavigationPage;
+            var viewModel = this.CurrentPage.BindingContext;
 
-            var viewModel = navPage != null
-                ? navPage.CurrentPage.BindingContext
-                : this.CurrentPage.BindingContext;
+            this.UpdatePropagatedProperties(this.CurrentPage);
 
             if (viewModel != null && !(viewModel is RootTabPageViewModel))
             {
-                this.ViewModel.HandlePageSelectionChanged((ViewModelBase) viewModel);
+                this.ViewModel.HandlePageSelectionChanged((ViewModelBase)viewModel);
             }
+        }
+
+        private void UpdatePropagatedProperties(Page page)
+        {
+            this.Title = page.Title;
+            NavigationPage.SetHasNavigationBar(this, NavigationPage.GetHasNavigationBar(page));
         }
 
         private void OnBindingContextChanged(object sender, EventArgs eventArgs)
         {
-            var viewModel = (RootTabPageViewModel) this.BindingContext;
+            var viewModel = (RootTabPageViewModel)this.BindingContext;
             viewModel.PageSelectionChangeRequested += this.HandlePageSelectionChangeRequested;
         }
 

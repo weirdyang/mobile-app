@@ -128,6 +128,7 @@
     <Compile Include="Localization\IosLocale.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
     <Compile Include="Services\IosDeviceService.cs" />
     <Compile Include="Services\Reachability.cs" />
     <Compile Include="Storage\IosPathResolver.cs" />

@@ -1,10 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
              xmlns:controls="clr-namespace:LH.Forcas.Views.Reusable.Controls;assembly=LH.Forcas"
-             x:Class="LH.Forcas.Views.Settings.SettingsPage" Title="{ ext:Translate SettingsPage_Title }">
-  <StackLayout>
+             x:Class="LH.Forcas.Views.Preferences.PreferencesPage" Title="{ ext:Translate PreferencesPage_Title }">
+<StackLayout>
     <ActivityIndicator IsVisible="{ Binding IsBusy }" IsRunning="{ Binding IsBusy }" />
 
     <TableView Intent="Form" IsVisible="{ Binding IsBusy, Converter={ StaticResource NegateBoolConverter } }">

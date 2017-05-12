@@ -18,9 +18,9 @@ namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
         [SetUp]
         public void Setup()
         {
-            var jsonPath = Extensions.GetContentFilePath(@"Integration\Banks\Cz\Fio\TransactionParsingSample.json");
+            var jsonPath = TestExtensions.GetContentFilePath(@"Integration\Banks\Cz\Fio\TransactionParsingSample.json");
             var failingJsonPath =
-                Extensions.GetContentFilePath(@"Integration\Banks\Cz\Fio\TransactionParsingSample-Fail.json");
+                TestExtensions.GetContentFilePath(@"Integration\Banks\Cz\Fio\TransactionParsingSample-Fail.json");
 
             this.SampleJsonStream = File.OpenRead(jsonPath);
             this.SampleFailingJsonStream = File.OpenRead(failingJsonPath);

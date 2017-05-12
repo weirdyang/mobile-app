@@ -8,25 +8,24 @@ namespace LH.Forcas.ViewModels
     public class RootTabPageViewModel : BindableBase, INavigationAware
     {
         public const string SelectedPageParameter = "Page";
-
         public const string AccountsPageName = "Accounts";
+        public const string MorePageName = "More";
 
         private ViewModelBase selectedPageViewModel;
-        private AccountsListPageViewModel accountsListPageViewModel;
 
         public RootTabPageViewModel(
-            AccountsListPageViewModel accountsListPageViewModel)
+            AccountsListPageViewModel accountsListPageViewModel,
+            MorePageViewModel morePageViewModel)
         {
             this.AccountsListPageViewModel = accountsListPageViewModel;
+            this.MorePageViewModel = morePageViewModel;
         }
 
         public event EventHandler<ViewModelEventArgs> PageSelectionChangeRequested;
 
-        public AccountsListPageViewModel AccountsListPageViewModel
-        {
-            get { return this.accountsListPageViewModel; }
-            private set { this.SetProperty(ref this.accountsListPageViewModel, value); }
-        }
+        public AccountsListPageViewModel AccountsListPageViewModel { get; }
+
+        public MorePageViewModel MorePageViewModel { get; }
 
         public void HandlePageSelectionChanged(ViewModelBase newViewModel)
         {
@@ -50,6 +49,10 @@ namespace LH.Forcas.ViewModels
                 {
                     case AccountsPageName:
                         this.HandlePageSelectionChanged(this.AccountsListPageViewModel);
+                        break;
+
+                    case MorePageName:
+                        this.HandlePageSelectionChanged(this.MorePageViewModel);
                         break;
                 }
             }

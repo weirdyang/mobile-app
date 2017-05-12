@@ -31,7 +31,7 @@ namespace LH.Forcas.Services
 
         public void SaveAccount(Account account)
         {
-            throw new NotImplementedException();
+            this.userDataRepository.SaveAccount(account);
         }
 
         public void DeleteAccount(Guid id)

@@ -1,0 +1,72 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:LH.Forcas.Views.Reusable.Controls;assembly=LH.Forcas"
+             xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
+             xmlns:behaviors="clr-namespace:LH.Forcas.Views.Reusable.Behaviors;assembly=LH.Forcas"
+             x:Class="LH.Forcas.Views.About.AboutPage"
+             Title="{ ext:Translate AboutPage_Title }">
+    <AbsoluteLayout>
+        <ScrollView
+            AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+            IsVisible="{ Binding IsBusy, Converter={ StaticResource NegateBoolConverter }}">
+            <StackLayout Spacing="{DynamicResource CardSpacing}" Padding="{DynamicResource CardPadding}">
+
+                <controls:CardFrame BackgroundColor="White">
+                    <StackLayout Spacing="0">
+                        <controls:CardHeader HeaderText="{ ext:Translate AboutPage_AboutAppHeader }" />
+
+                        <StackLayout Padding="{ StaticResource StandardPadding }">
+                            <Label Text="{ Binding AppVersion, StringFormat={ ext:Translate AboutPage_VersionFormat } }" Style="{ DynamicResource ForcasListItemDetailTextStyle }"/>
+                        </StackLayout>
+                        <controls:CardItemSeparator />
+
+                        <StackLayout Padding="{ StaticResource StandardPadding }">
+                            <Label Text="{ Binding Author, StringFormat={ ext:Translate AboutPage_AuthorFormat } }" Style="{ DynamicResource ForcasListItemDetailTextStyle }"/>
+                        </StackLayout>
+                    </StackLayout>
+                </controls:CardFrame>
+
+                <controls:CardFrame BackgroundColor="White">
+                    <StackLayout Spacing="0">
+                        <controls:CardHeader HeaderText="{ ext:Translate AboutPage_DependenciesHeader }" />
+
+                        <controls:NonScrollableListView ItemsSource="{ Binding Dependencies }" ItemsCount="{ Binding DependenciesCount }" RowHeight="44">
+                            <ListView.Behaviors>
+                                <behaviors:DisableListViewSelectionBehavior />
+                            </ListView.Behaviors>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Padding="{ DynamicResource StandardPadding }" VerticalOptions="CenterAndExpand">
+                                            <Label Text="{ Binding DisplayName }" LineBreakMode="TailTruncation" 
+                                                   Style="{ DynamicResource ForcasListItemDetailTextStyle }"
+                                                   VerticalTextAlignment="Center" VerticalOptions="Center" />
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </controls:NonScrollableListView>
+
+                        <controls:CardFooter FooterText="{ ext:Translate AboutPage_DependenciesThanks }" />
+                    </StackLayout>
+                </controls:CardFrame>
+
+            </StackLayout>
+        </ScrollView>
+
+        <StackLayout IsVisible="{Binding IsBusy}"
+                                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                                   AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <StackLayout.Orientation>
+                <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+            </StackLayout.Orientation>
+            <ActivityIndicator IsRunning="{ Binding IsBusy }" >
+                <ActivityIndicator.Color>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                </ActivityIndicator.Color>
+            </ActivityIndicator>
+            <Label Text="{ ext:Translate AboutPage_BusyText }" HorizontalOptions="Center" Style="{ DynamicResource ForcasListItemTextStyle }"/>
+        </StackLayout>
+
+    </AbsoluteLayout>
+</ContentPage>

@@ -227,9 +227,11 @@
   <ItemGroup>
     <Compile Include="Banking\Providers\TestsBankProvider.cs" />
     <Compile Include="Domain\UserData\AccountNumberTests.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Extensions\DynamicExtensionsTests.cs" />
+    <Compile Include="TestExtensions.cs" />
     <Compile Include="Banking\Providers\BankProviderFactoryTests.cs" />
     <Compile Include="Banking\Providers\BankProviderInfoAttributeTests.cs" />
+    <Compile Include="Extensions\ReflectionExtensionsTests.cs" />
     <Compile Include="Integration\Banks\Cz\Fio\FioBankIntegrationTests.cs" />
     <Compile Include="Integration\Banks\Cz\Fio\FioOutputParserTests.cs" />
     <Compile Include="MockExtensions.cs" />
@@ -246,9 +248,12 @@
     <Compile Include="Storage\TestsDbManager.cs" />
     <Compile Include="Sync\RefData\GitHubClientFactoryTests.cs" />
     <Compile Include="Sync\RefData\RefDataDownloaderTests.cs" />
+    <Compile Include="ViewModels\About\AboutPageViewModelTests.cs" />
+    <Compile Include="ViewModels\About\LicensePageViewModelTests.cs" />
     <Compile Include="ViewModels\Accounts\AccountsDetailPageViewModelTests.cs" />
     <Compile Include="ViewModels\Accounts\AccountsListPageViewModelTests.cs" />
     <Compile Include="ViewModels\DetailViewModeBaseTests.cs" />
+    <Compile Include="ViewModels\MorePageViewModelTests.cs" />
     <Compile Include="ViewModels\ViewModelBaseTests.cs" />
     <Compile Include="Views\Reusables\Converters\DateTimeAgoConverterTests.cs" />
     <Compile Include="Views\Reusables\Converters\NumberColorIndicatorConverter.cs" />
@@ -262,6 +267,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="Extensions\TestResource.txt" />
     <Content Include="Integration\Banks\Cz\Fio\TransactionDownloadSample.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

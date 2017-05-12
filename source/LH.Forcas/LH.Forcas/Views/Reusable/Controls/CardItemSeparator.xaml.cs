@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace LH.Forcas.Views.Settings
+namespace LH.Forcas.Views.Reusable.Controls
 {
-    public partial class SettingsPage : ContentPage
+    public partial class CardItemSeparator : ContentView
     {
-        public SettingsPage()
+        public CardItemSeparator()
         {
             InitializeComponent();
         }

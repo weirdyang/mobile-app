@@ -62,6 +62,69 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About App.
+        /// </summary>
+        public static string AboutPage_AboutAppHeader {
+            get {
+                return ResourceManager.GetString("AboutPage_AboutAppHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App created by {0}.
+        /// </summary>
+        public static string AboutPage_AuthorFormat {
+            get {
+                return ResourceManager.GetString("AboutPage_AuthorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string AboutPage_BusyText {
+            get {
+                return ResourceManager.GetString("AboutPage_BusyText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Used components.
+        /// </summary>
+        public static string AboutPage_DependenciesHeader {
+            get {
+                return ResourceManager.GetString("AboutPage_DependenciesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Many thanks to the authors of these components!.
+        /// </summary>
+        public static string AboutPage_DependenciesThanks {
+            get {
+                return ResourceManager.GetString("AboutPage_DependenciesThanks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string AboutPage_Title {
+            get {
+                return ResourceManager.GetString("AboutPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version {0}.
+        /// </summary>
+        public static string AboutPage_VersionFormat {
+            get {
+                return ResourceManager.GetString("AboutPage_VersionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account Type.
         /// </summary>
         public static string AccountsDetailPage_AccountType {
@@ -530,11 +593,56 @@ namespace LH.Forcas.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading license....
+        /// </summary>
+        public static string LicensePage_BusyText {
+            get {
+                return ResourceManager.GetString("LicensePage_BusyText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License.
+        /// </summary>
+        public static string LicensePage_Title {
+            get {
+                return ResourceManager.GetString("LicensePage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App.
+        /// </summary>
+        public static string MorePage_AppSection_Header {
+            get {
+                return ResourceManager.GetString("MorePage_AppSection_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculators.
+        /// </summary>
+        public static string MorePage_CalculatorsSection_Header {
+            get {
+                return ResourceManager.GetString("MorePage_CalculatorsSection_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to More.
         /// </summary>
         public static string MorePage_Title {
             get {
                 return ResourceManager.GetString("MorePage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preferences.
+        /// </summary>
+        public static string PreferencesPage_Title {
+            get {
+                return ResourceManager.GetString("PreferencesPage_Title", resourceCulture);
             }
         }
         
@@ -562,15 +670,6 @@ namespace LH.Forcas.Localization {
         public static string SettingsPage_PreferedValuesSectionTitle {
             get {
                 return ResourceManager.GetString("SettingsPage_PreferedValuesSectionTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        public static string SettingsPage_Title {
-            get {
-                return ResourceManager.GetString("SettingsPage_Title", resourceCulture);
             }
         }
     }

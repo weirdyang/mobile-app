@@ -203,8 +203,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
 
         protected void NavigateTo()
         {
-            this.ViewModel.OnNavigatedTo(null);
-            this.ViewModel.CurrentBackgroundTask?.Wait();
+            this.ViewModel.OnNavigatedToAsync(null).Wait();
         }
     }
 }

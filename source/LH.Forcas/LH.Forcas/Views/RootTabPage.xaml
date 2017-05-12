@@ -9,14 +9,9 @@
              xmlns:views="clr-namespace:LH.Forcas.Views;assembly=LH.Forcas"
              xmlns:transactions="clr-namespace:LH.Forcas.Views.Transactions;assembly=LH.Forcas"
              x:Class="LH.Forcas.Views.RootTabPage" BarTheme="Light" BarBackgroundColor="Default">
-
   <dashboard:DashboardPage Title="{ ext:Translate Dashboard_Title }" Icon="chart.png" />
   <budget:BudgetPage Title="{ ext:Translate BudgetPage_Title }" Icon="budget.png" />
   <transactions:CashTransactionPage Title="{ ext:Translate CashTransactionPage_Title }" Icon="cash_euro.png" />
-  <NavigationPage Title="{ ext:Translate AccountsListPage_Title }" Icon="account.png">
-    <x:Arguments>
-      <accounts:AccountsListPage BindingContext="{ Binding AccountsListPageViewModel }" />
-    </x:Arguments>
-  </NavigationPage>
-  <views:MorePage Title="{ ext:Translate MorePage_Title }" Icon="more.png" />
+  <accounts:AccountsListPage BindingContext="{ Binding AccountsListPageViewModel }" Title="{ ext:Translate AccountsListPage_Title }" Icon="account.png" />
+  <views:MorePage Title="{ ext:Translate MorePage_Title }" BindingContext="{ Binding MorePageViewModel }" Icon="more.png" />
 </bbar:BottomBarPage>

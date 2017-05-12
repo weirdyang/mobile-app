@@ -10,11 +10,14 @@ using LH.Forcas.Storage;
 using LH.Forcas.Storage.Caching;
 using LH.Forcas.Storage.Data;
 using LH.Forcas.Sync.RefData;
+using LH.Forcas.ViewModels.About;
+using LH.Forcas.ViewModels.Accounts;
 using LH.Forcas.Views;
+using LH.Forcas.Views.About;
 using LH.Forcas.Views.Accounts;
 using LH.Forcas.Views.Categories;
 using LH.Forcas.Views.Dashboard;
-using LH.Forcas.Views.Settings;
+using LH.Forcas.Views.Preferences;
 using Microsoft.Practices.Unity;
 using Prism.Events;
 using Prism.Unity;
@@ -33,8 +36,6 @@ namespace LH.Forcas
 
             this.SetVersion();
             this.InitializeComponent();
-
-            NavigationExtensions.InitializeNavigation();
 
             this.Container.Resolve<IPathResolver>().Initialize();
             this.Container.Resolve<IDbManager>().ApplyMigrations();
@@ -87,20 +88,21 @@ namespace LH.Forcas
             this.Container.RegisterType<IRefDataService, RefDataService>(new ContainerControlledLifetimeManager());
             this.Container.RegisterType<IUserSettingsService, UserSettingsService>(new ContainerControlledLifetimeManager());
 
+            this.Container.RegisterTypeForNavigation<RootNavigationPage>();
             this.Container.RegisterTypeForNavigation<RootTabPage>();
-            this.Container.RegisterTypeForNavigation<GenericNavigationPage>();
 
             this.Container.RegisterTypeForNavigation<DashboardPage>();
             this.Container.RegisterTypeForNavigation<DashboardNavigationPage>();
 
-            this.Container.RegisterTypeForNavigation<AccountsListPage>();
+            this.Container.RegisterTypeForNavigation<AccountsListPage, AccountsListPageViewModel>();
             this.Container.RegisterTypeForNavigation<AccountsDetailPage>();
-            this.Container.RegisterTypeForNavigation<AccountsNavigationPage>();
 
             this.Container.RegisterTypeForNavigation<CategoriesListPage>();
             this.Container.RegisterTypeForNavigation<CategoriesDetailPage>();
 
-            this.Container.RegisterTypeForNavigation<SettingsPage>();
+            this.Container.RegisterTypeForNavigation<PreferencesPage>();
+            this.Container.RegisterTypeForNavigation<AboutPage, AboutPageViewModel>();
+            this.Container.RegisterTypeForNavigation<LicensePage, LicensePageViewModel>();
         }
 
         private void SetVersion()

@@ -59,7 +59,7 @@ namespace LH.Forcas.ViewModels.Accounts
             private set { this.SetProperty(ref this.accountGroups, value); }
         }
 
-        public override async void OnNavigatedTo(NavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
         {
             await this.RefreshAccounts();
         }

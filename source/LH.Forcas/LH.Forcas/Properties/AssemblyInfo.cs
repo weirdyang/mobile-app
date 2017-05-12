@@ -1,6 +1,5 @@
 ﻿using System.Resources;
 using System.Reflection;
-using Xamarin.Forms.Xaml;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -8,7 +7,7 @@ using Xamarin.Forms.Xaml;
 [assembly: AssemblyTitle("LH.Forcas")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Lukas Holota")]
 [assembly: AssemblyProduct("LH.Forcas")]
 [assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]

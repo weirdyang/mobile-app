@@ -6,7 +6,7 @@
              xmlns:ext="clr-namespace:LH.Forcas.Views.Reusable.MarkupExtensions;assembly=LH.Forcas"
              xmlns:behaviors="clr-namespace:LH.Forcas.Views.Reusable.Behaviors;assembly=LH.Forcas"
              x:Class="LH.Forcas.Views.Accounts.AccountsDetailPage"
-             NavigationPage.HasBackButton="True" Title="{ Binding Title  }">
+             Title="{ Binding Title }">
   <ContentPage.ToolbarItems>
     <iconize:IconToolbarItem Icon="md-edit" Command="{ Binding SaveCommand }" />
   </ContentPage.ToolbarItems>

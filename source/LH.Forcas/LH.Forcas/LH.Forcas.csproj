@@ -72,6 +72,7 @@
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
     <Compile Include="Extensions\LocalizationExtensions.cs" />
     <Compile Include="Extensions\PrismExtensions.cs" />
+    <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="IApp.cs" />
     <Compile Include="Banking\Providers\BankProviderFactory.cs" />
     <Compile Include="Banking\Providers\BankProviderInfoAttribute.cs" />
@@ -94,17 +95,27 @@
     <Compile Include="Sync\RefData\IRefDataDownloader.cs" />
     <Compile Include="Sync\RefData\RefDataDownloader.cs" />
     <Compile Include="Sync\RefData\RefDataDownloadResult.cs" />
+    <Compile Include="ViewModels\About\AboutPageViewModel.cs" />
+    <Compile Include="ViewModels\About\Dependency.cs" />
+    <Compile Include="ViewModels\About\LicensePageViewModel.cs" />
     <Compile Include="ViewModels\Categories\CategoriesDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Categories\CategoriesListPageViewModel.cs" />
     <Compile Include="ViewModels\DetailViewModelBase.cs" />
     <Compile Include="ViewModels\ItemSelectionViewModelBase.cs" />
     <Compile Include="ViewModels\IValidated.cs" />
+    <Compile Include="ViewModels\MorePageViewModel.cs" />
     <Compile Include="ViewModels\PropertyValidationResult.cs" />
     <Compile Include="ViewModels\RootTabPageViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ValidationResults.cs" />
     <Compile Include="ViewModels\ValidationState.cs" />
     <Compile Include="ViewModels\ViewModelEventArgs.cs" />
+    <Compile Include="Views\About\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\About\LicensePage.xaml.cs">
+      <DependentUpon>LicensePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Accounts\AccountCellView.xaml.cs">
       <DependentUpon>AccountCellView.xaml</DependentUpon>
     </Compile>
@@ -114,9 +125,6 @@
     <Compile Include="Views\Categories\CategoriesDetailPage.xaml.cs">
       <DependentUpon>CategoriesDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GenericNavigationPage.xaml.cs">
-      <DependentUpon>GenericNavigationPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Accounts\AccountTemplateSelector.cs" />
     <Compile Include="Views\Categories\CategoriesListPage.xaml.cs">
       <DependentUpon>CategoriesListPage.xaml</DependentUpon>
@@ -124,17 +132,31 @@
     <Compile Include="Views\MorePage.xaml.cs">
       <DependentUpon>MorePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Reusable\Behaviors\DisableListViewScrollBehavior.cs" />
     <Compile Include="Views\Reusable\Behaviors\DisableListViewSelectionBehavior.cs" />
     <Compile Include="Views\Reusable\Behaviors\DynamicTableViewBehavior.cs" />
     <Compile Include="Views\Reusable\Behaviors\HideWhenElementScrolled.cs" />
     <Compile Include="Views\Reusable\Behaviors\ViewCellCommand.cs" />
     <Compile Include="Views\Reusable\Controls\ActivityOverlay.cs" />
+    <Compile Include="Views\Reusable\Controls\CardFooter.xaml.cs">
+      <DependentUpon>CardFooter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reusable\Controls\CardFrame.cs" />
+    <Compile Include="Views\Reusable\Controls\CardHeader.xaml.cs">
+      <DependentUpon>CardHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reusable\Controls\CardItemSeparator.xaml.cs">
+      <DependentUpon>CardItemSeparator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reusable\Controls\CardSeparator.xaml.cs">
+      <DependentUpon>CardSeparator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reusable\Controls\ContentControl.cs" />
     <Compile Include="Views\Reusable\Controls\FloatingActionButtonView.cs" />
     <Compile Include="Views\Reusable\Controls\GroupHeader.xaml.cs">
       <DependentUpon>GroupHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Reusable\Controls\NonScrollableListView.cs" />
     <Compile Include="Views\Reusable\Controls\PickerCell.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationIcon.cs" />
     <Compile Include="Views\Reusable\Controls\ValidationLabel.cs" />
@@ -143,6 +165,7 @@
     <Compile Include="Views\Reusable\Converters\NegateBoolConverter.cs" />
     <Compile Include="Views\Reusable\Converters\AmountToColorConverter.cs" />
     <Compile Include="Views\Reusable\Converters\AmountToCurrencyStringConverter.cs" />
+    <Compile Include="Views\Reusable\Converters\StringToHtmlWebViewSourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\StringToResourceConverter.cs" />
     <Compile Include="Views\Reusable\Converters\ToResourceConverter.cs" />
     <Compile Include="Domain\UserData\Account.cs" />
@@ -187,9 +210,6 @@
     <Compile Include="Views\Accounts\AccountsListPage.xaml.cs">
       <DependentUpon>AccountsListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Accounts\AccountsNavigationPage.xaml.cs">
-      <DependentUpon>AccountsNavigationPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Dashboard\DashboardPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Dashboard\DashboardNavigationPage.xaml.cs">
@@ -198,11 +218,14 @@
     <Compile Include="Views\Dashboard\DashboardPage.xaml.cs">
       <DependentUpon>DashboardPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RootNavigationPage.xaml.cs">
+      <DependentUpon>RootNavigationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RootTabPage.xaml.cs">
       <DependentUpon>RootTabPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Settings\SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    <Compile Include="Views\Preferences\PreferencesPage.xaml.cs">
+      <DependentUpon>PreferencesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SyncSetup\AuthenticationPage.xaml.cs">
       <DependentUpon>AuthenticationPage.xaml</DependentUpon>
@@ -235,9 +258,9 @@
     </None>
     <EmbeddedResource Include="Storage\Data\Bank.json" />
     <EmbeddedResource Include="Storage\Data\Currency.json" />
+    <EmbeddedResource Include="ViewModels\About\Dependencies.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\About\" />
     <Folder Include="Views\Reports\" />
     <Folder Include="Views\Rules\" />
   </ItemGroup>
@@ -434,12 +457,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Accounts\AccountsNavigationPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Views\Accounts\AccountsListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -467,13 +484,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Settings\SettingsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\GenericNavigationPage.xaml">
+    <EmbeddedResource Include="Views\Preferences\PreferencesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -514,6 +525,51 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\About\AboutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reusable\Controls\CardHeader.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reusable\Controls\CardSeparator.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reusable\Controls\CardFooter.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reusable\Controls\CardItemSeparator.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\About\LicensePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RootNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModels\About\License.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -524,4 +580,7 @@
   </Target>
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>powershell "$(SolutionDir)\..\tools\Generate-DependenciesList.ps1 -PackagesDir '$(SolutionDir)\packages' -OutFilePath '$(ProjectDir)\ViewModels\About\Dependencies.json'"</PreBuildEvent>
+  </PropertyGroup>
 </Project>

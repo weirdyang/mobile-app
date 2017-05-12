@@ -11,11 +11,11 @@
     using NUnit.Framework;
     using Prism.Navigation;
 
-    public static class Extensions
+    public static class TestExtensions
     {
         public static string GetContentFilePath(string fileName)
         {
-            var currentDir = Path.GetDirectoryName(typeof(Extensions).Assembly.Location);
+            var currentDir = Path.GetDirectoryName(typeof(TestExtensions).Assembly.Location);
             // ReSharper disable once AssignNullToNotNullAttribute
             return Path.Combine(currentDir, fileName);
         }

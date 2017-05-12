@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace LH.Forcas.ViewModels
+﻿namespace LH.Forcas.ViewModels
 {
     using System;
     using System.Threading.Tasks;
@@ -37,9 +35,17 @@ namespace LH.Forcas.ViewModels
             }
         }
 
-        public virtual void OnNavigatedFrom(NavigationParameters parameters) {}
+        public virtual void OnNavigatedFrom(NavigationParameters parameters) { }
 
-        public virtual void OnNavigatedTo(NavigationParameters parameters) {}
+        public virtual void OnNavigatedTo(NavigationParameters parameters)
+        {
+            this.OnNavigatedToAsync(parameters);
+        }
+
+        public virtual Task OnNavigatedToAsync(NavigationParameters parameters)
+        {
+            return Task.FromResult(0);
+        }
 
         protected Task RunAsyncWithBusyIndicator(Action action)
         {

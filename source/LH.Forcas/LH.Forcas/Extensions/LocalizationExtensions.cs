@@ -1,10 +1,8 @@
-﻿using LH.Forcas.RefDataContract;
+﻿using LH.Forcas.Localization;
+using LH.Forcas.RefDataContract;
 
 namespace LH.Forcas.Extensions
 {
-    using Domain.RefData;
-    using Localization;
-
     public static class LocalizationExtensions
     {
         public static string ToLocalizedResourceString(this object value, string keyFormat = null)
