@@ -1,10 +1,10 @@
-﻿namespace LH.Forcas.Views.Reusable.Controls
-{
-    using FluentValidation.Results;
-    using FormsPlugin.Iconize;
-    using Xamarin.Forms;
+﻿using System;
+using FluentValidation.Results;
+using Xamarin.Forms;
 
-    public class ValidationIcon : IconLabel
+namespace LH.Forcas.Views.Reusable.Controls
+{
+    public class ValidationIcon : Image
     {
         public static readonly BindableProperty ValidationResultProperty = 
             BindableProperty.Create(
@@ -16,23 +16,25 @@
 
         private static void HandlePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            var icon = (ValidationIcon)bindable;
-            var newResult = (ValidationResult) newvalue;
+            throw new NotImplementedException();
 
-            if (newResult == null)
-            {
-                icon.Text = null;
-            }
-            else if (newResult.IsValid)
-            {
-                icon.TextColor = Color.Green;
-                icon.Text = "md-check-circle";
-            }
-            else
-            {
-                icon.TextColor = Color.Red;
-                icon.Text = "md-error-outline";
-            }
+            //var icon = (ValidationIcon)bindable;
+            //var newResult = (ValidationResult) newvalue;
+
+            //if (newResult == null)
+            //{
+            //    icon.Text = null;
+            //}
+            //else if (newResult.IsValid)
+            //{
+            //    icon.TextColor = Color.Green;
+            //    icon.Text = "md-check-circle";
+            //}
+            //else
+            //{
+            //    icon.TextColor = Color.Red;
+            //    icon.Text = "md-error-outline";
+            //}
         }
 
         public ValidationResult ValidationResult

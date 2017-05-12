@@ -11,7 +11,6 @@ namespace LH.Forcas.Droid.Renderers
     using System.Windows.Input;
     using Android.Support.Design.Widget;
     using Android.Widget;
-    using Plugin.Iconize.Droid.Controls;
     using Views.Reusable.Controls;
     using Xamarin.Forms.Platform.Android;
 
@@ -114,20 +113,22 @@ namespace LH.Forcas.Droid.Renderers
         }
 
         private void SetIcon()
-        {            
-            var icon = Plugin.Iconize.Iconize.FindIconForKey(this.Element.Icon);
-            if (icon == null)
-            {
-                this.button.SetImageResource(Android.Resource.Color.Transparent);
-                return;
-            }
+        {
+            // TODO: Use standard image icon
+            throw new NotImplementedException();
+            //var icon = Plugin.Iconize.Iconize.FindIconForKey(this.Element.Icon);
+            //if (icon == null)
+            //{
+            //    this.button.SetImageResource(Android.Resource.Color.Transparent);
+            //    return;
+            //}
 
-            var drawable = new IconDrawable(Forms.Context, icon)
-                .Color(this.Element.IconColor.ToAndroid())
-                .SizeDp((int)this.Element.HeightRequest);
+            //var drawable = new IconDrawable(Forms.Context, icon)
+            //    .Color(this.Element.IconColor.ToAndroid())
+            //    .SizeDp((int)this.Element.HeightRequest);
 
-            this.button.SetScaleType(ImageView.ScaleType.FitCenter);
-            this.button.SetImageDrawable(drawable);
+            //this.button.SetScaleType(ImageView.ScaleType.FitCenter);
+            //this.button.SetImageDrawable(drawable);
         }
     }
 }

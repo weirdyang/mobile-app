@@ -20,9 +20,6 @@ namespace LH.Forcas.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.MaterialModule());
-            FormsPlugin.Iconize.iOS.IconControls.Init();
-
             this.LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

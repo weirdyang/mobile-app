@@ -91,9 +91,6 @@ namespace LH.Forcas
             this.Container.RegisterTypeForNavigation<RootNavigationPage>();
             this.Container.RegisterTypeForNavigation<RootTabPage>();
 
-            this.Container.RegisterTypeForNavigation<DashboardPage>();
-            this.Container.RegisterTypeForNavigation<DashboardNavigationPage>();
-
             this.Container.RegisterTypeForNavigation<AccountsListPage, AccountsListPageViewModel>();
             this.Container.RegisterTypeForNavigation<AccountsDetailPage>();
 
