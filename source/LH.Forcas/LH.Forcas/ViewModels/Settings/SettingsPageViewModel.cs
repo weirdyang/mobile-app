@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.ViewModels.Settings
+﻿using System.Threading.Tasks;
+
+namespace LH.Forcas.ViewModels.Settings
 {
     using System;
     using System.Collections.Generic;
@@ -61,10 +63,9 @@
             }
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
-            base.OnNavigatedTo(parameters);
-            this.RunAsyncWithBusyIndicator(() => this.LoadData());
+            await this.RunAsyncWithBusyIndicator(() => this.LoadData());
         }
 
         private void LoadData()

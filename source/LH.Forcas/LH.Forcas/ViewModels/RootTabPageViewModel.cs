@@ -5,7 +5,7 @@ using Prism.Navigation;
 
 namespace LH.Forcas.ViewModels
 {
-    public class RootTabPageViewModel : BindableBase, INavigationAware
+    public class RootTabPageViewModel : BindableBase, INavigatingAware
     {
         public const string SelectedPageParameter = "Page";
         public const string AccountsPageName = "Accounts";
@@ -29,18 +29,18 @@ namespace LH.Forcas.ViewModels
 
         public void HandlePageSelectionChanged(ViewModelBase newViewModel)
         {
-            this.selectedPageViewModel?.OnNavigatedFrom(null);
-            newViewModel.OnNavigatedTo(null);
+            // this.selectedPageViewModel?.OnNavigatedFrom(null);
+            newViewModel.OnNavigatingTo(null);
 
             this.selectedPageViewModel = newViewModel;
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
-            this.selectedPageViewModel?.OnNavigatedFrom(null);
+            // this.selectedPageViewModel?.OnNavigatedFrom(null);
         }
 
-        public void OnNavigatedTo(NavigationParameters parameters)
+        public void OnNavigatingTo(NavigationParameters parameters)
         {
             object value;
             if (parameters != null && parameters.TryGetValue(SelectedPageParameter, out value) && value != null)
@@ -58,7 +58,7 @@ namespace LH.Forcas.ViewModels
             }
             else
             {
-                this.selectedPageViewModel?.OnNavigatedTo(null);
+                this.selectedPageViewModel?.OnNavigatingTo(null);
             }
         }
 

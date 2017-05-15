@@ -8,7 +8,7 @@ namespace LH.Forcas.Views.Reusable.Controls
         {
             this.Padding = 0;
 
-            if (Device.OS == TargetPlatform.iOS)
+            if (Device.RuntimePlatform == Device.iOS)
             {
                 this.HasShadow = false;
                 this.OutlineColor = Color.Transparent;

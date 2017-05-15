@@ -16,7 +16,7 @@ namespace LH.Forcas.ViewModels.About
             set { this.SetProperty(ref this.licenseText, value); }
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
             await this.RunAsyncWithBusyIndicator((Action)this.LoadLicenseText);
         }

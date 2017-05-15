@@ -39,7 +39,7 @@ namespace LH.Forcas.Views.Reusable.Behaviors
                 return;
             }
 
-            var adjust = Device.OS != TargetPlatform.Android ? 1 : 0; // TODO: Handle for iOS -vm.AboutItems.Count + 1;
+            var adjust = Device.RuntimePlatform != Device.Android ? 1 : 0;
             behavior.listView.HeightRequest = behavior.ItemsCount*behavior.listView.RowHeight + adjust;
         }
     }

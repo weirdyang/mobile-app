@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LH.Forcas.Analytics;
@@ -34,13 +35,13 @@ namespace LH.Forcas.ViewModels.Accounts
             this.navigationService = navigationService;
             this.dialogService = dialogService;
             this.analyticsReporter = analyticsReporter;
+            
+            this.NavigateToAddAccountCommand = this.CreateAsyncCommand(this.navigationService.NavigateToAccountAdd);
+            this.NavigateToAccountDetailCommand = this.CreateAsyncCommand<Account>(this.NavigateToAccountDetail);
 
-            this.NavigateToAddAccountCommand = DelegateCommand.FromAsyncHandler(this.navigationService.NavigateToAccountAdd);
-            this.NavigateToAccountDetailCommand = DelegateCommand<Account>.FromAsyncHandler(this.NavigateToAccountDetail);
+            this.DeleteAccountCommand = this.CreateAsyncCommand<Account>(this.DeleteAccount);
 
-            this.DeleteAccountCommand = DelegateCommand<Account>.FromAsyncHandler(this.DeleteAccount);
-
-            this.RefreshAccountsCommand = DelegateCommand.FromAsyncHandler(this.RefreshAccounts);
+            this.RefreshAccountsCommand = this.CreateAsyncCommand(this.RefreshAccounts);
         }
 
         public bool NoAccountsTextDisplayed => (this.AccountGroups == null || this.AccountGroups.Count == 0) && !this.IsBusy;
@@ -59,19 +60,18 @@ namespace LH.Forcas.ViewModels.Accounts
             private set { this.SetProperty(ref this.accountGroups, value); }
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
             await this.RefreshAccounts();
         }
 
-        protected override void OnPropertyChanged(string propertyName = null)
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
         {
-            // ReSharper disable once ExplicitCallerInfoArgument
-            base.OnPropertyChanged(propertyName);
+            base.OnPropertyChanged(args);
 
-            if (propertyName == nameof(this.IsBusy) || propertyName == nameof(this.AccountGroups))
+            if (args.PropertyName == nameof(this.IsBusy) || args.PropertyName == nameof(this.AccountGroups))
             {
-                this.OnPropertyChanged(nameof(this.NoAccountsTextDisplayed));
+                this.RaisePropertyChanged(nameof(this.NoAccountsTextDisplayed));
             }
         }
 

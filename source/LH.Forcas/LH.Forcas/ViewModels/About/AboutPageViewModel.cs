@@ -34,14 +34,14 @@ namespace LH.Forcas.ViewModels.About
                 if (this.SetProperty(ref this.dependencies, value))
                 {
                     // ReSharper disable once ExplicitCallerInfoArgument
-                    this.OnPropertyChanged(nameof(this.DependenciesCount));
+                    this.RaisePropertyChanged(nameof(this.DependenciesCount));
                 }
             }
         }
 
         public int DependenciesCount => this.Dependencies?.Count ?? 0;
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
             await this.RunAsyncWithBusyIndicator((Action)this.LoadAppInfo);
         }

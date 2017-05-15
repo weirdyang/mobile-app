@@ -28,10 +28,10 @@
             this.accountingService = accountingService;
             this.dialogService = dialogService;
 
-            this.NavigateToAddCategoryCommand = DelegateCommand.FromAsyncHandler(navigationService.NavigateToCategoriesAdd);
+            this.NavigateToAddCategoryCommand = this.CreateAsyncCommand(navigationService.NavigateToCategoriesAdd);
 
-            this.DeleteCategoryCommand = DelegateCommand<Category>.FromAsyncHandler(this.DeleteCategory);
-            this.RefreshCategoriesCommand = new DelegateCommand(this.RefreshCategories);
+            this.DeleteCategoryCommand = this.CreateAsyncCommand<Category>(this.DeleteCategory);
+            this.RefreshCategoriesCommand = this.CreateAsyncCommand((Action)this.RefreshCategories);
         }
 
         public DelegateCommand NavigateToAddCategoryCommand { get; private set; }
@@ -46,21 +46,17 @@
             private set { this.SetProperty(ref this.categories, value); }
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
-            this.RefreshCategories();
+            await this.RunAsyncWithBusyIndicator((Action)this.RefreshCategories);
         }
 
         private void RefreshCategories()
         {
-            this.RunAsyncWithBusyIndicator(() =>
-                                           {
-                                               this.Categories = this.accountingService.GetCategories()
-                                                    .OrderBy(x => x.Name)
-                                                    .SelectMany(this.FlattenCategories)
-                                                    .ToArray();
-
-                                           });
+            this.Categories = this.accountingService.GetCategories()
+                .OrderBy(x => x.Name)
+                .SelectMany(this.FlattenCategories)
+                .ToArray();
         }
 
         private async Task DeleteCategory(Category category)

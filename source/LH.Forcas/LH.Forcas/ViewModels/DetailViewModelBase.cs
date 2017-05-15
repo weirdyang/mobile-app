@@ -19,7 +19,7 @@
         {
             this.DialogService = dialogService;
 
-            this.SaveCommand = DelegateCommand.FromAsyncHandler(this.Save, this.CanSave);
+            this.SaveCommand = this.CreateAsyncCommand(this.Save, this.CanSave);
         }
 
         public bool IsDirty { get; protected set; }
@@ -61,7 +61,7 @@
                     this.SaveCommand.RaiseCanExecuteChanged();
 
                     this.IsDirty = true;
-                    this.OnPropertyChanged(nameof(this.IsDirty));
+                    this.RaisePropertyChanged(nameof(this.IsDirty));
                 }
             }
 
@@ -108,7 +108,7 @@
             }
 
             // ReSharper disable once ExplicitCallerInfoArgument
-            this.OnPropertyChanged(nameof(this.ValidationResults));
+            this.RaisePropertyChanged(nameof(this.ValidationResults));
         }
     }
 }

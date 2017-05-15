@@ -126,9 +126,9 @@ namespace LH.Forcas.ViewModels.Accounts
             {
                 this.SetProperty(ref this.selectedAccountType, value);
 
-                this.OnPropertyChanged(() => this.SelectedCountry);
-                this.OnPropertyChanged(() => this.SelectedBank);
-                this.OnPropertyChanged(() => this.SelectedRemoteAccount);
+                this.RaisePropertyChanged(nameof(this.SelectedCountry));
+                this.RaisePropertyChanged(nameof(this.SelectedBank));
+                this.RaisePropertyChanged(nameof(this.SelectedRemoteAccount));
             }
         }
 
@@ -159,9 +159,9 @@ namespace LH.Forcas.ViewModels.Accounts
             set { this.SetProperty(ref this.remoteAccounts, value); }
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
-            this.RunAsyncWithBusyIndicator(() => this.LoadData(parameters));
+            await this.RunAsyncWithBusyIndicator(() => this.LoadData(parameters));
         }
 
         private async Task LoadData(NavigationParameters parameters)

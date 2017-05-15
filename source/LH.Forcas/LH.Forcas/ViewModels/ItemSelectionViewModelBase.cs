@@ -27,11 +27,9 @@
 
         protected virtual bool RequiresDataRefresh => false;
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override async Task OnNavigatingToAsync(NavigationParameters parameters)
         {
-            base.OnNavigatedTo(parameters);
-
-            this.RunAsyncWithBusyIndicator(() => this.Items = this.GetSelectionItems().Result);
+            await this.RunAsyncWithBusyIndicator(() => this.Items = this.GetSelectionItems().Result);
         }
 
         protected abstract Task<IEnumerable<TItem>> GetSelectionItems();

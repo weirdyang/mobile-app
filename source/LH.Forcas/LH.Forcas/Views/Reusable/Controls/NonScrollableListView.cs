@@ -32,7 +32,7 @@ namespace LH.Forcas.Views.Reusable.Controls
                 throw new InvalidOperationException("The RowHeight has to be set explicitly to use the NonScrollableListView control.");
             }
 
-            var adjust = Device.OS != TargetPlatform.Android ? -1 : listView.ItemsCount / 3 - 1;
+            var adjust = Device.RuntimePlatform != Device.Android ? -1 : listView.ItemsCount / 3 - 1;
             listView.HeightRequest = listView.ItemsCount * listView.RowHeight + adjust;
         }
     }

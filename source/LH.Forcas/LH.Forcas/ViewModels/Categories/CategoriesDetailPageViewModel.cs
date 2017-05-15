@@ -9,12 +9,7 @@
         public CategoriesDetailPageViewModel(IPageDialogService dialogService) 
             : base(dialogService)
         {
-        }
-
-        public override void OnNavigatedTo(NavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-        }
+        }        
 
         protected override Task Save()
         {

@@ -57,7 +57,7 @@ namespace LH.Forcas.ViewModels.Dashboard
             set
             {
                 this.isSecondSectionVisible = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
@@ -67,7 +67,7 @@ namespace LH.Forcas.ViewModels.Dashboard
             set
             {
                 this.isThirdSectionVisible = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
@@ -85,7 +85,7 @@ namespace LH.Forcas.ViewModels.Dashboard
             set
             {
                 this.selected = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
