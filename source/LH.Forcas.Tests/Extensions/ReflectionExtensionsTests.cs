@@ -1,5 +1,6 @@
 ﻿using LH.Forcas.Extensions;
 using NUnit.Framework;
+using System.Reflection;
 
 namespace LH.Forcas.Tests.Extensions
 {
@@ -22,7 +23,7 @@ namespace LH.Forcas.Tests.Extensions
             public void ThenShouldReturnCorrectContent()
             {
                 var resourceName = $"{this.GetType().Namespace}.TestResource.txt";
-                var content = this.GetType().Assembly.GetManifestResourceContentAsText(resourceName);
+                var content = this.GetType().GetTypeInfo().Assembly.GetManifestResourceContentAsText(resourceName);
 
                 Assert.AreEqual("Dummy Resource Content", content);
             }

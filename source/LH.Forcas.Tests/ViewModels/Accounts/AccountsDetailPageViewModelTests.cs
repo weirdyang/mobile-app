@@ -1,5 +1,6 @@
 ﻿using LH.Forcas.Banking;
 using LH.Forcas.RefDataContract;
+using Octokit;
 
 namespace LH.Forcas.Tests.ViewModels.Accounts
 {
@@ -108,7 +109,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
                 this.AccountingServiceMock.Setup(x => x.SaveAccount(It.Is<Account>(acc => this.CompareAccounts(validAccount, acc, true))));
                 this.AccountingServiceMock.Setup(x => x.GetAvailableRemoteAccounts(It.IsAny<string>())).ReturnsAsync(new[] { this.GetRemoteAccount() });
 
-                this.ViewModel.OnNavigatedTo(null);
+                this.ViewModel.OnNavigatingTo(null);
 
                 var bank = this.ViewModel.Banks.Single(x => x.BankId == validAccount.BankId);
 
@@ -151,7 +152,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
 
                 this.AccountingServiceMock.Setup(x => x.SaveAccount(It.Is<Account>(acc => this.CompareAccounts(validAccount, acc, true))));
 
-                this.ViewModel.OnNavigatedTo(null);
+                this.ViewModel.OnNavigatingTo(null);
 
                 this.ViewModel.SelectedAccountType = typeof(CashAccount);
                 this.ViewModel.AccountName = validAccount.Name;
@@ -202,7 +203,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             [Test]
             public void ShouldLoadAccountTypes()
             {
-                this.ViewModel.OnNavigatedTo(null);
+                this.ViewModel.OnNavigatingTo(null);
 
                 Assert.IsNotNull(this.ViewModel.AccountTypes);
                 Assert.AreEqual(2, this.ViewModel.AccountTypes.Count);
@@ -211,7 +212,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             [Test]
             public void ShouldLoadRefData()
             {
-                this.ViewModel.OnNavigatedTo(null);
+                this.ViewModel.OnNavigatingTo(null);
 
                 Assert.IsNotNull(this.ViewModel.Banks);
                 Assert.AreEqual(2, this.ViewModel.Banks.Count);
@@ -226,7 +227,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             [Test]
             public void PreferedCountryShouldBeSelectedWhenCreatingAccount()
             {
-                this.ViewModel.OnNavigatedTo(null);
+                this.ViewModel.OnNavigatingTo(null);
 
                 Assert.IsNotNull(this.ViewModel.SelectedCountry);
                 Assert.AreEqual("CZ", this.ViewModel.SelectedCountry.CountryId);
@@ -235,7 +236,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             [Test]
             public void ShouldSwitchToNewAccountModeIfNavigatedWithoutParams()
             {
-                this.ViewModel.OnNavigatedTo(null);
+                this.ViewModel.OnNavigatingTo(null);
 
                 Assert.IsNotEmpty(this.ViewModel.Title);
                 Assert.IsTrue(string.IsNullOrEmpty(this.ViewModel.AccountName));
@@ -270,7 +271,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
                 this.PageDialogServiceMock.Setup(x => x.DisplayAlertAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnAwaitable();
                 this.NavigationServiceMock.Setup(x => x.GoBackAsync(null, null, true)).ReturnsAsync(true);
 
-                this.ViewModel.OnNavigatedTo(parameters);
+                this.ViewModel.OnNavigatingTo(parameters);
 
                 this.PageDialogServiceMock.VerifyAll();
                 this.NavigationServiceMock.VerifyAll();
@@ -286,7 +287,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
                 this.PageDialogServiceMock.Setup(x => x.DisplayAlertAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnAwaitable();
                 this.NavigationServiceMock.Setup(x => x.GoBackAsync(null, null, true)).ReturnsAsync(true);
 
-                this.ViewModel.OnNavigatedTo(parameters);
+                this.ViewModel.OnNavigatingTo(parameters);
 
                 this.PageDialogServiceMock.VerifyAll();
                 this.NavigationServiceMock.VerifyAll();
@@ -299,7 +300,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             [Test]
             public void CashAccountValidationTest()
             {
-                this.ViewModel.OnNavigatedTo(null);
+                this.ViewModel.OnNavigatingTo(null);
 
                 this.ViewModel.TestPropertyValidation(x => x.SelectedAccountType, typeof(CashAccount), null);
 
@@ -312,7 +313,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             [Test]
             public void BankAccountValidationTest()
             {
-                this.ViewModel.OnNavigatedTo(null);
+                this.ViewModel.OnNavigatingTo(null);
 
                 this.ViewModel.TestPropertyValidation(x => x.SelectedAccountType, typeof(BankAccount), null);
 
@@ -338,7 +339,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
                 .Setup(x => x.GetAccount(this.AccountId))
                 .Returns(account);
 
-            this.ViewModel.OnNavigatedTo(parameters);
+            this.ViewModel.OnNavigatingTo(parameters);
         }
 
         private CashAccount GetValidCashAccount()

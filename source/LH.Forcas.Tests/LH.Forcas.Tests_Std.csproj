@@ -4,22 +4,25 @@
 	<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
     <DebugType>full</DebugType>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <RootNamespace>LH.Forcas</RootNamespace>
-    <AssemblyName>LH.Forcas</AssemblyName>
+    <RootNamespace>LH.Forcas.Tests</RootNamespace>
+    <AssemblyName>LH.Forcas.Tests</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Flurl.Http" Version="1.1.2" />
     <PackageReference Include="LH.BottomNavigationBar.XF" Version="1.0.30" />
     <PackageReference Include="LH.Forcas.RefDataContract" Version="1.0.55" />
     <PackageReference Include="LiteDB" Version="3.1.0" />
+    <PackageReference Include="Moq" Version="4.7.10" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
     <PackageReference Include="Octokit" Version="0.24.1-alpha0001" />
     <PackageReference Include="Polly" Version="5.1.0" />
     <PackageReference Include="Prism.Unity.Forms" Version="6.3.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="2.3.4.231" />
-	
-	
-    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
-    <EmbeddedResource Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
+	<PackageReference Include="NUnit" Version="3.6.0" />
+	<PackageReference Include="NUnit.Console" Version="3.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LH.Forcas\LH.Forcas\LH.Forcas.csproj" />
   </ItemGroup>
 </Project>

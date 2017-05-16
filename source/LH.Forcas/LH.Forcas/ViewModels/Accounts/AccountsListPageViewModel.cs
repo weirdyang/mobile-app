@@ -36,8 +36,8 @@ namespace LH.Forcas.ViewModels.Accounts
             this.dialogService = dialogService;
             this.analyticsReporter = analyticsReporter;
             
-            this.NavigateToAddAccountCommand = this.CreateAsyncCommand(this.navigationService.NavigateToAccountAdd);
-            this.NavigateToAccountDetailCommand = this.CreateAsyncCommand<Account>(this.NavigateToAccountDetail);
+            this.NavigateToAddAccountCommand = new AsyncDelegateCommand(this, this.navigationService.NavigateToAccountAdd);
+            this.NavigateToAccountDetailCommand = new AsyncDelegateCommand<Account>(this, this.NavigateToAccountDetail);
 
             this.DeleteAccountCommand = this.CreateAsyncCommand<Account>(this.DeleteAccount);
 

@@ -75,7 +75,7 @@ namespace LH.Forcas.ViewModels
         protected DelegateCommand<T> CreateAsyncCommand<T>(Func<T, Task> asyncCall, Func<T, bool> canExecute = null)
         {
             // How to pass the parameter and make it strongly typed?
-            Action<T> wrappedAction = (T param) => this.RunAsyncWithBusyIndicatorImpl(asyncCall, param);
+            Action<T> wrappedAction = (T param) => this.RunAsyncWithBusyIndicator(asyncCall, param);
 
             if (canExecute == null)
             {
@@ -85,17 +85,12 @@ namespace LH.Forcas.ViewModels
             return new DelegateCommand<T>(wrappedAction, canExecute);
         }
 
-        protected Task RunAsyncWithBusyIndicator(Action action)
+        public Task RunAsyncWithBusyIndicator(Action action)
         {
-            return this.RunAsyncWithBusyIndicatorImpl(() => Task.Run(action));
+            return this.RunAsyncWithBusyIndicator(() => Task.Run(action));
         }
 
-        protected Task RunAsyncWithBusyIndicator(Func<Task> asyncCall)
-        {
-            return this.RunAsyncWithBusyIndicatorImpl(asyncCall);
-        }
-
-        private Task RunAsyncWithBusyIndicatorImpl(Func<Task> innerAsyncCall)
+        public Task RunAsyncWithBusyIndicator(Func<Task> asyncCall)
         {
             this.IsBusy = true;
 
@@ -103,7 +98,7 @@ namespace LH.Forcas.ViewModels
             {
                 try
                 {
-                    await innerAsyncCall.Invoke();
+                    await asyncCall.Invoke();
                 }
                 finally
                 {
@@ -116,7 +111,7 @@ namespace LH.Forcas.ViewModels
             return result;
         }
 
-        private Task RunAsyncWithBusyIndicatorImpl<T>(Func<T, Task> innerAsyncCall, T param)
+        public Task RunAsyncWithBusyIndicator<T>(Func<T, Task> innerAsyncCall, T param)
         {
             this.IsBusy = true;
 

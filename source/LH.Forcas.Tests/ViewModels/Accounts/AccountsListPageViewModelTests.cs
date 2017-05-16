@@ -80,7 +80,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
                 this.NavigationServiceMock.Setup(x => x.NavigateAsync(It.Is<string>(uri => uri.Contains("Detail")), null, null, true)).ReturnAwaitable();
 
                 this.NavigateTo();
-                await this.ViewModel.NavigateToAddAccountCommand.Execute();
+                this.ViewModel.NavigateToAddAccountCommand.Execute();
 
                 this.NavigationServiceMock.VerifyAll();
             }
@@ -203,7 +203,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
 
         protected void NavigateTo()
         {
-            this.ViewModel.OnNavigatedToAsync(null).Wait();
+            this.ViewModel.OnNavigatingToAsync(null).Wait();
         }
     }
 }

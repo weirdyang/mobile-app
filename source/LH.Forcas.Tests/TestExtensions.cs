@@ -15,9 +15,7 @@
     {
         public static string GetContentFilePath(string fileName)
         {
-            var currentDir = Path.GetDirectoryName(typeof(TestExtensions).Assembly.Location);
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return Path.Combine(currentDir, fileName);
+            return Path.Combine(AppContext.BaseDirectory, fileName);
         }
 
         public static bool HasParameter<T>(this NavigationParameters parameters, string name, T expectedValue)
