@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using LH.Forcas.Analytics;
 using LH.Forcas.Domain.UserData;
 using LH.Forcas.Extensions;
@@ -75,12 +74,12 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
         public class WhenNavigatingAway : AccountsListPageViewModelTests
         {
             [Test]
-            public async Task ShouldNavigateWhenNavigateToAddCommandIsExecuted()
+            public void ShouldNavigateWhenNavigateToAddCommandIsExecuted()
             {
                 this.NavigationServiceMock.Setup(x => x.NavigateAsync(It.Is<string>(uri => uri.Contains("Detail")), null, null, true)).ReturnAwaitable();
 
                 this.NavigateTo();
-                this.ViewModel.NavigateToAddAccountCommand.Execute();
+                this.ViewModel.NavigateToAddAccountCommand.ExecuteSync();
 
                 this.NavigationServiceMock.VerifyAll();
             }
@@ -97,7 +96,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
                     null, 
                     true)).ReturnAwaitable();
 
-                this.ViewModel.NavigateToAccountDetailCommand.Execute(accountToNavigate);
+                this.ViewModel.NavigateToAccountDetailCommand.ExecuteSync(accountToNavigate);
 
                 this.NavigationServiceMock.VerifyAll();
             }
@@ -113,7 +112,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
 
                 this.NavigateTo();
 
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
+                this.ViewModel.DeleteAccountCommand.ExecuteSync(this.ViewModel.AccountGroups.First().First());
 
                 this.DialogServiceMock.VerifyAll();
             }
@@ -126,14 +125,14 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
 
                 this.NavigateTo();
 
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
+                this.ViewModel.DeleteAccountCommand.ExecuteSync(this.ViewModel.AccountGroups.First().First());
 
                 this.DialogServiceMock.VerifyAll();
                 this.AccountingServiceMock.Verify(x => x.DeleteAccount(It.IsAny<Guid>()), Times.Never);
             }
 
             [Test]
-            public async Task ShouldDeleteAccountIfConfirmed()
+            public void ShouldDeleteAccountIfConfirmed()
             {
                 this.NavigateTo();
                 var accountId = this.ViewModel.AccountGroups.First().First().Id;
@@ -141,7 +140,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
                 this.SetupDeleteConfirm(true);
                 this.AccountingServiceMock.Setup(x => x.DeleteAccount(It.Is<Guid>(id => id == accountId)));
                 
-                await this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
+                this.ViewModel.DeleteAccountCommand.ExecuteSync(this.ViewModel.AccountGroups.First().First());
                 
                 this.DialogServiceMock.VerifyAll();
                 this.AccountingServiceMock.VerifyAll();
@@ -160,7 +159,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
 
                 this.NavigateTo();
 
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
+                this.ViewModel.DeleteAccountCommand.ExecuteSync(this.ViewModel.AccountGroups.First().First());
 
                 this.DialogServiceMock.VerifyAll();
             }
@@ -175,7 +174,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
 
                 this.NavigateTo();
 
-                this.ViewModel.DeleteAccountCommand.Execute(this.ViewModel.AccountGroups.First().First());
+                this.ViewModel.DeleteAccountCommand.ExecuteSync(this.ViewModel.AccountGroups.First().First());
 
                 this.AnalyticsReporterMock.VerifyAll();
             }
@@ -184,7 +183,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             public void ShouldIgnoreCommandCalledWithoutParameter()
             {
                 this.NavigateTo();
-                this.ViewModel.DeleteAccountCommand.Execute(null);
+                this.ViewModel.DeleteAccountCommand.ExecuteSync(null);
 
                 this.AccountingServiceMock.VerifyAll();
                 this.DialogServiceMock.VerifyAll();

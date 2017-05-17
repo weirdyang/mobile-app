@@ -1,15 +1,15 @@
 ﻿{
   "dependencies": {
-    "LiteDB": "3.0.1",
+    "LiteDB": "3.1.0",
     "Microsoft.Bcl.Async": "1.0.168",
     "Microsoft.Bcl.Build": "1.0.21",
     "Microsoft.Net.Http": "2.2.29",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
-    "Prism.Core": "6.2.0",
-    "Prism.Forms": "6.2.0",
-    "Prism.Unity.Forms": "6.2.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
+    "Prism.Core": "6.3.0",
+    "Prism.Forms": "6.3.0",
+    "Prism.Unity.Forms": "6.3.0",
     "Xam.Plugins.Forms.ImageCircle": "1.8.1",
-    "Xamarin.Forms": "2.3.3.193"
+    "Xamarin.Forms": "2.3.4.247"
   },
   "frameworks": {
     "uap10.0": {}

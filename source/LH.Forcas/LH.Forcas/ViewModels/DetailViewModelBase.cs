@@ -19,7 +19,7 @@
         {
             this.DialogService = dialogService;
 
-            this.SaveCommand = this.CreateAsyncCommand(this.Save, this.CanSave);
+            this.SaveCommand = new AsyncDelegateCommand(this, this.Save, this.CanSave);
         }
 
         public bool IsDirty { get; protected set; }

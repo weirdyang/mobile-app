@@ -8,15 +8,15 @@ namespace LH.Forcas.ViewModels
     {
         public MorePageViewModel(INavigationService navigationService)
         {
-            this.NavigateToPreferencesCommand = this.CreateAsyncCommand(async () => await navigationService.NavigateToPreferences());
-            this.NavigateToAboutCommand = this.CreateAsyncCommand(async () => await navigationService.NavigateToAbout());
-            this.NavigateToLicenseCommand = this.CreateAsyncCommand(async () => await navigationService.NavigateToLicense());
+            this.NavigateToPreferencesCommand = new AsyncDelegateCommand(this, navigationService.NavigateToPreferences);
+            this.NavigateToAboutCommand = new AsyncDelegateCommand(this, navigationService.NavigateToAbout);
+            this.NavigateToLicenseCommand = new AsyncDelegateCommand(this, navigationService.NavigateToLicense);
         }
 
-        public DelegateCommand NavigateToPreferencesCommand { get; private set; }
+        public DelegateCommand NavigateToPreferencesCommand { get; }
 
-        public DelegateCommand NavigateToAboutCommand { get; private set; }
+        public DelegateCommand NavigateToAboutCommand { get; }
 
-        public DelegateCommand NavigateToLicenseCommand { get; private set; }
+        public DelegateCommand NavigateToLicenseCommand { get; }
     }
 }

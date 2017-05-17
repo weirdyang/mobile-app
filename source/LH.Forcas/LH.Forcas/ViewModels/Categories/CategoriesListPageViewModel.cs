@@ -28,10 +28,10 @@
             this.accountingService = accountingService;
             this.dialogService = dialogService;
 
-            this.NavigateToAddCategoryCommand = this.CreateAsyncCommand(navigationService.NavigateToCategoriesAdd);
+            this.NavigateToAddCategoryCommand = new AsyncDelegateCommand(this, navigationService.NavigateToCategoriesAdd);
 
-            this.DeleteCategoryCommand = this.CreateAsyncCommand<Category>(this.DeleteCategory);
-            this.RefreshCategoriesCommand = this.CreateAsyncCommand((Action)this.RefreshCategories);
+            this.DeleteCategoryCommand = new AsyncDelegateCommand<Category>(this, this.DeleteCategory);
+            this.RefreshCategoriesCommand = new AsyncDelegateCommand(this, (Action)this.RefreshCategories);
         }
 
         public DelegateCommand NavigateToAddCategoryCommand { get; private set; }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 
@@ -44,45 +43,6 @@ namespace LH.Forcas.ViewModels
         public virtual Task OnNavigatingToAsync(NavigationParameters parameters)
         {
             return Task.FromResult(0);
-        }
-
-        protected DelegateCommand CreateAsyncCommand(Func<Task> asyncCall, Func<bool> canExecute = null)
-        {
-            // How to pass the parameter and make it strongly typed?
-            Action wrappedAction = () => this.RunAsyncWithBusyIndicator(asyncCall);
-
-            if (canExecute == null)
-            {
-                return new DelegateCommand(wrappedAction);
-            }
-
-            return new DelegateCommand(wrappedAction, canExecute);
-        }
-
-        protected DelegateCommand CreateAsyncCommand(Action call, Func<bool> canExecute = null)
-        {
-            // How to pass the parameter and make it strongly typed?
-            Action wrappedAction = () => this.RunAsyncWithBusyIndicator(call);
-
-            if (canExecute == null)
-            {
-                return new DelegateCommand(wrappedAction);
-            }
-
-            return new DelegateCommand(wrappedAction, canExecute);
-        }
-
-        protected DelegateCommand<T> CreateAsyncCommand<T>(Func<T, Task> asyncCall, Func<T, bool> canExecute = null)
-        {
-            // How to pass the parameter and make it strongly typed?
-            Action<T> wrappedAction = (T param) => this.RunAsyncWithBusyIndicator(asyncCall, param);
-
-            if (canExecute == null)
-            {
-                return new DelegateCommand<T>(param => wrappedAction((T)param));
-            }
-
-            return new DelegateCommand<T>(wrappedAction, canExecute);
         }
 
         public Task RunAsyncWithBusyIndicator(Action action)

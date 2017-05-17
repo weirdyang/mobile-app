@@ -9,7 +9,6 @@ using LH.Forcas.Domain.UserData;
 using LH.Forcas.Extensions;
 using LH.Forcas.Localization;
 using LH.Forcas.Services;
-using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 
@@ -39,20 +38,20 @@ namespace LH.Forcas.ViewModels.Accounts
             this.NavigateToAddAccountCommand = new AsyncDelegateCommand(this, this.navigationService.NavigateToAccountAdd);
             this.NavigateToAccountDetailCommand = new AsyncDelegateCommand<Account>(this, this.NavigateToAccountDetail);
 
-            this.DeleteAccountCommand = this.CreateAsyncCommand<Account>(this.DeleteAccount);
+            this.DeleteAccountCommand = new AsyncDelegateCommand<Account>(this, this.DeleteAccount);
 
-            this.RefreshAccountsCommand = this.CreateAsyncCommand(this.RefreshAccounts);
+            this.RefreshAccountsCommand = new AsyncDelegateCommand(this, this.RefreshAccounts);
         }
 
         public bool NoAccountsTextDisplayed => (this.AccountGroups == null || this.AccountGroups.Count == 0) && !this.IsBusy;
 
-        public DelegateCommand NavigateToAddAccountCommand { get; private set; }
+        public AsyncDelegateCommand NavigateToAddAccountCommand { get; }
 
-        public DelegateCommand<Account> NavigateToAccountDetailCommand { get; private set; }
+        public AsyncDelegateCommand<Account> NavigateToAccountDetailCommand { get; }
 
-        public DelegateCommand RefreshAccountsCommand { get; private set; }
+        public AsyncDelegateCommand RefreshAccountsCommand { get; }
 
-        public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
+        public AsyncDelegateCommand<Account> DeleteAccountCommand { get; }
 
         public ObservableCollection<AccountsGroup> AccountGroups
         {

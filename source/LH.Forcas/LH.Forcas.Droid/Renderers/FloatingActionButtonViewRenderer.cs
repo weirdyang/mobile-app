@@ -74,7 +74,7 @@ namespace LH.Forcas.Droid.Renderers
                 case nameof(FloatingActionButtonView.BackgroundColorPressed):
                     if (this.Element.BackgroundColorPressed.HasValue)
                     {
-                        this.button.RippleColor = this.Element.BackgroundColorPressed.Value.ToAndroid();
+                        this.button.SetRippleColor(this.Element.BackgroundColorPressed.Value.ToAndroid());
                     }
                     break;
 

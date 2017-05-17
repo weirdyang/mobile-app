@@ -1,4 +1,6 @@
-﻿namespace LH.Forcas.Tests
+﻿using System.Threading.Tasks;
+
+namespace LH.Forcas.Tests
 {
     using System;
     using System.IO;
@@ -93,7 +95,7 @@
 
             while (viewModel.IsBusy && DateTime.Now - start <= timeout)
             {
-                Thread.SpinWait(1000);
+                Task.Delay(100).Wait();
             }
         }
     }
