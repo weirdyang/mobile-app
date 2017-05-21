@@ -17,33 +17,32 @@ namespace LH.Forcas.Storage
 
         public UserSettings GetUserSettings()
         {
-            return this.dbManager.Database.SingleOrDefault<UserSettings>(UserSettings.BsonId);
+            return this.dbManager.LiteRepository.SingleOrDefault<UserSettings>(x => x.Id == UserSettings.SingleId);
         }
 
         public void SaveUserSettings(UserSettings settings)
         {
-            this.dbManager.Database.GetCollection<UserSettings>().Upsert(settings);
+            this.dbManager.LiteRepository.Upsert(settings);
         }
 
         public IList<Account> GetAccounts()
         {
-            return this.dbManager.Database.Fetch<Account>();
+            return this.dbManager.LiteRepository.Fetch<Account>();
         }
 
         public void SaveAccount(Account account)
         {
-            this.dbManager.Database.GetCollection<Account>().Upsert(account);
+            this.dbManager.LiteRepository.Upsert(account);
         }
 
         public void SoftDeleteAccount(Guid id)
         {
-            using (var transaction = this.dbManager.Database.BeginTrans())
+            using (var transaction = this.dbManager.LiteRepository.BeginTrans())
             {
-                var collection = this.dbManager.Database.GetCollection<Account>();
-                var account = collection.FindById(new BsonValue(id));
+                var account = this.dbManager.LiteRepository.SingleById<Account>(new BsonValue(id));
                 account.IsDeleted = true;
 
-                collection.Update(account);
+                this.dbManager.LiteRepository.Update(account);
                 transaction.Commit();
             }
         }
@@ -66,10 +65,10 @@ namespace LH.Forcas.Storage
 #if DEBUG
         public void DeleteAll()
         {
-            this.dbManager.Database.DeleteAll<Account>();
-            this.dbManager.Database.DeleteAll<Category>();
-            this.dbManager.Database.DeleteAll<Budget>();
-            this.dbManager.Database.DeleteAll<UserSettings>();
+            this.dbManager.LiteRepository.DeleteAll<Account>();
+            this.dbManager.LiteRepository.DeleteAll<Category>();
+            this.dbManager.LiteRepository.DeleteAll<Budget>();
+            this.dbManager.LiteRepository.DeleteAll<UserSettings>();
         }
 #endif
     }

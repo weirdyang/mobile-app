@@ -1,8 +1,8 @@
 ﻿using LH.Forcas.Banking.Exceptions;
 using LH.Forcas.Banking.Providers;
 using LH.Forcas.Domain.UserData.Authorization;
-using Microsoft.Practices.Unity;
 using Moq;
+using MvvmCross.Platform.IoC;
 using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Banking.Providers
@@ -11,12 +11,13 @@ namespace LH.Forcas.Tests.Banking.Providers
     public class BankProviderFactoryTests
     {
         protected BankProviderFactory Factory;
-        protected Mock<IUnityContainer> UnityContainerMock;
+        protected Mock<IMvxIoCProvider> IoCProviderMock;
 
         [SetUp]
         public void Setup()
         {
-            this.Factory = new BankProviderFactory(new UnityContainer());
+            this.IoCProviderMock = new Mock<IMvxIoCProvider>();
+            this.Factory = new BankProviderFactory(this.IoCProviderMock.Object);
         }
 
         public class WhenCreatingAuthorization : BankProviderFactoryTests
@@ -25,11 +26,16 @@ namespace LH.Forcas.Tests.Banking.Providers
             public void ShouldCreateAuthorizationViaContainer()
             {
                 this.Factory.Initialize(new[] { typeof(TestsBankProvider) });
+                this.IoCProviderMock
+                    .Setup(x => x.IoCConstruct(typeof(StaticTokenAuthorization)))
+                    .Returns(new StaticTokenAuthorization());
 
                 var auth = this.Factory.CreateAuthorization("RB");
 
-                Assert.IsNotNull(auth);
-                Assert.IsInstanceOf<StaticTokenAuthorization>(auth);
+                Assert.NotNull(auth);
+                AssertEx.IsOfType<StaticTokenAuthorization>(auth);
+
+                this.IoCProviderMock.VerifyAll();
             }
 
             [Test]
@@ -42,15 +48,19 @@ namespace LH.Forcas.Tests.Banking.Providers
         public class WhenCreatingProvider : BankProviderFactoryTests
         {
             [Test]
-            public void ShouldCreateProviderViaContainer()
+            public void ShouldCreateProviderViaFactory()
             {
-                // this.UnityContainerMock.Setup(x => x.Resolve(typeof(IBankProvider), "RB")).Returns(new TestsBankProvider());
-
                 this.Factory.Initialize(new[] { typeof(TestsBankProvider) });
+                this.IoCProviderMock
+                    .Setup(x => x.IoCConstruct(typeof(TestsBankProvider)))
+                    .Returns(new TestsBankProvider());
+
                 var provider = this.Factory.CreateProvider("RB");
 
-                Assert.IsNotNull(provider);
-                Assert.IsInstanceOf<TestsBankProvider>(provider);
+                Assert.NotNull(provider);
+                AssertEx.IsOfType<TestsBankProvider>(provider);
+
+                this.IoCProviderMock.VerifyAll();
             }
 
             [Test]
@@ -59,7 +69,5 @@ namespace LH.Forcas.Tests.Banking.Providers
                 Assert.Throws<BankNotSupportedException>(() => this.Factory.CreateProvider("NotExistingId"));
             }
         }
-
-        // TODO: Add edge cases - invalid id
     }
 }

@@ -1,7 +1,4 @@
 ﻿using LH.Forcas.iOS.Storage;
-using Xamarin.Forms;
-
-[assembly:Dependency(typeof(IosPathResolver))]
 
 namespace LH.Forcas.iOS.Storage
 {

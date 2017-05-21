@@ -1,37 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LH.Forcas.Domain.RefData;
 using LH.Forcas.Events;
 using LH.Forcas.RefDataContract;
 using LH.Forcas.Storage;
 using LH.Forcas.Storage.Caching;
 using Moq;
+using MvvmCross.Plugins.Messenger;
 using NUnit.Framework;
-using Prism.Events;
 
 namespace LH.Forcas.Tests.Storage.Caching
 {
     [TestFixture]
     public class RefDataRepositoryCacheTests
     {
+        private Action<TrimMemoryRequestedEvent> trimMemoryEventCallback;
+
         protected RefDataRepositoryCache Cache;
         protected Mock<IRefDataRepository> RepositoryMock;
-        protected Mock<IEventAggregator> EventAggregatorMock;
-        protected TrimMemoryRequestedEvent TrimMemoryEvent;
+        protected Mock<IMvxMessenger> MessengerMock;
 
         [SetUp]
         public void Setup()
         {
             this.RepositoryMock = new Mock<IRefDataRepository>();
-            this.EventAggregatorMock = new Mock<IEventAggregator>();
-            this.TrimMemoryEvent = new TrimMemoryRequestedEvent();
 
-            this.EventAggregatorMock
-                .Setup(x => x.GetEvent<TrimMemoryRequestedEvent>())
-                .Returns(this.TrimMemoryEvent);
-            
+            this.MessengerMock = new Mock<IMvxMessenger>();
+            this.MessengerMock.SetupMessengerSubscribe<TrimMemoryRequestedEvent>(action => this.trimMemoryEventCallback = action);
+
             this.Cache = new RefDataRepositoryCache(
                 this.RepositoryMock.Object,
-                this.EventAggregatorMock.Object);
+                this.MessengerMock.Object);
+        }
+
+        protected void PublishTrimMemoryEvent(TrimMemorySeverity severity)
+        {
+            var evt = new TrimMemoryRequestedEvent(this)
+            {
+                Severity = severity
+            };
+            
+            this.trimMemoryEventCallback.Invoke(evt);
         }
 
         public class WhenHandlingBanks : RefDataRepositoryCacheTests
@@ -242,7 +251,7 @@ namespace LH.Forcas.Tests.Storage.Caching
                 this.Cache.GetCountries();
                 this.Cache.GetCurrencies();
 
-                this.TrimMemoryEvent.Publish(TrimMemorySeverity.ReleaseAll);
+                this.PublishTrimMemoryEvent(TrimMemorySeverity.ReleaseAll);
 
                 this.Cache.GetBanks();
                 this.Cache.GetCountries();
@@ -264,7 +273,7 @@ namespace LH.Forcas.Tests.Storage.Caching
                 this.Cache.GetCountries();
                 this.Cache.GetCurrencies();
 
-                this.TrimMemoryEvent.Publish(TrimMemorySeverity.ReleaseLevel);
+                this.PublishTrimMemoryEvent(TrimMemorySeverity.ReleaseLevel);
 
                 this.Cache.GetBanks();
                 this.Cache.GetCountries();

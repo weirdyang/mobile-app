@@ -1,9 +1,10 @@
-﻿namespace LH.Forcas.Tests.Sync.RefData
+﻿using NUnit.Framework;
+
+namespace LH.Forcas.Tests.Sync.RefData
 {
     using System;
     using Forcas.Sync.RefData;
     using Moq;
-    using NUnit.Framework;
     using Octokit;
 
     [TestFixture]
@@ -32,8 +33,8 @@
 
                 var connection = (Connection)client.Connection;
 
-                Assert.IsTrue(connection.UserAgent.Contains(ExpectedVersion.ToString()));
-                Assert.IsTrue(connection.UserAgent.Contains(GitHubClientFactory.GitHubProductName));
+                AssertEx.Contains(ExpectedVersion.ToString(), connection.UserAgent);
+                AssertEx.Contains(GitHubClientFactory.GitHubProductName, connection.UserAgent);
             }
         }
     }

@@ -5,33 +5,40 @@ using LH.Forcas.Events;
 using LH.Forcas.Storage;
 using LH.Forcas.Storage.Caching;
 using Moq;
+using MvvmCross.Plugins.Messenger;
 using NUnit.Framework;
-using Prism.Events;
 
 namespace LH.Forcas.Tests.Storage.Caching
 {
     [TestFixture]
     public class UserDataRepositoryCacheTests
     {
+        private Action<TrimMemoryRequestedEvent> trimMemoryEventCallback;
+
         protected UserDataRepositoryCache Cache;
         protected Mock<IUserDataRepository> RepositoryMock;
-        protected Mock<IEventAggregator> EventAggregatorMock;
-        protected TrimMemoryRequestedEvent TrimMemoryEvent;
+        protected Mock<IMvxMessenger> MessengerMock;
 
         [SetUp]
         public void Setup()
         {
             this.RepositoryMock = new Mock<IUserDataRepository>();
-            this.EventAggregatorMock = new Mock<IEventAggregator>();
-            this.TrimMemoryEvent = new TrimMemoryRequestedEvent();
-
-            this.EventAggregatorMock
-                .Setup(x => x.GetEvent<TrimMemoryRequestedEvent>())
-                .Returns(this.TrimMemoryEvent);
+            this.MessengerMock = new Mock<IMvxMessenger>();
+            this.MessengerMock.SetupMessengerSubscribe<TrimMemoryRequestedEvent>(action => this.trimMemoryEventCallback = action);
 
             this.Cache = new UserDataRepositoryCache(
                 this.RepositoryMock.Object,
-                this.EventAggregatorMock.Object);
+                this.MessengerMock.Object);
+        }
+
+        protected void PublishTrimMemoryEvent(TrimMemorySeverity severity)
+        {
+            var evt = new TrimMemoryRequestedEvent(this)
+            {
+                Severity = severity
+            };
+
+            this.trimMemoryEventCallback.Invoke(evt);
         }
 
         public class WhenHandlingUserSettings : UserDataRepositoryCacheTests
@@ -138,7 +145,7 @@ namespace LH.Forcas.Tests.Storage.Caching
 
                 this.Cache.GetUserSettings();
 
-                this.TrimMemoryEvent.Publish(TrimMemorySeverity.ReleaseAll);
+                this.PublishTrimMemoryEvent(TrimMemorySeverity.ReleaseAll);
 
                 this.Cache.GetUserSettings();
 

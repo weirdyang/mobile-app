@@ -1,24 +1,37 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Threading.Tasks;
 using LH.Forcas.Extensions;
-using Prism.Navigation;
+using MvvmCross.Core.ViewModels;
 
 namespace LH.Forcas.ViewModels.About
 {
-    public class LicensePageViewModel : ViewModelBase
+    public class LicensePageViewModel : MvxViewModel
     {
         private string licenseText;
-        
-        public string LicenseText
+
+        public LicensePageViewModel()
         {
-            get { return this.licenseText; }
-            set { this.SetProperty(ref this.licenseText, value); }
+            this.ActivityIndicatorState = new ActivityIndicatorState();
         }
 
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
+        public string LicenseText
         {
-            await this.RunAsyncWithBusyIndicator((Action)this.LoadLicenseText);
+            get => this.licenseText;
+            set => this.SetProperty(ref this.licenseText, value);
+        }
+
+        public ActivityIndicatorState ActivityIndicatorState { get; }
+
+        public override void Appearing()
+        {
+#pragma warning disable 4014
+            this.AppearingAsync();
+#pragma warning restore 4014
+        }
+
+        public async Task AppearingAsync()
+        {
+            await this.ActivityIndicatorState.RunWithIndicator(this.LoadLicenseText);
         }
 
         private void LoadLicenseText()
@@ -28,7 +41,7 @@ namespace LH.Forcas.ViewModels.About
 
             var resourceName = type.GetSiblingResourceName("License.html");
 
-            this.LicenseText = assembly.GetManifestResourceContentAsText(resourceName); ;
+            this.LicenseText = assembly.GetManifestResourceContentAsText(resourceName);
         }
     }
 }

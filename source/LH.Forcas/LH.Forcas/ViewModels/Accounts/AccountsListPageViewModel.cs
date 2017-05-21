@@ -3,90 +3,92 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Chance.MvvmCross.Plugins.UserInteraction;
 using LH.Forcas.Analytics;
 using LH.Forcas.Domain.UserData;
-using LH.Forcas.Extensions;
 using LH.Forcas.Localization;
 using LH.Forcas.Services;
-using Prism.Commands;
-using Prism.Navigation;
-using Prism.Services;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
 
 namespace LH.Forcas.ViewModels.Accounts
 {
-    public class AccountsListPageViewModel : ViewModelBase
+    public class AccountsListPageViewModel : MvxViewModel
     {
-        private readonly INavigationService navigationService;
-        private readonly IPageDialogService dialogService;
+        private readonly IUserInteraction userInteraction;
         private readonly IAnalyticsReporter analyticsReporter;
+        private readonly IMvxNavigationService navigationService;
         private readonly IAccountingService accountingService;
         private readonly Type[] accountTypeOrder = { typeof(CashAccount), typeof(CheckingAccount), typeof(CreditCardAccount), typeof(SavingsAccount), typeof(LoanAccount), typeof(InvestmentAccount) };
 
         private ObservableCollection<AccountsGroup> accountGroups;
 
         public AccountsListPageViewModel(
+            IMvxNavigationService navigationService,
             IAccountingService accountingService,
-            INavigationService navigationService,
-            IPageDialogService dialogService,
+            IUserInteraction userInteraction,
             IAnalyticsReporter analyticsReporter)
         {
-            this.accountingService = accountingService;
             this.navigationService = navigationService;
-            this.dialogService = dialogService;
+            this.accountingService = accountingService;
+            this.userInteraction = userInteraction;
             this.analyticsReporter = analyticsReporter;
 
-            this.NavigateToAddAccountCommand = DelegateCommand.FromAsyncHandler(this.navigationService.NavigateToAccountAdd);
-            this.NavigateToAccountDetailCommand = DelegateCommand<Account>.FromAsyncHandler(this.NavigateToAccountDetail);
+            this.ActivityIndicatorState = new ActivityIndicatorState();
 
-            this.DeleteAccountCommand = DelegateCommand<Account>.FromAsyncHandler(this.DeleteAccount);
+            this.RefreshAccountsCommand = new MvxAsyncCommand(this.ActivityIndicatorState.WrapWithIndicator((Action)this.RefreshAccounts));
+            this.NavigateToAddAccountCommand = new MvxAsyncCommand(this.ActivityIndicatorState.WrapWithIndicator(navigationService.Navigate<AccountsDetailPageViewModel>));
 
-            this.RefreshAccountsCommand = DelegateCommand.FromAsyncHandler(this.RefreshAccounts);
+            this.NavigateToAccountDetailCommand = new MvxAsyncCommand<Account>(this.ActivityIndicatorState.WrapWithIndicator<Account>(this.NavigateToAccountDetail));
+            this.DeleteAccountCommand = new MvxAsyncCommand<Account>(this.ActivityIndicatorState.WrapWithIndicator<Account>(this.DeleteAccount));
         }
 
-        public bool NoAccountsTextDisplayed => (this.AccountGroups == null || this.AccountGroups.Count == 0) && !this.IsBusy;
+        public ActivityIndicatorState ActivityIndicatorState { get; set; }
 
-        public DelegateCommand NavigateToAddAccountCommand { get; private set; }
+        public bool NoAccountsTextDisplayed => (this.AccountGroups == null || this.AccountGroups.Count == 0);
 
-        public DelegateCommand<Account> NavigateToAccountDetailCommand { get; private set; }
+        public MvxAsyncCommand NavigateToAddAccountCommand { get; }
 
-        public DelegateCommand RefreshAccountsCommand { get; private set; }
+        public MvxAsyncCommand<Account> NavigateToAccountDetailCommand { get; }
 
-        public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
+        public MvxAsyncCommand RefreshAccountsCommand { get; }
+
+        public MvxAsyncCommand<Account> DeleteAccountCommand { get; }
 
         public ObservableCollection<AccountsGroup> AccountGroups
         {
-            get { return this.accountGroups; }
-            private set { this.SetProperty(ref this.accountGroups, value); }
-        }
-
-        public override async Task OnNavigatedToAsync(NavigationParameters parameters)
-        {
-            await this.RefreshAccounts();
-        }
-
-        protected override void OnPropertyChanged(string propertyName = null)
-        {
-            // ReSharper disable once ExplicitCallerInfoArgument
-            base.OnPropertyChanged(propertyName);
-
-            if (propertyName == nameof(this.IsBusy) || propertyName == nameof(this.AccountGroups))
+            get => this.accountGroups;
+            private set
             {
-                this.OnPropertyChanged(nameof(this.NoAccountsTextDisplayed));
+                this.SetProperty(ref this.accountGroups, value);
+                
+                // ReSharper disable once ExplicitCallerInfoArgument
+                this.RaisePropertyChanged(nameof(this.NoAccountsTextDisplayed));
             }
         }
 
-        private async Task RefreshAccounts()
+        public override void Appearing()
         {
-            await this.RunAsyncWithBusyIndicator(() =>
-                                                 {
-                                                     var accounts = this.accountingService.GetAccounts();
+            base.Appearing();
+#pragma warning disable 4014
+            this.AppearingAsync();
+#pragma warning restore 4014
+        }
 
-                                                     if (accounts != null)
-                                                     {
-                                                         var filtered = accounts.Where(x => !x.IsDeleted);
-                                                         this.AccountGroups = this.GroupAccounts(filtered);
-                                                     }
-                                                 });
+        public async Task AppearingAsync()
+        {
+            await this.ActivityIndicatorState.WrapWithIndicator((Action)this.RefreshAccounts).Invoke();
+        }
+
+        private void RefreshAccounts()
+        {
+            var accounts = this.accountingService.GetAccounts();
+
+            if (accounts != null)
+            {
+                var filtered = accounts.Where(x => !x.IsDeleted);
+                this.AccountGroups = this.GroupAccounts(filtered);
+            }
         }
 
         private async Task NavigateToAccountDetail(Account account)
@@ -96,7 +98,7 @@ namespace LH.Forcas.ViewModels.Accounts
                 return;
             }
 
-            await this.navigationService.NavigateToAccountDetail(account.Id);
+            await this.navigationService.Navigate<AccountsDetailPageViewModel, Account>(account);
         }
 
         private async Task DeleteAccount(Account account)
@@ -108,9 +110,9 @@ namespace LH.Forcas.ViewModels.Accounts
 
             var confirmMsg = string.Format(AppResources.AccountsListPage_DeleteAccountConfirmMsgFormat, account.Name);
 
-            var confirmed = await this.dialogService.DisplayAlertAsync(
-                          AppResources.AccountsListPage_DeleteAccountConfirmTitle,
+            var confirmed = await this.userInteraction.ConfirmAsync(
                           confirmMsg,
+                          AppResources.AccountsListPage_DeleteAccountConfirmTitle,
                           AppResources.ConfirmDialog_Yes,
                           AppResources.ConfirmDialog_No);
 
@@ -127,11 +129,11 @@ namespace LH.Forcas.ViewModels.Accounts
             catch (Exception ex)
             {
                 this.analyticsReporter.ReportHandledException(ex);
-                await this.dialogService.DisplayErrorAlert(AppResources.AccountsListPage_DeleteAccountError);
+                await this.userInteraction.AlertAsync(AppResources.AccountsListPage_DeleteAccountError);
             }
             finally
             {
-                await this.RefreshAccounts();
+                this.RefreshAccounts();
             }
         }
 

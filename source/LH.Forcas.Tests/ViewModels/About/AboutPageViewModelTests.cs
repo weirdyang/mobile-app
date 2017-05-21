@@ -19,15 +19,15 @@ namespace LH.Forcas.Tests.ViewModels.About
             [Test]
             public void ShouldLoadVersion()
             {
-                this.ViewModel.OnNavigatedToAsync(null).Wait();
+                this.ViewModel.AppearingAsync().Wait();
 
-                Assert.IsNotNull(this.ViewModel.AppVersion);
+                Assert.NotNull(this.ViewModel.AppVersion);
             }
 
             [Test]
             public void ShouldLoadAuthor()
             {
-                this.ViewModel.OnNavigatedToAsync(null).Wait();
+                this.ViewModel.AppearingAsync().Wait();
 
                 Assert.IsNotEmpty(this.ViewModel.Author);
             }
@@ -35,7 +35,7 @@ namespace LH.Forcas.Tests.ViewModels.About
             [Test]
             public void ShouldLoadDependencies()
             {
-                this.ViewModel.OnNavigatedToAsync(null).Wait();
+                this.ViewModel.AppearingAsync().Wait();
 
                 Assert.IsNotEmpty(this.ViewModel.Dependencies);
             }

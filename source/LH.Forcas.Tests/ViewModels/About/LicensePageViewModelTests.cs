@@ -19,10 +19,10 @@ namespace LH.Forcas.Tests.ViewModels.About
             [Test]
             public void ShouldLoadLicenseText()
             {
-                this.ViewModel.OnNavigatedToAsync(null).Wait();
+                this.ViewModel.AppearingAsync().Wait();
 
                 Assert.IsNotEmpty(this.ViewModel.LicenseText);
-                Assert.IsTrue(this.ViewModel.LicenseText.Contains("GNU"));
+                AssertEx.Contains("GNU", this.ViewModel.LicenseText);
             }
         }
     }

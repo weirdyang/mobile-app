@@ -1,13 +1,13 @@
-﻿namespace LH.Forcas.ViewModels.Settings
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Extensions;
-    using Prism.Navigation;
-    using Services;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using LH.Forcas.Extensions;
+using LH.Forcas.Services;
+using MvvmCross.Core.ViewModels;
 
-    public class SettingsPageViewModel : ViewModelBase
+namespace LH.Forcas.ViewModels.Settings
+{
+    public class SettingsPageViewModel : MvxViewModel
     {
         private readonly IRefDataService refDataService;
         private readonly IUserSettingsService userSettingsService;
@@ -19,9 +19,13 @@
 
         public SettingsPageViewModel(IRefDataService refDataService, IUserSettingsService userSettingsService)
         {
+            this.ActivityIndicatorState = new ActivityIndicatorState();
+
             this.refDataService = refDataService;
             this.userSettingsService = userSettingsService;
         }
+
+        public ActivityIndicatorState ActivityIndicatorState { get; }
 
         public IList<Tuple<string, string>> Countries
         {
@@ -61,10 +65,10 @@
             }
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override void Appearing()
         {
-            base.OnNavigatedTo(parameters);
-            this.RunAsyncWithBusyIndicator(() => this.LoadData());
+            base.Appearing();
+            this.ActivityIndicatorState.RunWithIndicator(this.LoadData);
         }
 
         private void LoadData()

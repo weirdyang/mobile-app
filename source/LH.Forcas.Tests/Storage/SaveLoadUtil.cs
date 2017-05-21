@@ -109,7 +109,7 @@ namespace LH.Forcas.Tests.Storage
 
                 Console.WriteLine("COMPARE: {0} ({1} == {2})", property.PropertyInfo.Name, expectedValue, loadedValue);
 
-                Assert.IsNotNull(loadedValue);
+                Assert.NotNull(loadedValue);
                 Assert.AreEqual(expectedValue, loadedValue);
             }
         }
@@ -125,7 +125,7 @@ namespace LH.Forcas.Tests.Storage
             if (missingProperties.Any())
             {
                 var names = string.Join(", ", missingProperties.Select(x => x.Name));
-                Assert.Fail("Properties {0} are not tested.", names);
+                Assert.True(false, string.Format("Properties {0} are not tested.", names));
             }
         }
 

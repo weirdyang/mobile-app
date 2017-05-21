@@ -1,5 +1,8 @@
-﻿using LH.Forcas.Banking;
+﻿using Chance.MvvmCross.Plugins.UserInteraction;
+using LH.Forcas.Banking;
 using LH.Forcas.RefDataContract;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
 
 namespace LH.Forcas.ViewModels.Accounts
 {
@@ -11,16 +14,14 @@ namespace LH.Forcas.ViewModels.Accounts
     using FluentValidation;
     using LH.Forcas.Extensions;
     using LH.Forcas.Localization;
-    using Prism.Navigation;
-    using Prism.Services;
     using Services;
 
-    public class AccountsDetailPageViewModel : DetailViewModelBase
+    public class AccountsDetailPageViewModel : MvxViewModel<Account>
     {
         private readonly IAccountingService accountingService;
         private readonly IRefDataService refDataService;
         private readonly IUserSettingsService userSettingsService;
-        private readonly INavigationService navigationService;
+        private readonly IMvxNavigationService navigationService;
 
         private string title;
         private string accountName;
@@ -40,16 +41,15 @@ namespace LH.Forcas.ViewModels.Accounts
             IAccountingService accountingService,
             IRefDataService refDataService,
             IUserSettingsService userSettingsService,
-            INavigationService navigationService,
-            IPageDialogService pageDialogService)
-            : base(pageDialogService)
+            IMvxNavigationService navigationService,
+            IUserInteraction userInteraction)
         {
             this.accountingService = accountingService;
             this.refDataService = refDataService;
             this.userSettingsService = userSettingsService;
             this.navigationService = navigationService;
 
-            this.Validator = new AccountsDetailPageViewModelValidator();
+            // this.Validator = new AccountsDetailPageViewModelValidator();
         }
 
         public string Title
@@ -78,7 +78,7 @@ namespace LH.Forcas.ViewModels.Accounts
                 if (this.SetProperty(ref this.selectedBank, value) && value != null)
                 {
                     this.SelectedRemoteAccount = null;
-                    this.RunAsyncWithBusyIndicator(this.RefreshRemoteAccounts);
+                    // this.RunAsyncWithBusyIndicator(this.RefreshRemoteAccounts);
                 }
             }
         }
@@ -126,9 +126,9 @@ namespace LH.Forcas.ViewModels.Accounts
             {
                 this.SetProperty(ref this.selectedAccountType, value);
 
-                this.OnPropertyChanged(() => this.SelectedCountry);
-                this.OnPropertyChanged(() => this.SelectedBank);
-                this.OnPropertyChanged(() => this.SelectedRemoteAccount);
+                this.RaisePropertyChanged(nameof(this.SelectedCountry));
+                this.RaisePropertyChanged(nameof(this.SelectedBank));
+                this.RaisePropertyChanged(nameof(this.SelectedRemoteAccount));
             }
         }
 
@@ -159,65 +159,65 @@ namespace LH.Forcas.ViewModels.Accounts
             set { this.SetProperty(ref this.remoteAccounts, value); }
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
-        {
-            this.RunAsyncWithBusyIndicator(() => this.LoadData(parameters));
-        }
+        //public override async Task OnNavigatingToAsync(NavigationParameters parameters)
+        //{
+        //    await this.RunAsyncWithBusyIndicator(() => this.LoadData(parameters));
+        //}
 
-        private async Task LoadData(NavigationParameters parameters)
-        {
-            try
-            {
-                this.Banks = this.refDataService.GetBanks();
-                this.Countries = this.refDataService.GetCountries();
-                this.Currencies = this.refDataService.GetCurrencies();
+        //private async Task LoadData(NavigationParameters parameters)
+        //{
+        //    try
+        //    {
+        //        this.Banks = this.refDataService.GetBanks();
+        //        this.Countries = this.refDataService.GetCountries();
+        //        this.Currencies = this.refDataService.GetCurrencies();
 
-                this.AccountTypes = new[]
-                {
-                    typeof(CashAccount),
-                    typeof(BankAccount)
-                    //typeof(LoanAccount)
-                };
+        //        this.AccountTypes = new[]
+        //        {
+        //            typeof(CashAccount),
+        //            typeof(BankAccount)
+        //            //typeof(LoanAccount)
+        //        };
 
-                if (parameters == null || parameters.Count == 0)
-                {
-                    this.CanEditAccountType = true;
-                    this.Title = AppResources.AccountsDetailPage_Title_New;
+        //        if (parameters == null || parameters.Count == 0)
+        //        {
+        //            this.CanEditAccountType = true;
+        //            this.Title = AppResources.AccountsDetailPage_Title_New;
 
-                    var preferedCountryId = this.userSettingsService.Settings.DefaultCountryId;
-                    this.SelectedCountry = this.Countries.SingleOrDefault(x => x.CountryId == preferedCountryId);
-                }
-                else
-                {
-                    this.accountId = (Guid)parameters[NavigationExtensions.AccountIdParameterName];
-                    var account = this.accountingService.GetAccount(this.accountId);
+        //            var preferedCountryId = this.userSettingsService.Settings.DefaultCountryId;
+        //            this.SelectedCountry = this.Countries.SingleOrDefault(x => x.CountryId == preferedCountryId);
+        //        }
+        //        else
+        //        {
+        //            this.accountId = (Guid)parameters[NavigationExtensions.AccountIdParameterName];
+        //            var account = this.accountingService.GetAccount(this.accountId);
 
-                    this.Title = account.Name;
-                    this.CanEditAccountType = false;
+        //            this.Title = account.Name;
+        //            this.CanEditAccountType = false;
 
-                    this.AccountName = account.Name;
-                    this.SelectedAccountType = account.GetType();
+        //            this.AccountName = account.Name;
+        //            this.SelectedAccountType = account.GetType();
 
-                    this.SelectedCurrency = this.Currencies.SingleById(account.CurrencyId);
+        //            this.SelectedCurrency = this.Currencies.SingleById(account.CurrencyId);
 
-                    var bankAccount = account as BankAccount;
-                    if (bankAccount != null)
-                    {
-                        var bank = this.Banks.SingleById(bankAccount.BankId);
+        //            var bankAccount = account as BankAccount;
+        //            if (bankAccount != null)
+        //            {
+        //                var bank = this.Banks.SingleById(bankAccount.BankId);
 
-                        this.SelectedCountry = this.Countries.SingleById(bank.CountryId);
-                        this.SelectedBank = bank;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                // TODO: Log exception
+        //                this.SelectedCountry = this.Countries.SingleById(bank.CountryId);
+        //                this.SelectedBank = bank;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // TODO: Log exception
 
-                await this.DialogService.DisplayErrorAlert(AppResources.AccountsDetailPage_LoadError);
-                await this.navigationService.GoBackAsync();
-            }
-        }
+        //        await this.DialogService.DisplayErrorAlert(AppResources.AccountsDetailPage_LoadError);
+        //        await this.navigationService.GoBackAsync();
+        //    }
+        //}
 
         private async Task RefreshRemoteAccounts()
         {
@@ -229,32 +229,32 @@ namespace LH.Forcas.ViewModels.Accounts
             this.RemoteAccounts = await this.accountingService.GetAvailableRemoteAccounts(this.selectedBank.BankId);
         }
 
-        protected override async Task Save()
-        {
-            try
-            {
-                var account = (Account)Activator.CreateInstance(this.SelectedAccountType);
-                account.Name = this.AccountName;
-                account.CurrencyId = this.SelectedCurrency.CurrencyId;
+        //protected override async Task Save()
+        //{
+        //    try
+        //    {
+        //        var account = (Account)Activator.CreateInstance(this.SelectedAccountType);
+        //        account.Name = this.AccountName;
+        //        account.CurrencyId = this.SelectedCurrency.CurrencyId;
 
-                var bankAccount = account as BankAccount;
-                if (bankAccount != null)
-                {
-                    bankAccount.AccountNumber = this.selectedRemoteAccount.AccountNumber;
-                    bankAccount.BankId = this.SelectedBank.BankId;
-                }
+        //        var bankAccount = account as BankAccount;
+        //        if (bankAccount != null)
+        //        {
+        //            bankAccount.AccountNumber = this.selectedRemoteAccount.AccountNumber;
+        //            bankAccount.BankId = this.SelectedBank.BankId;
+        //        }
 
-                this.accountingService.SaveAccount(account);
+        //        this.accountingService.SaveAccount(account);
 
-                await base.Save();
-                await this.navigationService.GoBackAsync();
-            }
-            catch (Exception)
-            {
-                // TODO: Log
-                await this.DialogService.DisplayErrorAlert(AppResources.AccountsDetailPage_SaveError);
-            }
-        }
+        //        await base.Save();
+        //        await this.navigationService.GoBackAsync();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // TODO: Log
+        //        await this.DialogService.DisplayErrorAlert(AppResources.AccountsDetailPage_SaveError);
+        //    }
+        //}
 
         public class AccountsDetailPageViewModelValidator : AbstractValidator<AccountsDetailPageViewModel>
         {
@@ -268,6 +268,11 @@ namespace LH.Forcas.ViewModels.Accounts
                 this.RuleFor(x => x.SelectedBank).NotNull().When(x => x.SelectedAccountType == typeof(BankAccount));
                 this.RuleFor(x => x.SelectedRemoteAccount).NotNull().When(x => x.SelectedAccountType == typeof(BankAccount));
             }
+        }
+
+        public override Task Initialize(Account parameter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

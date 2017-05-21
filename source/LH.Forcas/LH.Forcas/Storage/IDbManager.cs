@@ -5,7 +5,7 @@ namespace LH.Forcas.Storage
 {
     public interface IDbManager : IDisposable
     {
-        LiteDatabase Database { get; }
+        LiteRepository LiteRepository { get; }
 
         void ApplyMigrations();
     }

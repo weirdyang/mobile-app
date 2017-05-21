@@ -1,8 +1,8 @@
-﻿namespace LH.Forcas.Tests.Integration.Banks.Cze.Fio
-{
-    using Flurl.Http.Testing;
-    using NUnit.Framework;
+﻿using Flurl.Http.Testing;
+using NUnit.Framework;
 
+namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
+{
     [TestFixture]
     public class FioBankIntegrationTests
     {

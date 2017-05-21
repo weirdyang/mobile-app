@@ -13,16 +13,16 @@ namespace LH.Forcas.Tests.Storage
             DbManager.RegisterBsonMappings();
 
             this.stream = new MemoryStream();
-            this.Database = new LiteDatabase(this.stream);
+            this.LiteRepository = new LiteRepository(this.stream);
         }
 
-        public LiteDatabase Database { get; }
+        public LiteRepository LiteRepository { get; }
 
         public void ApplyMigrations() { }
 
         public void Dispose()
         {
-            this.Database.Dispose();
+            this.LiteRepository.Dispose();
             this.stream.Dispose();
         }
     }

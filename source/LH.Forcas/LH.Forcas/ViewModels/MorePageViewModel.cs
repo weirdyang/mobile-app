@@ -1,22 +1,26 @@
-﻿using LH.Forcas.Extensions;
-using Prism.Commands;
-using Prism.Navigation;
+﻿using LH.Forcas.ViewModels.About;
+using LH.Forcas.ViewModels.Settings;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
 
 namespace LH.Forcas.ViewModels
 {
-    public class MorePageViewModel : ViewModelBase
+    public class MorePageViewModel : MvxViewModel
     {
-        public MorePageViewModel(INavigationService navigationService)
+        public MorePageViewModel(IMvxNavigationService navigationService)
         {
-            this.NavigateToPreferencesCommand = DelegateCommand.FromAsyncHandler(async () => await navigationService.NavigateToPreferences());
-            this.NavigateToAboutCommand = DelegateCommand.FromAsyncHandler(async () => await navigationService.NavigateToAbout());
-            this.NavigateToLicenseCommand = DelegateCommand.FromAsyncHandler(async () => await navigationService.NavigateToLicense());
+            this.ActivityIndicatorState = new ActivityIndicatorState();
+            this.NavigateToPreferencesCommand = new MvxAsyncCommand(this.ActivityIndicatorState.WrapWithIndicator(navigationService.Navigate<SettingsPageViewModel>));
+            this.NavigateToAboutCommand = new MvxAsyncCommand(this.ActivityIndicatorState.WrapWithIndicator(navigationService.Navigate<AboutPageViewModel>));
+            this.NavigateToLicenseCommand = new MvxAsyncCommand(this.ActivityIndicatorState.WrapWithIndicator(navigationService.Navigate<LicensePageViewModel>));
         }
 
-        public DelegateCommand NavigateToPreferencesCommand { get; private set; }
+        public ActivityIndicatorState ActivityIndicatorState { get; private set; }
 
-        public DelegateCommand NavigateToAboutCommand { get; private set; }
+        public MvxAsyncCommand NavigateToPreferencesCommand { get; }
 
-        public DelegateCommand NavigateToLicenseCommand { get; private set; }
+        public MvxAsyncCommand NavigateToAboutCommand { get; }
+
+        public MvxAsyncCommand NavigateToLicenseCommand { get; }
     }
 }

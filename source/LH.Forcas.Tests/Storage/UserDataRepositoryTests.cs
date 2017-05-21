@@ -20,7 +20,6 @@ namespace LH.Forcas.Tests.Storage
             this.Repository = new UserDataRepository(dbManager);
         }
 
-        [TestFixture]
         public class WhenHandlingSettings : UserDataRepositoryTests
         {
             [Test]
@@ -36,7 +35,6 @@ namespace LH.Forcas.Tests.Storage
             }
         }
 
-        [TestFixture]
         public class WhenHandlingAccounts : UserDataRepositoryTests
         {
             [Test]

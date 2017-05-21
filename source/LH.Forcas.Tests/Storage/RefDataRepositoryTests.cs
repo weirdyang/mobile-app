@@ -16,7 +16,6 @@ namespace LH.Forcas.Tests.Storage
             this.refDataRepository = new RefDataRepository();
         }
 
-        [TestFixture]
         public class LoadDataTests : RefDataRepositoryTests
         {
             [Test]
@@ -25,12 +24,12 @@ namespace LH.Forcas.Tests.Storage
                 var banks = this.refDataRepository.GetBanks();
                 var rb = banks.SingleOrDefault(x => x.BankId == "RB");
 
-                Assert.IsNotNull(rb);
+                Assert.NotNull(rb);
                 Assert.IsNotEmpty(rb.Name);
                 Assert.IsNotEmpty(rb.CountryId);
                 Assert.AreNotEqual(0, rb.Bban);
                 Assert.AreEqual(BankAuthorizationScope.PerAccount, rb.AuthorizationScope);
-                Assert.IsTrue(rb.IsActive);
+                Assert.True(rb.IsActive);
             }
 
             [Test]
@@ -39,7 +38,7 @@ namespace LH.Forcas.Tests.Storage
                 var countries = this.refDataRepository.GetCountries();
                 var cz = countries.SingleOrDefault(x => x.CountryId == "CZ");
 
-                Assert.IsNotNull(cz);
+                Assert.NotNull(cz);
                 Assert.IsNotEmpty(cz.DefaultCurrencyId);
             }
 
@@ -49,7 +48,7 @@ namespace LH.Forcas.Tests.Storage
                 var currencies = this.refDataRepository.GetCurrencies();
                 var cz = currencies.SingleOrDefault(x => x.CurrencyId == "CZK");
 
-                Assert.IsNotNull(cz);
+                Assert.NotNull(cz);
                 Assert.IsNotEmpty(cz.DisplayFormat);
             }
         }

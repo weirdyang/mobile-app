@@ -1,7 +1,4 @@
 using LH.Forcas.Droid.Localization;
-using Xamarin.Forms;
-
-[assembly: Dependency(typeof(DroidLocale))]
 
 namespace LH.Forcas.Droid.Localization
 {

@@ -15,7 +15,7 @@ namespace LH.Forcas.Tests.Banking.Providers
             {
                 var exception = Assert.Throws<ArgumentException>(() => new BankProviderInfoAttribute(typeof(BankAuthorizationBase), "DummyID"));
 
-                Assert.IsTrue(exception.Message.Contains("Type"));
+                AssertEx.Contains("Type", exception.Message);
             }
 
             [Test]
@@ -23,7 +23,7 @@ namespace LH.Forcas.Tests.Banking.Providers
             {
                 var exception = Assert.Throws<ArgumentException>(() => new BankProviderInfoAttribute(typeof(string), "DummyID"));
 
-                Assert.IsTrue(exception.Message.Contains("Type"));
+                AssertEx.Contains("Type", exception.Message);
             }
 
             [Test]
@@ -31,7 +31,7 @@ namespace LH.Forcas.Tests.Banking.Providers
             {
                 var exception = Assert.Throws<ArgumentException>(() => new BankProviderInfoAttribute(typeof(StaticTokenAuthorization)));
 
-                Assert.IsTrue(exception.Message.Contains("Id"));
+                AssertEx.Contains("Id", exception.Message);
             }
         }
     }

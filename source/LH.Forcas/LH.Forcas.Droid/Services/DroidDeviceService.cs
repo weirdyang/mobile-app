@@ -5,11 +5,8 @@ using Android.Telephony;
 using LH.Forcas.Droid.Services;
 using LH.Forcas.Events;
 using LH.Forcas.Services;
-using Prism.Events;
-using Xamarin.Forms;
 using Application = Android.App.Application;
-
-[assembly: Dependency(typeof(DroidDeviceService))]
+using MvvmCross.Plugins.Messenger;
 
 namespace LH.Forcas.Droid.Services
 {
@@ -25,13 +22,13 @@ namespace LH.Forcas.Droid.Services
 
         public static ConnectivityManager ConnectivityManager => Application.Context.GetSystemService(Context.ConnectivityService) as ConnectivityManager;
 
-        private IEventAggregator eventAggregator;
+        private IMvxMessenger messenger;
 
-        public void Initialize(IEventAggregator eventAggregator)
+        public void Initialize(IMvxMessenger messenger)
         {
             deviceServiceInstance = this;
 
-            this.eventAggregator = eventAggregator;
+            this.messenger = messenger;
 
             var adapter = new ComponentCallbacksAdapter();
             Application.Context.RegisterComponentCallbacks((IComponentCallbacks)adapter);
@@ -56,13 +53,13 @@ namespace LH.Forcas.Droid.Services
 
             public void OnLowMemory()
             {
-                deviceServiceInstance.eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(TrimMemorySeverity.ReleaseAll);
+                this.PublishTrimEvent(TrimMemorySeverity.ReleaseAll);
             }
 
             public void OnTrimMemory(TrimMemory level)
             {
                 var severity = this.TranslateToSeverity(level);
-                deviceServiceInstance.eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(severity);
+                this.PublishTrimEvent(severity);
             }
 
             private TrimMemorySeverity TranslateToSeverity(TrimMemory level)
@@ -76,6 +73,11 @@ namespace LH.Forcas.Droid.Services
                     default:
                         return TrimMemorySeverity.ReleaseLevel;
                 }
+            }
+
+            private void PublishTrimEvent(TrimMemorySeverity severity)
+            {
+                deviceServiceInstance.messenger.Publish<TrimMemoryRequestedEvent>(new TrimMemoryRequestedEvent(this) { Severity = severity });
             }
         }
 

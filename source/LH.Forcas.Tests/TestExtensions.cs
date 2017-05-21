@@ -1,48 +1,56 @@
-﻿namespace LH.Forcas.Tests
-{
-    using System;
-    using System.IO;
-    using System.Linq.Expressions;
-    using System.Reflection;
-    using System.Text;
-    using System.Threading;
-    using Flurl.Util;
-    using Forcas.ViewModels;
-    using NUnit.Framework;
-    using Prism.Navigation;
+﻿using System;
+using System.IO;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using LH.Forcas.Extensions;
+using LH.Forcas.ViewModels;
 
+namespace LH.Forcas.Tests
+{
     public static class TestExtensions
     {
+        public static string GetSiblingResourceText(this object obj, string resourceName)
+        {
+            var fullName = obj.GetType().GetSiblingResourceName(resourceName);
+            return obj.GetType().GetTypeInfo().Assembly.GetManifestResourceContentAsText(fullName);
+        }
+
+        public static Stream GetSiblingResourceStream(this object obj, string resourceName)
+        {
+            var fullName = obj.GetType().GetSiblingResourceName(resourceName);
+            return obj.GetType().GetTypeInfo().Assembly.GetManifestResourceStream(fullName);
+        }
+
         public static string GetContentFilePath(string fileName)
         {
-            var currentDir = Path.GetDirectoryName(typeof(TestExtensions).Assembly.Location);
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return Path.Combine(currentDir, fileName);
+            return Path.Combine(AppContext.BaseDirectory, fileName);
         }
 
-        public static bool HasParameter<T>(this NavigationParameters parameters, string name, T expectedValue)
-            where T : IEquatable<T>
-        {
-            return parameters.ContainsKey(name)
-                   && ((T)parameters[name]).Equals(expectedValue);
-        }
+        //public static bool HasParameter<T>(this NavigationParameters parameters, string name, T expectedValue)
+        //    where T : IEquatable<T>
+        //{
+        //    return parameters.ContainsKey(name)
+        //           && ((T)parameters[name]).Equals(expectedValue);
+        //}
 
-        public static void TestPropertyValidation<TVm, TProp>(this TVm viewModel, Expression<Func<TVm, TProp>>  propertyExpression, TProp validValue, TProp invalidValue)
-            where TVm : DetailViewModelBase
-        {
-            var propInfo = ExtractPropertyInfoFromLambda(propertyExpression);
+        //public static void TestPropertyValidation<TVm, TProp>(this TVm viewModel, Expression<Func<TVm, TProp>>  propertyExpression, TProp validValue, TProp invalidValue)
+        //    where TVm : DetailViewModelBase
+        //{
+        //    var propInfo = ExtractPropertyInfoFromLambda(propertyExpression);
 
-            propInfo.SetValue(viewModel, validValue);
-            Assert.IsNull(viewModel.ValidationResults[propInfo.Name]);
+        //    propInfo.SetValue(viewModel, validValue);
+        //    Assert.Null(viewModel.ValidationResults[propInfo.Name]);
 
-            propInfo.SetValue(viewModel, invalidValue);
+        //    propInfo.SetValue(viewModel, invalidValue);
 
-            Assert.IsFalse(viewModel.ValidationResults.IsValid);
-            Assert.IsNotNull(viewModel.ValidationResults[propInfo.Name]);
+        //    Assert.False(viewModel.ValidationResults.IsValid);
+        //    Assert.NotNull(viewModel.ValidationResults[propInfo.Name]);
 
-            propInfo.SetValue(viewModel, validValue);
-            Assert.IsNull(viewModel.ValidationResults[propInfo.Name]);
-        }
+        //    propInfo.SetValue(viewModel, validValue);
+        //    Assert.Null(viewModel.ValidationResults[propInfo.Name]);
+        //}
 
         public static PropertyInfo ExtractPropertyInfoFromLambda(this LambdaExpression expression)
         {
@@ -84,7 +92,7 @@
             return builder.ToString();
         }
 
-        public static void WaitUntilNotBusy(this ViewModelBase viewModel, TimeSpan timeout = default(TimeSpan))
+        public static void WaitUntilNotBusy(this ActivityIndicatorState indicatorState, TimeSpan timeout = default(TimeSpan))
         {
             if (timeout == default(TimeSpan))
             {
@@ -93,9 +101,9 @@
 
             var start = DateTime.Now;
 
-            while (viewModel.IsBusy && DateTime.Now - start <= timeout)
+            while (indicatorState.IsBusy && DateTime.Now - start <= timeout)
             {
-                Thread.SpinWait(1000);
+                Task.Delay(500).Wait();
             }
         }
     }

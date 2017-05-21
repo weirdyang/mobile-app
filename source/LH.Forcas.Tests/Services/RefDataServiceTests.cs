@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LH.Forcas.Analytics;
 using LH.Forcas.Domain.RefData;
@@ -11,8 +12,6 @@ using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Services
 {
-    using System.Linq;
-
     [TestFixture]
     public class RefDataServiceTests
     {

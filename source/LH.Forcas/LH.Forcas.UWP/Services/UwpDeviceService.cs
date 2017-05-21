@@ -1,10 +1,7 @@
 ﻿using Windows.System;
 using LH.Forcas.Events;
 using LH.Forcas.UWP.Services;
-using Prism.Events;
-using Xamarin.Forms;
-
-[assembly:Dependency(typeof(UwpDeviceService))]
+using MvvmCross.Plugins.Messenger;
 
 namespace LH.Forcas.UWP.Services
 {
@@ -14,7 +11,7 @@ namespace LH.Forcas.UWP.Services
 
     public class UwpDeviceService : IDeviceService
     {
-        private IEventAggregator eventAggregator;
+        private IMvxMessenger messenger;
 
         public string CountryCode => RegionInfo.CurrentRegion.TwoLetterISORegionName;
 
@@ -38,9 +35,9 @@ namespace LH.Forcas.UWP.Services
             }
         }
 
-        public void Initialize(IEventAggregator eventAggregator)
+        public void Initialize(IMvxMessenger _messenger)
         {
-            this.eventAggregator = eventAggregator;
+            this.messenger = _messenger;
 
             MemoryManager.AppMemoryUsageLimitChanging += this.HandleMemoryUsageLimitChanging;
         }
@@ -49,11 +46,11 @@ namespace LH.Forcas.UWP.Services
         {
             if (args.NewLimit < MemoryManager.AppMemoryUsage)
             {
-                this.eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(TrimMemorySeverity.ReleaseAll);
+                this.messenger.Publish<TrimMemoryRequestedEvent>(TrimMemorySeverity.ReleaseAll);
             }
             else if (args.NewLimit < args.OldLimit)
             {
-                this.eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(TrimMemorySeverity.ReleaseLevel);
+                this.messenger.Publish<TrimMemoryRequestedEvent>(TrimMemorySeverity.ReleaseLevel);
             }
         }
     }

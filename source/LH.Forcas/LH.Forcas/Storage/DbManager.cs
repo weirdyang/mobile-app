@@ -20,10 +20,10 @@ namespace LH.Forcas.Storage
         public DbManager(IPathResolver pathResolver)
         {
             RegisterBsonMappings();
-            this.Database = new LiteDatabase(pathResolver.DbFilePath);
+            this.LiteRepository = new LiteRepository(pathResolver.DbFilePath);
         }
 
-        public LiteDatabase Database { get; set; }
+        public LiteRepository LiteRepository { get; }
 
         public void ApplyMigrations()
         {
@@ -32,7 +32,7 @@ namespace LH.Forcas.Storage
 
         public void Dispose()
         {
-            this.Database.Dispose();
+            this.LiteRepository.Dispose();
         }
     }
 }

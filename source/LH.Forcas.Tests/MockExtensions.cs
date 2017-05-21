@@ -1,37 +1,40 @@
-﻿using Prism.Navigation;
+﻿using System;
+using System.Threading.Tasks;
+using Chance.MvvmCross.Plugins.UserInteraction;
+using Moq;
+using Moq.Language.Flow;
+using MvvmCross.Plugins.Messenger;
 
 namespace LH.Forcas.Tests
 {
-    using System.Threading.Tasks;
-    using Moq;
-    using Moq.Language.Flow;
-    using Prism.Services;
-
     public static class MockExtensions
     {
-        public static ISetup<INavigationService, Task> SetupNavigation(this Mock<INavigationService> mock, string pageName)
+        public static void SetupMessengerSubscribe<TEvent>(this Mock<IMvxMessenger> messengerMock, Action<Action<TEvent>> saveCallAction) where TEvent : MvxMessage
         {
-            return mock.Setup(x => x.NavigateAsync(It.Is<string>(uri => uri.Contains(pageName)), null, false, true));
+            messengerMock
+                .Setup(x => x.Subscribe(It.IsAny<Action<TEvent>>(), MvxReference.Weak, null))
+                .Callback<Action<TEvent>, MvxReference, string>((action, reference, tag) => saveCallAction.Invoke(action));
         }
 
-        public static void SetupAlert(this Mock<IPageDialogService> dialogService)
+
+        public static void SetupAlert(this Mock<IUserInteraction> userInteractionMock)
         {
-            dialogService.Setup(x => x.DisplayAlertAsync(It.IsAny<string>(),
-                                                         It.IsAny<string>(),
-                                                         It.IsAny<string>()))
-                         .ReturnAwaitable();
+            userInteractionMock.Setup(x => x.AlertAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>()))
+                .ReturnsAwaitable();
         }
 
-        public static void SetupAlert(this Mock<IPageDialogService> dialogService, bool result)
+        public static void SetupConfirm(this Mock<IUserInteraction> userInteractionMock, bool result)
         {
-            dialogService.Setup(x => x.DisplayAlertAsync(It.IsAny<string>(),
-                                                         It.IsAny<string>(),
-                                                         It.IsAny<string>(),
-                                                         It.IsAny<string>()))
-                         .ReturnsAsync(result);
+            userInteractionMock.Setup(x => x.ConfirmAsync(It.IsAny<string>(),
+                                                            It.IsAny<string>(),
+                                                            It.IsAny<string>(),
+                                                            It.IsAny<string>()));
         }
 
-        public static ISetup<TMock, Task> ReturnAwaitable<TMock>(this ISetup<TMock, Task> setup) where TMock : class
+        public static ISetup<TMock, Task> ReturnsAwaitable<TMock>(this ISetup<TMock, Task> setup) where TMock : class
         {
             setup.Returns(Task.FromResult(0));
 

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using LH.Forcas.Domain.UserData;
-using Microsoft.Practices.Unity;
-using Prism.Events;
+using MvvmCross.Plugins.Messenger;
 
 namespace LH.Forcas.Storage.Caching
 {
@@ -15,9 +14,10 @@ namespace LH.Forcas.Storage.Caching
         private readonly object userSettingsLock = new object();
         private readonly object accountsLock = new object();
 
-        public UserDataRepositoryCache([Dependency("Repository")] IUserDataRepository repository, IEventAggregator eventAggregator)
-            : base(eventAggregator)
+        public UserDataRepositoryCache(IUserDataRepository repository, IMvxMessenger messenger)
+            : base(messenger)
         {
+            
             this.repository = repository;
         }
 

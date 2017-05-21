@@ -1,13 +1,12 @@
-﻿namespace LH.Forcas.Tests.Domain.UserData
+﻿using NUnit.Framework;
+
+namespace LH.Forcas.Tests.Domain.UserData
 {
     using System;
     using Forcas.Domain.UserData;
-    using NUnit.Framework;
 
-    [TestFixture]
     public class AccountNumberTests
     {
-        [TestFixture]
         public class CzTests
         {
             [Test]
@@ -88,7 +87,6 @@
             //}
         }
 
-        [TestFixture]
         public class EqualityTests
         {
             //private AccountNumber numberA = new AccountNumber { Prefix = 123, Number = 567, BankRoutingCode = 5500};
@@ -144,21 +142,20 @@
             //}
         }
 
-        [TestFixture]
         public class IbanCalculationTests
         {
             [Test]
             public void ValidateIbanSuccess()
             {
                 const string iban = "CZ2155000000002254171001";
-                Assert.IsTrue(AccountNumber.IsIbanValid(iban));
+                Assert.True(AccountNumber.IsIbanValid(iban));
             }
 
             [Test]
             public void ValidateIbanInvalid()
             {
                 const string iban = "CZ2155010000002254171001";
-                Assert.IsFalse(AccountNumber.IsIbanValid(iban));
+                Assert.False(AccountNumber.IsIbanValid(iban));
             }
 
             [Test]

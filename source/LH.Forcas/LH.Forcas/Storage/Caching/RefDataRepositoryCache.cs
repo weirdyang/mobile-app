@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using LH.Forcas.Domain.RefData;
 using LH.Forcas.RefDataContract;
-using Microsoft.Practices.Unity;
-using Prism.Events;
+using MvvmCross.Plugins.Messenger;
 
 namespace LH.Forcas.Storage.Caching
 {
@@ -17,8 +16,8 @@ namespace LH.Forcas.Storage.Caching
         private readonly object sharedLock = new object();
         private readonly IRefDataRepository repository;
 
-        public RefDataRepositoryCache([Dependency("Repository")] IRefDataRepository repository, IEventAggregator eventAggregator)
-            : base(eventAggregator)
+        public RefDataRepositoryCache(IRefDataRepository repository, IMvxMessenger messenger)
+            : base(messenger)
         {
             this.repository = repository;
         }

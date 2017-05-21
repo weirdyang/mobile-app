@@ -1,7 +1,4 @@
 ﻿using LH.Forcas.iOS.Localization;
-using Xamarin.Forms;
-
-[assembly: Dependency(typeof(IosLocale))]
 
 namespace LH.Forcas.iOS.Localization
 {

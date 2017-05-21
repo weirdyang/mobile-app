@@ -8,8 +8,8 @@ using LH.Forcas.RefDataContract;
 using LH.Forcas.RefDataContract.Parsing;
 using LH.Forcas.Sync.RefData;
 using Moq;
-using NUnit.Framework;
 using Octokit;
+using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Sync.RefData
 {
@@ -21,7 +21,6 @@ namespace LH.Forcas.Tests.Sync.RefData
         protected Mock<IGitHubClient> GitHubClientMock;
         protected Mock<IGitHubClientFactory> GitHubClientFactoryMock;
         protected Mock<IAnalyticsReporter> AnalyticsReporterMock;
-
         protected Mock<IRepositoriesClient> GitHubRepositoriesClientMock;
         protected Mock<IRepositoryBranchesClient> GitHubBranchesClientMock;
         protected Mock<IRepositoryContentsClient> GitHubContentsClientMock;
@@ -60,7 +59,7 @@ namespace LH.Forcas.Tests.Sync.RefData
                 this.SetupBranchCommit("sha");
                 var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha", 1));
 
-                Assert.IsFalse(update.NewDataAvailable);
+                Assert.False(update.NewDataAvailable);
             }
         }
 
@@ -82,9 +81,9 @@ namespace LH.Forcas.Tests.Sync.RefData
 
                 var result = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
 
-                Assert.IsTrue(result.NewDataAvailable);
-                Assert.IsNotNull(result.Data);
-                Assert.IsNotNull(result.NewStatus);
+                Assert.True(result.NewDataAvailable);
+                Assert.NotNull(result.Data);
+                Assert.NotNull(result.NewStatus);
                 Assert.AreEqual(newCommitSha, result.NewStatus.CommitSha);
                 Assert.AreEqual(4, result.NewStatus.DataVersion);
             }
@@ -100,7 +99,7 @@ namespace LH.Forcas.Tests.Sync.RefData
 
                 var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
 
-                Assert.IsFalse(update.NewDataAvailable);
+                Assert.False(update.NewDataAvailable);
             }
         }
 
@@ -123,7 +122,7 @@ namespace LH.Forcas.Tests.Sync.RefData
 
                 var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha", 1));
 
-                Assert.IsFalse(update.NewDataAvailable);
+                Assert.False(update.NewDataAvailable);
             }
 
             [Test]
@@ -141,7 +140,7 @@ namespace LH.Forcas.Tests.Sync.RefData
 
                 var update = await this.Downloader.DownloadRefData(new RefDataStatus("sha1", 1));
 
-                Assert.IsFalse(update.NewDataAvailable);
+                Assert.False(update.NewDataAvailable);
 
                 this.AnalyticsReporterMock.VerifyAll();
             }

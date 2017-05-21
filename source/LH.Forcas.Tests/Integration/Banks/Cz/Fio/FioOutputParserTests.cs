@@ -1,13 +1,12 @@
-﻿using LH.Forcas.Banking.Exceptions;
+﻿using System;
+using System.IO;
+using System.Linq;
+using LH.Forcas.Banking.Exceptions;
 using LH.Forcas.Banking.Providers.Cz.Fio;
+using NUnit.Framework;
 
 namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-    using NUnit.Framework;
-
     [TestFixture]
     public class FioOutputParserTests
     {
@@ -18,12 +17,8 @@ namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
         [SetUp]
         public void Setup()
         {
-            var jsonPath = TestExtensions.GetContentFilePath(@"Integration\Banks\Cz\Fio\TransactionParsingSample.json");
-            var failingJsonPath =
-                TestExtensions.GetContentFilePath(@"Integration\Banks\Cz\Fio\TransactionParsingSample-Fail.json");
-
-            this.SampleJsonStream = File.OpenRead(jsonPath);
-            this.SampleFailingJsonStream = File.OpenRead(failingJsonPath);
+            this.SampleJsonStream = this.GetSiblingResourceStream("TransactionParsingSample.json");
+            this.SampleFailingJsonStream = this.GetSiblingResourceStream("TransactionParsingSample-Fail.json");
 
             this.Parser = new FioOutputParser();
         }
@@ -34,7 +29,6 @@ namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
             this.SampleJsonStream.Dispose();
         }
 
-        [TestFixture]
         public class SampleParsingTests : FioOutputParserTests
         {
             [Test]
@@ -42,7 +36,7 @@ namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
             {
                 var result = this.Parser.Parse(this.SampleJsonStream);
 
-                Assert.IsNotNull(result.Info);
+                Assert.NotNull(result.Info);
                 Assert.AreEqual("2400222222", result.Info.AccountId);
                 Assert.AreEqual("2010", result.Info.BankId);
                 Assert.AreEqual("CZK", result.Info.Currency);
@@ -64,8 +58,8 @@ namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
             {
                 var result = this.Parser.Parse(this.SampleJsonStream);
 
-                Assert.IsNotNull(result.TransactionList);
-                Assert.IsNotNull(result.TransactionList.Transactions);
+                Assert.NotNull(result.TransactionList);
+                Assert.NotNull(result.TransactionList.Transactions);
                 Assert.AreEqual(3, result.TransactionList.Transactions.Length);
 
                 var testedTransaction =
@@ -97,14 +91,7 @@ namespace LH.Forcas.Tests.Integration.Banks.Cz.Fio
             [Test]
             public void ShouldThrowIfParsingFails()
             {
-                try
-                {
-                    this.Parser.Parse(this.SampleFailingJsonStream);
-                    Assert.Fail();
-                }
-                catch (BankPayloadFormatException)
-                {
-                }
+                Assert.Throws<BankPayloadFormatException>(() => this.Parser.Parse(this.SampleFailingJsonStream));
             }
         }
     }

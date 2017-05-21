@@ -1,4 +1,5 @@
 ﻿using Octokit;
+using ProductHeaderValue = Octokit.ProductHeaderValue;
 
 namespace LH.Forcas.Sync.RefData
 {

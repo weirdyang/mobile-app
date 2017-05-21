@@ -1,7 +1,4 @@
 using LH.Forcas.Droid.Storage;
-using Xamarin.Forms;
-
-[assembly: Dependency(typeof(DroidPathResolver))]
 
 namespace LH.Forcas.Droid.Storage
 {

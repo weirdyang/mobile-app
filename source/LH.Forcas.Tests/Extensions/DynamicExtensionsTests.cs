@@ -19,7 +19,7 @@ namespace LH.Forcas.Tests.Extensions
                 dictionary.Add("MyProp", "Value");
 
                 string actual;
-                Assert.IsTrue(expando.TryGetPropertyValue("MyProp", out actual));
+                Assert.True(expando.TryGetPropertyValue("MyProp", out actual));
                 Assert.AreEqual("Value", actual);
             }
 
@@ -29,8 +29,8 @@ namespace LH.Forcas.Tests.Extensions
                 var expando = new ExpandoObject();
 
                 string actual;
-                Assert.IsFalse(expando.TryGetPropertyValue("NotExisting", out actual));
-                Assert.IsNull(actual);
+                Assert.False(expando.TryGetPropertyValue("NotExisting", out actual));
+                Assert.Null(actual);
             }
         }
     }

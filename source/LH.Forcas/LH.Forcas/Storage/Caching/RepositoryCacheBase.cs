@@ -2,19 +2,17 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using LH.Forcas.Events;
-using Prism.Events;
+using MvvmCross.Plugins.Messenger;
 
 namespace LH.Forcas.Storage.Caching
 {
     public abstract class RepositoryCacheBase : IDisposable
     {
-        private readonly SubscriptionToken trimMemorySubToken;
+        private readonly MvxSubscriptionToken trimMemorySubToken;
 
-        protected RepositoryCacheBase(IEventAggregator eventAggregator)
+        protected RepositoryCacheBase(IMvxMessenger messenger)
         {
-            this.trimMemorySubToken = eventAggregator
-                .GetEvent<TrimMemoryRequestedEvent>()
-                .Subscribe(this.HandleTrimMemoryRequested);
+            this.trimMemorySubToken = messenger.Subscribe<TrimMemoryRequestedEvent>(this.HandleTrimMemoryRequested);
         }
 
         protected TVal GetThroughCache<TVal>(ref TVal cacheStore, Func<TVal> loadFunc, object lockObj)
@@ -78,7 +76,7 @@ namespace LH.Forcas.Storage.Caching
 
         protected abstract IEnumerable<Func<bool>> GetTrimPriorities();
 
-        private void HandleTrimMemoryRequested(TrimMemorySeverity severity)
+        private void HandleTrimMemoryRequested(TrimMemoryRequestedEvent evt)
         {
             var invalidateFuncs = this.GetTrimPriorities();
 
@@ -86,7 +84,7 @@ namespace LH.Forcas.Storage.Caching
             {
                 var result = invalidateFunc.Invoke();
 
-                if (severity == TrimMemorySeverity.ReleaseLevel && result)
+                if (evt.Severity == TrimMemorySeverity.ReleaseLevel && result)
                 {
                     // One level was released which is enough for ReleaseLevel
                     break;

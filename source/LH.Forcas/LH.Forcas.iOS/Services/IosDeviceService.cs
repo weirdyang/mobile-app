@@ -4,11 +4,8 @@ using Foundation;
 using LH.Forcas.Events;
 using LH.Forcas.iOS.Services;
 using LH.Forcas.Services;
-using Prism.Events;
 using UIKit;
-using Xamarin.Forms;
-
-[assembly: Dependency(typeof(IosDeviceService))]
+using MvvmCross.Plugins.Messenger;
 
 namespace LH.Forcas.iOS.Services
 {
@@ -18,10 +15,10 @@ namespace LH.Forcas.iOS.Services
 
         private NSObject memoryWarningListener;
 
-        public void Initialize(IEventAggregator eventAggregator)
+        public void Initialize(IMvxMessenger messenger)
         {
             this.memoryWarningListener = UIApplication.Notifications.ObserveDidReceiveMemoryWarning((sender, args) => {
-                eventAggregator.GetEvent<TrimMemoryRequestedEvent>().Publish(TrimMemorySeverity.ReleaseLevel);
+                messenger.Publish<TrimMemoryRequestedEvent>(new TrimMemoryRequestedEvent(this) { Severity = TrimMemorySeverity.ReleaseLevel });
             });
         }
 

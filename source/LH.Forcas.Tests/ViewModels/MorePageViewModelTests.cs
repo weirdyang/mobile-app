@@ -1,9 +1,9 @@
 ﻿using LH.Forcas.ViewModels;
-using LH.Forcas.Views.About;
-using LH.Forcas.Views.Preferences;
+using LH.Forcas.ViewModels.About;
+using LH.Forcas.ViewModels.Settings;
 using Moq;
+using MvvmCross.Core.Navigation;
 using NUnit.Framework;
-using Prism.Navigation;
 
 namespace LH.Forcas.Tests.ViewModels
 {
@@ -11,12 +11,12 @@ namespace LH.Forcas.Tests.ViewModels
     public class MorePageViewModelTests
     {
         protected MorePageViewModel ViewModel;
-        protected Mock<INavigationService> NavigationServiceMock;
+        protected Mock<IMvxNavigationService> NavigationServiceMock;
 
         [SetUp]
         public void Setup()
         {
-            this.NavigationServiceMock = new Mock<INavigationService>();
+            this.NavigationServiceMock = new Mock<IMvxNavigationService>();
             this.ViewModel = new MorePageViewModel(this.NavigationServiceMock.Object);
         }
 
@@ -25,9 +25,9 @@ namespace LH.Forcas.Tests.ViewModels
             [Test]
             public void ThenShouldNavigateToAboutPage()
             {
-                this.NavigationServiceMock.SetupNavigation(nameof(AboutPage));
+                this.NavigationServiceMock.Setup(x => x.Navigate<AboutPageViewModel>()).ReturnsAwaitable();
 
-                Assert.IsTrue(this.ViewModel.NavigateToAboutCommand.CanExecute());
+                Assert.True(this.ViewModel.NavigateToAboutCommand.CanExecute());
                 this.ViewModel.NavigateToAboutCommand.Execute();
 
                 this.NavigationServiceMock.VerifyAll();
@@ -36,9 +36,9 @@ namespace LH.Forcas.Tests.ViewModels
             [Test]
             public void ThenShouldNavigateToLicensePage()
             {
-                this.NavigationServiceMock.SetupNavigation(nameof(LicensePage));
+                this.NavigationServiceMock.Setup(x => x.Navigate<LicensePageViewModel>()).ReturnsAwaitable();
 
-                Assert.IsTrue(this.ViewModel.NavigateToLicenseCommand.CanExecute());
+                Assert.True(this.ViewModel.NavigateToLicenseCommand.CanExecute());
                 this.ViewModel.NavigateToLicenseCommand.Execute();
 
                 this.NavigationServiceMock.VerifyAll();
@@ -47,9 +47,9 @@ namespace LH.Forcas.Tests.ViewModels
             [Test]
             public void ThenShouldNavigateToPreferencesPage()
             {
-                this.NavigationServiceMock.SetupNavigation(nameof(PreferencesPage));
+                this.NavigationServiceMock.Setup(x => x.Navigate<SettingsPageViewModel>()).ReturnsAwaitable();
 
-                Assert.IsTrue(this.ViewModel.NavigateToPreferencesCommand.CanExecute());
+                Assert.True(this.ViewModel.NavigateToPreferencesCommand.CanExecute());
                 this.ViewModel.NavigateToPreferencesCommand.Execute();
 
                 this.NavigationServiceMock.VerifyAll();
