@@ -132,7 +132,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
+    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility">
+	<Version>1.0.1</Version>
+	</PackageReference>
     <PackageReference Include="MvvmCross.Plugin.Messenger">
       <Version>5.0.0-beta0011</Version>
     </PackageReference>

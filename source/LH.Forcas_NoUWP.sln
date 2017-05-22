@@ -18,8 +18,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LH.Forcas.Tests", "LH.Forca
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BE797E1E-A3C9-4991-B5CA-1B1D328F67A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LH.Forcas.UWP", "LH.Forcas\LH.Forcas.UWP\LH.Forcas.UWP.csproj", "{6A314E73-C17B-494E-B02E-0E0CFE358A35}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
