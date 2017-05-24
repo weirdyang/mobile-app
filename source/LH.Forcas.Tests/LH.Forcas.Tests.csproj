@@ -26,8 +26,7 @@
 	<PackageReference Include="Microsoft.TestPlatform.TestHost" Version="15.3.0-preview-20170517-02" />
 	<PackageReference Include="Moq" Version="4.7.10" />
     <PackageReference Include="LH.Forcas.RefDataContract" Version="1.0.55" />
-    <PackageReference Include="MvvmCross.Platform" Version="5.0.0-beta0011" />
-    <PackageReference Include="MvvmCross.Tests" Version="5.0.0-beta0011" />
+    <PackageReference Include="MvvmCross.Platform" Version="5.0.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-alpha1" />
     <PackageReference Include="OpenCover" Version="4.6.519" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />

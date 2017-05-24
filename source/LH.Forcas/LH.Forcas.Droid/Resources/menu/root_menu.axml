@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto">
+    <item
+      android:id="@+id/action_root_menu_dashboard"
+      android:icon="@drawable/chart"
+      android:title="@string/dashboard_title"/>
+
+  <item
+    android:id="@+id/action_root_menu_budget"
+    android:icon="@drawable/budget"
+    android:title="@string/budget_title"/>
+  
+  <item
+    android:id="@+id/action_root_menu_cash"
+    android:icon="@drawable/cash_euro"
+    android:title="@string/add_cash_title"/>
+  
+  <item
+    android:id="@+id/action_root_menu_accounts"
+    android:icon="@drawable/account"
+    android:title="@string/accounts_title"/>
+
+  <item
+    android:id="@+id/action_root_menu_more"
+    android:icon="@drawable/more"
+    android:title="@string/more_title"/>
+</menu>

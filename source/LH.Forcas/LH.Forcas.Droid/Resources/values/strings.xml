@@ -1,0 +1,8 @@
+﻿<resources>
+  <string name="add_cash_title">Cash payment</string>
+  <string name="budget_title">Budget</string>
+  <string name="accounts_title">Accounts</string>
+  <string name="dashboard_title">Overview</string>
+  <string name="more_title">More</string>
+  <string name="controls_progressindicator_text">Working on it...</string>
+</resources>

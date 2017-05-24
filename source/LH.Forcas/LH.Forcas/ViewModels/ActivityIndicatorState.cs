@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using MvvmCross.Core.ViewModels;
 using System.Threading.Tasks;
 
@@ -10,8 +11,16 @@ namespace LH.Forcas.ViewModels
 
         public bool IsBusy
         {
-            get => this.isBusy;
-            set => this.SetProperty(ref this.isBusy, value);
+            get
+            {
+                Debug.WriteLine("Getting IsBusy ({0})", this.isBusy);
+                return this.isBusy;
+            }
+            set
+            {
+                Debug.WriteLine("Setting IsBusy ({0})", this.isBusy);
+                this.SetProperty(ref this.isBusy, value);
+            }
         }
 
         public async Task RunWithIndicator(Action action)

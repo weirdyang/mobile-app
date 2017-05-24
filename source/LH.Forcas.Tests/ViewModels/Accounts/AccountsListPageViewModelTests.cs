@@ -15,7 +15,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
     [TestFixture]
     public class AccountsListPageViewModelTests
     {
-        protected AccountsListPageViewModel ViewModel;
+        protected AccountsListViewModel ViewModel;
         protected Mock<IAccountingService> AccountingServiceMock;
         protected Mock<IMvxNavigationService> NavigationServiceMock;
         protected Mock<IUserInteraction> UserInteraction;
@@ -29,7 +29,7 @@ namespace LH.Forcas.Tests.ViewModels.Accounts
             this.UserInteraction = new Mock<IUserInteraction>();
             this.AnalyticsReporterMock = new Mock<IAnalyticsReporter>();
 
-            this.ViewModel = new AccountsListPageViewModel(
+            this.ViewModel = new AccountsListViewModel(
                 this.NavigationServiceMock.Object,
                 this.AccountingServiceMock.Object,
                 this.UserInteraction.Object,

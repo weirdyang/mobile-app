@@ -80,11 +80,15 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Activities\SplashActivity.cs" />
+    <Compile Include="Activities\RootView.cs" />
+    <Compile Include="Activities\SplashView.cs" />
+    <Compile Include="Fragments\Accounts\AccountsListFragment.cs" />
+    <Compile Include="Fragments\Dashboard\DashboardFragment.cs" />
     <Compile Include="Localization\DroidLocale.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DroidDeviceService.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="Storage\DroidPathResolver.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +100,21 @@
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
     <AndroidResource Include="Resources\layout\Toolbar.axml" />
+    <AndroidResource Include="Resources\layout\Root.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\controls_progressIndicator.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\menu\root_menu.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Accounts_List.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Dashboard.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />
@@ -117,24 +136,24 @@
       <Project>{5EDC3600-B3AE-471C-A4BE-6DFC7E359EC9}</Project>
       <Name>LH.Forcas</Name>
     </ProjectReference>
-    <PackageReference Include="MvvmCross.Plugin.Messenger">
-      <Version>5.0.0-beta0011</Version>
+    <PackageReference Include="MvvmCross.Droid.Support.Design">
+      <Version>5.0.0</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.Animated.Vector.Drawable" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.Compat" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.Core.UI" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.Core.Utils" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.Design" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.Fragment" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.Media.Compat" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.Transition" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.v4" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.v7.CardView" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.v7.Palette" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView" version="25.1.1" />
-    <PackageReference Include="Xamarin.Android.Support.Vector.Drawable" version="25.1.1" />
+    <PackageReference Include="MvvmCross.Droid.Support.Fragment">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmCross.Droid.Support.V4">
+      <Version>4.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmCross.Droid.Support.V7.AppCompat">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmCross.Plugin.Messenger">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmCross.Plugin.Visibility">
+      <Version>5.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\account.png" />
@@ -250,9 +269,19 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\cash_account.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\nav_item_color_state.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

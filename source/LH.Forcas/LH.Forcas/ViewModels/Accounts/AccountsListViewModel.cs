@@ -13,7 +13,7 @@ using MvvmCross.Core.ViewModels;
 
 namespace LH.Forcas.ViewModels.Accounts
 {
-    public class AccountsListPageViewModel : MvxViewModel
+    public class AccountsListViewModel : MvxViewModel
     {
         private readonly IUserInteraction userInteraction;
         private readonly IAnalyticsReporter analyticsReporter;
@@ -23,7 +23,7 @@ namespace LH.Forcas.ViewModels.Accounts
 
         private ObservableCollection<AccountsGroup> accountGroups;
 
-        public AccountsListPageViewModel(
+        public AccountsListViewModel(
             IMvxNavigationService navigationService,
             IAccountingService accountingService,
             IUserInteraction userInteraction,

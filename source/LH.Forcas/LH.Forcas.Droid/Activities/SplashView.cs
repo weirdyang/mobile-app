@@ -4,10 +4,12 @@ using MvvmCross.Droid.Views;
 
 namespace LH.Forcas.Droid.Activities
 {
-    [Activity(Label = "Forcas", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon")]
-    public class SplashActivity : MvxSplashScreenActivity
+    using Android.Content.PM;
+
+    [Activity(Label = "Forcas", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon", ScreenOrientation = ScreenOrientation.Portrait, Theme = "@style/Splash")]
+    public class SplashView : MvxSplashScreenActivity
     {
-        public SplashActivity()
+        public SplashView()
             : base(Resource.Layout.Splash)
         {
         }
@@ -15,8 +17,6 @@ namespace LH.Forcas.Droid.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your application here
         }
     }
 }

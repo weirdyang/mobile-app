@@ -10,14 +10,14 @@ namespace LH.Forcas.Tests.ViewModels
     [TestFixture]
     public class MorePageViewModelTests
     {
-        protected MorePageViewModel ViewModel;
+        protected MoreViewModel ViewModel;
         protected Mock<IMvxNavigationService> NavigationServiceMock;
 
         [SetUp]
         public void Setup()
         {
             this.NavigationServiceMock = new Mock<IMvxNavigationService>();
-            this.ViewModel = new MorePageViewModel(this.NavigationServiceMock.Object);
+            this.ViewModel = new MoreViewModel(this.NavigationServiceMock.Object);
         }
 
         public class WhenNavigating : MorePageViewModelTests

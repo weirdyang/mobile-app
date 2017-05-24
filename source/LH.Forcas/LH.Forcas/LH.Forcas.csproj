@@ -11,8 +11,9 @@
     <PackageReference Include="Chance.MvvmCross.Plugins.UserInteraction" Version="1.1.4" />
     <PackageReference Include="LH.Forcas.RefDataContract" Version="1.0.55" />
     <PackageReference Include="LiteDB" Version="3.1.0" />
-    <PackageReference Include="MvvmCross" Version="5.0.0-beta0011" />
-    <PackageReference Include="MvvmCross.Plugin.Messenger" Version="5.0.0-beta0011" />
+    <PackageReference Include="MvvmCross" Version="5.0.0" />
+    <PackageReference Include="MvvmCross.Plugin.Messenger" Version="5.0.0" />
+    <PackageReference Include="MvvmCross.Plugin.Visibility" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
     <PackageReference Include="Octokit" Version="0.24.1-alpha0001" />
     <PackageReference Include="Polly" Version="5.1.0" />
@@ -37,6 +38,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Categories\" />
-    <Folder Include="ViewModels\Dashboard\" />
   </ItemGroup>
 </Project>
