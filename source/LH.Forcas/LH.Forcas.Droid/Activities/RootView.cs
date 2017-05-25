@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Content.PM;
-using Android.Support.Design.Widget;
 using LH.Forcas.Droid.Fragments.Accounts;
 using LH.Forcas.Droid.Fragments.Dashboard;
 using LH.Forcas.ViewModels;
-using LH.Forcas.ViewModels.Dashboard;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Platform;
 
 namespace LH.Forcas.Droid.Activities
 {
@@ -23,7 +22,12 @@ namespace LH.Forcas.Droid.Activities
             this.SetContentView(Resource.Layout.Root);
             this.InitializeFragments();
 
-            this.FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation).NavigationItemSelected += this.HandleBottomBarClicked;
+            this.RegisterBottomNavViewCommands(Resource.Id.bottom_navigation, new Dictionary<int, Func<RootViewModel, IMvxCommand>>
+            {
+                {  Resource.Id.action_root_menu_dashboard, x => x.SwitchToDashboardCommand },
+                {  Resource.Id.action_root_menu_accounts, x => x.SwitchToAccountsCommand }
+            });
+
             this.ViewModel.RequestSwitch += this.HandleTabSwitchRequest;
 
             this.Show(this.fragments.First().Key, true);
@@ -56,20 +60,6 @@ namespace LH.Forcas.Droid.Activities
                 }
 
                 trans.Commit();
-            }
-        }
-
-        private void HandleBottomBarClicked(object sender, BottomNavigationView.NavigationItemSelectedEventArgs args)
-        {
-            switch (args.Item.ItemId)
-            {
-                case Resource.Id.action_root_menu_dashboard:
-                    this.ViewModel.SwitchToDashboardCommand.Execute();
-                    break;
-
-                case Resource.Id.action_root_menu_accounts:
-                    this.ViewModel.SwitchToAccountsCommand.Execute();
-                    break;
             }
         }
 

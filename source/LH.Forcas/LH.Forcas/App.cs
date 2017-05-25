@@ -44,9 +44,9 @@ namespace LH.Forcas
 
             CurrentCultureInfo = Mvx.Resolve<ILocale>().GetCultureInfo();
 
-            //Mvx.Resolve<IPathResolver>().Initialize();
-            //Mvx.Resolve<IDbManager>().ApplyMigrations();
-            //Mvx.Resolve<IUserSettingsService>().Initialize();
+            Mvx.Resolve<IPathResolver>().Initialize();
+            Mvx.Resolve<IDbManager>().ApplyMigrations();
+            // Mvx.Resolve<IUserSettingsService>().Initialize();
 
             this.RegisterAppStart<RootViewModel>();
         }

@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Activities\RootView.cs" />
     <Compile Include="Activities\SplashView.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Fragments\Accounts\AccountsListFragment.cs" />
     <Compile Include="Fragments\Dashboard\DashboardFragment.cs" />
     <Compile Include="Localization\DroidLocale.cs" />
