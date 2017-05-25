@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/action_accounts_list_add"
+    android:icon="@drawable/add"
+    android:title="@string/general_add"
+    app:showAsAction="ifRoom"/>
+</menu>

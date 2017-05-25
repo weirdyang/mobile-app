@@ -5523,14 +5523,17 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080010
 			public const int MvxBindingTagUnique = 2131230736;
 			
-			// aapt resource value: 0x7f080077
-			public const int RelativeLayout01 = 2131230839;
-			
 			// aapt resource value: 0x7f080076
-			public const int accounts_listview = 2131230838;
+			public const int RelativeLayout01 = 2131230838;
 			
-			// aapt resource value: 0x7f080087
-			public const int action0 = 2131230855;
+			// aapt resource value: 0x7f080075
+			public const int accounts_listview = 2131230837;
+			
+			// aapt resource value: 0x7f080086
+			public const int action0 = 2131230854;
+			
+			// aapt resource value: 0x7f0800a1
+			public const int action_accounts_list_add = 2131230881;
 			
 			// aapt resource value: 0x7f080066
 			public const int action_bar = 2131230822;
@@ -5553,17 +5556,17 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080043
 			public const int action_bar_title = 2131230787;
 			
-			// aapt resource value: 0x7f080084
-			public const int action_container = 2131230852;
+			// aapt resource value: 0x7f080083
+			public const int action_container = 2131230851;
 			
 			// aapt resource value: 0x7f080067
 			public const int action_context_bar = 2131230823;
 			
-			// aapt resource value: 0x7f08008b
-			public const int action_divider = 2131230859;
+			// aapt resource value: 0x7f08008a
+			public const int action_divider = 2131230858;
 			
-			// aapt resource value: 0x7f080085
-			public const int action_image = 2131230853;
+			// aapt resource value: 0x7f080084
+			public const int action_image = 2131230852;
 			
 			// aapt resource value: 0x7f080003
 			public const int action_menu_divider = 2131230723;
@@ -5580,26 +5583,26 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080045
 			public const int action_mode_close_button = 2131230789;
 			
+			// aapt resource value: 0x7f0800a5
+			public const int action_root_menu_accounts = 2131230885;
+			
 			// aapt resource value: 0x7f0800a3
-			public const int action_root_menu_accounts = 2131230883;
-			
-			// aapt resource value: 0x7f0800a1
-			public const int action_root_menu_budget = 2131230881;
-			
-			// aapt resource value: 0x7f0800a2
-			public const int action_root_menu_cash = 2131230882;
-			
-			// aapt resource value: 0x7f0800a0
-			public const int action_root_menu_dashboard = 2131230880;
+			public const int action_root_menu_budget = 2131230883;
 			
 			// aapt resource value: 0x7f0800a4
-			public const int action_root_menu_more = 2131230884;
+			public const int action_root_menu_cash = 2131230884;
 			
-			// aapt resource value: 0x7f080086
-			public const int action_text = 2131230854;
+			// aapt resource value: 0x7f0800a2
+			public const int action_root_menu_dashboard = 2131230882;
 			
-			// aapt resource value: 0x7f080094
-			public const int actions = 2131230868;
+			// aapt resource value: 0x7f0800a6
+			public const int action_root_menu_more = 2131230886;
+			
+			// aapt resource value: 0x7f080085
+			public const int action_text = 2131230853;
+			
+			// aapt resource value: 0x7f080093
+			public const int actions = 2131230867;
 			
 			// aapt resource value: 0x7f080046
 			public const int activity_chooser_view_content = 2131230790;
@@ -5625,14 +5628,11 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f08002a
 			public const int bottom = 2131230762;
 			
-			// aapt resource value: 0x7f08009c
-			public const int bottom_navigation = 2131230876;
-			
 			// aapt resource value: 0x7f08004d
 			public const int buttonPanel = 2131230797;
 			
-			// aapt resource value: 0x7f080088
-			public const int cancel_action = 2131230856;
+			// aapt resource value: 0x7f080087
+			public const int cancel_action = 2131230855;
 			
 			// aapt resource value: 0x7f080032
 			public const int center = 2131230770;
@@ -5646,8 +5646,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f08005d
 			public const int checkbox = 2131230813;
 			
-			// aapt resource value: 0x7f080090
-			public const int chronometer = 2131230864;
+			// aapt resource value: 0x7f08008f
+			public const int chronometer = 2131230863;
 			
 			// aapt resource value: 0x7f08003b
 			public const int clip_horizontal = 2131230779;
@@ -5673,20 +5673,20 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080049
 			public const int default_activity_button = 2131230793;
 			
-			// aapt resource value: 0x7f08007b
-			public const int design_bottom_sheet = 2131230843;
-			
-			// aapt resource value: 0x7f080082
-			public const int design_menu_item_action_area = 2131230850;
+			// aapt resource value: 0x7f08007a
+			public const int design_bottom_sheet = 2131230842;
 			
 			// aapt resource value: 0x7f080081
-			public const int design_menu_item_action_area_stub = 2131230849;
+			public const int design_menu_item_action_area = 2131230849;
 			
 			// aapt resource value: 0x7f080080
-			public const int design_menu_item_text = 2131230848;
+			public const int design_menu_item_action_area_stub = 2131230848;
 			
 			// aapt resource value: 0x7f08007f
-			public const int design_navigation_view = 2131230847;
+			public const int design_menu_item_text = 2131230847;
+			
+			// aapt resource value: 0x7f08007e
+			public const int design_navigation_view = 2131230846;
 			
 			// aapt resource value: 0x7f080014
 			public const int disableHome = 2131230740;
@@ -5697,8 +5697,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080023
 			public const int end = 2131230755;
 			
-			// aapt resource value: 0x7f08009a
-			public const int end_padder = 2131230874;
+			// aapt resource value: 0x7f080099
+			public const int end_padder = 2131230873;
 			
 			// aapt resource value: 0x7f08002c
 			public const int enterAlways = 2131230764;
@@ -5739,8 +5739,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f08004b
 			public const int icon = 2131230795;
 			
-			// aapt resource value: 0x7f080095
-			public const int icon_group = 2131230869;
+			// aapt resource value: 0x7f080094
+			public const int icon_group = 2131230868;
 			
 			// aapt resource value: 0x7f080027
 			public const int ifRoom = 2131230759;
@@ -5748,23 +5748,23 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080048
 			public const int image = 2131230792;
 			
-			// aapt resource value: 0x7f080091
-			public const int info = 2131230865;
+			// aapt resource value: 0x7f080090
+			public const int info = 2131230864;
 			
 			// aapt resource value: 0x7f080000
 			public const int item_touch_helper_previous_elevation = 2131230720;
 			
-			// aapt resource value: 0x7f080079
-			public const int largeLabel = 2131230841;
+			// aapt resource value: 0x7f080078
+			public const int largeLabel = 2131230840;
 			
 			// aapt resource value: 0x7f080036
 			public const int left = 2131230774;
 			
-			// aapt resource value: 0x7f080096
-			public const int line1 = 2131230870;
+			// aapt resource value: 0x7f080095
+			public const int line1 = 2131230869;
 			
-			// aapt resource value: 0x7f080098
-			public const int line3 = 2131230872;
+			// aapt resource value: 0x7f080097
+			public const int line3 = 2131230871;
 			
 			// aapt resource value: 0x7f080011
 			public const int listMode = 2131230737;
@@ -5772,11 +5772,11 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f08004a
 			public const int list_item = 2131230794;
 			
-			// aapt resource value: 0x7f08009f
-			public const int masked = 2131230879;
+			// aapt resource value: 0x7f0800a0
+			public const int masked = 2131230880;
 			
-			// aapt resource value: 0x7f08008a
-			public const int media_actions = 2131230858;
+			// aapt resource value: 0x7f080089
+			public const int media_actions = 2131230857;
 			
 			// aapt resource value: 0x7f080024
 			public const int middle = 2131230756;
@@ -5787,8 +5787,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f08001c
 			public const int multiply = 2131230748;
 			
-			// aapt resource value: 0x7f08007e
-			public const int navigation_header_container = 2131230846;
+			// aapt resource value: 0x7f08007d
+			public const int navigation_header_container = 2131230845;
 			
 			// aapt resource value: 0x7f080028
 			public const int never = 2131230760;
@@ -5799,14 +5799,14 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080012
 			public const int normal = 2131230738;
 			
-			// aapt resource value: 0x7f080093
-			public const int notification_background = 2131230867;
-			
-			// aapt resource value: 0x7f08008d
-			public const int notification_main_column = 2131230861;
+			// aapt resource value: 0x7f080092
+			public const int notification_background = 2131230866;
 			
 			// aapt resource value: 0x7f08008c
-			public const int notification_main_column_container = 2131230860;
+			public const int notification_main_column = 2131230860;
+			
+			// aapt resource value: 0x7f08008b
+			public const int notification_main_column_container = 2131230859;
 			
 			// aapt resource value: 0x7f080039
 			public const int parallax = 2131230777;
@@ -5829,11 +5829,17 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080037
 			public const int right = 2131230775;
 			
-			// aapt resource value: 0x7f080092
-			public const int right_icon = 2131230866;
+			// aapt resource value: 0x7f080091
+			public const int right_icon = 2131230865;
 			
-			// aapt resource value: 0x7f08008e
-			public const int right_side = 2131230862;
+			// aapt resource value: 0x7f08008d
+			public const int right_side = 2131230861;
+			
+			// aapt resource value: 0x7f08009c
+			public const int root_bottom_navigation = 2131230876;
+			
+			// aapt resource value: 0x7f08009a
+			public const int root_toolbar = 2131230874;
 			
 			// aapt resource value: 0x7f08001d
 			public const int screen = 2131230749;
@@ -5901,14 +5907,14 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f08009d
 			public const int sliding_tabs = 2131230877;
 			
-			// aapt resource value: 0x7f080078
-			public const int smallLabel = 2131230840;
-			
-			// aapt resource value: 0x7f08007d
-			public const int snackbar_action = 2131230845;
+			// aapt resource value: 0x7f080077
+			public const int smallLabel = 2131230839;
 			
 			// aapt resource value: 0x7f08007c
-			public const int snackbar_text = 2131230844;
+			public const int snackbar_action = 2131230844;
+			
+			// aapt resource value: 0x7f08007b
+			public const int snackbar_text = 2131230843;
 			
 			// aapt resource value: 0x7f080030
 			public const int snap = 2131230768;
@@ -5931,8 +5937,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080038
 			public const int start = 2131230776;
 			
-			// aapt resource value: 0x7f080089
-			public const int status_bar_latest_event_content = 2131230857;
+			// aapt resource value: 0x7f080088
+			public const int status_bar_latest_event_content = 2131230856;
 			
 			// aapt resource value: 0x7f080060
 			public const int submenuarrow = 2131230816;
@@ -5943,11 +5949,11 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080013
 			public const int tabMode = 2131230739;
 			
-			// aapt resource value: 0x7f080099
-			public const int text = 2131230873;
+			// aapt resource value: 0x7f080098
+			public const int text = 2131230872;
 			
-			// aapt resource value: 0x7f080097
-			public const int text2 = 2131230871;
+			// aapt resource value: 0x7f080096
+			public const int text2 = 2131230870;
 			
 			// aapt resource value: 0x7f080054
 			public const int textSpacerNoButtons = 2131230804;
@@ -5955,8 +5961,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080053
 			public const int textSpacerNoTitle = 2131230803;
 			
-			// aapt resource value: 0x7f080083
-			public const int text_input_password_toggle = 2131230851;
+			// aapt resource value: 0x7f080082
+			public const int text_input_password_toggle = 2131230850;
 			
 			// aapt resource value: 0x7f08000c
 			public const int textinput_counter = 2131230732;
@@ -5964,8 +5970,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f08000d
 			public const int textinput_error = 2131230733;
 			
-			// aapt resource value: 0x7f08008f
-			public const int time = 2131230863;
+			// aapt resource value: 0x7f08008e
+			public const int time = 2131230862;
 			
 			// aapt resource value: 0x7f08004c
 			public const int title = 2131230796;
@@ -5976,8 +5982,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080059
 			public const int title_template = 2131230809;
 			
-			// aapt resource value: 0x7f080075
-			public const int toolbar = 2131230837;
+			// aapt resource value: 0x7f08009e
+			public const int toolbar = 2131230878;
 			
 			// aapt resource value: 0x7f08002b
 			public const int top = 2131230763;
@@ -5985,8 +5991,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f080058
 			public const int topPanel = 2131230808;
 			
-			// aapt resource value: 0x7f08007a
-			public const int touch_outside = 2131230842;
+			// aapt resource value: 0x7f080079
+			public const int touch_outside = 2131230841;
 			
 			// aapt resource value: 0x7f08000a
 			public const int transition_current_scene = 2131230730;
@@ -6003,8 +6009,8 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f08000e
 			public const int view_offset_helper = 2131230734;
 			
-			// aapt resource value: 0x7f08009e
-			public const int visible = 2131230878;
+			// aapt resource value: 0x7f08009f
+			public const int visible = 2131230879;
 			
 			// aapt resource value: 0x7f080029
 			public const int withText = 2131230761;
@@ -6147,10 +6153,10 @@ namespace LH.Forcas.Droid
 			public const int abc_select_dialog_material = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int Accounts_List = 2130903067;
+			public const int accounts_list = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int controls_progressIndicator = 2130903068;
+			public const int controls_progress_indicator = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
 			public const int Dashboard = 2130903069;
@@ -6243,7 +6249,7 @@ namespace LH.Forcas.Droid
 			public const int notification_template_part_time = 2130903098;
 			
 			// aapt resource value: 0x7f03003b
-			public const int Root = 2130903099;
+			public const int root = 2130903099;
 			
 			// aapt resource value: 0x7f03003c
 			public const int select_dialog_item_material = 2130903100;
@@ -6280,7 +6286,10 @@ namespace LH.Forcas.Droid
 		{
 			
 			// aapt resource value: 0x7f0e0000
-			public const int root_menu = 2131623936;
+			public const int accounts_list_toolbar_menu = 2131623936;
+			
+			// aapt resource value: 0x7f0e0001
+			public const int root_menu = 2131623937;
 			
 			static Menu()
 			{
@@ -6406,14 +6415,17 @@ namespace LH.Forcas.Droid
 			// aapt resource value: 0x7f090023
 			public const int character_counter_pattern = 2131296291;
 			
-			// aapt resource value: 0x7f090031
-			public const int controls_progressindicator_text = 2131296305;
-			
 			// aapt resource value: 0x7f09002f
 			public const int dashboard_title = 2131296303;
 			
 			// aapt resource value: 0x7f090029
 			public const int fab_scroll_shrink_grow_autohide_behavior = 2131296297;
+			
+			// aapt resource value: 0x7f090031
+			public const int general_add = 2131296305;
+			
+			// aapt resource value: 0x7f090032
+			public const int general_loading = 2131296306;
 			
 			// aapt resource value: 0x7f09002b
 			public const int library_name = 2131296299;

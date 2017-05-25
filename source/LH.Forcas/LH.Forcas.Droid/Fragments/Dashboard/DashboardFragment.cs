@@ -11,6 +11,8 @@ namespace LH.Forcas.Droid.Fragments.Dashboard
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
+            this.Activity.Title = this.Resources.GetString(Resource.String.dashboard_title);
+
             return this.BindingInflate(Resource.Layout.Dashboard, null);
         }
     }

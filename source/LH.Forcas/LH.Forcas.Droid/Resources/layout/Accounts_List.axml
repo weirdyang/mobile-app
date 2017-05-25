@@ -3,15 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Toolbar
-        android:minHeight="?android:attr/actionBarSize"
-        android:background="?android:attr/colorPrimary"
-        android:minWidth="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar"
-        android:title="@string/accounts_title"
-        style="@style/ToolBarStyle" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

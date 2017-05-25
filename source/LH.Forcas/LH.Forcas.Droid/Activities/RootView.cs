@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Content.PM;
+using Android.Support.V7.Widget;
 using LH.Forcas.Droid.Fragments.Accounts;
 using LH.Forcas.Droid.Fragments.Dashboard;
 using LH.Forcas.ViewModels;
@@ -19,10 +20,12 @@ namespace LH.Forcas.Droid.Activities
 
         protected override void OnViewModelSet()
         {
-            this.SetContentView(Resource.Layout.Root);
+            this.SetContentView(Resource.Layout.root);
             this.InitializeFragments();
 
-            this.RegisterBottomNavViewCommands(Resource.Id.bottom_navigation, new Dictionary<int, Func<RootViewModel, IMvxCommand>>
+            this.SetSupportActionBar(this.FindViewById<Toolbar>(Resource.Id.root_toolbar));
+
+            this.RegisterBottomNavViewCommands(Resource.Id.root_bottom_navigation, new Dictionary<int, Func<RootViewModel, IMvxCommand>>
             {
                 {  Resource.Id.action_root_menu_dashboard, x => x.SwitchToDashboardCommand },
                 {  Resource.Id.action_root_menu_accounts, x => x.SwitchToAccountsCommand }
